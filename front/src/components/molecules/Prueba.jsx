@@ -1,8 +1,6 @@
 
 
 
-
-
 const Prueba= () => {
   return (
     <div >
