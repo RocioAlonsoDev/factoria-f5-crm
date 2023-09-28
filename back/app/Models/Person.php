@@ -8,5 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Person extends Model
 {
     use HasFactory;
+    protected $hidden = [];
+
+    protected $fillable = [
+            'name',
+            'surname',
+            'email',
+            'phone',
+            'address',
+            'city',
+            'region',
+            'birthdate',
+            'dataprotection',
+            'gender',
+            'dni',
+            'id_status',
+            'id_bootcamp',
+            
+    ];
 
 }
