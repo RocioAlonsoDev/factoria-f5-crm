@@ -4,62 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Status;
 use Illuminate\Http\Request;
+use App\Http\Requests\StatusRequest;
+use Illuminate\Http\JsonResponse;
 
 class StatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+   
+    public function index():JsonResponse
     {
-        //
+        $status = Status::all();
+        return response()->json(['data'=>$status], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+   
+    public function store(StatusRequest $request):JsonResponse
     {
-        //
+        $status = Status::create($request->all());
+        return response()->json([
+            'success'=>true,
+            'data'=>$status], 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function show($id):JsonResponse
     {
-        //
+        $status = Status::find($id);
+        return response ()->json($status, 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Status $status)
+    public function update(StatusRequest $request, $id):JsonResponse
     {
-        //
+        $status = Status::find($id);
+        $status->name=$request->name;
+        $status->save();
+
+        return response()->json([
+            'success'=>true
+        ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Status $status)
+    public function destroy($id):JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Status $status)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Status $status)
-    {
-        //
+        Status::find($id)->delete();
+        return response()->json(
+            [
+                'succes'=>true
+            ], 200);
     }
 }
