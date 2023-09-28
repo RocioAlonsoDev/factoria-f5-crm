@@ -22,12 +22,12 @@ class BootcampRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'startDate' =>'required', 
-            'endDate' =>'required',
-            'description'=>'required',
+            'name'=>'required|string',
+            'startDate' =>'required|date', 
+            'endDate' =>'required|date',
+            'description'=>'required|text',
             'school'=>'required',
-            'promo'=>'required', 
+            'promo'=>'required|string', 
         ];
     }
 }
