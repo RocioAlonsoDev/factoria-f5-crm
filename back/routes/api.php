@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\PersonController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BootcampController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +25,10 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 
+Route::resource('/person', PersonController::class);
 Route::resource('/status', StatusController::class);
 Route::resource('/bootcamp', BootcampController::class);
 Route::resource('/role', RoleController::class);
+
 
 

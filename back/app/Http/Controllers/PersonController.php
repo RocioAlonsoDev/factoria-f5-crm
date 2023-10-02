@@ -4,62 +4,67 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use Illuminate\Http\Request;
+use App\Http\Requests\PersonRequest;
+use Illuminate\Http\JsonResponse;
 
 class PersonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    
+    public function index():JsonResponse
     {
-        //
+        $persons = Person::all();
+        return response()->json(['data'=>$persons], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    
+       
+    public function store(PersonRequest $request):JsonResponse
     {
-        //
+        $person=Person::create($request->all());
+
+        return response()->json([
+            'success'=>true,
+            'data'=>$person], 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    
+    public function show($id):JsonResponse
     {
-        //
+        $person = Person::find($id);
+        return response ()->json($person, 200);
+    }
+    
+        
+    public function update(PersonRequest $request, $id):JsonResponse
+    {
+        $person = Person::find($id);
+        $person->person=$request->person;
+        $person->name=$request->name;
+        $person->surname=$request->surname;
+        $person->email=$request->email;
+        $person->phone=$request->phone;
+        $person->address=$request->address;
+        $person->city=$request->city;
+        $person->region=$request->region;
+        $person->birthdate=$request->birthdate;
+        $person->dataprotection=$request->dataprotection;
+        $person->gender=$request->gender;
+        $person->dni=$request->dni;
+        $person->id_status=$request->id_status;
+        $person->id_bootcamp=$request->id_bootcamp;
+        $person ->save();
+
+        return response()->json([
+            'success'=>true
+            ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Person $person)
+    
+    public function destroy($id):JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Person $person)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Person $person)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Person $person)
-    {
-        //
+        Person::find($id)->delete();
+        return response()->json([
+            'success'=>true
+        ], 200);
     }
 }
