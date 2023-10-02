@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BootcampController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\PersonController;
+
 
 /*
 |--------------------------------------------------------------------------

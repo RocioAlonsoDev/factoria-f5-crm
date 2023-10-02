@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('dni');
             $table->bigInteger('id_status');
             $table->bigInteger('id_bootcamp');
+            $table->timestamps();
         });
     }
 
