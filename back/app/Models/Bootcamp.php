@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Bootcamp extends Model
 {
     use HasFactory;
+    protected $hidden = [];
+
+    protected $fillable = [
+        'name',
+        'startDate', 
+        'endDate',
+        'description', 
+        'school', 
+        'promo',
+
+    ];
+
 }
