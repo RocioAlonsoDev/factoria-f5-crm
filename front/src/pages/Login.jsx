@@ -1,5 +1,26 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import APIservice from '../services/APIService'
+import { useState } from "react";
+
+
 export default function Login() {
+  const[email,setEmail] = useState('');
+  const[password,setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try{
+      const res = await APIservice.post('/login', {email, password})
+      setEmail('');
+      setPassword('');
+      navigate('/');
+      console.log(res)
+    }catch(e){
+      console.log(e)
+    }
+  }
+
   return (
     <div className='flex h-screen'>
       <div className="container m-auto px-4 h-full">
@@ -11,16 +32,20 @@ export default function Login() {
               <div className="text-blueGray-400 text-center mb-3 font-bold">
                 <small>Iniciar sesión</small>
               </div>
-              <form>
+              <form onSubmit={handleLogin}>
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="email"
                   >
                     Correo electrónico
                   </label>
                   <input
                     type="email"
+                    name='email'
+                    id='email'
+                    value={email}
+                    onChange={(ev)=>{setEmail(ev.target.value)}}
                     className="border-0 px-3 py-3 placeholder-blueGray-400 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="nombre@ejemplo.com"
                   />
@@ -29,12 +54,15 @@ export default function Login() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="password"
                   >
                     Contraseña
                   </label>
                   <input
-                    type="password"
+                    name='password'
+                    id='password'
+                    value={password}
+                    type="password" onChange={(ev)=>{setPassword(ev.target.value)}}
                     className="border-0 px-3 py-3 placeholder-blueGray-400 text-blueGray-600 bg-gray-100 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="*************"
                   />
@@ -55,7 +83,7 @@ export default function Login() {
                 <div className="text-center mt-6">
                   <button
                     className="bg-orange-600 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                    type="button"
+                    type="submit"
                   >
                     Sign In
                   </button>
