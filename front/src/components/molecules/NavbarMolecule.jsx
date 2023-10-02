@@ -20,6 +20,12 @@ export default function NavbarMolecule() {
           Login
         </Link>
         <Link
+          className="text-orange-600 text-sm uppercase hidden lg:inline-block font-semibold"
+          to="/signup"
+        >
+          Register
+        </Link>
+        <Link
         className="text-orange-600 text-sm uppercase hidden lg:inline-block font-semibold"
         to="/seleccion"
         >
