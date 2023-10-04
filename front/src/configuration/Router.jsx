@@ -3,7 +3,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import Login from "../pages/Login"
-
+import Signup from '../pages/Signup'
 
 const Router = createBrowserRouter([
   {
@@ -31,6 +31,10 @@ const Router = createBrowserRouter([
   {
     path: '/login',
     element: <Login/>
+  },
+  {
+    path: '/signup',
+    element: <Signup/>
   }
 ])
 
