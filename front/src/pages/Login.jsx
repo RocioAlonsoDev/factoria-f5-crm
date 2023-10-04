@@ -1,19 +1,38 @@
 import { useState } from "react"
 // import { Link } from "react-router-dom"
-// import APIservice from '../services/APIservice'
+import APIservice from '../services/APIservice'
 import { Navigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext'
 
 export default function Login() {
+  const{setCurrentUser, setUserToken, userToken} = AuthContext();
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
-  const {userToken} = AuthContext();
+  const[error,setError] = useState({__html: ''});
+
+  const onSubmit = (ev) => {
+    ev.preventDefault();
+    setError({__html:''})
+
+    APIservice.post('/login',{
+      email,
+      password
+    })
+    .then(({data})=>{
+      setCurrentUser(data.user)
+      setUserToken(data.token)
+    })
+    .catch((error)=>{
+      if(error.response.data.error){
+        setError({__html:error.response.data.error})
+      }
+    })
+  }
 
   if(userToken){
     return <Navigate to='/' />
   }
 
-  
   return (
     <div className='flex h-screen'>
       <div className="container m-auto px-4 h-full">
@@ -25,7 +44,12 @@ export default function Login() {
               <div className="text-blueGray-400 text-center mb-3 font-bold">
                 <small>Iniciar sesión</small>
               </div>
-              <form onSubmit={console.log('login')}>
+              {error.__html && (
+                <div className='bg-red-500 rounded py-2 px-3 text-white'
+                dangerouslySetInnerHTML={error}>
+                </div>
+              )}
+              <form onSubmit={onSubmit}>
 
                 <div className="relative w-full mb-3">
                   <label
