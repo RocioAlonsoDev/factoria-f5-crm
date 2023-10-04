@@ -1,5 +1,27 @@
+import TableAtom from "../../components/atoms/TableAtom";
+
 
 export default function SelectionDayShow() {
+
+  const data =[
+    {Nombre: 'Yolanda',
+    Apellidos: 'Zahonero Alfaro',
+    Ciudad: 'A Coruña',
+    Género: 'Femenino',
+    Bootcamp: 'FemNorte',
+    Asistencia: 'Convocada',}
+  ];
+
+  const columns =[
+    'nombre',
+    'apellidos',
+    'ciudad',
+    'genero',
+    'bootcamp',
+    'asistencia',
+  ]
+
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
@@ -17,8 +39,6 @@ export default function SelectionDayShow() {
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          
-            
 
             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
@@ -105,81 +125,10 @@ export default function SelectionDayShow() {
             <h6 className="text-blueGray-400 text-md mt-3 mb-6 font-bold uppercase">
               Personas asociadas a esta reunión
             </h6>
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-                <div className="rounded-t mb-0 px-4 py-3 border-0">
-                <div className="flex flex-wrap items-center">
-                    <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                    <h3 className="font-semibold text-blueGray-700 text-lg">
-                        Personas
-                    </h3>
-                    </div>
-                    <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                    <button
-                        className="bg-orange-500 text-white active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button"
-                    >
-                        ver todas
-                    </button>
-                    </div>
-                </div>
-                </div>
-                <div className="block w-full overflow-x-auto">
-                {/* Projects table */}
-                <table className="items-center w-full bg-transparent border-collapse">
-                    <thead>
-                    <tr>
-                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
-                        Nombre
-                        </th>
-                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
-                        Apellidos
-                        </th>
-                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
-                        Ciudad
-                        </th>
-                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
-                        Género
-                        </th>
-                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
-                        Bootcamp
-                        </th>
-                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
-                        Asistencia
-                        </th>
-                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
-                        Admin
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4 text-left">
-                        Yolanda
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4 text-left">
-                        Zahonero Alfaro
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4">
-                        A Coruña
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4">
-                        Femenino
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4">
-                        FemNorte
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4">
-                        Convocada
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg text-indigo-800 font-semibold underline whitespace-nowrap p-4">
-                        <a href="http://">Ver |</a> <a href="http://">Editar |</a> <a href="http://">Eliminar</a>
-                        </td>
-                    </tr>
-                    
-                    </tbody>
-                </table>
-                </div>w
-            </div>
+            <TableAtom data={data} columns={columns}>
+
+
+            </TableAtom>
         </div>
       </div>
     </>
