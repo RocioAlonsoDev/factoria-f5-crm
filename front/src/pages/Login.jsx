@@ -1,17 +1,17 @@
 import { useState } from "react"
 // import { Link } from "react-router-dom"
 // import APIservice from '../services/APIservice'
-// import { Navigate } from "react-router-dom";
-// import { AuthContext } from '../contexts/AuthContext'
+import { Navigate } from "react-router-dom";
+import { AuthContext } from '../contexts/AuthContext'
 
 export default function Login() {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
-  // const {userToken} = AuthContext();
+  const {userToken} = AuthContext();
 
-  // if(userToken){
-  //   return <Navigate to='/' />
-  // }
+  if(userToken){
+    return <Navigate to='/' />
+  }
 
   
   return (

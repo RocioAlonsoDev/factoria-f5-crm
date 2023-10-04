@@ -1,11 +1,11 @@
 import { Navigate } from "react-router-dom";
-// import { AuthContext } from '../contexts/AuthContext'
-import { useState } from "react";
+import { AuthContext } from '../contexts/AuthContext'
+// import { useState } from "react";
 // import APIservice from '../services/APIservice'
 
 export default function Register() {
 
-  // const {userToken, setCurrentUser, setUserToken} = AuthContext();
+  const {userToken, setCurrentUser, setUserToken} = AuthContext();
   // const[name,setName] = useState('');
   // const[email,setEmail] = useState('');
   // const[password,setPassword] = useState('');
@@ -36,9 +36,9 @@ export default function Register() {
   //   })
 
   // }
-  // if(userToken){
-  //   return <Navigate to='/' />
-  // }
+  if(userToken){
+    return <Navigate to='/' />
+  }
 
   return (
     <>
