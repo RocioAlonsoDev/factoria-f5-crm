@@ -1,41 +1,46 @@
 import { Navigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext'
-// import { useState } from "react";
-// import APIservice from '../services/APIservice'
+import { useState } from "react";
+import APIservice from '../services/APIservice'
 
 export default function Register() {
 
   const {userToken, setCurrentUser, setUserToken} = AuthContext();
-  // const[name,setName] = useState('');
-  // const[email,setEmail] = useState('');
-  // const[password,setPassword] = useState('');
-  // const[passwordConfirmation,setPasswordConfirmation] = useState('');
-  // const[error,setError] = useState({__html: ''});
+  const[name,setName] = useState('');
+  const[surname,setSurname] = useState('');
+  const[email,setEmail] = useState('');
+  const[password,setPassword] = useState('');
+  const[role,setRole] = useState('');
+  const[passwordConfirmation,setPasswordConfirmation] = useState('');
+  const[error,setError] = useState({__html: ''});
 
-  // const onSubmit = (ev) => {
-  //   ev.preventDefault();
-  //   setError({__html:''})
+  const onSubmit = (ev) => {
+    ev.preventDefault();
+    setError({__html:''})
 
-  //   APIservice.post('/signup',{
-  //     name,
-  //     email,
-  //     password,
-  //     password_confirmation: passwordConfirmation
-  //   })
-  //   .then(({data})=>{
-  //     setCurrentUser(data.user)
-  //     setUserToken(data.token)
-  //   })
-  //   .catch((error)=>{
-  //     if(error.response){
-  //       const finalErrors= Object.values(error.response.data.errors).reduce((accum, next) => 
-  //       [...accum, ...next], [])
-  //       setError({__html: finalErrors.join('<br />')})
-  //     }
-  //     console.log(error)
-  //   })
+    APIservice.post('/signup',{
+      name,
+      surname,
+      email,
+      image: '../assets/img/icons8-usuario-50.png',
+      id_role: role,
+      password,
+      password_confirmation: passwordConfirmation
+    })
+    .then(({data})=>{
+      setCurrentUser(data.user)
+      setUserToken(data.token)
+    })
+    .catch((error)=>{
+      if(error.response){
+        const finalErrors= Object.values(error.response.data.errors).reduce((accum, next) => 
+        [...accum, ...next], [])
+        setError({__html: finalErrors.join('<br />')})
+      }
+      console.log(error.response.data.message)
+    })
 
-  // }
+  }
   if(userToken){
     return <Navigate to='/' />
   }
@@ -50,23 +55,26 @@ export default function Register() {
                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                   Regístrate
                 </div>
-                {/* {error.__html && (
+                {error.__html && (
                   <div className='bg-red-500 rounded py-2 px-3 text-white'
                   dangerouslySetInnerHTML={error}>
                   </div>
-                )} */}
-                <form onSubmit={console.log('signup')}>
+                )}
+                <form onSubmit={onSubmit}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
+                      htmlFor="name"
                     >
                       Nombre
                     </label>
                     <input
                     required
                       type="text"
-                      // onChange={ev => setName(ev.target.value)}
+                      value={name}
+                      name='name'
+                      id='name'
+                      onChange={ev => setName(ev.target.value)}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Name"
                     />
@@ -75,14 +83,58 @@ export default function Register() {
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
+                      htmlFor="surname"
+                    >
+                      Apellidos
+                    </label>
+                    <input
+                    required
+                      type="text"
+                      value={surname}
+                      name='surname'
+                      id='surname'
+                      onChange={ev => setSurname(ev.target.value)}
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Surname"
+                    />
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="id-role"
+                      >
+                        Rol
+                    </label>
+                    <select
+                      id="id-role"
+                      name="id_role"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      required
+                      value={role}
+                      onChange={ev => setRole(ev.target.value)}
+                    >
+                      <option disabled default>-- Selecciona un Rol --</option>
+                      <option value='0'>Admin</option>
+                      <option value='1'>RP</option>
+                      <option value='2'>Formador/a</option>
+                    </select>
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="email"
                     >
                       Correo electrónico
                     </label>
                     <input
-                    required
+                      required
+                      value={email}
                       type="email"
-                      // onChange={ev => setEmail(ev.target.value)}
+                      name='email'
+                      id='email'
+                      onChange={ev => setEmail(ev.target.value)}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
                     />
@@ -91,14 +143,17 @@ export default function Register() {
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
+                      htmlFor="password"
                     >
                       Contraseña
                     </label>
                     <input
                       required
+                      value={password}
                       type="password"
-                      // onChange={ev => setPassword(ev.target.value)}
+                      name='password'
+                      id='password'
+                      onChange={ev => setPassword(ev.target.value)}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
                     />
@@ -109,11 +164,11 @@ export default function Register() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="password-confirmation"
                     >
-                      Contraseña
+                      Confirmar contraseña
                     </label>
                     <input
-                      // value={passwordConfirmation}
-                      // onChange={ev => setPasswordConfirmation(ev.target.value)}
+                      value={passwordConfirmation}
+                      onChange={ev => setPasswordConfirmation(ev.target.value)}
                       id="password-confirmation"
                       name="password_confirmation"
                       type="password"

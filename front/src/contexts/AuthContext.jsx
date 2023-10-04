@@ -12,7 +12,7 @@ export const ContextProvider = ({ children }) => {
     const [currentUser,setCurrentUser] = useState({})
     
     // const [userToken,_setUserToken] = useState(localStorage.getItem('TOKEN') || '')
-    const [userToken,_setUserToken] = useState('1234')
+    const [userToken,_setUserToken] = useState('')
 
 
     const setUserToken = (token) => {
