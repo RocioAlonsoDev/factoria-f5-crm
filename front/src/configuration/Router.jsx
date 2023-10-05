@@ -9,6 +9,7 @@ import Signup from '../pages/Signup'
 import NavbarAtom from "../components/atoms/NavbarAtom";
 
 
+
 const Router = createBrowserRouter([
   {
     path: '/home',
@@ -18,10 +19,7 @@ const Router = createBrowserRouter([
     path: '/dashboard',
     element: <Navigate to='/' />
   },
-  {
-    path: '/navbar',
-    element: <NavbarAtom />
-  },
+  
   {
     path: '/recruitment/selectiondayshow/id',
     element: <SelectionDayShow />
