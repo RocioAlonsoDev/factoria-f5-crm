@@ -23,7 +23,7 @@ class PersonRequest extends FormRequest
             'name'=>'required|string',
             'surname'=>'required|string',
             'email'=>'required|string',
-            'image'=>'string',
+            'image'=>'',
             'phone'=>'required|string',
             'address'=>'required|string',
             'city'=>'required|string',
