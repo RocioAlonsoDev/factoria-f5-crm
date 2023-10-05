@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use App\Models\Role;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -14,9 +16,9 @@ class RoleController extends Controller
             ['data'=>$role], 200);
     }
 
-    public function store(Request $request)
+    public function store(RoleRequest $request):JsonResponse
     {
-        $role = Role::create($role->all);
+        $role = Role::create($request->all());
         return response()->json([
             'data'=>$role,
             'success'=>true
