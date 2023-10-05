@@ -14,6 +14,7 @@ class Person extends Model
             'name',
             'surname',
             'email',
+            'image',
             'phone',
             'address',
             'city',

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function TableAtom(props) {
     const { tableTitle, data, columns } = props;
@@ -30,6 +30,7 @@ export default function TableAtom(props) {
     const [sortColumn, setSortColumn] = useState(null);
     const [sortDirection, setSortDirection] = useState('asc');
 
+    //Ordenar por orden alfabético las columnas
     const sortedData = [...filteredData].sort((a, b) => {
         if (sortColumn === null) return 0;
 

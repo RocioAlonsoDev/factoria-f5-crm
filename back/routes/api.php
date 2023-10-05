@@ -10,7 +10,6 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\AuthController;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
