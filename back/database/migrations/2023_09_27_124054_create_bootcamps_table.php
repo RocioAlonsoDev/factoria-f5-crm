@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('startDate');
             $table->date('endDate');
-            $table->text('description');
+            $table->string('description');
             $table->enum('school', ['Cataluña', 'Madrid', 'Asturias']);
             $table->string('promo');
 
