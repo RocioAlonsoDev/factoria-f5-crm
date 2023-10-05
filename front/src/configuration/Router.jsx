@@ -8,6 +8,7 @@ import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 
 
+
 const Router = createBrowserRouter([
   {
     path: '/home',
@@ -17,10 +18,7 @@ const Router = createBrowserRouter([
     path: '/dashboard',
     element: <Navigate to='/' />
   },
-  {
-    path: '/navbar',
-    element: <NavbarAtom />
-  },
+  
   {
     path: '/recruitment/selectiondayshow/id',
     element: <SelectionDayShow />
