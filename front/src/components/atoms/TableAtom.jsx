@@ -36,10 +36,6 @@ export default function TableAtom(props) {
 
                             </th>
                         ) )}
-                        {/* <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
-                        Nombre
-                        </th> */}
-                        
                     </tr>
                     </thead>
                     <tbody>
@@ -57,30 +53,7 @@ export default function TableAtom(props) {
                             </tr>
                         )
                         )}
-                    {/* <tr>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4 text-left">
-                        Yolanda
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4 text-left">
-                        Zahonero Alfaro
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4">
-                        A Coruña
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4">
-                        Femenino
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4">
-                        FemNorte
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4">
-                        Convocada
-                        </td>
-                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg text-indigo-800 font-semibold underline whitespace-nowrap p-4">
-                        <a href="http://">Ver |</a> <a href="http://">Editar |</a> <a href="http://">Eliminar</a>
-                        </td>
-                    </tr> */}
-                    
+
                     </tbody>
                 </table>
                 </div>
