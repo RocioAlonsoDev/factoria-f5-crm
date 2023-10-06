@@ -1,9 +1,11 @@
 import NavbarAtom from '../../components/atoms/NavbarAtom';
 import FormAtom from '../../components/atoms/FormAtom'
 import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service'
+import {useNavigate} from 'react-router-dom';
 
 
 function SelectionDayAdd() {
+  const navigate = useNavigate();
   const formData = [
     {
       id: 'school', 
