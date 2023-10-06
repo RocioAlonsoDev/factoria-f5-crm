@@ -57,6 +57,20 @@ const Requirements= () => {
                   <i className="fas fa-circle text-emerald-500 mr-2"></i>{" "}
                   CV en PDF
                 </td>
+                <td>
+                <button
+                             className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                             type="button"
+                    >
+                    Editar
+                    </button>
+                    <button
+                             className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                             type="button"
+                    >
+                    Eliminar
+                    </button>
+                </td>
                 </tr>
                 </tbody>
                 </table>

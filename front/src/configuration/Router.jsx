@@ -5,6 +5,8 @@ import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
 import Requirements from "../pages/ConfigurationPages/Requirements";
+import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
+import RequirementStatus from "../pages/ConfigurationPages/RequirementStatus";
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 
@@ -53,6 +55,14 @@ const Router = createBrowserRouter([
   {
     path: '/configuration/requirements',
     element: <Requirements />
+  },
+  {
+    path: '/configuration/person/status',
+    element: <PersonStatus />
+  },
+  {
+    path: '/configuration/requirement/status',
+    element: <RequirementStatus />
   },
 ])
 
