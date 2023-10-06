@@ -1,6 +1,7 @@
 
 import CardAtom from "../../components/atoms/CardAtom";
-import selection from "../../assets/img/selection.jpg"
+import selection from "../../assets/img/selection.jpg";
+import {Link} from "react-router-dom";
 
 // components
 
@@ -19,15 +20,19 @@ export default function CardAtomSocialTraffic() {
   };
   return (
     <>
-      <div className="flex justify-center items-center">
-      <div className="max-w-screen-lg flex justify-center gap-4">
-        <CardAtom {...CardAtomData} style={{ width: '20%' }} />
-        <CardAtom {...CardAtomData} style={{ width: '20%' }} />
-        <CardAtom {...CardAtomData} style={{ width: '20%' }} />
-        <CardAtom {...CardAtomData} style={{ width: '20%' }} />
+     <div className="flex flex-col items-center">
+      <Link to='/recruitment/selectionday/add'> 
+      <button className="bg-orange-500 text-white px-4 py-2 rounded mt-4">
+        Añadir jornada de selección
+      </button>
+      </Link>
+      <div className="max-w-screen-lg flex justify-center gap-4 mt-4">
+        <CardAtom {...CardAtomData} style={{ width: "20%" }} />
+        <CardAtom {...CardAtomData} style={{ width: "20%" }} />
+        <CardAtom {...CardAtomData} style={{ width: "20%" }} />
+        <CardAtom {...CardAtomData} style={{ width: "20%" }} />
       </div>
     </div>
-
   
 
  
