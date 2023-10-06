@@ -1,187 +1,103 @@
 
 import CardAtom from "../../components/atoms/CardAtom";
 import selection from "../../assets/img/selection.jpg";
-import {Link} from "react-router-dom";
-
-// components
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
+import TableAtom from "../../components/atoms/TableAtom";
 
 export default function CardAtomSocialTraffic() {
-  const CardAtomData = {
-    name: "nombre de la jornada de selección",
-    imageUrl: selection,
-    stats: [
-      { label: "Fecha", value: "2-12-2023" },
-      { label: "Personas convocadas", value: 50 },
-      { label: "Personas confirmadas", value: 30 }
-    ],
-    overview: "Faltan X días",
-    buttonText:"Ver Detalles",
-    buttonLink:"/detalle",
-  };
+  const [selectionDay, setSelectionDay] = useState([]);
+  const columns = [
+    'Escuela',
+    'Fecha',
+    'Asistentes',
+    'Personas admitidas'
+  ];
+
+  useEffect(() => {
+    SelectionDayDataService.getAll()
+      .then((response) => {
+        setSelectionDay(response.data.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al mostrar las jornadas de selección", error);
+      });
+  }, []);
+
+  const currentDate = new Date();
+
+  const nextSelections = selectionDay.filter((day) => {
+    const eventDate = new Date(day.date);
+    return eventDate >= currentDate;
+  });
+
+  const previousSelections = selectionDay.filter((day) => {
+    const eventDate = new Date(day.date);
+    return eventDate < currentDate;
+  });
+
+  // Mapear las jornadas de selección pasadas
+  const formattedPreviousSelections = previousSelections.map((day) => {
+    return {
+      'Escuela': day.school,
+      'Fecha': new Date(day.date).toLocaleDateString("es-ES", {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+      }),
+      'Asistentes': day.attendees,
+      'Personas admitidas': day.admittedPeople
+      
+    };
+  });
+
   return (
     <>
-     <div className="flex flex-col items-center">
-      <Link to='/recruitment/selectionday/add'> 
-      <button className="bg-orange-500 text-white px-4 py-2 rounded mt-4">
-        Añadir jornada de selección
-      </button>
-      </Link>
-      <div className="max-w-screen-lg flex justify-center gap-4 mt-4">
-        <CardAtom {...CardAtomData} style={{ width: "20%" }} />
-        <CardAtom {...CardAtomData} style={{ width: "20%" }} />
-        <CardAtom {...CardAtomData} style={{ width: "20%" }} />
-        <CardAtom {...CardAtomData} style={{ width: "20%" }} />
-      </div>
-    </div>
-  
+      <div className="flex flex-col items-center">
+        <Link to="/recruitment/selectionday/add">
+          <button className="bg-orange-500 text-white px-4 py-2 rounded mt-4">
+            Añadir jornada de selección
+          </button>
+        </Link>
+        <div className="max-w-screen-lg flex justify-center gap-4 mt-4">
+          {nextSelections.map((day, index) => {
+            const formattedDate = new Date(day.date).toLocaleDateString("es-ES", {
+              day: "numeric",
+              month: "numeric",
+              year: "numeric",
+            });
 
- 
+            const eventDate = new Date(day.date);
+            const timeDifference = eventDate - currentDate;
+            const daysRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const remainingInfo = `${daysRemaining} días`;
 
-
-
-    {/* // Tabla con bootcamps anteriores */}
-      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-        <div className="rounded-t mb-0 px-4 py-3 border-0">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className="font-semibold text-base text-blueGray-700">
-                Jornadas de selección anteriores
-              </h3>
-            </div>
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
-                className="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-              >
-                Ver todas
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="block w-full overflow-x-auto">
-          {/* Projects table */}
-          <table className="items-center w-full bg-transparent border-collapse">
-            <thead className="thead-light">
-              <tr>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Fecha
-                </th>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Participantes
-                </th>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  Jornada de selección
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  1,480
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">60%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                        <div
-                          style={{ width: "60%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  Facebook
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  5,480
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">70%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-emerald-200">
-                        <div
-                          style={{ width: "70%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  Google
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  4,807
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">80%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-purple-200">
-                        <div
-                          style={{ width: "80%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  Instagram
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  3,678
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">75%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-lightBlue-200">
-                        <div
-                          style={{ width: "75%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lightBlue-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  twitter
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2,645
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">30%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-orange-200">
-                        <div
-                          style={{ width: "30%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            return (
+              <CardAtom
+                key={index}
+                name={day.school}
+                imageUrl={selection}
+                stats={[
+                  { label: "Fecha", value: formattedDate },
+                  { label: "Faltan", value: remainingInfo },
+                ]}
+                buttonText="Ver Detalles"
+                buttonLink={`/recruitment/selectiondayshow/${day.id}`}
+                style={{ width: "20%" }}
+              />
+            );
+          })}
         </div>
       </div>
+
+      {/* Tabla con jornadas anteriores */}
+      <TableAtom
+        tableTitle="Jornadas de selección anteriores"
+        data={formattedPreviousSelections}
+        columns={columns}
+      />
     </>
   );
 }
