@@ -1,8 +1,10 @@
 import FormAtom from '../../components/atoms/FormAtom'
 import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service'
+import {useNavigate} from 'react-router-dom';
 
 
 function SelectionDayAdd() {
+  const navigate = useNavigate();
   const formData = [
     {
       id: 'school', 
@@ -27,6 +29,8 @@ function SelectionDayAdd() {
     SelectionDayDataService.create(values)
       .then((response) => {
         console.log('Respuesta:', response.data);
+        alert ('La jornada de selección se ha añadido correctamente');
+        navigate ('/recruitment/selectionDay');
         
       })
       .catch((error) => {
