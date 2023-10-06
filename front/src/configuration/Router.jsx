@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
+import Requirements from "../pages/ConfigurationPages/Requirements";
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 
@@ -48,6 +49,10 @@ const Router = createBrowserRouter([
   {
     path: '/recruitment/selectionday',
     element: <SelectionDayIndex />
+  },
+  {
+    path: '/configuration/requirements',
+    element: <Requirements />
   },
 ])
 
