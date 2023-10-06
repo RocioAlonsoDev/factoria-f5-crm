@@ -1,7 +1,29 @@
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import TableAtom from "../../components/atoms/TableAtom";
+import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
 
 
 export default function SelectionDayShow() {
+
+  const { id } = useParams();
+  const [selectionDay, setSelectionDay] = useState(null);
+
+  useEffect(() => {
+
+    SelectionDayDataService.get(id)
+      .then((response) =>{
+        setSelectionDay(response.data);
+      })
+      .catch((error) => {
+        console.error('Error al cargar la jornada de selección:', error);
+      });
+
+  }, [id]);
+
+  if (!selectionDay){
+    return <div>Cargando...</div>
+  }
 
   const data =[
     {Nombre: 'Yolanda',
@@ -58,7 +80,7 @@ export default function SelectionDayShow() {
                   <input
                     type="email"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-lg shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue="Asturias"
+                    defaultValue={selectionDay.school}
                     readOnly
                   />
                 </div>
@@ -74,7 +96,7 @@ export default function SelectionDayShow() {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-lg shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue="03/11/2023, 09:00"
+                    defaultValue={selectionDay.date}
                     readOnly
                   />
                 </div>
