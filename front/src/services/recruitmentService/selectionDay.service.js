@@ -26,6 +26,10 @@ class SelectionDayDataService{
     findByUser(id_user){
         return http.get(`api/selectionDay?id_user=${id_user}`);
     }
+
+    getPeopleInSelectionDay(id_selectionDay){
+        return http.get(`api/getPeopleInSelectionDay/${id_selectionDay}/people`)
+    }
     
 }
 
