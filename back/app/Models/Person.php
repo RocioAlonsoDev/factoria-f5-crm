@@ -28,4 +28,11 @@ class Person extends Model
             
     ];
 
+    public function selectionDays()
+{
+    return $this->belongsToMany(SelectionDay::class, 'person_selection_day', 'id_person', 'id_selection_day')
+        ->withPivot(['school', 'comments', 'turn', 'decision'])
+        ->withTimestamps();
+}
+
 }

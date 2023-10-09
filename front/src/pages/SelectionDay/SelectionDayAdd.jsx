@@ -1,13 +1,18 @@
 import FormAtom from '../../components/atoms/FormAtom'
+import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service'
+import {useNavigate} from 'react-router-dom';
 
-const formData = [
+
+function SelectionDayAdd() {
+  const navigate = useNavigate();
+  const formData = [
     {
-      id: 'nombreJornada', 
+      id: 'school', 
       label: 'Nombre de la escuela', 
       type: 'text', 
     },
     {
-      id: 'fecha', 
+      id: 'date', 
       label: 'Fecha', 
       type: 'date', 
     },
@@ -19,7 +24,21 @@ const formData = [
 
   ];
 
-function SelectionDayAdd() {
+  const handleSubmit = (values) => {
+    
+    SelectionDayDataService.create(values)
+      .then((response) => {
+        console.log('Respuesta:', response.data);
+        alert ('La jornada de selección se ha añadido correctamente');
+        navigate ('/recruitment/selectionDay');
+        
+      })
+      .catch((error) => {
+        console.error('Error al enviar los datos:', error);
+      });
+  };
+
+ 
 
 
   return (
@@ -27,11 +46,8 @@ function SelectionDayAdd() {
     <FormAtom
     formTitle="Formulario de Jornada"
     formData={formData}
-     onSubmit={(values) => {
-        //aquí tengo que meter los datos para enviar
-    console.log('Valores del formulario:', values);
-  }}
-    />
+    onSubmit={handleSubmit}
+  />
   )
 }
 
