@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from 'react-router-dom';
 import TableAtom from "../../components/atoms/TableAtom";
 import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
+import PersonDataService from "../../services/crmService/person.service";
 
 
 
@@ -12,28 +13,58 @@ export default function SelectionDayShow() {
   const [people, setPeople] = useState();
 
   useEffect(() => {
-
-    SelectionDayDataService.get(id)
-      .then((response) =>{
-        setSelectionDay(response.data);
-      })
-      .catch((error) => {
-        console.error('Error al cargar la jornada de selección:', error);
-      });
-
-  }, [id]);
-
-  useEffect (() =>{
     SelectionDayDataService.getPeopleInSelectionDay(id)
       .then((response) => {
-      setPeople(response.data.data);
-      console.log(response.data.data);
+        const peopleData = response.data.data; 
+        setPeople(peopleData);
+        console.log(peopleData);
+
+        setSelectionDay(response.data)
+  
+        
+        const promises = peopleData.map((person) => {
+          return PersonDataService.get(person.id_person)
+            .then((personResponse) => {
+              console.log(personResponse.data)
+              
+            })
+            .catch((error) => {
+              console.error(`Error al obtener detalles de la persona ${person.id_person}:`, error);
+            });
+        });
+  
+        
       })
       .catch((error) => {
-     console.error('Error al cargar las personas de la jornada de selección:', error);
-     });
+        console.error('Error al cargar las personas de la jornada de selección:', error);
+      });
+  }, [id]);
+
+ 
+  
+
+  // useEffect (() =>{
+  //   SelectionDayDataService.getPeopleInSelectionDay(id)
+  //     .then((response) => {
+  //     setPeople(response.data.data);
+  //     console.log(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //    console.error('Error al cargar las personas de la jornada de selección:', error);
+  //    });
 
      
+  // }, [id]);
+  useEffect(() => {
+    SelectionDayDataService.getPeopleInSelectionDay(id)
+      .then((response) => {
+        const peopleData = response.data.data; 
+        setPeople(peopleData);
+        console.log(peopleData);
+      })
+      .catch((error) => {
+        console.error('Error al cargar las personas de la jornada de selección:', error);
+      });
   }, [id]);
 
   if (!selectionDay){
@@ -58,17 +89,20 @@ export default function SelectionDayShow() {
     'asistencia',
   ]
 
-  const data = people.map((person) => ({
+  // const data = people ? people.map((person) => {
+  //   return {
+  //     'nombre' : person.id_person,
+  //   }
+  // }) : [];
 
-  
-    return {
-      'nombre' : person.id_person,
-
-    }
-    
-  ))}
-
-  
+  const data = people
+  ? people.map((person) => ({
+      nombre: person.name, 
+      
+      ciudad: person.ciudad,
+      
+    }))
+  : [];
 
 
   return (
