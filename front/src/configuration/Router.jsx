@@ -65,7 +65,7 @@ const Router = createBrowserRouter([
   {
     path:'/recruitment/person/add',
     element: <AdminAddPerson />
-  }
+  },
   {
     path: '/configuration/requirements',
     element: <Requirements />
