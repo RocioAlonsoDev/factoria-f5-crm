@@ -9,7 +9,7 @@ export default function SelectionDayShow() {
 
   const { id } = useParams();
   const [selectionDay, setSelectionDay] = useState(null);
-  const [people, setPeople] = useState(null);
+  const [people, setPeople] = useState();
 
   useEffect(() => {
 
@@ -26,8 +26,8 @@ export default function SelectionDayShow() {
   useEffect (() =>{
     SelectionDayDataService.getPeopleInSelectionDay(id)
       .then((response) => {
-      setPeople(response.data);
-      console.log(response.data);
+      setPeople(response.data.data);
+      console.log(response.data.data);
       })
       .catch((error) => {
      console.error('Error al cargar las personas de la jornada de selección:', error);
@@ -40,14 +40,14 @@ export default function SelectionDayShow() {
     return <div>Cargando...</div>
   }
 
-  const data =[
-    {Nombre: 'Yolanda',
-    Apellidos: 'Zahonero Alfaro',
-    Ciudad: 'A Coruña',
-    Género: 'Femenino',
-    Bootcamp: 'FemNorte',
-    Asistencia: 'Convocada',}
-  ];
+  // const data =[
+  //   {Nombre: 'Yolanda',
+  //   Apellidos: 'Zahonero Alfaro',
+  //   Ciudad: 'A Coruña',
+  //   Género: 'Femenino',
+  //   Bootcamp: 'FemNorte',
+  //   Asistencia: 'Convocada',}
+  // ];
 
   const columns =[
     'nombre',
@@ -57,6 +57,12 @@ export default function SelectionDayShow() {
     'bootcamp',
     'asistencia',
   ]
+
+  const data = people.map((person) => {
+    return {
+      'nombre' : person.id_person,
+    }
+  })
 
 
   return (
