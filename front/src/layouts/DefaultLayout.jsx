@@ -17,9 +17,11 @@ export default function DefaultLayout() {
     <>
     <div className='flex w-full bg-red-500'>
       <Sidebar></Sidebar>
-        <div className='w-auto'>
+        <div>
           <NavbarMolecule />
-          <Outlet />
+          <div className='md:fixed md:right-0 md:left-64 top-20 p-8 '>
+            <Outlet />
+          </div>
         </div>
     </div>
         

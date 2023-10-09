@@ -16,7 +16,7 @@ function classNames(...classes) {
 export default function NavbarMolecule() {
   return (
 
-    <Disclosure as="nav" className="bg-gray-800 md:block md:fixed md:right-0 md:left-0 ">
+    <Disclosure as="nav" className="bg-gray-800 md:block md:fixed md:right-0 md:left-64 ">
     {({ open }) => (
       <>
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
