@@ -4,10 +4,12 @@ import TableAtom from "../../components/atoms/TableAtom";
 import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
 
 
+
 export default function SelectionDayShow() {
 
   const { id } = useParams();
   const [selectionDay, setSelectionDay] = useState(null);
+  const [people, setPeople] = useState(null);
 
   useEffect(() => {
 
@@ -19,6 +21,19 @@ export default function SelectionDayShow() {
         console.error('Error al cargar la jornada de selección:', error);
       });
 
+  }, [id]);
+
+  useEffect (() =>{
+    SelectionDayDataService.getPeopleInSelectionDay(id)
+      .then((response) => {
+      setPeople(response.data);
+      console.log(response.data);
+      })
+      .catch((error) => {
+     console.error('Error al cargar las personas de la jornada de selección:', error);
+     });
+
+     
   }, [id]);
 
   if (!selectionDay){
