@@ -58,12 +58,17 @@ export default function SelectionDayShow() {
     'asistencia',
   ]
 
-  const data = people.map((person) => {
+  const data = people.map((person) => ({
+
+  
     return {
       'nombre' : person.id_person,
+
     }
     
-  })
+  ))}
+
+  
 
 
   return (
