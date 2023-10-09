@@ -3,12 +3,14 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
-import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
+import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
 import RequirementStatus from "../pages/ConfigurationPages/RequirementStatus";
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
+import PublicAddPerson from "../pages/Person/PublicAddPerson";
+import AdminAddPerson from "../pages/Person/AdminAddPerson";
 
 
 
@@ -23,7 +25,7 @@ const Router = createBrowserRouter([
   },
   
   {
-    path: '/recruitment/selectiondayshow/id',
+    path: '/recruitment/selectiondayshow/:id',
     element: <SelectionDayShow />
   },
   {
@@ -52,6 +54,18 @@ const Router = createBrowserRouter([
     path: '/recruitment/selectionday',
     element: <SelectionDayIndex />
   },
+
+  // Person
+
+  {
+    path:'/inscribe',
+    element: <PublicAddPerson />
+  },
+
+  {
+    path:'/recruitment/person/add',
+    element: <AdminAddPerson />
+  }
   {
     path: '/configuration/requirements',
     element: <Requirements />
