@@ -76,19 +76,39 @@ useEffect(() => {
 
   
 
-  if (!selectionDay || isLoading) {
-    return <div>Cargando...</div>;
+  if (!selectionDay){
+    return <div>Cargando...</div>
   }
 
-  const columns = ['nombre', 'apellidos', 'ciudad', 'genero', 'comentarios', 'estado'];
+  // const data =[
+  //   {Nombre: 'Yolanda',
+  //   Apellidos: 'Zahonero Alfaro',
+  //   Ciudad: 'A Coruña',
+  //   Género: 'Femenino',
+  //   Bootcamp: 'FemNorte',
+  //   Asistencia: 'Convocada',}
+  // ];
+
+  const columns =[
+    'nombre',
+    'apellidos',
+    'ciudad',
+    'genero',
+    'bootcamp',
+    'asistencia',
+  ]
+
   const data = people.map((person) => ({
-    nombre: person.nombre,
-    apellidos: person.apellidos,
-    ciudad: person.ciudad,
-    genero: person.genero,
-    comentarios: person.comentarios,
-    estado: person.estado,
-  }))
+
+  
+    return {
+      'nombre' : person.id_person,
+
+    }
+    
+  ))}
+
+  
 
 
   return (
