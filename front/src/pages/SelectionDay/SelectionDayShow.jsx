@@ -40,14 +40,14 @@ export default function SelectionDayShow() {
     return <div>Cargando...</div>
   }
 
-  const data =[
-    {Nombre: 'Yolanda',
-    Apellidos: 'Zahonero Alfaro',
-    Ciudad: 'A Coruña',
-    Género: 'Femenino',
-    Bootcamp: 'FemNorte',
-    Asistencia: 'Convocada',}
-  ];
+  // const data =[
+  //   {Nombre: 'Yolanda',
+  //   Apellidos: 'Zahonero Alfaro',
+  //   Ciudad: 'A Coruña',
+  //   Género: 'Femenino',
+  //   Bootcamp: 'FemNorte',
+  //   Asistencia: 'Convocada',}
+  // ];
 
   const columns =[
     'nombre',
@@ -172,7 +172,7 @@ export default function SelectionDayShow() {
             <h6 className="text-blueGray-400 text-md mt-3 mb-6 font-bold uppercase">
               Personas asociadas a esta reunión
             </h6>
-            <TableAtom data={data} columns={columns}>
+            <TableAtom data={people} columns={columns}>
 
 
             </TableAtom>
