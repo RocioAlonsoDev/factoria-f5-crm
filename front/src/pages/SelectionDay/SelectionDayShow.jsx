@@ -62,6 +62,7 @@ export default function SelectionDayShow() {
     return {
       'nombre' : person.id_person,
     }
+    
   })
 
 
