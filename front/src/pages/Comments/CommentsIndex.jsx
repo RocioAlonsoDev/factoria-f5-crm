@@ -1,7 +1,7 @@
 import  { useState } from 'react';
 import TableAtom from "../../components/atoms/TableAtom";
 import TableDropdown from "./TableDropdown";
-import RegularModal from "./RegularModalAtom";
+import RegularModal from "./AddCommentModal";
 
 export default function CommentsIndex() {
   const [isModalOpen, setIsModalOpen] = useState(false);

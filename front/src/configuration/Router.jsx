@@ -4,7 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
-import CommentsIndex from "../pages/Comments/CommentsIndex";;
+import CommentsIndex from "../pages/Comments/CommentsIndex";
 import Login from "../pages/Login";
 import Signup from '../pages/Signup';
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
@@ -64,7 +64,8 @@ const Router = createBrowserRouter([
     path:'/recruitment/person/add',
     element: <AdminAddPerson />
   },
-  
+
+  //Comments
   {
     path: '/recruitment/comments',
     element: <CommentsIndex />

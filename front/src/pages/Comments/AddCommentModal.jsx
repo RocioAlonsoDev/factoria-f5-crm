@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from "react";
 
-export default function RegularModal({ setIsModalOpen }) {
+export default function AddCommentModal({ setIsModalOpen }) {
   const [formData, setFormData] = useState({
     comment: "",
     stage: "",
@@ -48,8 +48,8 @@ export default function RegularModal({ setIsModalOpen }) {
                 <label className="block text-blueGray-700 text-sm font-bold mb-2">Comentario:</label>
                 <textarea
                   name="comment"
-                  rows={15}
-                  cols={7}
+                  rows={10}
+                  cols={100}
                   wrap="wrap"
                   maxLength={200}
                   value={formData.comment}
@@ -93,7 +93,7 @@ export default function RegularModal({ setIsModalOpen }) {
   );
 }
 
-RegularModal.propTypes = {
+AddCommentModal.propTypes = {
      setIsModalOpen: PropTypes.any.isRequired,
 
  };
