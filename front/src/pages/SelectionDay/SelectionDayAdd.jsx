@@ -2,6 +2,7 @@ import NavbarAtom from '../../components/atoms/NavbarAtom';
 import FormAtom from '../../components/atoms/FormAtom'
 import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service'
 import {useNavigate} from 'react-router-dom';
+import NavbarAtom from '../../components/atoms/NavbarAtom';
 
 
 function SelectionDayAdd() {
@@ -33,22 +34,27 @@ function SelectionDayAdd() {
     { label: 'Estadísticas', url: '/estadísticas' },
   ];
 
-  
-
-function SelectionDayAdd() {
+  const menuItems = [
+    { label: 'Inicio', url: '/' },
+    { label: 'Jornada de Selección', url: '/seleccion' }, 
+    { label: 'Total Aspirantes', url: '/aspirantes' }, 
+    { label: 'Aspirantes Bootcamp', url: '/bootcamp' }, 
+    { label: 'Estadísticas', url: '/estadisticas' }, 
+  ];
+ 
 
 
   return (
-    <>
-    <NavbarAtom menuItems={menuItems} />
+   <>
+   <div>
+    <NavbarAtom menuItems={menuItems}/>
+    </div>
+    
     <FormAtom
     formTitle="Formulario de Jornada"
     formData={formData}
-     onSubmit={(values) => {
-        //aquí tengo que meter los datos para enviar
-    console.log('Valores del formulario:', values);
-  }}
-    />
+    onSubmit={handleSubmit}
+  />
   </>
   )
 }

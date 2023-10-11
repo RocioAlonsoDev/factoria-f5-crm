@@ -11,12 +11,12 @@ export default function FormAtom(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(values); // Envía los valores a la función onSubmit proporcionada
+    onSubmit(values); 
   };
 
   return (
 
-    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded py-12">
     <form onSubmit={handleSubmit}>
       <div className="rounded-t mb-0 px-4 py-3 border-0">
         <div className="flex flex-wrap items-center">
