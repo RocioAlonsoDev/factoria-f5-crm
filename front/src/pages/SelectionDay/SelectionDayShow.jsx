@@ -98,17 +98,20 @@ useEffect(() => {
     'asistencia',
   ]
 
-  const data = people.map((person) => ({
+  // const data = people ? people.map((person) => {
+  //   return {
+  //     'nombre' : person.id_person,
+  //   }
+  // }) : [];
 
-  
-    return {
-      'nombre' : person.id_person,
-
-    }
-    
-  ))}
-
-  
+  const data = people
+  ? people.map((person) => ({
+  nombre: person.name, 
+      
+  ciudad: person.ciudad,
+      
+  }))
+  : [];
 
 
   return (
