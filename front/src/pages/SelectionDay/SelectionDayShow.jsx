@@ -97,11 +97,11 @@ export default function SelectionDayShow() {
 
   const data = people
   ? people.map((person) => ({
-      nombre: person.name, 
+  nombre: person.name, 
       
-      ciudad: person.ciudad,
+  ciudad: person.ciudad,
       
-    }))
+  }))
   : [];
 
 
