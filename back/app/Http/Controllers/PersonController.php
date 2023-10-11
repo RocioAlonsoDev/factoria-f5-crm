@@ -68,4 +68,14 @@ class PersonController extends Controller
             'success'=>true
         ], 200);
     }
+
+    // RECRUITMENT METHODS
+
+    public function getPeopleInSelectionDay($selectionDayId)
+{
+   
+    $people = Person::where('selection_day_id', $selectionDayId)->get();
+
+    return response()->json(['data' => $people], 200);
+}
 }

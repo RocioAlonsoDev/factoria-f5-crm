@@ -1,14 +1,17 @@
 import NavbarAtom from '../../components/atoms/NavbarAtom';
 import FormAtom from '../../components/atoms/FormAtom'
+import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service'
 
-const formData = [
+
+function SelectionDayAdd() {
+  const formData = [
     {
-      id: 'nombreJornada', 
+      id: 'school', 
       label: 'Nombre de la escuela', 
       type: 'text', 
     },
     {
-      id: 'fecha', 
+      id: 'date', 
       label: 'Fecha', 
       type: 'date', 
     },
@@ -34,17 +37,17 @@ function SelectionDayAdd() {
 
 
   return (
-    <div className="pt-14">
-      <NavbarAtom menuItems={menuItems} />
-      <FormAtom
-        formTitle="Nueva Jornada de Selección"
-        formData={formData}
-        onSubmit={(values) => {
-          // Aquí tienes que manejar los datos para enviar
-          console.log('Valores del formulario:', values);
-        }}
-      />
-    </div>
+    <>
+    <NavbarAtom menuItems={menuItems} />
+    <FormAtom
+    formTitle="Formulario de Jornada"
+    formData={formData}
+     onSubmit={(values) => {
+        //aquí tengo que meter los datos para enviar
+    console.log('Valores del formulario:', values);
+  }}
+    />
+  </>
   )
 }
 
