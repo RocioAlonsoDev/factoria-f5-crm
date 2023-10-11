@@ -26,7 +26,7 @@ const Router = createBrowserRouter([
     element: <SelectionDayShow />
   },
   {
-    path: '/selectionday/add',
+    path: 'recruitment/selectionday/add',
     element: <SelectionDayAdd />
   },
   {
