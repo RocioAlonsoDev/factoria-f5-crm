@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('person__bootcamps', function (Blueprint $table) {
             $table->bigInteger('id_bootcamp');
-            $table->bigInteger('id_user');
+            $table->bigInteger('id_person');
             $table->timestamps();
         });
     }
