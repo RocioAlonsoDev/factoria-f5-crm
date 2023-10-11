@@ -4,105 +4,73 @@ import TableAtom from "../../components/atoms/TableAtom";
 import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
 import PersonDataService from "../../services/crmService/person.service";
 
-
-
 export default function SelectionDayShow() {
-
   const { id } = useParams();
   const [selectionDay, setSelectionDay] = useState(null);
-  const [people, setPeople] = useState();
+  const [people, setPeople] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    SelectionDayDataService.getPeopleInSelectionDay(id)
+    
+    SelectionDayDataService.get(id)
       .then((response) => {
-        const peopleData = response.data.data; 
-        setPeople(peopleData);
-        console.log(peopleData);
+        setSelectionDay(response.data);
+      })
+      .catch((error) => {
+        console.error('Error al cargar la jornada de selección:', error);
+      });
 
-        setSelectionDay(response.data)
-  
-        
-        const promises = peopleData.map((person) => {
-          return PersonDataService.get(person.id_person)
-            .then((personResponse) => {
-              console.log(personResponse.data)
-              
-            })
-            .catch((error) => {
-              console.error(`Error al obtener detalles de la persona ${person.id_person}:`, error);
-            });
+    
+    SelectionDayDataService.getPeopleInSelectionDay(id)
+      .then(async (response) => {
+        const peopleData = response.data.data;
+
+        const personPromises = peopleData.map((person) => {
+          return PersonDataService.get(person.id_person);
         });
-  
-        
+
+        try {
+          const personResponses = await Promise.all(personPromises);
+          const formattedPeopleData = personResponses.map((response, index) => {
+            
+            const person = response.data;
+            const selectionDayData = peopleData[index];
+            return {
+              nombre: person.name,
+              apellidos: person.surname,
+              ciudad: person.city,
+              genero: person.gender,
+              comentarios: selectionDayData.comments,
+              decision: selectionDayData.decission,
+            };
+          });
+
+          setPeople(formattedPeopleData);
+          setIsLoading(false);
+        } catch (error) {
+          console.error('Error al cargar detalles de las personas:', error);
+          setIsLoading(false);
+        }
       })
       .catch((error) => {
         console.error('Error al cargar las personas de la jornada de selección:', error);
+        setIsLoading(false);
       });
   }, [id]);
 
- 
-  
-
-  // useEffect (() =>{
-  //   SelectionDayDataService.getPeopleInSelectionDay(id)
-  //     .then((response) => {
-  //     setPeople(response.data.data);
-  //     console.log(response.data.data);
-  //     })
-  //     .catch((error) => {
-  //    console.error('Error al cargar las personas de la jornada de selección:', error);
-  //    });
-
-     
-  // }, [id]);
-  useEffect(() => {
-    SelectionDayDataService.getPeopleInSelectionDay(id)
-      .then((response) => {
-        const peopleData = response.data.data; 
-        setPeople(peopleData);
-        console.log(peopleData);
-      })
-      .catch((error) => {
-        console.error('Error al cargar las personas de la jornada de selección:', error);
-      });
-  }, [id]);
-
-  if (!selectionDay){
-    return <div>Cargando...</div>
+  if (!selectionDay || isLoading) {
+    return <div>Cargando...</div>;
   }
 
-  // const data =[
-  //   {Nombre: 'Yolanda',
-  //   Apellidos: 'Zahonero Alfaro',
-  //   Ciudad: 'A Coruña',
-  //   Género: 'Femenino',
-  //   Bootcamp: 'FemNorte',
-  //   Asistencia: 'Convocada',}
-  // ];
-
-  const columns =[
-    'nombre',
-    'apellidos',
-    'ciudad',
-    'genero',
-    'bootcamp',
-    'asistencia',
-  ]
-
-  // const data = people ? people.map((person) => {
-  //   return {
-  //     'nombre' : person.id_person,
-  //   }
-  // }) : [];
-
-  const data = people
-  ? people.map((person) => ({
-      nombre: person.name, 
-      
-      ciudad: person.ciudad,
-      
-    }))
-  : [];
+  const columns = ['nombre', 'apellidos', 'ciudad', 'genero', 'comentarios', 'decision'];
+  const data = people.map((person) => ({
+    nombre: person.nombre,
+    apellidos: person.apellidos,
+    ciudad: person.ciudad,
+    genero: person.genero,
+    comentarios: person.comentarios,
+    decision: person.decision,
+  }))
 
 
   return (
