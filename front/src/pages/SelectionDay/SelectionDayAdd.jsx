@@ -1,29 +1,26 @@
 import NavbarAtom from '../../components/atoms/NavbarAtom';
 import FormAtom from '../../components/atoms/FormAtom'
 import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service'
-import {useNavigate} from 'react-router-dom';
-import NavbarAtom from '../../components/atoms/NavbarAtom';
-
+import { useNavigate } from 'react-router-dom';
 
 function SelectionDayAdd() {
   const navigate = useNavigate();
   const formData = [
     {
-      id: 'school', 
-      label: 'Nombre de la escuela', 
-      type: 'text', 
+      id: 'school',
+      label: 'Nombre de la escuela',
+      type: 'text',
     },
     {
-      id: 'date', 
-      label: 'Fecha', 
-      type: 'date', 
+      id: 'date',
+      label: 'Fecha',
+      type: 'date',
     },
     {
-       id: 'link', 
-       label: 'Link del zoom', 
-       type: 'text', 
-      },
-
+      id: 'link',
+      label: 'Link del zoom',
+      type: 'text',
+    },
   ];
 
   const menuItems = [
@@ -34,29 +31,31 @@ function SelectionDayAdd() {
     { label: 'Estadísticas', url: '/estadísticas' },
   ];
 
-  const menuItems = [
-    { label: 'Inicio', url: '/' },
-    { label: 'Jornada de Selección', url: '/seleccion' }, 
-    { label: 'Total Aspirantes', url: '/aspirantes' }, 
-    { label: 'Aspirantes Bootcamp', url: '/bootcamp' }, 
-    { label: 'Estadísticas', url: '/estadisticas' }, 
-  ];
- 
-
+  const handleSubmit = (values) => {
+    SelectionDayDataService.create(values)
+      .then((response) => {
+        console.log('Respuesta:', response.data);
+        alert('La jornada de selección se ha añadido correctamente');
+        navigate('/recruitment/selectionDay');
+      })
+      .catch((error) => {
+        console.error('Error al enviar los datos:', error);
+      });
+  };
 
   return (
-   <>
-   <div>
-    <NavbarAtom menuItems={menuItems}/>
-    </div>
-    
-    <FormAtom
-    formTitle="Formulario de Jornada"
-    formData={formData}
-    onSubmit={handleSubmit}
-  />
-  </>
-  )
+    <>
+      <div>
+        <NavbarAtom menuItems={menuItems} />
+      </div>
+
+      <FormAtom
+        formTitle="Formulario de Jornada"
+        formData={formData}
+        onSubmit={handleSubmit}
+      />
+    </>
+  );
 }
 
 export default SelectionDayAdd;
