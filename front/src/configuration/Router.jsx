@@ -6,6 +6,8 @@ import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
+import PublicAddPerson from "../pages/Person/PublicAddPerson";
+import AdminAddPerson from "../pages/Person/AdminAddPerson";
 
 
 
@@ -49,6 +51,18 @@ const Router = createBrowserRouter([
     path: '/recruitment/selectionday',
     element: <SelectionDayIndex />
   },
+
+  // Person
+
+  {
+    path:'/inscribe',
+    element: <PublicAddPerson />
+  },
+
+  {
+    path:'/recruitment/person/add',
+    element: <AdminAddPerson />
+  }
 ])
 
 export default Router;
