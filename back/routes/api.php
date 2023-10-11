@@ -10,7 +10,6 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\AuthController;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,4 +36,7 @@ Route::resource('/role', RoleController::class);
 
 Route::post('/signup',[AuthController::class, 'signup']);
 Route::post('/login',[AuthController::class, 'login']);
-
+Route::resource('/person', PersonController::class);
+Route::resource('/status', StatusController::class);
+Route::resource('/bootcamp', BootcampController::class);
+Route::resource('/role', RoleController::class);

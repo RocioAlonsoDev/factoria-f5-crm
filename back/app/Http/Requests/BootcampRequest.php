@@ -25,7 +25,7 @@ class BootcampRequest extends FormRequest
             'name'=>'required|string',
             'startDate' =>'required|date', 
             'endDate' =>'required|date',
-            'description'=>'required|string',
+            'description'=>'required|text',
             'school'=>'required',
             'promo'=>'required|string', 
         ];

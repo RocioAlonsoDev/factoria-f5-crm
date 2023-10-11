@@ -42,6 +42,7 @@ class PersonController extends Controller
         $person->name=$request->name;
         $person->surname=$request->surname;
         $person->email=$request->email;
+        $person->image=$request->image;
         $person->phone=$request->phone;
         $person->address=$request->address;
         $person->city=$request->city;
