@@ -26,6 +26,10 @@ class PersonDataService{
     findByUser(id_user){
         return http.get(`api/person?id_user=${id_user}`);
     }
+
+    showByStatus(id_status){
+        return http.get(`api/person?id_status=${id_status}`);
+    }
     
 }
 

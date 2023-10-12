@@ -5,6 +5,10 @@ import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
 import CommentsIndex from "../pages/Comments/CommentsIndex";
+import Requirements from "../pages/ConfigurationPages/Requirements";
+import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
+//import PersonStatusAdd from "../pages/ConfigurationPages/PersonStatusAdd";
+import RequirementStatus from "../pages/ConfigurationPages/RequirementStatus";
 import Login from "../pages/Login";
 import Signup from '../pages/Signup';
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
@@ -64,6 +68,25 @@ const Router = createBrowserRouter([
     path:'/recruitment/person/add',
     element: <AdminAddPerson />
   },
+
+  //Connfiguration
+  {
+    path: '/configuration/requirements',
+    element: <Requirements />
+  },
+  {
+    path: '/configuration/person/status',
+    element: <PersonStatus />
+  },
+  /*{
+    path: '/configuration/person/status/add',
+    element: <PersonStatusAdd />
+  },*/
+  {
+    path: '/configuration/requirement/status',
+    element: <RequirementStatus />
+  },
+  
 
   //Comments
   {
