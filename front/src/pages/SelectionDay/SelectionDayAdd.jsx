@@ -1,7 +1,8 @@
 import NavbarAtom from '../../components/atoms/NavbarAtom';
-import FormAtom from '../../components/atoms/FormAtom'
-import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service'
+import FormAtom from '../../components/atoms/FormAtom';
+import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service';
 import { useNavigate } from 'react-router-dom';
+import SideBarAtom from '../../components/atoms/SideBarAtom';
 
 function SelectionDayAdd() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ function SelectionDayAdd() {
       <div>
         <NavbarAtom menuItems={menuItems} />
       </div>
-
+      <SideBarAtom/>
       <FormAtom
         formTitle="Formulario de Jornada"
         formData={formData}
