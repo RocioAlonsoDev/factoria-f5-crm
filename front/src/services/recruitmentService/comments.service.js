@@ -26,6 +26,10 @@ class CommentDataService{
     findByTitle(id_user){
         return http.get(`api/comment?id_user=${id_user}`);
     }
+
+    findByPerson(id_person){
+        return http.get(`api/comment?id_person=${id_person}`);
+    }
 }
 
 export default new CommentDataService();
