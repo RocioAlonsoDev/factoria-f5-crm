@@ -249,7 +249,7 @@ export default function PublicAddPerson() {
       value="1"
     />
     <div>
-                      <label className="inline-flex items-center cursor-pointer">
+                      <label className="inline-flex items-center cursor-pointer m-6">
                         <input
                           id="dataprotection"
                           type="checkbox"
@@ -281,12 +281,14 @@ export default function PublicAddPerson() {
                   </div>
                 )}
                  {section === totalSections && (
-                  <button
-                    type="submit"
-                    className="bg-orange-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1 w-48 ease-linear transition-all duration-150"
-                  >
-                    Enviar
-                  </button>
+                  <div className="flex justify-center m-6">
+                 <button
+                 type="submit"
+                 className="bg-white text-orange-500 border border-orange-500 text-sm font-bold uppercase px-6 py-3 mx-auto rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1 w-48 mx-auto transition-all duration-150 ease-linear"
+               >
+                 Enviar
+               </button>
+               </div>
                 )}
   
               
