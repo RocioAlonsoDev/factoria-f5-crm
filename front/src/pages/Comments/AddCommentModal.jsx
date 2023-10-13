@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from "react";
 
-export default function AddCommentModal({ setIsModalOpen }) {
+export default function AddCommentModal({ setIsModalOpen, handleClick }) {
   const [formData, setFormData] = useState({
     comment: "",
     stage: "",
@@ -17,12 +17,6 @@ export default function AddCommentModal({ setIsModalOpen }) {
     e.stopPropagation();
   };
 
-  const handleGuardarClick = () => {
-    // Agrega aquí la lógica para guardar los datos del formulario
-    // Puedes hacer una llamada a una función para guardar los datos en tu aplicación
-    // Una vez que los datos se guarden con éxito, puedes cerrar el modal usando setIsModalOpen(false)
-    // setIsModalOpen(false);
-  };
 
   return (
     <>
@@ -80,7 +74,7 @@ export default function AddCommentModal({ setIsModalOpen }) {
               <button
                 className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                 type="button"
-                onClick={handleGuardarClick}
+                onClick={handleClick}
               >
                 Guardar
               </button>
@@ -95,5 +89,6 @@ export default function AddCommentModal({ setIsModalOpen }) {
 
 AddCommentModal.propTypes = {
      setIsModalOpen: PropTypes.any.isRequired,
+     handleClick: PropTypes.any.isRequired,
 
  };
