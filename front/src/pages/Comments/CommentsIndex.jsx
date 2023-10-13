@@ -3,15 +3,17 @@ import TableAtom from '../../components/atoms/TableAtom';
 import TableDropdown from './TableDropdown';
 import AddCommentModal from './AddCommentModal';
 import CommentDataService from '../../services/recruitmentService/comments.service';
+import { useParams } from 'react-router';
 
 export default function CommentsIndex() {
+  const {id} = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Obtener los comentarios al cargar el componente
-    CommentDataService.getAll()
+    CommentDataService.get(id)
       .then(async (response) => {
         setComments(response.data.data);
         setIsLoading(false);
@@ -20,7 +22,7 @@ export default function CommentsIndex() {
         console.error('Error al cargar los comentarios:', error);
         setIsLoading(false);
       });
-  }, []);
+  }, [id]);
 
   console.log("Comments:" , comments);
 

@@ -1,4 +1,5 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
+import { ContextProvider } from "../contexts/AuthContext";
 import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
@@ -13,6 +14,8 @@ import Login from "../pages/Login";
 import Signup from '../pages/Signup';
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
+import ShowPerson from "../pages/Person/ShowPerson";
+import AllPeople from "../pages/Person/AllPeople";
 
 
 
@@ -24,6 +27,15 @@ const Router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Navigate to='/' />
+  },
+
+  {
+    path: '/person/:id',
+    element: <ShowPerson />
+  },
+  {
+    path: '/people',
+    element: <AllPeople />
   },
   
   {
@@ -69,6 +81,8 @@ const Router = createBrowserRouter([
     element: <AdminAddPerson />
   },
 
+
+
   //Connfiguration
   {
     path: '/configuration/requirements',
@@ -86,12 +100,16 @@ const Router = createBrowserRouter([
     path: '/configuration/requirement/status',
     element: <RequirementStatus />
   },
-  
+
 
   //Comments
+  
   {
     path: '/recruitment/comments',
-    element: <CommentsIndex />
+    element: 
+    <ContextProvider>
+      <CommentsIndex />
+    </ContextProvider>
   },
 ])
 

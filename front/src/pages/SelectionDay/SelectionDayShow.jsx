@@ -58,6 +58,8 @@ export default function SelectionDayShow() {
       });
   }, [id]);
 
+  
+
   if (!selectionDay || isLoading) {
     return <div>Cargando...</div>;
   }
