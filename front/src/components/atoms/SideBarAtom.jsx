@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NotificationDropdownAtom from "./NotificationDropdownAtom";
-import UserDropdownAtom from "./UserDropdownAtom";
 import logo from "../../assets/img/Logo FF5 VECTORIZADO.png";
 
 export default function Sidebar() {
@@ -29,9 +28,6 @@ export default function Sidebar() {
           <ul className="md:hidden items-center flex flex-wrap list-none">
             <li className="inline-block relative">
               <NotificationDropdownAtom />
-            </li>
-            <li className="inline-block relative">
-              <UserDropdownAtom />
             </li>
           </ul>
           {/* Collapse */}
