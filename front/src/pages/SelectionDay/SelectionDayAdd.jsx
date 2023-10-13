@@ -40,9 +40,7 @@ function SelectionDayAdd() {
 
  
 
-
   return (
-   
     <FormAtom
     formTitle="Formulario de Jornada"
     formData={formData}
