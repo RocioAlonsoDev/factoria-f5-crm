@@ -1,9 +1,15 @@
 import { useState } from "react";
 import InputField from "../../components/atoms/InputField";
 import NavigationButtons from "./NavigationButtons";
+import PersonDataService from "./../../services/crmService/person.service"
+import Popup from "../../components/atoms/PopUp";
+import { useNavigate } from "react-router-dom";
 
 export default function PublicAddPerson() {
   const [section, setSection] = useState(1);
+  const totalSections = 3; 
+  const navigate = useNavigate();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -33,20 +39,59 @@ export default function PublicAddPerson() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    PersonDataService.create(formData)
+    .then((response)=>{
+      if(response.status ===201){
+        setIsPopupOpen(true);
+        console.log('Persona añadida correctamente. Estos son sus datos:', response.data)
+      }
+      else{
+        console.error("Error al crear a la persona")
+      }
+    })
+    
+      .catch((error)=>{
+        console.error ("Error al añadir una nueva persona", error)
+      })
+
+
+     
+    
+  }
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    console.log('Redirigiendo a /login');
+    navigate('/login');
+  };
+
+  const handleDataProtectionChange = (e) => {
+    const isChecked = e.target.checked;
+    const newValue = isChecked ? "sí" : "no";
+    setFormData({ ...formData, dataprotection: newValue });
+  };
+
   return (
-    <div className="container mx-auto px-4 h-full">
-      <div className="flex content-center items-center justify-center h-full">
-        <div className="w-full lg:w-6/12 px-4 bg-white">
-          <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
-            <div className="rounded-t mb-0 px-6 py-6">
+    
+    <div className="bg-orange-500 min-h-screen flex items-center justify-center">
+      <div className="w-full lg:w-6/12 px-4 bg-white">
+        <div className="relative flex flex-col min-w-0 break-words w-full m-6 ">
+          
+          
               <div className="text-center mb-3">
-                <h3 className="text-orange-500 text-sm font-bold">
-                  EMPIEZA A ROMPER LOS CÓDIGOS
-                </h3>
+                <h2 className="text-orange-500 text-2xl font-bold">
+                  EMPIEZA A #ROMPERLOSCÓDIGOS
+                </h2>
+                <h4 className="text-orange-500 text-xl  m-6">
+                  Inscríbete aquí para obtener más información sobre nuestros bootcamps
+                </h4>
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <form>
+              <form onSubmit={handleSubmit}>
                 {section === 1 && (
                   <div className="section">
                     <InputField
@@ -88,10 +133,12 @@ export default function PublicAddPerson() {
                     <NavigationButtons
                       onPrevious={handlePrevious}
                       onNext={handleNext}
+                      section={section}
+                      totalSections={totalSections}
                     />
                   </div>
                 )}
-
+  
                 {section === 2 && (
                   <div className="section">
                     <InputField
@@ -103,7 +150,7 @@ export default function PublicAddPerson() {
                       value={formData.address}
                       onChange={handleChange}
                     />
-                     <InputField
+                    <InputField
                       label="CIUDAD"
                       id="city"
                       name="city"
@@ -114,13 +161,13 @@ export default function PublicAddPerson() {
                     />
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">COMUNIDAD AUTÓNOMA</label>
                     <select
-          
                       id="region"
                       name="region"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       value={formData.region}
+                      onChange={handleChange}
                     >
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         Selecciona una comunidad autónoma
                       </option>
                       <option value="Andalucía">Andalucía</option>
@@ -128,13 +175,9 @@ export default function PublicAddPerson() {
                       <option value="Asturias">Asturias</option>
                       <option value="Cantabria">Cantabria</option>
                       <option value="Castilla y León">Castilla y León</option>
-                      <option value="Castilla-La Mancha">
-                        Castilla-La Mancha
-                      </option>
+                      <option value="Castilla-La Mancha">Castilla-La Mancha</option>
                       <option value="Cataluña">Cataluña</option>
-                      <option value="Comunidad Valenciana">
-                        Comunidad Valenciana
-                      </option>
+                      <option value="Comunidad Valenciana">Comunidad Valenciana</option>
                       <option value="Extremadura">Extremadura</option>
                       <option value="Galicia">Galicia</option>
                       <option value="Islas Baleares">Islas Baleares</option>
@@ -147,24 +190,29 @@ export default function PublicAddPerson() {
                       <option value="Ceuta">Ceuta</option>
                       <option value="Melilla">Melilla</option>
                     </select>
-                    <NavigationButtons
-                      onPrevious={handlePrevious}
-                      onNext={handleNext}
-                    />
+                    <div style={{ marginTop: '1rem' }}>
+                      <NavigationButtons
+                        onPrevious={handlePrevious}
+                        onNext={handleNext}
+                        section={section}
+                        totalSections={totalSections}
+                      />
+                    </div>
                   </div>
                 )}
+  
                 {section === 3 && (
                   <div className="section">
-                     <InputField
+                    <InputField
                       label="fecha de nacimiento"
-                      id="bithdate"
+                      id="birthdate"
                       name="birthdate"
                       type="date"
                       placeholder="Fecha de nacimiento"
                       value={formData.birthdate}
                       onChange={handleChange}
                     />
-                     <InputField
+                    <InputField
                       label="dni"
                       id="dni"
                       name="dni"
@@ -179,8 +227,9 @@ export default function PublicAddPerson() {
                       name="gender"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       value={formData.gender}
+                      onChange={handleChange}
                     >
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         Selecciona un género
                       </option>
                       <option value="Mujer">Mujer</option>
@@ -189,20 +238,74 @@ export default function PublicAddPerson() {
                       <option value="Fluido">Fluido</option>
                       <option value="Otros">Otros</option>
                     </select>
+                    <input
+      type="hidden"
+      name="id_status"
+      value="2"
+    />
+    <input
+      type="hidden"
+      name="id_bootcamp"
+      value="1"
+    />
+    <div>
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input
+                          id="dataprotection"
+                          type="checkbox"
+                          className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                          checked={formData.dataprotection === "sí"}
+                          onChange={handleDataProtectionChange}
+                        />
+                        <span className="ml-2 text-sm font-semibold text-blueGray-600">
+                          Acepto {" "}
+                          <a
+                            href="#términosPrivacidad"
+                            className="text-lightBlue-500"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            la política de privacidad
+                          </a>
+                        </span>
+                      </label>
+                    </div>
 
-                    <NavigationButtons
-                      onPrevious={handlePrevious}
-                      
-                    />
+                    <div style={{ marginTop: '1rem' }}>
+                      <NavigationButtons
+                        onPrevious={handlePrevious}
+                        onNext={handleNext}
+                        section={section}
+                        totalSections={totalSections}
+                      />
+                    </div>
                   </div>
                 )}
-
-                {/* Agrega más secciones según sea necesario */}
+                 {section === totalSections && (
+                  <button
+                    type="submit"
+                    className="bg-orange-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1 w-48 ease-linear transition-all duration-150"
+                  >
+                    Enviar
+                  </button>
+                )}
+  
+              
               </form>
             </div>
+            <Popup 
+      isOpen={isPopupOpen} 
+      onClose={closePopup}
+      >
+        <h2 className="text-2xl font-bold mb-4">¡Genial!</h2>
+        <p>Yas has dado el primer paso hacia tu nueva vida laboral. Pronto nos pondremos en contacto contigo.</p>
+        </Popup>
           </div>
+       
         </div>
-      </div>
-    </div>
+    //   </div>
+     
+    // </div>
   );
+  
+  
 }
