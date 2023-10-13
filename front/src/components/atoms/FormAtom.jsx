@@ -18,10 +18,10 @@ export default function FormAtom(props) {
 
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
     <form onSubmit={handleSubmit}>
-      <div className="rounded-t mb-0 px-4 py-3 border-0">
+      <div className="rounded-t mb-0 px-4 py-8 border-0">
         <div className="flex flex-wrap items-center">
-          <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-            <h3 className="font-semibold text-blueGray-700 text-lg">{formTitle}</h3>
+          <div className="relative w-full px-1 max-w-full flex-grow flex-1">
+            <h3 className="font-semibold text-blueGray-700 text-2xl">{formTitle}</h3>
           </div>
         </div>
       </div>

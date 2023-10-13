@@ -1,6 +1,5 @@
 // import APIservice from "../../services/APIservice"
 import TableAtom from '../../components/atoms/TableAtom'
-import { Navigate } from 'react-router-dom';
 
 export default function BootcampIndex() {
 
@@ -26,7 +25,6 @@ export default function BootcampIndex() {
 
     return (
         <div className='md:block md:fixed md:top-16 md:left-64 md:right-0 w-auto p-2'>
-            
             <TableAtom tableTitle='Bootcamps' data={data} columns={columns} addbutton='bootcamp' addlink='/tracking/bootcamp/add'></TableAtom>
         </div>
     )
