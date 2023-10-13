@@ -15,7 +15,9 @@ export default function TableAtom(props) {
                     cellValue &&
                     cellValue.toString().toLowerCase().includes(searchTerm.toLowerCase())
                 );
-            })
+            }),
+            console.log("Data:", data),
+        console.log("Columns:", columns)
         );
 
         setFilteredData(newFilteredData);
