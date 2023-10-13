@@ -3,73 +3,87 @@ import { useParams, Link } from 'react-router-dom';
 import TableAtom from "../../components/atoms/TableAtom";
 import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
 import PersonDataService from "../../services/crmService/person.service";
+import StatusDataService from "../../services/crmService/status.service";
 
 export default function SelectionDayShow() {
   const { id } = useParams();
   const [selectionDay, setSelectionDay] = useState(null);
   const [people, setPeople] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  
 
-  useEffect(() => {
-    
-    SelectionDayDataService.get(id)
-      .then((response) => {
-        setSelectionDay(response.data);
-      })
-      .catch((error) => {
-        console.error('Error al cargar la jornada de selección:', error);
+useEffect(() => {
+  SelectionDayDataService.get(id)
+    .then((response) => {
+      setSelectionDay(response.data);
+    })
+    .catch((error) => {
+      console.error('Error al cargar la jornada de selección:', error);
+    });
+
+  SelectionDayDataService.getPeopleInSelectionDay(id)
+    .then(async (response) => {
+      const peopleData = response.data.data;
+
+      const personPromises = peopleData.map((person) => {
+        return PersonDataService.get(person.id_person);
       });
 
-    
-    SelectionDayDataService.getPeopleInSelectionDay(id)
-      .then(async (response) => {
-        const peopleData = response.data.data;
-
-        const personPromises = peopleData.map((person) => {
-          return PersonDataService.get(person.id_person);
+      try {
+        const personResponses = await Promise.all(personPromises);
+        const formattedPeopleData = personResponses.map((response, index) => {
+          const person = response.data;
+          const selectionDayData = peopleData[index];
+          return {
+            nombre: person.name,
+            apellidos: person.surname,
+            ciudad: person.city,
+            genero: person.gender,
+            comentarios: selectionDayData.comments,
+            estado: person.id_status, 
+          };
         });
 
-        try {
-          const personResponses = await Promise.all(personPromises);
-          const formattedPeopleData = personResponses.map((response, index) => {
-            
-            const person = response.data;
-            const selectionDayData = peopleData[index];
-            return {
-              nombre: person.name,
-              apellidos: person.surname,
-              ciudad: person.city,
-              genero: person.gender,
-              comentarios: selectionDayData.comments,
-              decision: selectionDayData.decission,
-            };
-          });
+        
+        const statusPromises = formattedPeopleData.map((person) => {
+          return StatusDataService.get(person.estado);
+        });
 
-          setPeople(formattedPeopleData);
-          setIsLoading(false);
-        } catch (error) {
-          console.error('Error al cargar detalles de las personas:', error);
-          setIsLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.error('Error al cargar las personas de la jornada de selección:', error);
+        const statusResponses = await Promise.all(statusPromises);
+
+        
+        formattedPeopleData.forEach((person, index) => {
+          person.estado = statusResponses[index].data.name;
+        });
+
+        setPeople(formattedPeopleData);
         setIsLoading(false);
-      });
-  }, [id]);
+      } catch (error) {
+        console.error('Error al cargar detalles de las personas:', error);
+        setIsLoading(false);
+      }
+    })
+    .catch((error) => {
+      console.error('Error al cargar las personas de la jornada de selección:', error);
+      setIsLoading(false);
+    });
+}, [id]);
+
+
+
 
   if (!selectionDay || isLoading) {
     return <div>Cargando...</div>;
   }
 
-  const columns = ['nombre', 'apellidos', 'ciudad', 'genero', 'comentarios', 'decision'];
+  const columns = ['nombre', 'apellidos', 'ciudad', 'genero', 'comentarios', 'estado'];
   const data = people.map((person) => ({
     nombre: person.nombre,
     apellidos: person.apellidos,
     ciudad: person.ciudad,
     genero: person.genero,
     comentarios: person.comentarios,
-    decision: person.decision,
+    estado: person.estado,
   }))
 
 
