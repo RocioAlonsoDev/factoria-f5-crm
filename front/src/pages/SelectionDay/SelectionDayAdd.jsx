@@ -11,7 +11,7 @@ function SelectionDayAdd() {
       id: 'school',
       label: 'Escuela',
       type: 'select',
-      options: ['selecciona', 'Cataluña', 'Madrid', 'Asturias'],
+      options: ['Selecciona', 'Cataluña', 'Madrid', 'Asturias'],
     },
     {
       id: 'date',

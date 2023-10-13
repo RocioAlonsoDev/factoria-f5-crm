@@ -157,14 +157,14 @@ export default function FormAtom(props) {
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
-              <h3 className="font-semibold text-blueGray-700 text-lg">{formTitle}</h3>
+              <h6 className="text-blueGray-700 text-xl font-bold">{formTitle}</h6>
             </div>
           </div>
         </div>
         <div className="block w-full px-4 py-3">
           {formData.map((field, index) => (
             <div className="mb-4" key={index}>
-              <label className="block text-blueGray-600 text-sm font-bold mb-2" htmlFor={field.id}>
+              <label className="block uppercase text-blueGray-600 text-md font-bold mb-2" htmlFor={field.id}>
                 {field.label}
               </label>
               {field.type === 'select' ? ( 
