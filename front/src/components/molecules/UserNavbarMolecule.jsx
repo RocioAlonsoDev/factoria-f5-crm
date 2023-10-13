@@ -1,8 +1,8 @@
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+//import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { AuthContext } from '../../contexts/AuthContext'
-import APIservice from '../../services/APIservice'
+//import APIservice from '../../services/APIservice'
 import { useEffect } from 'react'
 
 function classNames(...classes) {

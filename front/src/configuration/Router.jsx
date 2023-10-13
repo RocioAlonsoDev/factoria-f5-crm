@@ -14,14 +14,14 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 
 
 const Router = createBrowserRouter([
-  {
-    path: '/home',
-    element: <Navigate to='/' />
-  },
-  {
-    path: '/dashboard',
-    element: <Navigate to='/' />
-  },
+  // {
+  //   path: '/home',
+  //   element: <Navigate to='/' />
+  // },
+  // // {
+  // //   path: '/dashboard',
+  // //   element: <Navigate to='/' />
+  // // },
   
   {
     path: '/recruitment/selectiondayshow/:id',

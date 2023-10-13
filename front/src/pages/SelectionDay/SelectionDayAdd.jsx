@@ -9,8 +9,9 @@ function SelectionDayAdd() {
   const formData = [
     {
       id: 'school',
-      label: 'Nombre de la escuela',
-      type: 'text',
+      label: 'Escuela',
+      type: 'select',
+      options: ['selecciona', 'Cataluña', 'Madrid', 'Asturias'],
     },
     {
       id: 'date',
@@ -22,7 +23,18 @@ function SelectionDayAdd() {
       label: 'Link del zoom',
       type: 'text',
     },
+    {
+      id: 'comment',
+      label: 'Comentarios',
+      type: 'text',
+    },
+    {
+      id: 'document',
+      label: 'Documentos',
+      type: 'text',
+    },
   ];
+  
 
   const menuItems = [
     { label: 'Inicio', url: '/' },
