@@ -5,7 +5,7 @@ import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
-import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
+import BootcampForm from '../pages/Bootcamp/BootcampForm'
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 
@@ -42,7 +42,11 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/bootcamp/add',
-        element: <BootcampAdd />
+        element: <BootcampForm />
+      },
+      {
+        path: '/tracking/bootcamp/update/:id',
+        element: <BootcampForm />
       },
       {
         path: '/tracking/coders',
