@@ -95,49 +95,9 @@ const Router = createBrowserRouter([
     path: '/recruitment/selectionday',
     element: <SelectionDayIndex />
   },
-
-  // Person
-
   {
-    path:'/inscribe',
-    element: <PublicAddPerson />
-  },
-
-  {
-    path:'/recruitment/person/add',
-    element: <AdminAddPerson />
-  },
-  {
-    path:'/recruitment/person/index',
-    element: <IndexPerson />
-  },
-
-
-
-  //Connfiguration
-  {
-    path: '/configuration/requirements',
-    element: <Requirements />
-  },
-  {
-    path: '/configuration/requirements/edit/:id',
-    element: <RequirementEdit />
-  },
-  {
-    path: '/configuration/person/status',
-    element: <PersonStatus />
-  },
-  {
-    path: '/configuration/requirement/status',
-    element: <RequirementStatus />
-  },
-
-
-  //Comments
-  
-  {
-    path: '/recruitment/comments',
-    element: <CommentsIndexByPerson />
+    path:'/tracking/evaluation/id',
+    element:<Evaluation/>
   },
 ])
 
