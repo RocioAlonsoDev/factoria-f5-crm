@@ -6,6 +6,7 @@ import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
+import Evaluation from "../pages/Evaluation";
 
 
 
@@ -48,6 +49,10 @@ const Router = createBrowserRouter([
   {
     path: '/recruitment/selectionday',
     element: <SelectionDayIndex />
+  },
+  {
+    path:'/tracking/evaluation/id',
+    element:<Evaluation/>
   },
 ])
 
