@@ -3,8 +3,6 @@ import TableAtom from '../../components/atoms/TableAtom'
 
 export default function BootcampIndex() {
 
-
-
     const data =[
         {name: 'Femcoders Norte',
         school: 'Langreo, Asturias',
