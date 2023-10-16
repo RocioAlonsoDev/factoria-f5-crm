@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
+import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
 import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
 import Login from "../pages/Login"
@@ -26,6 +27,10 @@ const Router = createBrowserRouter([
   {
     path: '/recruitment/selectiondayshow/:id',
     element: <SelectionDayShow />
+  },
+  {
+    path: '/recruitment/selectiondayupdate/:id',
+    element: <SelectionDayUpdate />
   },
   {
     path: 'recruitment/selectionday/add',
