@@ -14,10 +14,11 @@ import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
 import RequirementStatus from "../pages/ConfigurationPages/RequirementStatus";
 import Login from "../pages/Login";
 import Signup from '../pages/Signup';
-import CodersIndex from "../pages/CodersFrontend/CodersIndex";
-import Evaluation from "../pages/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
+import ShowPerson from "../pages/Person/ShowPerson";
+import AllPeople from "../pages/Person/AllPeople";
+import IndexPerson from "../pages/Person/IndexPerson";
 
 
 
@@ -53,7 +54,6 @@ const Router = createBrowserRouter([
     element: <SelectionDayAdd />
   },
   
-  
 
   {
     path: '/',
@@ -79,7 +79,7 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/coders',
-        element: <CodersIndex />
+        element: <Dashboard />
       }
     ]
   },
@@ -91,33 +91,10 @@ const Router = createBrowserRouter([
     path: '/signup',
     element: <Signup/>
   },
-
   {
-    path: '/recruitment',
-    element: <DefaultLayout title='Captación'/>,
-    children:[
-      {
-        path: '/recruitment/selectionday',
-        element: <SelectionDayIndex />
-      },
-      {
-        path:'/recruitment/person/add',
-        element: <AdminAddPerson />
-      },
-      {
-        path:'/recruitment/person/index',
-        element: <IndexPerson />
-      },
-       //Comments
-  
-      {
-        path: '/recruitment/comments',
-        element: <CommentsIndexByPerson />
-      },
-    ]
+    path: '/recruitment/selectionday',
+    element: <SelectionDayIndex />
   },
- 
-
 
   // Person
 
@@ -126,32 +103,42 @@ const Router = createBrowserRouter([
     element: <PublicAddPerson />
   },
 
-
-
-  //Configuration
   {
-    path: '/configuration',
-    element: <DefaultLayout title='Configuración'/>,
-    children:[
-      {
-        path: '/configuration/requirements',
-        element: <Requirements />
-      },
-      {
-        path: '/configuration/requirements/edit/:id',
-        element: <RequirementEdit />
-      },
-      {
-        path: '/configuration/person/status',
-        element: <PersonStatus />
-      },
-      {
-        path: '/configuration/requirement/status',
-        element: <RequirementStatus />
-      },
-    ]
+    path:'/recruitment/person/add',
+    element: <AdminAddPerson />
+  },
+  {
+    path:'/recruitment/person/index',
+    element: <IndexPerson />
   },
 
+
+
+  //Connfiguration
+  {
+    path: '/configuration/requirements',
+    element: <Requirements />
+  },
+  {
+    path: '/configuration/requirements/edit/:id',
+    element: <RequirementEdit />
+  },
+  {
+    path: '/configuration/person/status',
+    element: <PersonStatus />
+  },
+  {
+    path: '/configuration/requirement/status',
+    element: <RequirementStatus />
+  },
+
+
+  //Comments
+  
+  {
+    path: '/recruitment/comments',
+    element: <CommentsIndexByPerson />
+  },
 ])
 
 export default Router;
