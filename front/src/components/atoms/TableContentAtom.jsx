@@ -12,7 +12,7 @@ function TableContentAtom(props) {
             <div  className="block w-full overflow-x-auto">
                 <div className=''>
                     <table className="items-center w-full bg-transparent dark:border-neutral-200">
-                        <caption className="text-2xl p-4 caption-top  border-b font-medium dark:border-neutral-200">
+                        <caption className="text-2xl text-left p-4 caption-top  border-b font-medium dark:border-neutral-200">
                             {captionTittles}
                         </caption>
                         <thead className="border-b font-medium dark:border-neutral-200">
