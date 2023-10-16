@@ -15,11 +15,11 @@ function SelectionDayAdd() {
     },
     {
       id: 'date',
-      label: 'Fecha',
+      label: 'Fecha y hora de la jornada de selección',
       type: 'date',
     },
     {
-      id: 'link',
+      id: 'link de reunión',
       label: 'Link del zoom',
       type: 'text',
     },

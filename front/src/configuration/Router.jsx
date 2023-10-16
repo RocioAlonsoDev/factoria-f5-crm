@@ -3,7 +3,8 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
-import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
+import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
+import SelectionDayEdit from "../pages/SelectionDay/SelectionDayEdit";
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
 import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
 import Login from "../pages/Login"
@@ -28,10 +29,13 @@ const Router = createBrowserRouter([
     element: <SelectionDayShow />
   },
   {
-    path: 'recruitment/selectionday/add',
+    path: '/recruitment/selectionday/add',
     element: <SelectionDayAdd />
   },
-  
+  {
+    path: '/recruitment/selectionday/edit/:id',
+    element: <SelectionDayEdit />
+  },
 
   {
     path: '/',
