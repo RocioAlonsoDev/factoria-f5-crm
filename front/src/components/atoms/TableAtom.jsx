@@ -16,7 +16,7 @@ export default function TableAtom(props) {
                 );
             }),
             console.log("Data:", data),
-        console.log("Columns:", columns)
+            // console.log("Columns:", columns)
         );
 
         setFilteredData(newFilteredData);

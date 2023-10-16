@@ -8,6 +8,7 @@ import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
+import IndexPerson from "../pages/Person/IndexPerson";
 
 
 
@@ -62,7 +63,12 @@ const Router = createBrowserRouter([
   {
     path:'/recruitment/person/add',
     element: <AdminAddPerson />
-  }
+  },
+
+  {
+    path:'/recruitment/person/index',
+    element: <IndexPerson />
+  },
 ])
 
 export default Router;
