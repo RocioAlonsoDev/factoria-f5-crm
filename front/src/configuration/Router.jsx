@@ -91,10 +91,32 @@ const Router = createBrowserRouter([
     path: '/signup',
     element: <Signup/>
   },
+
   {
-    path: '/recruitment/selectionday',
-    element: <SelectionDayIndex />
+    path: '/recruitment',
+    element: <DefaultLayout title='Captación'/>,
+    children:[
+      {
+        path: '/recruitment/selectionday',
+        element: <SelectionDayIndex />
+      },
+      {
+        path:'/recruitment/person/add',
+        element: <AdminAddPerson />
+      },
+      {
+        path:'/recruitment/person/index',
+        element: <IndexPerson />
+      },
+       //Comments
+  
+      {
+        path: '/recruitment/comments',
+        element: <CommentsIndexByPerson />
+      },
+    ]
   },
+ 
 
 
   // Person
@@ -104,42 +126,32 @@ const Router = createBrowserRouter([
     element: <PublicAddPerson />
   },
 
-  {
-    path:'/recruitment/person/add',
-    element: <AdminAddPerson />
-  },
-  {
-    path:'/recruitment/person/index',
-    element: <IndexPerson />
-  },
 
 
+  //Configuration
+  {
+    path: '/configuration',
+    element: <DefaultLayout title='Configuración'/>,
+    children:[
+      {
+        path: '/configuration/requirements',
+        element: <Requirements />
+      },
+      {
+        path: '/configuration/requirements/edit/:id',
+        element: <RequirementEdit />
+      },
+      {
+        path: '/configuration/person/status',
+        element: <PersonStatus />
+      },
+      {
+        path: '/configuration/requirement/status',
+        element: <RequirementStatus />
+      },
+    ]
+  },
 
-  //Connfiguration
-  {
-    path: '/configuration/requirements',
-    element: <Requirements />
-  },
-  {
-    path: '/configuration/requirements/edit/:id',
-    element: <RequirementEdit />
-  },
-  {
-    path: '/configuration/person/status',
-    element: <PersonStatus />
-  },
-  {
-    path: '/configuration/requirement/status',
-    element: <RequirementStatus />
-  },
-
-
-  //Comments
-  
-  {
-    path: '/recruitment/comments',
-    element: <CommentsIndexByPerson />
-  },
 ])
 
 export default Router;

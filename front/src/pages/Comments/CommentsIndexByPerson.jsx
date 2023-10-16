@@ -164,7 +164,7 @@ export default function CommentsIndexByPerson() {
 
 
   return (
-    <div>
+    <div className='md:block md:fixed md:top-16 md:left-64 md:right-0 w-auto p-2'>
       <>
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
           <div className="rounded-t bg-white mb-0 px-6 py-6">
