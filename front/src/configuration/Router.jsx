@@ -3,7 +3,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
-import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
+import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
 import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
@@ -12,8 +12,10 @@ import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
 import RequirementStatus from "../pages/ConfigurationPages/RequirementStatus";
-import Login from "../pages/Login";
+import Login from "../pages/Login";;
 import Signup from '../pages/Signup';
+import CodersIndex from "../pages/CodersFrontend/CodersIndex";
+;
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
@@ -79,7 +81,7 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/coders',
-        element: <Dashboard />
+        element: <CodersIndex />
       }
     ]
   },
