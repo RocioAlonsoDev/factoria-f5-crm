@@ -9,8 +9,8 @@ const TableDropdown = ({commentId, onDeleteComment, onEditComment}) => {
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
+    createPopper(btnDropdownRef.new, popoverDropdownRef.new, {
+      placement: "auto-end",
     });
     setDropdownPopoverShow(true);
   };
@@ -21,7 +21,7 @@ const TableDropdown = ({commentId, onDeleteComment, onEditComment}) => {
     <>
       <a
         className="text-blueGray-500 py-1 px-3"
-        href="#pablo"
+        href="#"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
@@ -40,7 +40,7 @@ const TableDropdown = ({commentId, onDeleteComment, onEditComment}) => {
         }
       >
         <a
-          href="#pablo"
+          href="#"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }

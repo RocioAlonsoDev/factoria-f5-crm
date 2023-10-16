@@ -1,11 +1,12 @@
 import { useParams } from 'react-router';
 import CommentDataService from '../../services/recruitmentService/comments.service';
-import UserDataService from '../../services/crmService/user.service'
+import UserDataService from '../../services/crmService/user.service';
 import { useState, useEffect } from 'react';
 import TableAtom from '../../components/atoms/TableAtom';
 import TableDropdown from './TableDropdown';
 import AddCommentModal from './AddCommentModal';
 import EditCommentModal from './EditCommentModal';
+import Popup from '../../components/atoms/PopUp';
 
 export default function CommentsIndexByPerson() {
   const { id } = useParams();
@@ -14,16 +15,14 @@ export default function CommentsIndexByPerson() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editCommentId, setEditCommentId] = useState(null);
-
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false);
 
   useEffect(() => {
-
     CommentDataService.findByPerson(id)
       .then(async (response) => {
-
         if (Array.isArray(response.data.data)) {
           const commentsData = response.data.data;
-
           const userPromises = commentsData.map((comment) => {
             return UserDataService.get(comment.id_user);
           });
@@ -34,10 +33,10 @@ export default function CommentsIndexByPerson() {
 
             const updatedComments = commentsData.map((comment, index) => {
               const user = userResponses[index].data.user;
-              console.log('User:', user); 
+              console.log('User:', user);
               return {
                 ...comment,
-                user: user.name, 
+                user: user.name,
               };
             });
 
@@ -63,18 +62,26 @@ export default function CommentsIndexByPerson() {
     return <div>Cargando...</div>;
   }
 
-  const handleDeleteComment = async (commentId) => {
+  const handleDeleteComment = (commentId) => {
+    setSelectedCommentId(commentId);
+    setIsConfirmDeleteOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
     try {
-        await CommentDataService.delete(commentId);
-        const updatedComments = comments.filter((comment) => comment.id !== commentId);
-        setComments(updatedComments);
+      await CommentDataService.delete(selectedCommentId);
+      const updatedComments = comments.filter((comment) => comment.id !== selectedCommentId);
+      setComments(updatedComments);
+
     } catch (error) {
-        console.error('Error al eliminar el comentario:', error);
+      console.error('Error al eliminar el comentario:', error);
     }
-  }
+    setSelectedCommentId(null);
+    setIsConfirmDeleteOpen(true);
+  };
+
 
   const handleEditComment = (commentId) => {
-
     setEditCommentId(commentId);
     setIsEditModalOpen(true);
   };
@@ -90,17 +97,16 @@ export default function CommentsIndexByPerson() {
     Escrito: comment.user,
     Fecha: formatDate(comment.created_at),
     '': (
-    <TableDropdown 
-      commentId={comment.id} 
-      onDeleteComment={handleDeleteComment}
-      onEditComment={handleEditComment}
+      <TableDropdown
+        commentId={comment.id}
+        onDeleteComment={handleDeleteComment}
+        onEditComment={handleEditComment}
       />
     ),
   }));
   console.log('Data:', data);
 
   const columns = ['Comentario', 'Etapa', 'Escrito', 'Fecha', ''];
-
 
   return (
     <div>
@@ -123,19 +129,30 @@ export default function CommentsIndexByPerson() {
             <TableAtom data={data} columns={columns} />
           </div>
         </div>
-        {isModalOpen && (
-          <AddCommentModal 
-            setIsModalOpen={setIsModalOpen}
-          />
-        )}
+        {isModalOpen && <AddCommentModal setIsModalOpen={setIsModalOpen} />}
         {isEditModalOpen && (
           <EditCommentModal
             setIsEditModalOpen={setIsEditModalOpen}
             commentId={editCommentId}
-            updateComments={setComments} />
+            updateComments={setComments}
+          />
+        )}
+        {isConfirmDeleteOpen && (
+          <Popup isOpen={setIsConfirmDeleteOpen} onClose={handleConfirmDelete} >
+            <h6 className="text-blueGray-700 font-bold mb-4">
+              ¡Estás a punto de eliminar este comentario!
+            </h6>
+            <h2 className="text-2xl font-bold mb-4">¿Eliminar?</h2>
+              {/* <button
+                className="text-black-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                onClick={() => setIsConfirmDeleteOpen(false)}
+              >
+                Cerrar
+              </button> */}
+          </Popup>
         )}
       </>
     </div>
   );
 }
-
