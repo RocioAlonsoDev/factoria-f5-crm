@@ -11,6 +11,12 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+<<<<<<< HEAD
+=======
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@headlessui/react": "^1.7.17",
+>>>>>>> 94c356d5b8390dd208b1272517ba9a990150a05b
     "@popperjs/core": "^2.11.8",
     "axios": "^1.5.1",
     "primereact": "^10.0.2",

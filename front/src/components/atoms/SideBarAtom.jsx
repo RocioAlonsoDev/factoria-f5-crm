@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NotificationDropdownAtom from "./NotificationDropdownAtom";
-
 import logo from "../../assets/img/Logo FF5 VECTORIZADO.png";
 
 export default function Sidebar() {
@@ -30,7 +29,6 @@ export default function Sidebar() {
             <li className="inline-block relative">
               <NotificationDropdownAtom />
             </li>
-            
           </ul>
           {/* Collapse */}
           <div
@@ -131,7 +129,7 @@ export default function Sidebar() {
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  to="/admin/tables"
+                  to="/tracking/bootcamp"
                 >
                   <i
                     className={

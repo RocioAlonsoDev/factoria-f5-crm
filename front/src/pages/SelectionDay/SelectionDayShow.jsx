@@ -1,68 +1,94 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link} from 'react-router-dom';
 import TableAtom from "../../components/atoms/TableAtom";
 import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
-
-
+import PersonDataService from "../../services/crmService/person.service";
+import StatusDataService from "../../services/crmService/status.service";
 
 export default function SelectionDayShow() {
-
   const { id } = useParams();
   const [selectionDay, setSelectionDay] = useState(null);
-  const [people, setPeople] = useState();
+  const [people, setPeople] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
 
-    SelectionDayDataService.get(id)
-      .then((response) =>{
-        setSelectionDay(response.data);
-      })
-      .catch((error) => {
-        console.error('Error al cargar la jornada de selección:', error);
+  
+
+useEffect(() => {
+  SelectionDayDataService.get(id)
+    .then((response) => {
+      setSelectionDay(response.data);
+    })
+    .catch((error) => {
+      console.error('Error al cargar la jornada de selección:', error);
+    });
+
+  SelectionDayDataService.getPeopleInSelectionDay(id)
+    .then(async (response) => {
+      const peopleData = response.data.data;
+
+      const personPromises = peopleData.map((person) => {
+        return PersonDataService.get(person.id_person);
       });
 
-  }, [id]);
+      try {
+        const personResponses = await Promise.all(personPromises);
+        const formattedPeopleData = personResponses.map((response, index) => {
+          const person = response.data;
+          const selectionDayData = peopleData[index];
+          return {
+            nombre: person.name,
+            apellidos: person.surname,
+            ciudad: person.city,
+            genero: person.gender,
+            comentarios: selectionDayData.comments,
+            estado: person.id_status, 
+          };
+        });
 
-  useEffect (() =>{
-    SelectionDayDataService.getPeopleInSelectionDay(id)
-      .then((response) => {
-      setPeople(response.data.data);
-      console.log(response.data.data);
-      })
-      .catch((error) => {
-     console.error('Error al cargar las personas de la jornada de selección:', error);
-     });
+        
+        const statusPromises = formattedPeopleData.map((person) => {
+          return StatusDataService.get(person.estado);
+        });
 
-     
-  }, [id]);
+        const statusResponses = await Promise.all(statusPromises);
 
-  if (!selectionDay){
-    return <div>Cargando...</div>
+        
+        formattedPeopleData.forEach((person, index) => {
+          person.estado = statusResponses[index].data.name;
+        });
+
+        setPeople(formattedPeopleData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error al cargar detalles de las personas:', error);
+        setIsLoading(false);
+      }
+    })
+    .catch((error) => {
+      console.error('Error al cargar las personas de la jornada de selección:', error);
+      setIsLoading(false);
+    });
+}, [id]);
+
+
+
+
+  
+
+  if (!selectionDay || isLoading) {
+    return <div>Cargando...</div>;
   }
 
-  // const data =[
-  //   {Nombre: 'Yolanda',
-  //   Apellidos: 'Zahonero Alfaro',
-  //   Ciudad: 'A Coruña',
-  //   Género: 'Femenino',
-  //   Bootcamp: 'FemNorte',
-  //   Asistencia: 'Convocada',}
-  // ];
-
-  const columns =[
-    'nombre',
-    'apellidos',
-    'ciudad',
-    'genero',
-    'bootcamp',
-    'asistencia',
-  ]
-
-  const data = people.map((person) => {
-    return {
-      'nombre' : person.id_person,
-    }
-  })
+  const columns = ['nombre', 'apellidos', 'ciudad', 'genero', 'comentarios', 'estado'];
+  const data = people.map((person) => ({
+    nombre: person.nombre,
+    apellidos: person.apellidos,
+    ciudad: person.ciudad,
+    genero: person.genero,
+    comentarios: person.comentarios,
+    estado: person.estado,
+  }))
 
 
   return (
@@ -78,11 +104,13 @@ export default function SelectionDayShow() {
                Ver documentos
               </button>
             </Link>
-            <Link to="/recruitment/selectionday/update">
-              <button className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
-               Modificar jornada
-              </button>
-            </Link>
+            <Link to={`/recruitment/selectiondayupdate/${id}`}>
+            <button className="bg-orange-500 text-white active-bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
+            Modificar Jornada
+            </button>
+          </Link>
+
+
             <Link to="/recruitment/selectionday/add">
               <button className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
                Crear nueva jornada
