@@ -15,7 +15,7 @@ import RequirementStatus from "../pages/ConfigurationPages/RequirementStatus";
 import Login from "../pages/Login";;
 import Signup from '../pages/Signup';
 import CodersIndex from "../pages/CodersFrontend/CodersIndex";
-;
+import Evaluation from "../pages/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
