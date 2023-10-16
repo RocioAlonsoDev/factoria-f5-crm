@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
 import { useState } from "react";
 
-export default function ModalAtom({ setIsModalOpen, handleCreate}) {
+export default function RequirementModalAtom({ setIsModalOpen, handleCreate}) {
   const [formData, setFormData] = useState({
     name: "",
-   
+    description: "",
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, description } = e.target;
+    setFormData({ ...formData, [name]: value, [description]: value });
   };
 
-  const handleModalClick = (e) => {
+  function handleModalClick(e) {
     // Evita que el evento se propague y cierre el modal
     e.stopPropagation();
-  };
+  }
 
   const handleGuardarClick = () => {
     if (handleCreate) {
@@ -51,12 +51,24 @@ export default function ModalAtom({ setIsModalOpen, handleCreate}) {
                   cols={100}
                   wrap="wrap"
                   maxLength={200}
-                  value={formData.status}
+                  value={formData.name}
                   onChange={handleInputChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-blueGray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
               </div>
-              
+              <div className="mb-4">
+                <label className="block text-blueGray-700 text-sm font-bold mb-2">Descripción:</label>
+                <textarea
+                  name="description"
+                  rows={10}
+                  cols={100}
+                  wrap="wrap"
+                  maxLength={200}
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-blueGray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
             </div>
             {/*footer*/}
             <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
@@ -83,7 +95,7 @@ export default function ModalAtom({ setIsModalOpen, handleCreate}) {
   );
 }
 
-ModalAtom.propTypes = {
+RequirementModalAtom.propTypes = {
      setIsModalOpen: PropTypes.any.isRequired,
      handleCreate: PropTypes.any.isRequired,
 

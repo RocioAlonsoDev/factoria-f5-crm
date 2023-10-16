@@ -1,7 +1,7 @@
 import StatusDataService from "../../services/crmService/status.service.js";
 import { useState, useEffect } from "react";
 
-import ModalAtom from "../../components/atoms/ModalAtom.jsx";
+import StatusModalAtom from "./StatusModalAtom.jsx"
 
 const PersonStatus= () => {
  
@@ -32,8 +32,9 @@ const PersonStatus= () => {
   const handleCreate = async (data) => {
     try {
       await StatusDataService.create(data);
-      const updatedStatuses = statuses.filter();
-      setStatuses(updatedStatuses);
+      const response = await StatusDataService.getAll();  // Refetch all statuses
+    setStatuses(response.data.data);
+    setIsModalOpen(false);  // Close the modal after successful creation
     } catch (error) {
       console.error('Error creating status:', error);
     }
@@ -100,7 +101,7 @@ const PersonStatus= () => {
                 </tbody>
                 </table>
             </div>
-            {isModalOpen && <ModalAtom setIsModalOpen={setIsModalOpen} />}
+            {isModalOpen && <StatusModalAtom setIsModalOpen={setIsModalOpen} handleCreate={handleCreate} />}
         </div>
         
     );
