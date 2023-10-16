@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link} from 'react-router-dom';
 import TableAtom from "../../components/atoms/TableAtom";
 import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
 import PersonDataService from "../../services/crmService/person.service";
@@ -10,6 +10,8 @@ export default function SelectionDayShow() {
   const [selectionDay, setSelectionDay] = useState(null);
   const [people, setPeople] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+
   
 
 useEffect(() => {
@@ -102,11 +104,13 @@ useEffect(() => {
                Ver documentos
               </button>
             </Link>
-            <Link to="/recruitment/selectionday/update">
-              <button className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
-               Modificar jornada
-              </button>
-            </Link>
+            <Link to={`/recruitment/selectiondayupdate/${id}`}>
+            <button className="bg-orange-500 text-white active-bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
+            Modificar Jornada
+            </button>
+          </Link>
+
+
             <Link to="/recruitment/selectionday/add">
               <button className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
                Crear nueva jornada

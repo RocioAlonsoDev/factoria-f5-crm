@@ -1,6 +1,6 @@
 import { useState } from "react"
 // import { Link } from "react-router-dom"
-import APIservice from '../services/APIservice'
+//import APIservice from '../services/APIservice'
 import { Navigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext'
 
@@ -10,6 +10,12 @@ export default function Login() {
   const [password,setPassword] = useState('');
   const[error,setError] = useState({__html: ''});
 
+  if(userToken){
+      return <Navigate to='/' />
+  }
+
+  console.log();
+  
   const onSubmit = (ev) => {
     ev.preventDefault();
     setError({__html:''})
@@ -29,9 +35,7 @@ export default function Login() {
     })
   }
 
-  if(userToken){
-    return <Navigate to='/' />
-  }
+  
 
   return (
     <div className='flex h-screen'>
