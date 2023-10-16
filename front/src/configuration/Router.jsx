@@ -45,12 +45,28 @@ const Router = createBrowserRouter([
     path: '/recruitment/selectionday/add',
     element: <SelectionDayAdd />
   },
+  
+
   {
     path: '/',
-    element: <DefaultLayout/>,
+    element: <DefaultLayout title='Home'/>,
     children:[
       {
         path: '/',
+        element: <Dashboard />
+      }
+    ]
+  },
+  {
+    path: '/tracking',
+    element: <DefaultLayout title='Seguimiento'/>,
+    children:[
+      {
+        path: '/tracking/bootcamps',
+        element: <Dashboard />
+      },
+      {
+        path: '/tracking/coders',
         element: <Dashboard />
       }
     ]
