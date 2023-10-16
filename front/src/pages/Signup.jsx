@@ -22,7 +22,7 @@ export default function Register() {
       name,
       surname,
       email,
-      image: '../assets/img/icons8-usuario-50.png',
+      image: '/src/assets/img/icons8-usuario-50.png',
       id_role: role,
       password,
       password_confirmation: passwordConfirmation
