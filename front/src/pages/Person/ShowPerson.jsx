@@ -107,15 +107,19 @@
 import { useParams } from 'react-router';
 import CommentDataService from '../../services/recruitmentService/comments.service';
 import { useState, useEffect } from 'react';
+// import { AuthContext } from '../../contexts/AuthContext'
 import TableAtom from '../../components/atoms/TableAtom';
 import TableDropdown from '../Comments/TableDropdown';
 import AddCommentModal from '../Comments/AddCommentModal';
 
 export default function ShowPerson() {
   const { id } = useParams();
+  // const {currentUser, setCurrentUser} = AuthContext();
   const [comments, setComments] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  // console.log('CurrentUser:', currentUser);
 
   useEffect(() => {
     // Obtener los comentarios al cargar el componente
@@ -142,15 +146,31 @@ export default function ShowPerson() {
     return <div>Cargando...</div>;
   }
 
-  const handleCreateComment = async (data) => {
-    try {
-      const response = await CommentDataService.create(data);
-      const newComment = response.data;
-      setComments([...comments, newComment]);
-    } catch (error) {
-      console.error('Error creating status:', error);
-    }
-  };
+  // const handleCreateComment = async (data) => {
+  //   try {
+  //     const response = await CommentDataService.create(data);
+  //     const newComment = response.data;
+  //     setComments([...comments, newComment]);
+  //   } catch (error) {
+  //     console.error('Error creating status:', error);
+  //   }
+  // };
+
+  // const handleCreateComment = async (data) => {
+  //   try {
+  //     const commentData = {
+  //       ...data,
+  //       id_user: currentUser.id_user, // Usa el id_user del contexto
+  //       id_person: id, // Usa el id de la persona de los parámetros
+  //     };
+
+  //     const response = await CommentDataService.create(commentData);
+  //     const newComment = response.data.data;
+  //     setComments([...comments, newComment]);
+  //   } catch (error) {
+  //     console.error('Error creating status:', error);
+  //   }
+  // }
 
   const handleDeleteComment = async (commentId) => {
    
@@ -203,7 +223,7 @@ export default function ShowPerson() {
           </div>
         </div>
         {isModalOpen && (
-          <AddCommentModal setIsModalOpen={setIsModalOpen} onClick={handleCreateComment}  />
+          <AddCommentModal setIsModalOpen={setIsModalOpen}   />
         )}
       </>
     </div>

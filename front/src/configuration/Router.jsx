@@ -1,11 +1,10 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import { ContextProvider } from "../contexts/AuthContext";
 import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
-import CommentsIndex from "../pages/Comments/CommentsIndex";
+import CommentsIndexByPerson from "../pages/Comments/CommentsIndexByPerson";
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
 //import PersonStatusAdd from "../pages/ConfigurationPages/PersonStatusAdd";
@@ -106,10 +105,7 @@ const Router = createBrowserRouter([
   
   {
     path: '/recruitment/comments',
-    element: 
-    <ContextProvider>
-      <CommentsIndex />
-    </ContextProvider>
+    element: <CommentsIndexByPerson />
   },
 ])
 

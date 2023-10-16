@@ -1,12 +1,36 @@
 import PropTypes from 'prop-types';
-import { useState } from "react";
+import { useEffect, useState} from "react";
+import { useParams } from 'react-router';
+import { AuthContext } from '../../contexts/AuthContext'
+import CommentDataService from '../../services/recruitmentService/comments.service';
+import APIservice from '../../services/APIservice';
 
-export default function AddCommentModal({ setIsModalOpen, handleClick }) {
+export default function AddCommentModal({ setIsModalOpen}) {
+  const { id } = useParams();
+  // const authContext = useContext(AuthContext);
+  const { currentUser, setCurrentUser } = AuthContext();
+  const [isLoading, setIsLoading] = useState(true);
+
   const [formData, setFormData] = useState({
     comment: "",
     stage: "",
   });
 
+  useEffect(() => {
+    APIservice.get('/me')
+      .then(({data})=> {
+        setCurrentUser(data)
+      })
+    },[])
+
+
+  console.log('CurrentUser:', currentUser);
+
+
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -17,6 +41,29 @@ export default function AddCommentModal({ setIsModalOpen, handleClick }) {
     e.stopPropagation();
   };
 
+  
+  const handleCreateComment = async () => {
+    setIsLoading(true);
+
+    try {
+      const commentData = {
+        ...formData,
+        id_user: currentUser.id,
+        id_person: id,
+      };
+
+      await CommentDataService.createByPerson(id, commentData);
+
+            // Actualiza el listado de comentarios (puedes usar alguna función para hacer esto).
+      // Esto es importante para que los comentarios se reflejen en la vista principal.
+
+      setIsLoading(false);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Error creating comment:', error);
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -74,7 +121,7 @@ export default function AddCommentModal({ setIsModalOpen, handleClick }) {
               <button
                 className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                 type="button"
-                onClick={handleClick}
+                onClick={handleCreateComment}
               >
                 Guardar
               </button>
@@ -89,6 +136,6 @@ export default function AddCommentModal({ setIsModalOpen, handleClick }) {
 
 AddCommentModal.propTypes = {
      setIsModalOpen: PropTypes.any.isRequired,
-     handleClick: PropTypes.any.isRequired,
+    //  handleClick: PropTypes.any.isRequired,
 
  };

@@ -5,7 +5,7 @@ import AddCommentModal from './AddCommentModal';
 import CommentDataService from '../../services/recruitmentService/comments.service';
 import { useParams } from 'react-router';
 
-export default function CommentsIndex() {
+export default function CommentsIndexByPerson() {
   const {id} = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [comments, setComments] = useState([]);
