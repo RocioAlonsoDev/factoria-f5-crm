@@ -54,7 +54,7 @@ export default function CardAtomSocialTraffic() {
   });
 
   return (
-    <>
+    <div className='md:block md:fixed md:top-16 md:left-64 md:right-0 w-auto p-2'>
       <div className="flex flex-col items-center">
         <Link to="/recruitment/selectionday/add">
           <button className="bg-orange-500 text-white px-4 py-2 rounded mt-4">
@@ -98,6 +98,6 @@ export default function CardAtomSocialTraffic() {
         data={formattedPreviousSelections}
         columns={columns}
       />
-    </>
+    </div>
   );
 }
