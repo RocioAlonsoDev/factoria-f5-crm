@@ -1,8 +1,10 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { createPopper } from "@popperjs/core";
-import userImg from "../../assets/img/team-1-800x800.jpg"
 
-const UserDropdownAtom = () => {
+
+const TableDropdown = ({commentId, onDeleteComment, onEditComment}) => {
+  
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
@@ -18,7 +20,7 @@ const UserDropdownAtom = () => {
   return (
     <>
       <a
-        className="text-blueGray-500 block"
+        className="text-blueGray-500 py-1 px-3"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -26,15 +28,9 @@ const UserDropdownAtom = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center flex">
-          <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-            <img
-              alt="..."
-              className="w-full rounded-full align-middle border-none shadow-lg"
-              src={userImg}
-            />
-          </span>
-        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+        </svg>
       </a>
       <div
         ref={popoverDropdownRef}
@@ -48,41 +44,37 @@ const UserDropdownAtom = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={(e) => {
+            e.preventDefault();
+            onEditComment(commentId); 
+            closeDropdownPopover(); 
+          }}
         >
-          Action
+          Editar
         </a>
         <a
           href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={(e) => {
+            e.preventDefault();
+            onDeleteComment(commentId); 
+            closeDropdownPopover(); 
+          } }
         >
-          Another action
-        </a>
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Something else here
-        </a>
-        <div className="h-0 my-2 border border-solid border-blueGray-100" />
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Seprated link
+          Eliminar
         </a>
       </div>
     </>
   );
 };
 
-export default UserDropdownAtom;
+TableDropdown.propTypes = {
+  commentId: PropTypes.any.isRequired,
+  onDeleteComment: PropTypes.any.isRequired,
+  onEditComment: PropTypes.any.isRequired,
+}
+
+
+export default TableDropdown;

@@ -1,4 +1,5 @@
 import { createContext, useContext }  from "react";
+import PropTypes from 'prop-types';
 import { useState } from "react";
 
 const StateContext = createContext({
@@ -11,9 +12,7 @@ const StateContext = createContext({
 export const ContextProvider = ({ children }) => {
     const [currentUser,setCurrentUser] = useState({})
     
-    // const [userToken,_setUserToken] = useState(localStorage.getItem('TOKEN') || '')
-    const [userToken,_setUserToken] = useState('')
-
+    const [userToken,_setUserToken] = useState(localStorage.getItem('TOKEN') || '')
 
     const setUserToken = (token) => {
         if(token){
@@ -35,5 +34,9 @@ export const ContextProvider = ({ children }) => {
         </StateContext.Provider>
     )
 }
+
+ContextProvider.propTypes = {
+    children: PropTypes.any.isRequired,
+};
 
 export const AuthContext = () => useContext(StateContext)

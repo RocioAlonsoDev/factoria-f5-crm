@@ -72,6 +72,8 @@ useEffect(() => {
 
 
 
+  
+
   if (!selectionDay || isLoading) {
     return <div>Cargando...</div>;
   }
