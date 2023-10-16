@@ -3,9 +3,11 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
-import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
-import Login from "../pages/Login"
-import Signup from '../pages/Signup'
+import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
+import Login from "../pages/Login";
+import Signup from '../pages/Signup';
+import CodersIndex from "../pages/CodersFrontend/CodersIndex";
+
 
 
 
@@ -40,7 +42,7 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/coders',
-        element: <Dashboard />
+        element: <CodersIndex />
       }
     ]
   },
