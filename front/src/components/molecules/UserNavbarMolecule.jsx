@@ -1,8 +1,8 @@
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+//import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { AuthContext } from '../../contexts/AuthContext'
-import APIservice from '../../services/APIservice'
+//import APIservice from '../../services/APIservice'
 import { useEffect } from 'react'
 
 function classNames(...classes) {
@@ -32,7 +32,7 @@ export default function UserNavbarMolecule({title}) {
 
 
     return (
-      <Disclosure as="nav" className="bg-white md:block md:fixed md:top-0 md:left-64 md:right-0">
+      <Disclosure as="nav" className="bg-white md:block md:fixed md:top-0 md:left-64 md:right-0 z-20">
           <>
             <div className="lg:px-6">
               <div className="relative flex h-16 items-center justify-between">
