@@ -1,31 +1,26 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState} from "react";
-import { useParams } from 'react-router';
-import { AuthContext } from '../../contexts/AuthContext'
+import { useEffect, useState } from 'react';
 import CommentDataService from '../../services/recruitmentService/comments.service';
-import APIservice from '../../services/APIservice';
 
-export default function AddCommentModal({ setIsModalOpen}) {
-  const { id } = useParams();
-  const { currentUser, setCurrentUser } = AuthContext();
 
+export default function EditCommentModal({ setIsEditModalOpen, commentId, updateComments }) {
 
   const [formData, setFormData] = useState({
-    comment: "",
-    stage: "",
+    comment: '',
+    stage: '',
   });
 
   useEffect(() => {
-    APIservice.get('/me')
-      .then(({data})=> {
-        setCurrentUser(data)
+
+    CommentDataService.get(commentId)
+      .then(({ data }) => {
+        setFormData(data);
       })
-    },[])
+      .catch((error) => {
+        console.error('Error fetching comment data:', error);
+      });
+  }, [commentId]);
 
-
-  console.log('CurrentUser:', currentUser);
-
-  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -35,47 +30,37 @@ export default function AddCommentModal({ setIsModalOpen}) {
     e.stopPropagation();
   };
 
-  
-  const handleCreateComment = async () => {
-
+  const handleUpdateComment = async () => {
     try {
-      const commentData = {
-        ...formData,
-        id_user: currentUser.id,
-        id_person: id,
-      };
-
-      await CommentDataService.createByPerson(id, commentData);
-
-      setIsModalOpen(false);
-      console.log('Redirigiend/person/:id');
-      window.location.reload();
-
-    } catch (error){
-      console.error('Error creating comment:', error);
-    } 
+      await CommentDataService.update(commentId, formData);
+      setIsEditModalOpen(false);
+      
+      updateComments((prevComments) =>
+        prevComments.map((comment) => {
+          if (comment.id === commentId) {
+            return { ...comment, ...formData };
+          }
+          return comment;
+        })
+      );
+    } catch (error) {
+      console.error('Error updating comment:', error);
+    }
   };
-
-  
-  // if (isLoading) {
-  //   return <div>Cargando...</div>;
-  // }
 
   return (
     <>
       <div
-      
         className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-        onClick={() => setIsModalOpen(false)}
+        onClick={() => setIsEditModalOpen(false)}
       >
         <div className="relative w-auto my-6 mx-auto max-w-3xl" onClick={handleModalClick}>
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            {/*header*/}
             <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-              <h3 className="text-3xl font-semibold">Comentario nuevo</h3>
+              <h3 className="text-3xl font-semibold">Editar comentario</h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => setIsEditModalOpen(false)}
               >
                 <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
               </button>
@@ -105,19 +90,18 @@ export default function AddCommentModal({ setIsModalOpen}) {
                 />
               </div>
             </div>
-            {/*footer*/}
             <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
               <button
                 className="text-black-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => setIsEditModalOpen(false)}
               >
                 Cerrar
               </button>
               <button
                 className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                 type="button"
-                onClick={handleCreateComment}
+                onClick={handleUpdateComment}
               >
                 Guardar
               </button>
@@ -130,9 +114,8 @@ export default function AddCommentModal({ setIsModalOpen}) {
   );
 }
 
-AddCommentModal.propTypes = {
-     setIsModalOpen: PropTypes.any.isRequired,
-     updateComments: PropTypes.any.isRequired,
-    //  handleClick: PropTypes.any.isRequired,
-
- };
+EditCommentModal.propTypes = {
+  setIsEditModalOpen: PropTypes.func.isRequired,
+  commentId: PropTypes.number.isRequired,
+  updateComments: PropTypes.func.isRequired,
+};
