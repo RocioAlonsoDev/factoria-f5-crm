@@ -11,7 +11,6 @@ import RequirementStatus from "../pages/ConfigurationPages/RequirementStatus";
 import Login from "../pages/Login";
 import Signup from '../pages/Signup';
 import CodersIndex from "../pages/CodersFrontend/CodersIndex";
-
 import Evaluation from "../pages/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
@@ -78,9 +77,6 @@ const Router = createBrowserRouter([
     path: '/recruitment/selectionday',
     element: <SelectionDayIndex />
   },
-
-
-  // Person
 
   {
     path:'/inscribe',
