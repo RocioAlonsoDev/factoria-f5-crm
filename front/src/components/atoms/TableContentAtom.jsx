@@ -8,8 +8,8 @@ function TableContentAtom(props) {
     }
 
     return (
-        <div className="relative flex flex-col min-w-0 break-words bg-white w-ful mb-6 shadow-lg rounded">
-            <div>
+        <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div  className="block w-full overflow-x-auto">
                 <div className=''>
                     <table className="items-center w-full bg-transparent dark:border-neutral-200">
                         <caption className="text-2xl p-4 caption-top  border-b font-medium dark:border-neutral-200">
