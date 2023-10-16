@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
@@ -106,6 +106,10 @@ const Router = createBrowserRouter([
   {
     path:'/recruitment/person/add',
     element: <AdminAddPerson />
+  },
+  {
+    path:'/recruitment/person/index',
+    element: <IndexPerson />
   },
 
 
