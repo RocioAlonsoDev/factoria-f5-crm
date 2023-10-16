@@ -3,12 +3,9 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
-import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
-import Login from "../pages/Login";
-import Signup from '../pages/Signup';
-import CodersIndex from "../pages/CodersFrontend/CodersIndex";
-
-import Evaluation from "../pages/Evaluation";
+import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
+import Login from "../pages/Login"
+import Signup from '../pages/Signup'
 
 
 
@@ -43,11 +40,7 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/coders',
-        element: <CodersIndex />
-      },
-      {
-        path:'/tracking/evaluation/id',
-      element:<Evaluation/>
+        element: <Dashboard />
       }
     ]
   },
@@ -63,7 +56,6 @@ const Router = createBrowserRouter([
     path: '/recruitment/selectionday',
     element: <SelectionDayIndex />
   },
-
 ])
 
 export default Router;
