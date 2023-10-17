@@ -228,8 +228,8 @@ export default function IndexPerson() {
   });
 
   return (
-    <>
+    <div  className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
       <TableAtom tableTitle={'Todas las personas inscritas'} columns={columns} data={data} />
-    </>
+    </div>
   );
 }

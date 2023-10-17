@@ -66,4 +66,15 @@ class AuthController extends Controller
         return $request->user();
     }
 
+    public function getUserDetails($user_id)
+{
+    $user = User::find($user_id);
+
+    if (!$user) {
+        return response(['error' => 'User not found'], 404);
+    }
+
+    return response(['user' => $user]);
+}
+
 }

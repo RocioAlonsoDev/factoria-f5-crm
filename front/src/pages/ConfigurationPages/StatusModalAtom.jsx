@@ -51,7 +51,7 @@ export default function ModalAtom({ setIsModalOpen, handleCreate}) {
                   cols={100}
                   wrap="wrap"
                   maxLength={200}
-                  value={formData.status}
+                  value={formData.name}
                   onChange={handleInputChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-blueGray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />

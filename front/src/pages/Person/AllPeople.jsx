@@ -27,7 +27,7 @@ export default function AllPeople() {
     const columns = ['Nombre', 'Apellido', ''];
   
     return (
-    <div>
+    <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
         
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
           <hr className="mt-6 border-b-1 border-blueGray-300" />
