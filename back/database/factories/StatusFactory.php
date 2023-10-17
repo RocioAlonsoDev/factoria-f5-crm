@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker;
 use App\Models\Status;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Status>
- */
+
 class StatusFactory extends Factory
 {
     protected $model = Status::class;
@@ -16,7 +14,12 @@ class StatusFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->unique()->randomElement([
+                'Postulante',
+                'Coder',
+                'ExCoder',
+                'Lista de Espera',
+            ]),
         ];
     }
 }

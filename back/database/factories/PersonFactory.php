@@ -5,6 +5,8 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker;
 use App\Models\Person;
+use App\Models\Status;
+use App\Models\Bootcamp;
 
 class PersonFactory extends Factory
 {
@@ -12,6 +14,8 @@ class PersonFactory extends Factory
 
     public function definition()
     {
+        $statusIds = Status::pluck('id')->toArray(); 
+
         return [
             'name' => $this->faker->firstName,
             'surname' => $this->faker->lastName,
@@ -25,8 +29,8 @@ class PersonFactory extends Factory
             'birthdate' => $this->faker->date,
             'gender' => $this->faker->randomElement(['mujer', 'hombre', 'no binario', 'fluido', 'otros']),
             'dni' => $this->faker->unique()->numerify('#########'), // Esto generará un DNI de 9 dígitos
-            'id_status' => $this->faker->randomElement([1, 2, 3]), 
-            'id_bootcamp' => $this->faker->randomElement([1, 2, 3]), 
+            'id_status' => $this->faker->randomElement([1, 2, 3, 4]),
+            'id_bootcamp' => $this->faker->randomElement(Bootcamp::pluck('id')->toArray()),
         ];
     }
 }

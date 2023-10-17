@@ -10,11 +10,18 @@ use Database\Factories\StatusFactory;
 
 class StatusSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
-        Status::factory()->count(10)->create();
+        $statuses = [
+            ['id' => 1, 'name' => 'Postulante'],
+            ['id' => 2, 'name' => 'Coder'],
+            ['id' => 3, 'name' => 'ExCoder'],
+            ['id' => 4, 'name' => 'Lista de Espera'],
+        ];
+
+        foreach ($statuses as $statusData) {
+            Status::create($statusData);
+        }
     }
 }
