@@ -11,8 +11,8 @@ import CommentsIndexByPerson from "../pages/Comments/CommentsIndexByPerson";
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
-import RequirementStatus from "../pages/ConfigurationPages/RequirementStatus";
-import Login from "../pages/Login";;
+import StatusRequirement from "../pages/ConfigurationPages/StatusRequirement";
+import Login from "../pages/Login";
 import Signup from '../pages/Signup';
 import CodersIndex from "../pages/CodersFrontend/CodersIndex";
 import Evaluation from "../pages/Evaluation";
@@ -43,19 +43,7 @@ const Router = createBrowserRouter([
     element: <AllPeople />
   },
   
-  {
-    path: '/recruitment/selectiondayshow/:id',
-    element: <SelectionDayShow />
-  },
-  {
-    path: '/recruitment/selectiondayupdate/:id',
-    element: <SelectionDayUpdate />
-  },
-  {
-    path: 'recruitment/selectionday/add',
-    element: <SelectionDayAdd />
-  },
-  
+    
 
   {
     path: '/',
@@ -93,15 +81,16 @@ const Router = createBrowserRouter([
     path: '/signup',
     element: <Signup/>
   },
+  {
+    path:'/inscribe',
+    element: <PublicAddPerson />
+  },
 
   {
     path: '/recruitment',
     element: <DefaultLayout title='Captación'/>,
     children:[
-      {
-        path: '/recruitment/selectionday',
-        element: <SelectionDayIndex />
-      },
+      
       {
         path:'/recruitment/person/add',
         element: <AdminAddPerson />
@@ -116,16 +105,26 @@ const Router = createBrowserRouter([
         path: '/recruitment/comments',
         element: <CommentsIndexByPerson />
       },
+      //
+      {
+        path: '/recruitment/selectiondayshow/:id',
+        element: <SelectionDayShow />
+      },
+      {
+        path: '/recruitment/selectiondayupdate/:id',
+        element: <SelectionDayUpdate />
+      },
+      {
+        path: '/recruitment/selectionday/add',
+        element: <SelectionDayAdd />
+      },
+      {
+        path: '/recruitment/selectionday',
+        element: <SelectionDayIndex />
+      },
+    
     ]
   },
- 
-
-  {
-    path:'/inscribe',
-    element: <PublicAddPerson />
-  },
-
-
 
   //Configuration
   {
@@ -145,8 +144,8 @@ const Router = createBrowserRouter([
         element: <PersonStatus />
       },
       {
-        path: '/configuration/requirement/status',
-        element: <RequirementStatus />
+        path: '/configuration/status/requirement',
+        element: <StatusRequirement />
       },
     ]
   },
