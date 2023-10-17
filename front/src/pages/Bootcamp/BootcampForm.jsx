@@ -1,100 +1,70 @@
-import FormAtom from '../../components/atoms/FormAtom'
-import APIservice from '../../services/APIservice';
-import { useNavigate , useParams } from 'react-router-dom';
+// import FormAtom from '../../components/atoms/FormAtom'
+// import APIservice from '../../services/APIservice';
+
 import { useState } from 'react';
-import { useEffect } from 'react';
-import StepperAtom from '../../components/atoms/StepperAtom'
-
-const formData = [
-    {
-      id: 'name', 
-      label: 'Nombre del bootcamp',
-      type: 'text', 
-    },
-    {
-      id: 'school', 
-      label: 'Escuela', 
-      type: 'text', 
-    },
-    {
-       id: 'promo', 
-       label: 'Promoción', 
-       type: 'text', 
-    },
-    {
-      id: 'description', 
-      label: 'Descripción', 
-      type: 'text', 
-   },
-   {
-    id: 'startDate', 
-    label: 'Fecha de inicio', 
-    type: 'date', 
-    },
-    {
-      id: 'endDate', 
-      label: 'Fecha de finalización', 
-      type: 'date', 
-      },
-
-  ];
-
-export default function BootcampAdd() {
-  const navigate = useNavigate()
-  const [error, setError] = useState("");
-  const { id } = useParams();
+// import { useEffect } from 'react';
+import StepperMolecule from '../../components/molecules/StepperMolecule'
 
 
-  const [bootcamp, setBootcamp] = useState({
-    name: '',
-    school: '',
-    promo: '',
-    description: '',
-    start_date: '',
-    end_date: '',
-  })
 
-  const createBootcamp = (values) => {
+export default function BootcampForm() {
+//   // const navigate = useNavigate()
+//   // const [error, setError] = useState("");
 
-    let res= null;
 
-    if(id){
-      res = APIservice.put(`/bootcamp/${id}`, values)
-    }else{
-      res = APIservice.post('/bootcamp', values)
-    }
 
-    res
-    .then(() => {
-      navigate('/tracking/bootcamp')
-    })
-    .catch(err=> {
-      if (err && err.response) {
-        setError(err.response.data);
-      }
-    })
-  }
+//   const [bootcamp, setBootcamp] = useState({
+//     name: '',
+//     school: '',
+//     promo: '',
+//     description: '',
+//     start_date: '',
+//     end_date: '',
+//   })
 
-  useEffect(() => {
-    if(id){
-      APIservice.get(`/bootcamp/${id}`)
-      .then(({ data }) => {
-        setBootcamp(data.data);
-        console.log(data.data)
-      })
-    }
-  },[id])
+//   
+
+
+//   const createBootcamp = (values) => {
+
+    
+
+    
+//   }
+
+  // useEffect(() => {
+  //   if(id){
+  //     APIservice.get(`/bootcamp/${id}`)
+  //     .then(({ data }) => {
+  //       setBootcamp(data.data);
+  //       console.log(data.data)
+  //     })
+  //   }
+  // },[id])
 
 
   return (
-    <div className="md:block md:fixed md:top-16 md:left-64 md:right-0 w-auto p-2">
-      <StepperAtom>
-        <FormAtom
-            formTitle="Crear nuevo Bootcamp"
-            formData={formData}
-            onSubmit={createBootcamp}
-          />
-      </StepperAtom>
+    <div className="md:block md:absolute md:top-[107px] md:left-64 md:right-0 w-auto p-2">
+      <StepperMolecule 
+      // step1={
+      //   
+      // }
+      // step2={
+      //   <FormAtom
+      //       formTitle="Añadir Stacks"
+      //       formData={formData}
+      //       onSubmit={step1}
+      //     />
+      // }
+      // step3={
+      //   <FormAtom
+      //       formTitle="Añadir Requisitos"
+      //       formData={formData}
+      //       onSubmit={step1}
+      //     />
+      // }
+      >
+      </StepperMolecule>
          
     </div>
   )

@@ -9,7 +9,7 @@ function NavbarAtom({ menuItems }) {
   };
 
   return (
-    <nav className="bg-white p-2 fixed top-0 left-0 right-0 z-10 flex justify-end ">
+    <nav className="p-2 md:block md:fixed md:top-16 md:right-0 z-10 flex justify-end">
       <div className="max-w-7xl">
         <div className="md:hidden">
           <button
@@ -42,7 +42,7 @@ function NavbarAtom({ menuItems }) {
           </button>
         </div>
         <div className={`md:flex space-x-0 ${isOpen ? 'flex-col' : 'hidden'} md:block`}>
-          {menuItems.map((item, index) => (
+          {menuItems && menuItems.map((item, index) => (
             <Link
               key={index}
               to={item.url}
