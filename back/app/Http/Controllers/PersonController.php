@@ -75,21 +75,6 @@ class PersonController extends Controller
         ], 200);
     }
 
-    //Event methods
-
-    // public function updateStatus(PersonRequest $request, $id)
-    // {
-    //     $person = Person::find($id);
-    //     $newStatus = $request->input('new_status'); // Puedes recibir el nuevo estado desde la solicitud
-    //     $person->id_status = $newStatus;
-    //     $person->save();
-
-    //     if ($newStatus == 3) {
-    //         event(new StatusDiscardedEvent($person));
-    // }
-
-    // return response()->json(['message' => 'Se ha actualizado el estado a Descartado'], 200);
-    // }
 
     // RECRUITMENT METHODS
 

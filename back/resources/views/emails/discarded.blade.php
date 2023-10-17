@@ -12,10 +12,8 @@
     </style>
 </head>
 
-<header>
-    <img src="../../img/Logo.png" alt="logo_factoria">
-</header>
 <body>
+    <img src="../../img/Logo.png" alt="logo_factoria">
     <h2>Hola {{ $name }}</h2>
     <h4>Lamentamos comunicarte que no has sido seleccionada para esta nueva edición en nuestros Bootcamps.</h4>
     <br>
