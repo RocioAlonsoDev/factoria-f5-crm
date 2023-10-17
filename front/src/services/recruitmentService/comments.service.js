@@ -7,11 +7,11 @@ class CommentDataService{
     get(id){
         return http.get(`api/comment/${id}`);
     }
-    create(data){
+    createByPerson(id_person, data){
         
-        return http.post("api/comment", data);
-        
+        return http.post(`api/comment?id_person=${id_person}`, data);
     }
+    
     update(id, data){
         return http.put(`api/comment/${id}`, data);
     }
@@ -25,6 +25,10 @@ class CommentDataService{
 
     findByTitle(id_user){
         return http.get(`api/comment?id_user=${id_user}`);
+    }
+
+    findByPerson(id_person){
+        return http.get(`api/comment?id_person=${id_person}`);
     }
 }
 

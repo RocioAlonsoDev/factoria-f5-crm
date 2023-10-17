@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link} from 'react-router-dom';
 import TableAtom from "../../components/atoms/TableAtom";
 import SelectionDayDataService from "./../../services/recruitmentService/selectionDay.service";
 import PersonDataService from "../../services/crmService/person.service";
@@ -10,6 +10,8 @@ export default function SelectionDayShow() {
   const [selectionDay, setSelectionDay] = useState(null);
   const [people, setPeople] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+
   
 
 useEffect(() => {
@@ -72,6 +74,8 @@ useEffect(() => {
 
 
 
+  
+
   if (!selectionDay || isLoading) {
     return <div>Cargando...</div>;
   }
@@ -88,7 +92,7 @@ useEffect(() => {
 
 
   return (
-    <>
+    <div  className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
             
@@ -100,16 +104,13 @@ useEffect(() => {
                Ver documentos
               </button>
             </Link>
-            {/* <Link to={`/recruitment/selectionday/edit/${id}`}>
-  <button className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
-    Editar jornada
-  </button>
-</Link> */}
-            <Link to="/recruitment/selectionday/update">
-              <button className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
-               Modificar jornada
-              </button>
-            </Link>
+            <Link to={`/recruitment/selectiondayupdate/${id}`}>
+            <button className="bg-orange-500 text-white active-bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
+            Modificar Jornada
+            </button>
+          </Link>
+
+
             <Link to="/recruitment/selectionday/add">
               <button className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
                Crear nueva jornada
@@ -211,6 +212,6 @@ useEffect(() => {
             </TableAtom>
         </div>
       </div>
-    </>
+    </div>
   )
 }
