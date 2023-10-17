@@ -3,12 +3,10 @@ import { Outlet } from 'react-router-dom'
 import UserNavbarMolecule from '../components/molecules/UserNavbarMolecule'
 import Sidebar from "../components/atoms/SideBarAtom"
 import NavbarAtom from '../components/atoms/NavbarAtom'
-
-
 import { AuthContext } from '../contexts/AuthContext'
 import { Navigate } from 'react-router-dom';
 
-export default function DefaultLayout({title}) {
+export default function DefaultLayout({title, menuItems}) {
   const { userToken } = AuthContext();
   const menuItems = [
     { label: 'Inicio', url: '/' },
