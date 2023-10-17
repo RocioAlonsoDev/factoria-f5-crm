@@ -13,8 +13,6 @@ import BootcampForm from '../pages/Bootcamp/BootcampForm'
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 
-
-
 const Router = createBrowserRouter([
   {
     path: '/home',
@@ -46,7 +44,12 @@ const Router = createBrowserRouter([
   },
   {
     path: '/tracking',
-    element: <DefaultLayout title='Seguimiento' />,
+    element: <DefaultLayout 
+      title='Seguimiento' 
+      menuItems={[
+        {url: '/tracking/bootcamp', label: 'BOOTCAMPS'},
+        {url: '/tracking/coders', label: 'CODERS'}
+      ]}/>,
     children:[
       {
         path: '/tracking/bootcamp',

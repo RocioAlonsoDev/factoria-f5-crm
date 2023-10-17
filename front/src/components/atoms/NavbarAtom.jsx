@@ -9,7 +9,7 @@ function NavbarAtom({ menuItems }) {
   };
 
   return (
-    <nav className="p-2 md:block md:fixed md:top-16 md:right-0 z-10 flex justify-end ">
+    <nav className="p-2 md:block md:fixed md:top-16 md:right-0 z-10 flex justify-end">
       <div className="max-w-7xl">
         <div className="md:hidden">
           <button
