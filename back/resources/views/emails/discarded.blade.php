@@ -5,15 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email</title>
     <style>
-        h1 {
+        h2 {
             color: orangered;
         }
 
     </style>
 </head>
+
+<header>
+    <img src="../../img/Logo.png" alt="logo_factoria">
+</header>
 <body>
-    <h1>Hola {{ $name }}</h1>
-    <p>Lamentamos comunicarte que no has sido seleccionada para esta nueva edición en nuestros Bootcamps.</p>
+    <h2>Hola {{ $name }}</h2>
+    <h4>Lamentamos comunicarte que no has sido seleccionada para esta nueva edición en nuestros Bootcamps.</h4>
+    <br>
+    <h4>Recibe un cordial saludo.</h4>
+
     
 </body>
 </html>
