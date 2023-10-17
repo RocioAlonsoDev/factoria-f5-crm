@@ -1,5 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
+import DefaultLayoutConfiguration from "../layouts/DefaultLayoutConfiguration";
+import DefaultLayoutRecruitment from "../layouts/DefaultLayoutRecruitment";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
@@ -88,7 +90,7 @@ const Router = createBrowserRouter([
 
   {
     path: '/recruitment',
-    element: <DefaultLayout title='Captación'/>,
+    element: <DefaultLayoutRecruitment title='Captación'/>,
     children:[
       
       {
@@ -129,7 +131,7 @@ const Router = createBrowserRouter([
   //Configuration
   {
     path: '/configuration',
-    element: <DefaultLayout title='Configuración'/>,
+    element: <DefaultLayoutConfiguration title='Configuración'/>,
     children:[
       {
         path: '/configuration/requirements',
