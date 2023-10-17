@@ -1,4 +1,3 @@
-
 import FormAtom from '../../components/atoms/FormAtom';
 import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service';
 import { useNavigate } from 'react-router-dom';
@@ -15,11 +14,11 @@ function SelectionDayAdd() {
     },
     {
       id: 'date',
-      label: 'Fecha y hora de la jornada de selección',
+      label: 'Fecha',
       type: 'date',
     },
     {
-      id: 'link de reunión',
+      id: 'link',
       label: 'Link del zoom',
       type: 'text',
     },
