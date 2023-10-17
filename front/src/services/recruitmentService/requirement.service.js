@@ -2,7 +2,7 @@ import http from "./http-common";
 
 class RequirementDataService{
     getAll(){
-        return http.get("api/requirement");
+        return http.get(`api/requirement`);
     }
     get(id){
         return http.get(`api/requirement/${id}`);
@@ -25,6 +25,10 @@ class RequirementDataService{
 
     findByUser(id_user){
         return http.get(`api/requirement?id_user=${id_user}`);
+    }
+
+    findByBootcamp(id_bootcamp){
+        return http.get(`api/requirement?id_bootcamp=${id_bootcamp}`);
     }
     
 }
