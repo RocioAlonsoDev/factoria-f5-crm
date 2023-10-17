@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import SelectionDayDataService from '../../services/recruitmentService/selectionDay.service';
+import DefaultLayout from '../../layouts/DefaultLayout';
 
 export default function SelectionDayUpdate() {
   const { id } = useParams();
@@ -64,7 +65,7 @@ export default function SelectionDayUpdate() {
   
 
   return (
-    <>
+    <div  className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-around">
@@ -166,6 +167,6 @@ export default function SelectionDayUpdate() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
