@@ -42,7 +42,8 @@ export default function RequirementEdit() {
 
     return (
     
-      <><div
+      <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
+      <div
   
         className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
        
@@ -96,7 +97,7 @@ export default function RequirementEdit() {
         </div>
       
       <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-      </>
+      </div>
       
     );
   }
