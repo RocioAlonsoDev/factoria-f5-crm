@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StatusDiscardedEvent;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use App\Http\Requests\PersonRequest;
@@ -38,7 +39,7 @@ class PersonController extends Controller
     public function update(PersonRequest $request, $id):JsonResponse
     {
         $person = Person::find($id);
-        $person->person=$request->person;
+       
         $person->name=$request->name;
         $person->surname=$request->surname;
         $person->email=$request->email;
@@ -55,6 +56,11 @@ class PersonController extends Controller
         $person->id_bootcamp=$request->id_bootcamp;
         $person ->save();
 
+        
+        if ($person -> id_status == 3) {
+            event(new StatusDiscardedEvent($person));
+             }
+
         return response()->json([
             'success'=>true
             ], 200);
@@ -68,6 +74,22 @@ class PersonController extends Controller
             'success'=>true
         ], 200);
     }
+
+    //Event methods
+
+    // public function updateStatus(PersonRequest $request, $id)
+    // {
+    //     $person = Person::find($id);
+    //     $newStatus = $request->input('new_status'); // Puedes recibir el nuevo estado desde la solicitud
+    //     $person->id_status = $newStatus;
+    //     $person->save();
+
+    //     if ($newStatus == 3) {
+    //         event(new StatusDiscardedEvent($person));
+    // }
+
+    // return response()->json(['message' => 'Se ha actualizado el estado a Descartado'], 200);
+    // }
 
     // RECRUITMENT METHODS
 
