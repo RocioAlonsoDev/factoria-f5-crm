@@ -42,7 +42,7 @@ function NavbarAtom({ menuItems }) {
           </button>
         </div>
         <div className={`md:flex space-x-0 ${isOpen ? 'flex-col' : 'hidden'} md:block`}>
-          {menuItems.map((item, index) => (
+          {menuItems && menuItems.map((item, index) => (
             <Link
               key={index}
               to={item.url}
