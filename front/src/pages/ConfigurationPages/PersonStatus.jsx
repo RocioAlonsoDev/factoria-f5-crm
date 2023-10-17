@@ -1,6 +1,5 @@
 import StatusDataService from "../../services/crmService/status.service.js";
 import { useState, useEffect } from "react";
-
 import StatusModalAtom from "./StatusModalAtom.jsx"
 
 const PersonStatus= () => {
@@ -32,15 +31,15 @@ const PersonStatus= () => {
   const handleCreate = async (data) => {
     try {
       await StatusDataService.create(data);
-      const response = await StatusDataService.getAll();  // Refetch all statuses
+      const response = await StatusDataService.getAll();  
     setStatuses(response.data.data);
-    setIsModalOpen(false);  // Close the modal after successful creation
+    setIsModalOpen(false);  
     } catch (error) {
       console.error('Error creating status:', error);
     }
   };
 
-  //console.log(statuses);
+  
 
     return (
         <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
@@ -48,7 +47,7 @@ const PersonStatus= () => {
             
                 <div className="text-center flex justify-between">
               
-                    <h6 className="text-blueGray-700 text-xl font-bold">Status de Persona</h6>
+                    <h6 className="text-blueGray-700 text-xl font-bold">Estatus de Persona</h6>
                     <button
                              className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                              type="button"
