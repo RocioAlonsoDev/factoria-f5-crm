@@ -11,17 +11,18 @@ export default function Evaluation() {
     tittlesCompetence: ["Competencia 1", "Competencia 2", "Competencia 3"],
     contents: [
       {
-          fecha: '2023-10-13',
-          tipo: 'Tipo 1',
-          values: ['Valor 1', 'Valor 2']
+        fecha: '2023-10-13',
+        tipo: 'Tipo 1',
+        competences: {
+          "Competencia 1": ['Contenido 1.1', 'Contenido 1.2'],
+          "Competencia 2": ['Contenido 2.1'],
+          "Competencia 3": ['Contenido 3.1', 'Contenido 3.2', 'Contenido 3.3', 'contenido cuatro él o ella han aprendido a buscar en chatGPT']
+        }
       },
-      {
-          fecha: '2023-10-14',
-          tipo: 'Tipo 2',
-          values: ['Valor 3', 'Valor 4']
-      }
-  ]
-};
+      // ... (otros registros) 
+    ]
+  };
+  
 
 
   //CONTENTES TABLE
