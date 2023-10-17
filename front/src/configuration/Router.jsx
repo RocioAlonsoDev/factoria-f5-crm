@@ -23,7 +23,8 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
-
+import CodersIndex from "../pages/CodersFrontend/CodersIndex";
+import Evaluation from "../pages/Evaluation";
 
 
 const Router = createBrowserRouter([

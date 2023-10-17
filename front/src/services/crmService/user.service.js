@@ -22,8 +22,7 @@ class UserDataService{
     deleteAll(){
         return http.delete(`api/user`);
     }
-   
-   
+       
 }
 
 export default new UserDataService();

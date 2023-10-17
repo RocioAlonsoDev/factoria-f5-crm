@@ -1,8 +1,8 @@
-import React from "react";
-//import { createPopper } from "@popperjs/core";
-import userImg from "../../assets/img/team-1-800x800.jpg"
+// import React from "react";
+// //import { createPopper } from "@popperjs/core";
+// import userImg from "../../assets/img/team-1-800x800.jpg"
 
-const UserDropdownAtom = () => {
+// const UserDropdownAtom = () => {
 //   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
 //   const btnDropdownRef = React.createRef();
 //   const popoverDropdownRef = React.createRef();
@@ -85,4 +85,4 @@ const UserDropdownAtom = () => {
 //   );
 // };
 
-export default UserDropdownAtom;
+// export default UserDropdownAtom;
