@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Status;
+use Database\Factories\StatusFactory;
+
 
 class StatusSeeder extends Seeder
 {
@@ -13,6 +16,9 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
+        Status::factory()->count(10)->create();
+
+
         DB::table('statuses')->insert([
             'name' => 'Aspirante',
      ]);
