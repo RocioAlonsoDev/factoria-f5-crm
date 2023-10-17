@@ -125,7 +125,8 @@ import PersonRequirementsDataService from '../../services/recruitmentService/per
 export default function IndexPerson() {
   const [people, setPeople] = useState([]);
   const [requirements, setRequirements] = useState([]);
-  const [updatedRequirementsStatus, setUpdatedRequirementsStatus] = useState({});
+  const [selectedStatus, setSelectedStatus] = useState({});
+
 
   const statusOptions = [
     { id: 1, name: 'En seguimiento' },
@@ -149,20 +150,57 @@ export default function IndexPerson() {
     '¿Acepta la política de protección?', 'Edad', 'Género', 'Fecha de inscripción', 'RIC',
     'Talleres F5', 'Derivada a entidad social', "JPA", 'JS', 'Turno', 'Decisión'];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await PersonDataService.getAll();
-        setPeople(response.data.data);
-        const requirementsResponse = await PersonRequirementsDataService.getAll();
-        setRequirements(requirementsResponse.data.data); 
-      } catch (error) {
-        console.error('Error al cargar datos de personas', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await PersonDataService.getAll();
+            setPeople(response.data.data);
+            const requirementsResponse = await PersonRequirementsDataService.getAll();
+            setRequirements(requirementsResponse.data.data);
+          } catch (error) {
+            console.error('Error al cargar datos de personas', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+    
+      const handleRicChange = (person, newStatus) => {
+        setSelectedStatus({
+          ...selectedStatus,
+          [person.id]: newStatus,
+        });
+      };
+    
+      const handleUpdateRequirements = async () => {
+        const updatePromises = [];
+        Object.keys(selectedStatus).forEach((personId) => {
+          const newStatus = selectedStatus[personId];
+          const personRequirement = requirements.find(
+            (requirement) =>
+              requirement.id_person === personId && requirement.id_requirement === 2
+          );
+    
+          if (personRequirement) {
+            // Actualiza el estado en la base de datos
+            const updatedStatus = { id_statusRequirement: newStatus };
+            const updatePromise = PersonRequirementsDataService.update(
+              personRequirement.id_person,
+              personRequirement.id_requirement,
+              updatedStatus
+            );
+            updatePromises.push(updatePromise);
+          }
+        });
+    
+        try {
+          // Espera a que todas las actualizaciones se completen
+          await Promise.all(updatePromises);
+          console.log('Estados actualizados con éxito en la base de datos');
+        } catch (error) {
+          console.error('Error al actualizar los estados en la base de datos', error);
+        }
+      };
 
   function calculateAge(birthdate) {
     if (birthdate) {
@@ -192,42 +230,12 @@ export default function IndexPerson() {
     return `${day}/${month}/${year}`;
   }
 
-  const handleRicChange = (person) => {
-    const personId = person.id;
-    const newRicStatus = 13; // ID del nuevo estado RIC
-
-    // Actualiza el estado en el objeto
-    setUpdatedRequirementsStatus({
-      ...updatedRequirementsStatus,
-      [personId]: newRicStatus,
-    });
-  };
-  const handleUpdateRequirements = () => {
-    // Envía las actualizaciones al servidor
-    Object.keys(updatedRequirementsStatus).forEach((personId) => {
-      const newStatus = updatedRequirementsStatus[personId];
-      PersonRequirementsDataService.updateRequirementsStatus(personId, {
-        id_statusRequirement: newStatus,
-      })
-        .then((response) => {
-          // Maneja la respuesta si es necesario
-          console.log('Estado actualizado con éxito para la persona', personId);
-        })
-        .catch((error) => {
-          // Maneja los errores si es necesario
-          console.error('Error al actualizar el estado para la persona', personId, error);
-        });
-    });
-  };
-
+  
+  
+  
   const data = people.map((person) => {
     const age = person.birthdate ? calculateAge(person.birthdate) : null;
     const formattedDate = person.created_at ? formatDateString(person.created_at) : null;
-  
-    const ricRequirement = requirements ? requirements.find(
-      (requirement) =>
-        requirement.id_person === person.id && requirement.id_requirement === 2
-    ) : null;
   
     return {
       Nombre: person.name,
@@ -242,7 +250,7 @@ export default function IndexPerson() {
       'Fecha de inscripción': formattedDate,
       RIC: (
         <select
-          value={ricRequirement ? ricRequirement.id_statusRequirement : ''} 
+          value={selectedStatus[person.id] || ''}
           onChange={(e) => handleRicChange(person, e.target.value)}
         >
           {statusOptions.map((option) => (
@@ -254,6 +262,7 @@ export default function IndexPerson() {
       ),
     };
   });
+  
 
   return (
     <>
