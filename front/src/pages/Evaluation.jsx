@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-//import TableContentAtom from '../components/atoms/TableContentAtom';
+
+import TableContentAtom from '../components/atoms/TableContentAtom';
+
 
 export default function Evaluation() {
   const heads = ["JAVA", "PHP", "LARAVEL", "BBDD", "PHYTON", "JAVASCRIPT", "Java", "pHYTON"];
@@ -46,4 +48,6 @@ const saveData = () => {
         </button>
     </div>
   );
+
 }
+
