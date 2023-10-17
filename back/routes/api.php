@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
 
 
-Route::resource('/person', PersonController::class);
+
 Route::resource('/status', StatusController::class);
 Route::resource('/bootcamp', BootcampController::class);
 Route::resource('/role', RoleController::class);
