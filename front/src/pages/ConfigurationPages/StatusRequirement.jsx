@@ -1,8 +1,6 @@
 import StatusRequirementDataService from "../../services/recruitmentService/statusRequirement.service.js"
 import { useState, useEffect } from "react";
-import RequirementModalAtom from "./RequirementModalAtom.jsx";
 //import RequirementEditModalAtom from "./RequirementEditModalAtom.jsx";
-import {Link} from 'react-router-dom';
 
 const StatusRequirement= () => {
 
