@@ -9,7 +9,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,8 +46,7 @@ Route::resource('/person', PersonController::class);
 Route::resource('/status', StatusController::class);
 Route::resource('/bootcamp', BootcampController::class);
 Route::resource('/role', RoleController::class);
-Route::resource('/genderper', StatisticsController::class);
 
-Route::get('genderpercentage', [StatisticsController::class, 'getGenderPercentages']);
-// Route::get('/person/genderpercentage', [PersonController::class, 'getGenderPercentages']);
+// Route::get('/',[MailController::class, 'index']);
+ Route::get('/discarded',[MailController::class, 'discarded']);
 
