@@ -10,10 +10,9 @@ import { Navigate } from 'react-router-dom';
 export default function DefaultLayoutConfiguration({title}) {
   const { userToken } = AuthContext();
   const menuItems = [
-    { label: 'Inicio', url: '/' },
     { label: 'Requerimientos', url: '/configuration/requirements' },
-    { label: 'Estatus de Persona', url: '/configuration/person/status' },
-    { label: 'Estatus de Requerimiento', url: '/configuration/status/requirement' },
+    { label: 'Estado de Persona', url: '/configuration/person/status' },
+    { label: 'Estado de Requerimiento', url: '/configuration/status/requirement' },
     
   ];
   
