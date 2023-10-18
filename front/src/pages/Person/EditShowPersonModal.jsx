@@ -11,6 +11,7 @@ export default function EditShowPersonModal({ setIsEditModalOpen, personId, upda
     status: status || ''
   });
 
+
 useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,11 +43,6 @@ useEffect(() => {
 
     fetchData();
   }, [personId]);
-
-
-
-
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -90,7 +86,7 @@ useEffect(() => {
               <div className="flex flex-wrap">
                 <div className="w-1/4 p-4 flex flex-col items-center justify-center">
                   <img
-                    src={profileError}
+                    src={formData.image}
                     alt="Foto de perfil"
                     onError={(e) => {
                       e.target.src = profileError;
@@ -103,22 +99,39 @@ useEffect(() => {
                   <div className="w-full p-4 flex flex-col justify-center center">
                     <div className="flex flex-wrap items-center justify-between">
                       <div className="relative w-5/12 px-4">
-                        <input
-                          type="text"
-                          id="bootcamp"
-                          className="text-center border-0 px-3 py-3 placeholder-blueGray-300 text-orange-500 bg-white rounded text-xl font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          defaultValue={formData.bootcamp}
-                          readOnly
-                        />
+                        <select
+                            id="bootcamp"
+                            name="bootcamp"
+                            className="text-center border-0 px-3 py-3 placeholder-blueGray-300 text-orange-500 bg-white rounded text-xl font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                            value={formData.bootcamp}
+                            onChange={handleInputChange}
+                          >
+                            <option value="" disabled>
+                              Selecciona un bootcamp
+                            </option>
+                            <option value="No definido">No definido</option>
+                            <option value="Digital Academy">Digital Academy</option>
+                            <option value="FemCoders Norte">FemCoders Norte</option>
+                            <option value="Rural Camp">Rural Camp</option>
+                            <option value="Bootcamp IA Madrid">Bootcamp IA Madrid</option>
+                        </select>
                       </div>
                       <div className="relative w-5/12 px-4">
-                        <input
-                          type="text"
-                          id="status"
-                          className="border-2 border-orange-500 text-center px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-m font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          defaultValue={formData.status}
-                          readOnly
-                        />
+                        <select
+                            id="status"
+                            name="status"
+                            className="border-2 border-orange-500 text-center px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-m font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                            value={formData.status}
+                            onChange={handleInputChange}
+                          >
+                            <option value="" disabled>
+                              Selecciona un estado
+                            </option>
+                            <option value="Aspirante">Aspirante</option>
+                            <option value="Convocada/o">Convocada/o</option>
+                            <option value="Descartada/o">Descartada/o</option>
+                            <option value="Coder">Coder</option>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -162,14 +175,22 @@ useEffect(() => {
                         <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="genero">
                           Género
                         </label>
-                        <input
-                          type="text"
-                          id="gender"
-                          name="gender"
-                          value={formData.gender}
-                          onChange={handleInputChange}
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        />
+                        <select
+                            id="gender"
+                            name="gender"
+                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                            value={formData.gender}
+                            onChange={handleInputChange}
+                          >
+                            <option value="" disabled>
+                              Selecciona un género
+                            </option>
+                            <option value="Mujer">Mujer</option>
+                            <option value="Hombre">Hombre</option>
+                            <option value="No binario">No binario</option>
+                            <option value="Fluido">Fluido</option>
+                            <option value="Otros">Otros</option>
+                        </select>
                       </div>
                     </div>
                     <div className="w-full lg:w-6/12 px-4">
