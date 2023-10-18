@@ -9,9 +9,23 @@ import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
-import BootcampForm from '../pages/Bootcamp/BootcampForm'
-import Login from "../pages/Login"
-import Signup from '../pages/Signup'
+import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
+import Requirements from "../pages/ConfigurationPages/Requirements";
+import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
+import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
+import StatusRequirement from "../pages/ConfigurationPages/StatusRequirement";
+import Login from "../pages/Login";
+import Signup from '../pages/Signup';
+import CodersIndex from "../pages/CodersFrontend/CodersIndex";
+import Evaluation from "../pages/Evaluation";
+import PublicAddPerson from "../pages/Person/PublicAddPerson";
+import AdminAddPerson from "../pages/Person/AdminAddPerson";
+import ShowPerson from "../pages/Person/ShowPerson";
+import AllPeople from "../pages/Person/AllPeople";
+import IndexPerson from "../pages/Person/IndexPerson";
+import Statistics from "../pages/Statistics/Statistics";
+import CodersAdd from "../pages/CodersFrontend/CodersAdd";
+
 
 const Router = createBrowserRouter([
   {
