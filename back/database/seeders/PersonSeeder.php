@@ -83,7 +83,110 @@ class PersonSeeder extends Seeder
         'id_status' => 4, 
         'id_bootcamp' => 3, 
     ]);
+
+    DB::table('people')->insert([
+        'name' => 'Angélica',
+        'surname' =>'Castro',
+        'email' => 'angélicacastro@ejemplo.com',
+        'image' => 'https://cdn.pixabay.com/photo/2012/06/19/10/32/owl-50267_1280.jpg',
+        'phone' => '555 555 555',
+        'address' => 'Plaza del Castaño, 234',
+        'city' => 'Pontevedra', 
+        'region' => 'Galicia', 
+        'dataprotection' => 'no',
+        'birthdate' => '1980-05-15', 
+        'gender' => 'mujer',
+        'dni' => '34912345J',
+        'id_status' => 4, 
+        'id_bootcamp' => 5, 
+    ]);
+
+    DB::table('people')->insert([
+        'name' => 'Manuel',
+        'surname' =>'Menéndez',
+        'email' => 'manuelmenendez@ejemplo.com',
+        'image' => 'https://cdn.pixabay.com/photo/2016/01/02/16/53/lion-1118467_1280.jpg',
+        'phone' => '666 666 666',
+        'address' => 'Plaza del Abedul, 567',
+        'city' => 'Granollers', 
+        'region' => 'Cataluña', 
+        'dataprotection' => 'sí',
+        'birthdate' => '1987-09-05', 
+        'gender' => 'hombre',
+        'dni' => '98912345L',
+        'id_status' => 4, 
+        'id_bootcamp' => 4, 
+    ]);
+
+    DB::table('people')->insert([
+        'name' => 'Azucena',
+        'surname' =>'Flores',
+        'email' => 'azucenaflores@ejemplo.com',
+        'image' => 'https://cdn.pixabay.com/photo/2018/01/06/09/25/hijab-3064633_1280.jpg',
+        'phone' => '777 777 777',
+        'address' => 'Plaza del Roble, 33',
+        'city' => 'Bilbao', 
+        'region' => 'País Vasco', 
+        'dataprotection' => 'no',
+        'birthdate' => '1976-11-07', 
+        'gender' => 'mujer',
+        'dni' => '76512345P',
+        'id_status' => 4, 
+        'id_bootcamp' => 3, 
+    ]);
+
+    DB::table('people')->insert([
+        'name' => 'Pedro',
+        'surname' =>'Picazo',
+        'email' => 'pedropicazo@ejemplo.com',
+        'image' => 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg',
+        'phone' => '777 777 777',
+        'address' => 'Calle Soria, 5',
+        'city' => 'Langreo', 
+        'region' => 'Asturias', 
+        'dataprotection' => 'sí',
+        'birthdate' => '1991-02-23', 
+        'gender' => 'hombre',
+        'dni' => '12312345L',
+        'id_status' => 4, 
+        'id_bootcamp' => 2, 
+    ]);
+
+    DB::table('people')->insert([
+        'name' => 'Lucía',
+        'surname' =>'Jiménez',
+        'email' => 'luciajimenez@ejemplo.com',
+        'image' => 'https://cdn.pixabay.com/photo/2016/12/19/21/36/woman-1919143_1280.jpg',
+        'phone' => '888 888 888 888',
+        'address' => 'Calle Solsticio, 19',
+        'city' => 'Zaragoza', 
+        'region' => 'Aragón', 
+        'dataprotection' => 'no',
+        'birthdate' => '1990-03-13', 
+        'gender' => 'fluido',
+        'dni' => '56412345K',
+        'id_status' => 4, 
+        'id_bootcamp' => 3, 
+    ]);
+
+    DB::table('people')->insert([
+        'name' => 'Roberto',
+        'surname' =>'García',
+        'email' => 'robertogarcia@ejemplo.com',
+        'image' => 'https://cdn.pixabay.com/photo/2016/11/19/14/28/bed-1839564_1280.jpg',
+        'phone' => '999 999 999',
+        'address' => 'Calle Estrella, 12',
+        'city' => 'Madrid', 
+        'region' => 'Comunidad de Madrid', 
+        'dataprotection' => 'sí',
+        'birthdate' => '1992-12-07', 
+        'gender' => 'no binario',
+        'dni' => '90872345M',
+        'id_status' => 4, 
+        'id_bootcamp' => 4, 
+    ]);
+}
 }
 
-}
+
 
