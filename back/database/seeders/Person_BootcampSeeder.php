@@ -13,7 +13,7 @@ class Person_BootcampSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('person__bootcamps')->insert([
+        DB::table('person__bootcamp')->insert([
             'id_bootcamp' => 1,
             'id_person' => 1,
      ]);

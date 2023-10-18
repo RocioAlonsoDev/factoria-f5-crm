@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $faker = FakerFactory::create(); // Crea una instancia de Faker
+        //$faker = FakerFactory::create(); // Crea una instancia de Faker
 
         // Crea los estados primero
-        Status::factory()->count(4)->create();
+        //Status::factory()->count(4)->create();
 
         // Crea las bootcamps
-        Bootcamp::factory()->count(5)->create();
+        //Bootcamp::factory()->count(5)->create();
 
         // // Obtiene los IDs de los estados y las bootcamps
         // $statusIds = Status::pluck('id')->toArray();
