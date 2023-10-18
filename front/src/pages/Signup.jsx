@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext'
 import { useState } from "react";
-//import APIservice from '../services/APIservice'
+import APIservice from '../services/APIservice'
 
 export default function Register() {
 
