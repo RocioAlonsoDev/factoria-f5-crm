@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ana',
             'surname' => 'Alvarez', 
             'email' => 'ana@gmail.com',
-            'password' => '123456', 
+            'password' => '123456Aa*', 
             'id_role' => 1,
      ]);
      $this->call(StatusSeeder::class);
