@@ -17,7 +17,7 @@ export default function CodersIndex() {
                     Teléfono: coder.phone,
                     Dirección: coder.address,
                     Ciudad: coder.city,
-                    Provincia: coder.region,                
+                    "Comunidad Autonoma": coder.region,                
                     "Protección de datos": coder.dataprotection,
                     "Fecha de nacimiento": coder.birthdate,
                     Género: coder.gender,
@@ -31,7 +31,7 @@ export default function CodersIndex() {
     }, []); // Agregué un arreglo vacío para que el efecto se ejecute solo una vez al montar el componente
 
     return (
-        <div className='md:block md:fixed md:top-16 md:left-64 md:right-0 w-auto p-2'>
+        <div className='md:block md:absolute md:top-16 md:left-64 md:right-0 w-auto p-2'>
             {data.length > 0 && (
                 <TableAtom 
                     tableTitle='Coders' 
