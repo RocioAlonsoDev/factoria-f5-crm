@@ -5,13 +5,14 @@ import TableCompetencesAtom from '../components/atoms/TableCompetencesAtom';
 export default function Evaluation() {
   // COMPETENSES TABLE
   const mockData = {
-    tittlesCompetence: ["Competencia 1", "Competencia 2", "Competencia 3"],
+    tittlesCompetence: ["Competencia 1", "Competencia 2", "Competencia 3", "competencia 4"],
     contents: [
       {
         competences: {
           "Competencia 1": ['Contenido 1.1', 'Contenido 1.2'],
           "Competencia 2": ['Contenido 2', 'contenido 2.2'],
-          "Competencia 3": ['Contenido 3.1', 'Contenido 3.2', 'Contenido 3.3', 'contenido cuatro él o ella han aprendido a buscar en chatGPT']
+          "Competencia 3": ['Contenido 3.1', 'Contenido 3.2', 'Contenido 3.3', 'contenido cuatro él o ella han aprendido a buscar en chatGPT'],
+          "competencia 4": ['contenido 4']
         }
       },
       // ... (otros registros) 
