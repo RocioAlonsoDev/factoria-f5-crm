@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
-
 import TableContentAtom from '../components/atoms/TableContentAtom';
 import TableCompetencesAtom from '../components/atoms/TableCompetencesAtom';
 
-
-
 export default function Evaluation() {
-
-
-  //COMPETENSES TABLE
+  // COMPETENSES TABLE
   const mockData = {
     tittlesCompetence: ["Competencia 1", "Competencia 2", "Competencia 3"],
     contents: [
       {
-       
         competences: {
           "Competencia 1": ['Contenido 1.1', 'Contenido 1.2'],
           "Competencia 2": ['Contenido 2', 'contenido 2.2'],
@@ -23,32 +17,28 @@ export default function Evaluation() {
       // ... (otros registros) 
     ]
   };
-  
 
-
-  //CONTENTES TABLE
+  // HEADERS FOR CONTENT TABLE
   const heads = ["JAVA", "PHP", "LARAVEL", "BBDD", "PHYTON", "JAVASCRIPT", "Java", "pHYTON"];
 
-  // Define el estado para el body, inicializado con los datos iniciales
-  const [body, setBody] = useState([
-    {
-    }
-  ]);
+  // Define el estado para el body, inicializado con un arreglo vacío
+  const [body, setBody] = useState([]);
 
-  //Función para agregar nuevos datos al body
-    const addNewData = () => {
-      const newData = {
-      };
-      // Agrega los nuevos datos al estado
-      setBody([...body, newData]);
-    };
+  // Estado para controlar si los selectores deben mostrarse
+  const [showSelects, setShowSelects] = useState(false);
 
-const saveData = () => {
-  const saveData ={
+  // Función para agregar una nueva fila al body
+  const addNewData = () => {
+    const newData = {};
+    // Agrega la nueva fila al estado
+    setBody([...body, newData]);
+    // Activa los selectores al agregar una nueva fila
+    setShowSelects(true);
   };
-} 
 
-
+  const saveData = () => {
+    // Aquí puedes guardar los datos según sea necesario
+  };
 
   return (
     <div className='md:block md:fixed md:top-16 md:left-64 md:right-0 w-auto p-2'>
@@ -57,10 +47,9 @@ const saveData = () => {
           captionTittles="Evolución de competencias()"
           tittlesCompetence={mockData.tittlesCompetence}
           contents={mockData.contents}
-
         ></TableCompetencesAtom>
       </div>
-      <div >
+      <div>
         <TableContentAtom
           date="FECHA"
           captionTittles="Stacks Femcoders Norte"
@@ -68,22 +57,23 @@ const saveData = () => {
           dateWrite="2023-09-23"
           tableData={body}
           dateEvaluation="2023-03-12"
+          showSelects={showSelects} // Pasa el estado como prop
         ></TableContentAtom>
       </div>
       <div>
         <button
           className="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          onClick={addNewData}>
-          Agregar nueva evaluación
+          onClick={addNewData}
+        >
+          Agregar nuevos niveles
         </button>
         <button
           className="bg-orange-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          onClick={saveData}>
+          onClick={saveData}
+        >
           Guardar cambios
         </button>
       </div>
     </div>
   );
-
 }
-

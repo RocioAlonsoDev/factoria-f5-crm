@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 
 function TableCompetencesAtom(props) {
     const { captionTittles, tittlesCompetence, contents } = props;
@@ -6,6 +7,11 @@ function TableCompetencesAtom(props) {
     if (!tittlesCompetence || tittlesCompetence.length === 0) {
         return <div>No se proporcionaron datos de las competencias.</div>;
     }
+    const [showSelectors, setShowSelectors] = useState(false);
+
+  const handleAddSelector = () => {
+    setShowSelectors(true);
+  };
 
     return (
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -19,16 +25,17 @@ function TableCompetencesAtom(props) {
                             <tr>
                                 <th rowSpan={3} className="border-r px-6 py-4 dark:border-neutral-200">Fecha</th>
                                 <th className="border-r px-6 py-4 dark:border-neutral-200">Tipo</th>
-                                {tittlesCompetence.map((tittle, index) => (
+                                {tittlesCompetence.map((tittle) => (
                                     <th
                                         scope="col"
                                         className="border-r px-6 py-4 dark:border-neutral-200"
-                                        key={index}
-                                        colSpan={ contents[0].competences[tittle].length} 
+                                        key={tittle} // Usar el nombre de la competencia como clave
+                                        colSpan={contents[0].competences[tittle].length} 
                                     >
                                         {tittle}
                                     </th>
                                 ))}
+
                             </tr>
                         </thead>
                         <tbody className="border-b font-medium dark:border-neutral-200">
@@ -75,7 +82,8 @@ function TableCompetencesAtom(props) {
                     </table>
                 </div>
             </div>
-        </div>
+      </div>
+       
     );
 }
 
