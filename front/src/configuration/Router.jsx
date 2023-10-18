@@ -26,6 +26,7 @@ import IndexPerson from "../pages/Person/IndexPerson";
 import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
 import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
 import Statistics from "../pages/Statistics/Statistics";
+import CodersAdd from "../pages/CodersFrontend/CodersAdd";
 
 
 // const Router = createBrowserRouter([
@@ -217,6 +218,10 @@ const Router = createBrowserRouter([
       {
         path: '/tracking/coders',
         element: <CodersIndex />
+      },
+      {
+        path: '/tracking/coders/add',
+        element: <CodersAdd />
       },
       {
         path:'/tracking/evaluation/id',
