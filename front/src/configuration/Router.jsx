@@ -24,6 +24,7 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
+import Statistics from "../pages/Statistics/Statistics";
 
 
 // const Router = createBrowserRouter([
@@ -180,7 +181,10 @@ const Router = createBrowserRouter([
     path: '/people',
     element: <AllPeople />
   },
-  
+  {
+    path: '/stats',
+    element: <Statistics />
+  },
     
 
   {
