@@ -9,6 +9,14 @@ use App\Models\Bootcamp;
 use App\Models\Person_Bootcamp;
 use Database\Factories\PersonFactory;
 use Faker\Factory as FakerFactory;
+use Illuminate\Support\Facades\DB;
+use Database\Seeders\BootcampSeeder;
+use Database\Seeders\StatusSeeder;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\PersonSeeder;
+use Database\Seeders\Person_BootcampSeeder;
+use Database\Seeders\Bootcamp_UserSeeder;
+use Database\Seeders\Bootcamp_RequirementSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,20 +30,35 @@ class DatabaseSeeder extends Seeder
         // Crea las bootcamps
         Bootcamp::factory()->count(5)->create();
 
-        // Obtiene los IDs de los estados y las bootcamps
-        $statusIds = Status::pluck('id')->toArray();
-        $bootcampIds = Bootcamp::pluck('id')->toArray();
+        // // Obtiene los IDs de los estados y las bootcamps
+        // $statusIds = Status::pluck('id')->toArray();
+        // $bootcampIds = Bootcamp::pluck('id')->toArray();
 
-        // Crea las personas
-        Person::factory()
-            ->count(10)
-            ->create([
-                'id_status' => function () use ($faker, $statusIds) {
-                    return $faker->randomElement($statusIds);
-                },
-                'id_bootcamp' => function () use ($faker, $bootcampIds) {
-                    return $faker->randomElement($bootcampIds);
-                },
-            ]);
+        // // Crea las personas
+        // Person::factory()
+        //     ->count(10)
+        //     ->create([
+        //         'id_status' => function () use ($faker, $statusIds) {
+        //             return $faker->randomElement($statusIds);
+        //         },
+        //         'id_bootcamp' => function () use ($faker, $bootcampIds) {
+        //             return $faker->randomElement($bootcampIds);
+        //         },
+        //     ]);
+
+        DB::table('users')->insert([
+            'name' => 'Ana',
+            'surname' => 'Alvarez', 
+            'email' => 'ana@gmail.com',
+            'password' => '123456', 
+            'id_role' => 1,
+     ]);
+     $this->call(StatusSeeder::class);
+     $this->call(RoleSeeder::class);
+     $this->call(BootcampSeeder::class);
+     $this->call(PersonSeeder::class);
+     $this->call(Person_BootcampSeeder::class);
+     $this->call(Bootcamp_UserSeeder::class);
+     $this->call(Bootcamp_RequirementSeeder::class);
     }
 }

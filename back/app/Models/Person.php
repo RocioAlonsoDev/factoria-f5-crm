@@ -30,6 +30,13 @@ class Person extends Model
             
     ];
 
+    public function selectionDays()
+{
+    return $this->belongsToMany(SelectionDay::class, 'person_selection_day', 'id_person', 'id_selection_day')
+        ->withPivot(['school', 'comments', 'turn', 'decision'])
+        ->withTimestamps();
+}
+
     public function personBootcamp(): BelongsToMany
     {
         return $this->belongsToMany(Person_Bootcamp::class, 'person__bootcamp', 'person_id', 'id');
