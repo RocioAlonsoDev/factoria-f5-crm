@@ -1,17 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
 
 function TableCompetencesAtom(props) {
-    const { captionTittles, tittlesCompetence, contents } = props;
+    const { captionTittles, tittlesCompetence, contents, showSelects } = props;
 
     if (!tittlesCompetence || tittlesCompetence.length === 0) {
         return <div>No se proporcionaron datos de las competencias.</div>;
     }
-    const [showSelectors, setShowSelectors] = useState(false);
-
-  const handleAddSelector = () => {
-    setShowSelectors(true);
-  };
 
     return (
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -35,7 +29,6 @@ function TableCompetencesAtom(props) {
                                         {tittle}
                                     </th>
                                 ))}
-
                             </tr>
                         </thead>
                         <tbody className="border-b font-medium dark:border-neutral-200">
@@ -52,26 +45,28 @@ function TableCompetencesAtom(props) {
                                     )
                                 ];
 
-                                const selectCells = [
-                                    <td key="spacer1" className="border px-6 py-4 dark:border-neutral-200"></td>,
-                                    <td key="spacer2" className="border px-6 py-4 dark:border-neutral-200"></td>,
-                                    ...tittlesCompetence.flatMap((tittle) => 
-                                        content.competences[tittle].map((value, i) => (
-                                            <td key={`select-${rowIndex}-${i}`} className="border px-6 py-4 dark:border-neutral-200">
-                                                <select name={`level-${rowIndex}-${i}`} id={`level-${rowIndex}-${i}`}>
-                                                    <option value="">--Selecciona un nivel--</option>
-                                                    <option value="1">LEVEL 1</option>
-                                                    <option value="2">LEVEL 2</option>
-                                                    <option value="3">LEVEL 3</option>
-                                                    <option value="4">LEVEL 4</option>
-                                                    <option value="5">LEVEL 5</option>
-                                                    <option value="6">LEVEL 6</option>
-                                                    <option value="7">LEVEL 7</option>
-                                                </select>
-                                            </td>
-                                        ))
-                                    )
-                                ];
+                                const selectCells = showSelects ? (
+                                    [
+                                        <td key="spacer1" className="border px-6 py-4 dark:border-neutral-200"></td>,
+                                        <td key="spacer2" className="border px-6 py-4 dark:border-neutral-200"></td>,
+                                        ...tittlesCompetence.flatMap((tittle) => 
+                                            content.competences[tittle].map((value, i) => (
+                                                <td key={`select-${rowIndex}-${i}`} className="border px-6 py-4 dark:border-neutral-200">
+                                                    <select name={`level-${rowIndex}-${i}`} id={`level-${rowIndex}-${i}`}>
+                                                        <option value="">--Selecciona un nivel--</option>
+                                                        <option value="1">LEVEL 1</option>
+                                                        <option value="2">LEVEL 2</option>
+                                                        <option value="3">LEVEL 3</option>
+                                                        <option value="4">LEVEL 4</option>
+                                                        <option value="5">LEVEL 5</option>
+                                                        <option value="6">LEVEL 6</option>
+                                                        <option value="7">LEVEL 7</option>
+                                                    </select>
+                                                </td>
+                                            ))
+                                        )
+                                    ]
+                                ) : null;
 
                                 return [
                                     <tr key={`contentRow-${rowIndex}`}>{contentCells}</tr>,
@@ -82,8 +77,7 @@ function TableCompetencesAtom(props) {
                     </table>
                 </div>
             </div>
-      </div>
-       
+        </div>
     );
 }
 
