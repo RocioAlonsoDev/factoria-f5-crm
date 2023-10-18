@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ana',
             'surname' => 'Alvarez', 
             'email' => 'ana@gmail.com',
-            'password' => bcrypt('123456Aa*'), 
-            'id_role' => 2,
+            'password' => '123456Aa*', 
+            'id_role' => 1,
      ]);
         DB::table('users')->insert([
             'name' => 'Cristina',
