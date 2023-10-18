@@ -13,7 +13,7 @@ class PersonController extends Controller
     
     public function index():JsonResponse
     {
-        $persons = Person::all();
+        $persons = Person::with('status','bootcamp')->get();
         return response()->json(['data'=>$persons], 200);
     }
 
