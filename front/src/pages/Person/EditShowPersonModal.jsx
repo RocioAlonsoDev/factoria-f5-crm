@@ -21,7 +21,6 @@ useEffect(() => {
         const bootcampId = response.data.id_bootcamp;
         const statusId = response.data.id_status;
 
-        // Fetch bootcamp and status details
         const [bootcampResponse, statusResponse] = await Promise.all([
           BootcampDataService.get(bootcampId),
           StatusDataService.get(statusId),
@@ -30,7 +29,6 @@ useEffect(() => {
         const bootcampName = bootcampResponse.data.name;
         const statusName = statusResponse.data.name;
 
-        // Update the form data with the fetched values
         setFormData((prevData) => ({
           ...prevData,
           bootcamp: bootcampName,
@@ -55,12 +53,11 @@ useEffect(() => {
 
   const handleUpdatePerson = async () => {
     try {
-      // Send the updated data to the server and update the local state
       await PersonDataService.update(personId, formData);
       setIsEditModalOpen(false);
 
-      // Update the local person information
       updatePerson({ ...formData });
+      window.location.reload();
     } catch (error) {
       console.error('Error updating person:', error);
     }
