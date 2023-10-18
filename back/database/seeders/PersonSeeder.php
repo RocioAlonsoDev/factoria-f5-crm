@@ -15,24 +15,6 @@ class PersonSeeder extends Seeder
 {
     public function run(): void
     {
-    //     $faker = \Faker\Factory::create();
-
-    //     $bootcampIds = Bootcamp::pluck('id')->toArray(); 
-    //     $people = Person::factory()->count(10)->create();
-
-    //     $statuses = Status::pluck('id')->toArray(); 
-
-    //     $people->each(function ($person) use ($statuses, $faker, $bootcampIds) {
-    //         $person->update([
-    //             'id_status' => $faker->randomElement($statuses),
-    //             'id_bootcamp' => $faker->randomElement($bootcampIds),
-    //         ]);
-    //     });
-    // }
-// }
-
-        // Person::factory()->count(10)->create();
-
 
     DB::table('people')->insert([
         'name' => 'Maria',
