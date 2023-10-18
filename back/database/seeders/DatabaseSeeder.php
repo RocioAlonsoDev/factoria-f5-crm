@@ -56,9 +56,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ana',
             'surname' => 'Alvarez', 
             'email' => 'ana@gmail.com',
-            'image' => 'https://img.freepik.com/fotos-premium/lindo-gato-camisa-floral-gafas-sol-sentado-aislado-sobre-fondo-blanco_962751-481.jpg',
-            'password' => bcrypt('123456Aa*'), 
-            'id_role' => 2,
+            'password' => '123456Aa*', 
+            'id_role' => 1,
      ]);
         DB::table('users')->insert([
             'name' => 'Cristina',
