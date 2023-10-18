@@ -7,8 +7,8 @@ use App\Models\Status;
 use App\Models\Person;
 use App\Models\Bootcamp;
 use App\Models\Person_Bootcamp;
-use Database\Factories\PersonFactory;
-use Faker\Factory as FakerFactory;
+// use Database\Factories\PersonFactory;
+// use Faker\Factory as FakerFactory;
 use Illuminate\Support\Facades\DB;
 use Database\Seeders\BootcampSeeder;
 use Database\Seeders\StatusSeeder;
@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $faker = FakerFactory::create(); // Crea una instancia de Faker
+        //$faker = FakerFactory::create(); // Crea una instancia de Faker
 
         // Crea los estados primero
-        Status::factory()->count(4)->create();
+        //Status::factory()->count(4)->create();
 
         // Crea las bootcamps
-        Bootcamp::factory()->count(5)->create();
+        //Bootcamp::factory()->count(5)->create();
 
         // // Obtiene los IDs de los estados y las bootcamps
         // $statusIds = Status::pluck('id')->toArray();
@@ -47,12 +47,42 @@ class DatabaseSeeder extends Seeder
         //     ]);
 
         DB::table('users')->insert([
+            'name' => 'Admin',
+            'surname' => 'Admin', 
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123456Aa*'), 
+            'id_role' => 1,
+     ]);
+        DB::table('users')->insert([
             'name' => 'Ana',
             'surname' => 'Alvarez', 
             'email' => 'ana@gmail.com',
-            'password' => '123456', 
-            'id_role' => 1,
+            'password' => bcrypt('123456Aa*'), 
+            'id_role' => 2,
      ]);
+        DB::table('users')->insert([
+            'name' => 'Cristina',
+            'surname' => 'Fernández', 
+            'email' => 'cristina@gmail.com',
+            'password' => bcrypt('123456Aa*'), 
+            'id_role' => 2,
+     ]);
+        DB::table('users')->insert([
+            'name' => 'Manuela',
+            'surname' => 'Grajales', 
+            'email' => 'manuela@gmail.com',
+            'password' => bcrypt('123456Aa*'), 
+            'id_role' => 3,
+     ]);
+        DB::table('users')->insert([
+            'name' => 'Maria',
+            'surname' => 'Villaverde', 
+            'email' => 'maria@gmail.com',
+            'password' => bcrypt('123456Aa*'), 
+            'id_role' => 3,
+     ]);
+
+
      $this->call(StatusSeeder::class);
      $this->call(RoleSeeder::class);
      $this->call(BootcampSeeder::class);
