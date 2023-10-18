@@ -94,3 +94,5 @@ CardStatsAtom.propTypes = {
   statIconColor: PropTypes.string,
   statIconImage: PropTypes.any
 }
+  statIconImage: PropTypes.any
+}
