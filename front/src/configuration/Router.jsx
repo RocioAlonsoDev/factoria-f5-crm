@@ -270,6 +270,8 @@ const Router = createBrowserRouter([
       {
       path: '/recruitment/person/:id',
       element: <ShowPerson />
+      path: '/recruitment/person/:id',
+      element: <ShowPerson />
       },
       //
       {
