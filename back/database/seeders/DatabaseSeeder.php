@@ -32,32 +32,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ana',
             'surname' => 'Alvarez', 
             'email' => 'ana@gmail.com',
-            'password' => bcrypt('123456Aa*'), 
-            'id_role' => 2,
+            'password' => '123456Aa*', 
+            'id_role' => 1,
      ]);
-        DB::table('users')->insert([
-            'name' => 'Cristina',
-            'surname' => 'Fernández', 
-            'email' => 'cristina@gmail.com',
-            'password' => bcrypt('123456Aa*'), 
-            'id_role' => 2,
-     ]);
-        DB::table('users')->insert([
-            'name' => 'Manuela',
-            'surname' => 'Grajales', 
-            'email' => 'manuela@gmail.com',
-            'password' => bcrypt('123456Aa*'), 
-            'id_role' => 3,
-     ]);
-        DB::table('users')->insert([
-            'name' => 'Maria',
-            'surname' => 'Villaverde', 
-            'email' => 'maria@gmail.com',
-            'password' => bcrypt('123456Aa*'), 
-            'id_role' => 3,
-     ]);
-
-
      $this->call(StatusSeeder::class);
      $this->call(RoleSeeder::class);
      $this->call(BootcampSeeder::class);
