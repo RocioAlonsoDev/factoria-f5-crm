@@ -17,9 +17,11 @@ export default function DefaultLayoutConfiguration({title}) {
     
   ];
   
-  if(!userToken){
-    return <Navigate to ='/login' />
-  }
+
+  // if(!userToken){
+  //   return <Navigate to ='/login' />
+  // }
+
 
   return (
     <>
@@ -29,4 +31,6 @@ export default function DefaultLayoutConfiguration({title}) {
         <Outlet className='bg-white md:block md:fixed md:top-20 md:left-64 md:right-0' />
     </>
   )
+
 }
+

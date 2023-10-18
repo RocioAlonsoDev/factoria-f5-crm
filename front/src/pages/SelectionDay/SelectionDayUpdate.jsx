@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import SelectionDayDataService from '../../services/recruitmentService/selectionDay.service';
+import DefaultLayout from '../../layouts/DefaultLayout';
 
 export default function SelectionDayUpdate() {
   const { id } = useParams();

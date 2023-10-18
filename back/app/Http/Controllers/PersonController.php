@@ -39,7 +39,6 @@ class PersonController extends Controller
     public function update(PersonRequest $request, $id):JsonResponse
     {
         $person = Person::find($id);
-       
         $person->name=$request->name;
         $person->surname=$request->surname;
         $person->email=$request->email;

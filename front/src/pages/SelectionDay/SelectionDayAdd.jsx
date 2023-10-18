@@ -1,4 +1,3 @@
-
 import FormAtom from '../../components/atoms/FormAtom';
 import SelectionDayDataService from './../../services/recruitmentService/selectionDay.service';
 import { useNavigate } from 'react-router-dom';
