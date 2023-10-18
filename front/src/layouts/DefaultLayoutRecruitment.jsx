@@ -17,9 +17,9 @@ export default function DefaultLayoutRecruitment({title}) {
     { label: 'Comentarios', url: '/recruitment/comments' },
   ];
   
-  if(!userToken){
-    return <Navigate to ='/login' />
-  }
+  // if(!userToken){
+  //   return <Navigate to ='/login' />
+  // }
 
   return (
     <>
