@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('gender', ['mujer', 'hombre', 'no binario', 'fluido', 'otros']);
             $table->string('dni');
             $table->bigInteger('id_status');
-            $table->bigInteger('id_bootcamp');
+            $table->bigInteger('id_bootcamp')->default(1);
             $table->timestamps();
         });
     }
