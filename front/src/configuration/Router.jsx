@@ -32,6 +32,142 @@ import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
 import PeoplebyBootcamp from "../pages/PersonBootcamp/PeoplebyBootcamp";
 
 
+// const Router = createBrowserRouter([
+//   {
+//     path: '/home',
+//     element: <Navigate to='/' />
+//   },
+//   {
+//     path: '/dashboard',
+//     element: <Navigate to='/' />
+//   },
+
+//   {
+//     path: '/person/:id',
+//     element: <ShowPerson />
+//   },
+//   {
+//     path: '/people',
+//     element: <AllPeople />
+//   },
+  
+    
+
+//   {
+//     path: '/',
+//     element: <DefaultLayout title='Home'/>,
+//     children:[
+//       {
+//         path: '/',
+//         element: <Dashboard />
+//       }
+//     ]
+//   },
+//   {
+//     path: '/tracking',
+//     element: <DefaultLayout title='Seguimiento'/>,
+//     children:[
+//       {
+//         path: '/tracking/bootcamp',
+//         element: <BootcampIndex />
+//       },
+//       {
+//         path: '/tracking/bootcamp/add',
+//         element: <BootcampAdd />
+//       },
+//       {
+//         path: '/tracking/coders',
+//         element: <CodersIndex />
+//       },
+//       {
+//         path:'/tracking/evaluation/id',
+//       element:<Evaluation/>
+//       }
+
+//     ]
+//   },
+//   {
+//     path: '/login',
+//     element: <Login/>
+//   },
+//   {
+//     path: '/signup',
+//     element: <Signup/>
+//   },
+//   {
+//     path:'/inscribe',
+//     element: <PublicAddPerson />
+//   },
+
+//   {
+//     path: '/recruitment',
+//     element: <DefaultLayoutRecruitment title='Captación'/>,
+//     children:[
+      
+//       {
+//         path:'/recruitment/person/add',
+//         element: <AdminAddPerson />
+//       },
+//       {
+//         path:'/recruitment/person/index',
+//         element: <IndexPerson />
+//       },
+//        //Comments
+  
+//       {
+//         path: '/recruitment/comments',
+//         element: <CommentsIndexByPerson />
+//       },
+//       //
+//       {
+//         path: '/recruitment/selectiondayshow/:id',
+//         element: <SelectionDayShow />
+//       },
+//       {
+//         path: '/recruitment/selectiondayupdate/:id',
+//         element: <SelectionDayUpdate />
+//       },
+//       {
+//         path: '/recruitment/selectionday/add',
+//         element: <SelectionDayAdd />
+//       },
+//       {
+//         path: '/recruitment/selectionday',
+//         element: <SelectionDayIndex />
+//       },
+    
+//     ]
+//   },
+
+//   //Configuration
+//   {
+//     path: '/configuration',
+//     element: <DefaultLayoutConfiguration title='Configuración'/>,
+//     children:[
+//       {
+//         path: '/configuration/requirements',
+//         element: <Requirements />
+//       },
+//       {
+//         path: '/configuration/requirements/edit/:id',
+//         element: <RequirementEdit />
+//       },
+//       {
+//         path: '/configuration/person/status',
+//         element: <PersonStatus />
+//       },
+//       {
+//         path: '/configuration/status/requirement',
+//         element: <StatusRequirement />
+//       },
+//     ]
+//   },
+
+// ])
+
+// export default Router;
+
+
 const Router = createBrowserRouter([
   {
     path: '/home',
