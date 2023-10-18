@@ -13,12 +13,12 @@ class BootcampSeeder extends Seeder
         $bootcamps = [
             [
                 'id' => 1,
-                'name' => 'Digital Academy',
+                'name' => 'No definido',
                 'startDate' => '2023-11-21',
                 'endDate' => '2024-03-01',
                 'description' => 'Sit vitae tempore odio.',
-                'school' => 'Andalucía',
-                'promo' => 'DA2023',
+                'school' => 'No definido',
+                'promo' => 'No definido',
             ],
             [
                 'id' => 2,
