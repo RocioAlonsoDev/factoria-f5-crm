@@ -24,11 +24,11 @@ class StatusSeeder extends Seeder
     ]);
 
         DB::table('statuses')->insert([
-        'name' => 'Coder',
+        'name' => 'Descartada/o',
     ]);
 
-        DB::table('statuses')->insert([
-        'name' => 'Descartada/o',
+    DB::table('statuses')->insert([
+        'name' => 'Coder',
     ]);
 
     }
