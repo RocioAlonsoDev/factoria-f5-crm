@@ -18,9 +18,9 @@ export default function DefaultLayoutConfiguration({title}) {
   ];
   
 
-  // if(!userToken){
-  //   return <Navigate to ='/login' />
-  // }
+  if(!userToken){
+    return <Navigate to ='/login' />
+  }
 
 
   return (
