@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Bootcamp extends Model
 {
@@ -17,7 +20,16 @@ class Bootcamp extends Model
         'description', 
         'school', 
         'promo',
-
     ];
 
+    public function personBootcamp(): BelongsToMany
+    {
+        return $this->belongsToMany(Person_Bootcamp::class, 'person__bootcamp', 'bootcamp_id', 'id');
+    }
+
+    public function person(): BelongsTo
+    {
+        return $this->belongsTo(Bootcamp::class);
+                   
+    }
 }

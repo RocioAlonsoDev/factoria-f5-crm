@@ -10,17 +10,17 @@ import { Navigate } from 'react-router-dom';
 export default function DefaultLayoutRecruitment({title}) {
   const { userToken } = AuthContext();
   const menuItems = [
-    { label: 'Inicio', url: '/' },
-    { label: 'Jornada de Selección', url: '/recruitment/selectionday' },
+    
+    { label: 'Jornadas de Selección', url: '/recruitment/selectionday' },
     { label: 'Total Aspirantes', url: '/recruitment/person/index' },
     { label: 'Aspirantes por Bootcamp', url: '/aspirantes_bootcamp' },
-    { label: 'Comentarios', url: '/recruitment/comments' },
+    { label: 'Estadísticas', url: '/estadisticas' },
   ];
   
 
-  // if(!userToken){
-  //   return <Navigate to ='/login' />
-  // }
+  if(!userToken){
+    return <Navigate to ='/login' />
+  }
 
 
   return (
