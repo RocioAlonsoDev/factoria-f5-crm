@@ -1,3 +1,4 @@
+
 import React from "react";
 import { createPopper } from "@popperjs/core";
 import userImg from "../../assets/img/team-1-800x800.jpg"
@@ -84,5 +85,6 @@ const UserDropdownAtom = () => {
     </>
   );
 };
+
 
 export default UserDropdownAtom;

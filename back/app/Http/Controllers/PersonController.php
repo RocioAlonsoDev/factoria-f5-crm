@@ -12,7 +12,7 @@ class PersonController extends Controller
     
     public function index():JsonResponse
     {
-        $persons = Person::all();
+        $persons = Person::with('status','bootcamp')->get();
         return response()->json(['data'=>$persons], 200);
     }
 
@@ -38,7 +38,6 @@ class PersonController extends Controller
     public function update(PersonRequest $request, $id):JsonResponse
     {
         $person = Person::find($id);
-        $person->person=$request->person;
         $person->name=$request->name;
         $person->surname=$request->surname;
         $person->email=$request->email;
@@ -68,4 +67,14 @@ class PersonController extends Controller
             'success'=>true
         ], 200);
     }
+
+    // RECRUITMENT METHODS
+
+    public function getPeopleInSelectionDay($selectionDayId)
+{
+   
+    $people = Person::where('selection_day_id', $selectionDayId)->get();
+
+    return response()->json(['data' => $people], 200);
+}
 }

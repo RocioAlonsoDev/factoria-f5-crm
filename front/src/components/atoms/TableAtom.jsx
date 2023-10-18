@@ -15,7 +15,9 @@ export default function TableAtom(props) {
                     cellValue &&
                     cellValue.toString().toLowerCase().includes(searchTerm.toLowerCase())
                 );
-            })
+            }),
+            console.log("Data:", data),
+            // console.log("Columns:", columns)
         );
 
         setFilteredData(newFilteredData);
@@ -83,12 +85,12 @@ export default function TableAtom(props) {
                             >
                                 Limpiar
                             </button>
-                            <button
+                            {/* <button
                                 className="bg-orange-500 text-white active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button"
                             >
                                 ver todas
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>
@@ -115,7 +117,7 @@ export default function TableAtom(props) {
                                 {sortedData.map((row, rowIndex) => (
                                     <tr key={rowIndex}>
                                         {columns.map((column, columnIndex) => (
-                                            <td key={columnIndex}>{row[column]}</td>
+                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" key={columnIndex}>{row[column]}</td>
                                         ))}
                                     </tr>
                                 ))}

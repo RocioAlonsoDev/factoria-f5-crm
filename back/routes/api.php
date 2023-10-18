@@ -32,8 +32,9 @@ Route::middleware('auth:sanctum')->group(function(){
 // });
 
 
+Route::get('user/{user_id}', [AuthController::class, 'getUserDetails']);
 
-Route::resource('/person', PersonController::class);
+
 Route::resource('/status', StatusController::class);
 Route::resource('/bootcamp', BootcampController::class);
 Route::resource('/role', RoleController::class);

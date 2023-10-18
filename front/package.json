@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@headlessui/react": "^1.7.17",
     "@material-tailwind/react": "^2.1.2",
     "@popperjs/core": "^2.11.8",

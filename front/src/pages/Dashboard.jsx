@@ -1,9 +1,13 @@
+import Sidebar from "../components/atoms/SideBarAtom";
+
 
 export default function Dashboard() {
 
     return (
-
-      <div>Dashboard</div>
+      <><div><Sidebar></Sidebar></div>
+      
+      </>
+      
 
     )
 }
