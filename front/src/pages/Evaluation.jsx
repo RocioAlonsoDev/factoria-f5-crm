@@ -22,15 +22,15 @@ export default function Evaluation() {
   // HEADERS FOR CONTENT TABLE
   const heads = ["JAVA", "PHP", "LARAVEL", "BBDD", "PHYTON", "JAVASCRIPT", "Java", "pHYTON"];
 
-  // Define el estado para el body de ambas tablas, inicializado con un arreglo vacío
   const [bodyCompetences, setBodyCompetences] = useState([]);
   const [bodyContent, setBodyContent] = useState([]);
 
   // Estado para controlar si los selectores deben mostrarse
   const [showSelects, setShowSelects] = useState(false);
 
-  // Función para agregar una nueva fila al body de ambas tablas
-  const addNewData = () => {
+// ...
+
+const addNewData = () => {
     const newCompetencesData = {};
     const newContentData = {};
     // Agrega la nueva fila al estado de ambas tablas
@@ -38,7 +38,7 @@ export default function Evaluation() {
     setBodyContent([...bodyContent, newContentData]);
     // Activa los selectores al agregar una nueva fila
     setShowSelects(true);
-  };
+};
 
   const saveData = () => {
     // Aquí puedes guardar los datos según sea necesario
@@ -51,8 +51,10 @@ export default function Evaluation() {
           captionTittles="Evolución de competencias()"
           tittlesCompetence={mockData.tittlesCompetence}
           contents={mockData.contents}
-          showSelects={false}
-        ></TableCompetencesAtom>
+          showSelects={showSelects}
+        >
+          
+        </TableCompetencesAtom>
       </div>
       <div>
         <TableContentAtom
