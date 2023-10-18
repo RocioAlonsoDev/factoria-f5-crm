@@ -9,7 +9,6 @@ import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
 import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
-import CommentsIndexByPerson from "../pages/Comments/CommentsIndexByPerson";
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
@@ -23,6 +22,7 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
+import Statistics from "../pages/Statistics/Statistics";
 
 
 const Router = createBrowserRouter([
@@ -43,7 +43,10 @@ const Router = createBrowserRouter([
     path: '/people',
     element: <AllPeople />
   },
-  
+  {
+    path: '/stats',
+    element: <Statistics />
+  },
     
 
   {
@@ -105,11 +108,9 @@ const Router = createBrowserRouter([
         path:'/recruitment/person/index',
         element: <IndexPerson />
       },
-       //Comments
-  
       {
-        path: '/recruitment/comments',
-        element: <CommentsIndexByPerson />
+      path: '/recruitment/person/:id',
+      element: <ShowPerson />
       },
       //
       {
