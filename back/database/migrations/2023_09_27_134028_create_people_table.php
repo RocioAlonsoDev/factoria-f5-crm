@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('people', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->string('surname');
             $table->string('email');
@@ -25,8 +25,10 @@ return new class extends Migration
             $table->date('birthdate');
             $table->enum('gender', ['mujer', 'hombre', 'no binario', 'fluido', 'otros']);
             $table->string('dni');
-            $table->bigInteger('id_status');
-            $table->bigInteger('id_bootcamp')->default(1);
+            $table->unsignedBigInteger('id_status');
+            $table->foreign('id_status')->references('id')->on('statuses');
+            $table->unsignedBigInteger('id_bootcamp')->default(1);
+            $table->foreign('id_bootcamp')->references('id')->on('bootcamps');
             $table->timestamps();
         });
     }
