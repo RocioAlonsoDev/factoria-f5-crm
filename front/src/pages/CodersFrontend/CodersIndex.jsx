@@ -22,8 +22,8 @@ export default function CodersIndex() {
                     "Fecha de nacimiento": coder.birthdate,
                     Género: coder.gender,
                     DNI: coder.dni,
-                    Status: coder.id_status,
-                    Bootcamp: coder.id_bootcamp
+                    Status: coder.status.name,
+                    Bootcamp: coder.bootcamp.name
                 }));
                 setData(transformedData); 
             })
