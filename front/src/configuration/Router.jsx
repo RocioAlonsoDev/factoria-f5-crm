@@ -14,7 +14,7 @@ import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
-import BootcampForm from '../pages/Bootcamp/BootcampForm'
+import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
@@ -145,8 +145,6 @@ const Router = createBrowserRouter([
         path:'/recruitment/personbybootcamp',
         element: <PersonbyBootcampTable />
       },
-       //Comments
-  
       {
       path: '/recruitment/person/:id',
       element: <ShowPerson />

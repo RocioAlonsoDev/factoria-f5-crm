@@ -9,6 +9,7 @@ export default function CardStatsAtom({
   statDescripiron,
   statIconColor,
   statIconImage,
+  statIconImage,
 }) {
   return (
     <>
