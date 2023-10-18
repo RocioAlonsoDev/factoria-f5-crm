@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NotificationDropdownAtom from "./NotificationDropdownAtom";
-import UserDropdownAtom from "./UserDropdownAtom";
 import logo from "../../assets/img/Logo FF5 VECTORIZADO.png";
+
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -29,9 +29,6 @@ export default function Sidebar() {
           <ul className="md:hidden items-center flex flex-wrap list-none">
             <li className="inline-block relative">
               <NotificationDropdownAtom />
-            </li>
-            <li className="inline-block relative">
-              <UserDropdownAtom />
             </li>
           </ul>
           {/* Collapse */}
@@ -111,7 +108,7 @@ export default function Sidebar() {
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  to="/admin/settings"
+                  to="/recruitment/person/index"
                 >
                   <i
                     className={
@@ -133,7 +130,7 @@ export default function Sidebar() {
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  to="/admin/tables"
+                  to="/tracking/bootcamp"
                 >
                   <i
                     className={
@@ -155,7 +152,7 @@ export default function Sidebar() {
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  to="/admin/tables"
+                  to="/configuration/requirements"
                 >
                   <i
                     className={

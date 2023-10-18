@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import TableContentAtom from '../components/atoms/TableContentAtom';
 import TableCompetencesAtom from '../components/atoms/TableCompetencesAtom';
+
 
 
 export default function Evaluation() {
@@ -82,4 +84,6 @@ const saveData = () => {
       </div>
     </div>
   );
+
 }
+

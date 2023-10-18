@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('person__bootcamps', function (Blueprint $table) {
-            $table->bigInteger('id_bootcamp');
-            $table->bigInteger('id_user');
+        Schema::create('person__bootcamp', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_bootcamp');
+            $table->foreign('id_bootcamp')->references('id')->on('bootcamps');
+            $table->unsignedBigInteger('id_person');
+            $table->foreign('id_person')->references('id')->on('people');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('person__bootcamps');
+        Schema::dropIfExists('person__bootcamp');
     }
 };

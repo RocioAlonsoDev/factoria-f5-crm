@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function TableAtom(props) {
-    const { tableTitle, data, columns } = props;
+    const { tableTitle, data, columns, addbutton, addlink } = props;
     const [searchTerm, setSearchTerm] = useState("");
     const [showAlert, setShowAlert] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
@@ -14,7 +15,9 @@ export default function TableAtom(props) {
                     cellValue &&
                     cellValue.toString().toLowerCase().includes(searchTerm.toLowerCase())
                 );
-            })
+            }),
+            console.log("Data:", data),
+            // console.log("Columns:", columns)
         );
 
         setFilteredData(newFilteredData);
@@ -47,11 +50,27 @@ export default function TableAtom(props) {
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                 <div className="rounded-t mb-0 px-4 py-3 border-0">
                     <div className="flex flex-wrap items-center">
-                        <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                            <h3 className="font-semibold text-blueGray-700 text-lg">
+                        <div className="relative px-2 flex-none">
+                            <h3 className="font-semibold text-blueGray-700 text-2xl ">
                                 {tableTitle}
                             </h3>
                         </div>
+                        
+                            {addbutton && 
+                            <div className="relative flex-none">
+                                <Link to={addlink}>
+                                    <button
+                                        className="bg-transparent mx-2 text-orange-500 outline-orange-500  hover:bg-orange-500 hover:text-white 
+                                        hover:outline-orange-500 my-2 active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none 
+                                        focus:outline-none ease-linear transition-all duration-150" 
+                                        type="button"
+                                    >
+                                        + CREAR NUEVO {addbutton}
+                                    </button>
+                                </Link>
+                                
+                            </div>}
+                        
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                             <input
                                 className="my-5"
@@ -66,12 +85,12 @@ export default function TableAtom(props) {
                             >
                                 Limpiar
                             </button>
-                            <button
+                            {/* <button
                                 className="bg-orange-500 text-white active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button"
                             >
                                 ver todas
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>
@@ -98,7 +117,7 @@ export default function TableAtom(props) {
                                 {sortedData.map((row, rowIndex) => (
                                     <tr key={rowIndex}>
                                         {columns.map((column, columnIndex) => (
-                                            <td key={columnIndex}>{row[column]}</td>
+                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" key={columnIndex}>{row[column]}</td>
                                         ))}
                                     </tr>
                                 ))}
