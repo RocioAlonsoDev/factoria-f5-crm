@@ -21,9 +21,7 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
-import Statistics from "../pages/Statistics/Statistics";
-//import CodersIndex from "../pages/CodersFrontend/CodersIndex";
-//import Evaluation from "../pages/Evaluation";
+import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 
 
 const Router = createBrowserRouter([
@@ -97,6 +95,11 @@ const Router = createBrowserRouter([
   {
     path:'/inscribe',
     element: <PublicAddPerson />
+  },
+
+  {
+    path:'/inscribe_femcoders',
+    element: <AddPersonFemcoders />
   },
 
   {
