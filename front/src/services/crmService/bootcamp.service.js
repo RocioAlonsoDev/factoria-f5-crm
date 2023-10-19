@@ -26,8 +26,7 @@ class BootcampDataService{
     findByPerson(id_person){
         return http.get(`api/bootcamp?id_person=${id_person}`);
     }
-    
-   
+
 }
 
 export default new BootcampDataService();
