@@ -1,9 +1,5 @@
 import { useState } from "react"
-<<<<<<< HEAD
-import { Link } from "react-router-dom"
-=======
 // import { Link } from "react-router-dom"
->>>>>>> a5a67e5 (bootcamp.service created and profileError added)
 import APIservice from '../services/APIservice'
 import { Navigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext'
