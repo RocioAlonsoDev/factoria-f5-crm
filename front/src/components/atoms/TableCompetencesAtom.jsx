@@ -31,9 +31,13 @@ function TableCompetencesAtom(props) {
                     scope="col"
                     className="border-r px-6 py-4 dark:border-neutral-200"
                     key={competence}
-                    colSpan={contents.flatMap((content) =>
-                      content.competences[competence] ? content.competences[competence].length : 0
-                    )}
+                    colSpan={
+                      contents.flatMap((content) =>
+                        content.competences[competence]
+                          ? content.competences[competence].length
+                          : 1 // Cambiamos 0 a 1 para mostrar la categoría incluso si no hay habilidades
+                      ).reduce((a, b) => a + b, 0) // Suma de longitudes
+                    }
                   >
                     {competence}
                   </th>

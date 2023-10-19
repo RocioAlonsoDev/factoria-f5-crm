@@ -1,23 +1,47 @@
-import React, { useState } from 'react';
-import TableContentAtom from '../components/atoms/TableContentAtom';
-import TableCompetencesAtom from '../components/atoms/TableCompetencesAtom';
+import { useState, useEffect } from 'react';
+import TableContentAtom from '../../components/atoms/TableContentAtom';
+import TableCompetencesAtom from '../../components/atoms/TableCompetencesAtom';
+import CategoryDataService from '../../services/trackingService/category.service';
 
 export default function Evaluation() {
+  const [categories, setCategories] = useState([]);
+  const [stack, setStack]= useState([]);
+  const [skill, setSkill] = useState ([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect (() => {
+    CategoryDataService.getAll()
+    .then(({data})=> {
+      console.log('Datos de la API:', data);
+      setCategories(data.data);
+      setIsLoading(false)
+    })
+    .catch((error) => {
+      console.error('Error al cargar los datos de la API:', error);
+      setIsLoading(false);
+    });
+  }, [])
+
+
+
+
+
+
   // COMPETENSES TABLE
-  const mockData = {
-    tittlesCompetence: ["Competencia 1", "Competencia 2", "Competencia 3", "competencia 4"],
-    contents: [
-      {
-        competences: {
-          "Competencia 1": ['Contenido 1.1', 'Contenido 1.2'],
-          "Competencia 2": ['Contenido 2', 'contenido 2.2'],
-          "Competencia 3": ['Contenido 3.1', 'Contenido 3.2', 'Contenido 3.3', 'contenido cuatro él o ella han aprendido a buscar en chatGPT'],
-          "competencia 4": ['contenido 4']
-        }
-      },
-      // ... (otros registros) 
-    ]
-  };
+  // const mockData = {
+  //   tittlesCompetence: ["Competencia 1", "Competencia 2", "Competencia 3", "competencia 4"],
+  //   contents: [
+  //     {
+  //       competences: {
+  //         "Competencia 1": ['Contenido 1.1', 'Contenido 1.2'],
+  //         "Competencia 2": ['Contenido 2', 'contenido 2.2'],
+  //         "Competencia 3": ['Contenido 3.1', 'Contenido 3.2', 'Contenido 3.3', 'contenido cuatro él o ella han aprendido a buscar en chatGPT'],
+  //         "competencia 4": ['contenido 4']
+  //       }
+  //     },
+  //     // ... (otros registros) 
+  //   ]
+  // };
 
   // HEADERS FOR CONTENT TABLE
   const heads = ["JAVA", "PHP", "LARAVEL", "BBDD", "PHYTON", "JAVASCRIPT", "Java", "pHYTON"];
@@ -47,15 +71,21 @@ const addNewData = () => {
   return (
     <div className='md:block md:absolute md:top-16 md:left-64 md:right-0 w-auto p-2'>
       <div>
+    {isLoading ? (
+      <p>Cargando...</p>
+    ) : (
+      <div>
         <TableCompetencesAtom
-          captionTittles="Evolución de competencias()"
-          tittlesCompetence={mockData.tittlesCompetence}
-          contents={mockData.contents}
-          showSelects={showSelects}
-        >
-          
-        </TableCompetencesAtom>
+  captionTittles="Evolución de competencias()"
+  tittlesCompetence={categories?.map((category) => category.name)}
+  contents={categories?.map((category) => Object.values(category.skills).map((skill) => skill.name))}
+
+  showSelects={showSelects}
+/>
       </div>
+    )}
+  </div>
+
       <div>
         <TableContentAtom
           date="FECHA"
