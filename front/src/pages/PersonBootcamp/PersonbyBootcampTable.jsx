@@ -14,6 +14,7 @@ export default function PersonbyBootcampTable() {
  
 
   useEffect(() => {
+    console.log('ID:', id);
     PersonDataService.showByBootcamp(id)
       .then(async (response) => {
         if (Array.isArray(response.data.data)) {
@@ -50,7 +51,7 @@ export default function PersonbyBootcampTable() {
         setIsLoading(false);
       });
   }, [id]);
-
+  console.log('ID:', id);
   console.log('Bootcamps:', bootcamps);
 
   if (isLoading) {

@@ -126,7 +126,7 @@ const Router = createBrowserRouter([
         element: <IndexPersonBootcamp />
       },
       {
-        path:'/recruitment/personbybootcamp',
+        path:'/recruitment/personbybootcamp/:id',
         element: <PersonbyBootcampTable />
       },
        //Comments
