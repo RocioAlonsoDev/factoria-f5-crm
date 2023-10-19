@@ -5,69 +5,52 @@ import CategoryDataService from '../../services/trackingService/category.service
 
 export default function Evaluation() {
   const [categories, setCategories] = useState([]);
-  const [stack, setStack]= useState([]);
-  const [skill, setSkill] = useState ([]);
+  const [tittlesCompetence, setTittlesCompetence] = useState([]); // Define tittlesCompetence antes de usarlo
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect (() => {
+  useEffect(() => {
     CategoryDataService.getAll()
-    .then(({data})=> {
-      console.log('Datos de la API:', data);
-      console.log('Formato de las categorías:', data);
-      setCategories(data);
-      setIsLoading(false)
-    })
-    .catch((error) => {
-      console.error('Error al cargar los datos de la API:', error);
-      setIsLoading(false);
-    });
-  }, [])
-
-  const titlesCompetence = categories.map((category) => category.name);
-  const contents = categories.map((category) => category.skills.map((skill) => skill.name));
+      .then(({ data }) => {
+        console.log(data)
+        // Reformatea los datos de la API
+        const formattedData = data.map((category) => ({
+          fecha: '', // Establece la fecha según tus necesidades
+          tipo: '',  // Establece el tipo según tus necesidades
+          competences: {
+            [category.name]: category.skills.map((skill) => skill.name),
+          },
+        }));
   
+        setCategories(formattedData);
+        setTittlesCompetence(data.map((category) => category.name)); // Define tittlesCompetence aquí
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al cargar los datos de la API:', error);
+        setIsLoading(false);
+      });
+  }, []);
   
-  console.log('titlesCompetence:', titlesCompetence);
-  console.log('contents:', contents);
+  const heads = ["Fecha", "Tipo", ...tittlesCompetence]; // Ahora tittlesCompetence está definido
   
-
-
-  // COMPETENSES TABLE
-  // const mockData = {
-  //   tittlesCompetence: ["Competencia 1", "Competencia 2", "Competencia 3", "competencia 4"],
-  //   contents: [
-  //     {
-  //       competences: {
-  //         "Competencia 1": ['Contenido 1.1', 'Contenido 1.2'],
-  //         "Competencia 2": ['Contenido 2', 'contenido 2.2'],
-  //         "Competencia 3": ['Contenido 3.1', 'Contenido 3.2', 'Contenido 3.3', 'contenido cuatro él o ella han aprendido a buscar en chatGPT'],
-  //         "competencia 4": ['contenido 4']
-  //       }
-  //     },
-  //     // ... (otros registros) 
-  //   ]
-  // };
-
-  // HEADERS FOR CONTENT TABLE
-  const heads = ["JAVA", "PHP", "LARAVEL", "BBDD", "PHYTON", "JAVASCRIPT", "Java", "pHYTON"];
-
-  const [bodyCompetences, setBodyCompetences] = useState([]);
-  const [bodyContent, setBodyContent] = useState([]);
-
   // Estado para controlar si los selectores deben mostrarse
   const [showSelects, setShowSelects] = useState(false);
 
-// ...
+  // Estado para los datos de competencias
+  const [bodyContent, setBodyContent] = useState([]);
 
-const addNewData = () => {
-    const newCompetencesData = {};
-    const newContentData = {};
-    // Agrega la nueva fila al estado de ambas tablas
-    setBodyCompetences([...bodyCompetences, newCompetencesData]);
+  const addNewData = () => {
+    const newContentData = {
+      fecha: '', // Establece la fecha según tus necesidades
+      tipo: '', // Establece el tipo según tus necesidades
+      competences: new Array(tittlesCompetence.length).fill('-'),
+    };
+
+    // Agrega la nueva fila al estado
     setBodyContent([...bodyContent, newContentData]);
     // Activa los selectores al agregar una nueva fila
     setShowSelects(true);
-};
+  };
 
   const saveData = () => {
     // Aquí puedes guardar los datos según sea necesario
@@ -76,20 +59,19 @@ const addNewData = () => {
   return (
     <div className='md:block md:absolute md:top-16 md:left-64 md:right-0 w-auto p-2'>
       <div>
-    {isLoading ? (
-      <p>Cargando...</p>
-    ) : (
-      <div>
-        <TableCompetencesAtom
-        captionTittles="Evolución de competencias()"
-        contents={contents}
-        showSelects={showSelects}
-        tittlesCompetence={titlesCompetence}
-      />
-
+        {isLoading ? (
+          <p>Cargando...</p>
+        ) : (
+          <div>
+            <TableCompetencesAtom
+              captionTittles="Evolución de competencias()"
+              contents={categories} // Cambia bodyContent a categories para mostrar los datos de la API
+              showSelects={showSelects}
+              tittlesCompetence={tittlesCompetence}
+            />
+          </div>
+        )}
       </div>
-    )}
-  </div>
 
       <div>
         <TableContentAtom
@@ -97,7 +79,7 @@ const addNewData = () => {
           captionTittles="Stacks Femcoders Norte"
           theadTittles={heads}
           dateWrite="2023-09-23"
-          tableData={bodyContent} // Pasa el estado de la tabla de contenido como prop
+          tableData={bodyContent} // Pasa el estado como prop
           dateEvaluation="2023-03-12"
           showSelects={showSelects} // Pasa el estado como prop
         ></TableContentAtom>
