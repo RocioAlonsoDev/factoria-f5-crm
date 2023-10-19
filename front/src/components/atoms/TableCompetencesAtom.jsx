@@ -10,7 +10,12 @@ function TableCompetencesAtom(props) {
   // Extrae todas las competencias únicas de los contenidos
   const allCompetences = Array.from(
     new Set(
-      contents.flatMap((content) => Object.keys(content.competences))
+      contents.flatMap((content) => {
+        if (content.competences) {
+          return Object.keys(content.competences);
+        }
+        return [];
+      })
     )
   );
 
@@ -26,18 +31,11 @@ function TableCompetencesAtom(props) {
               <tr>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Fecha</th>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Tipo</th>
-                {allCompetences.map((competence) => (
+                {tittlesCompetence.map((competence) => (
                   <th
                     scope="col"
                     className="border-r px-6 py-4 dark:border-neutral-200"
                     key={competence}
-                    colSpan={
-                      contents.flatMap((content) =>
-                        content.competences[competence]
-                          ? content.competences[competence].length
-                          : 1 // Cambiamos 0 a 1 para mostrar la categoría incluso si no hay habilidades
-                      ).reduce((a, b) => a + b, 0) // Suma de longitudes
-                    }
                   >
                     {competence}
                   </th>

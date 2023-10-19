@@ -13,7 +13,8 @@ export default function Evaluation() {
     CategoryDataService.getAll()
     .then(({data})=> {
       console.log('Datos de la API:', data);
-      setCategories(data.data);
+      console.log('Formato de las categorías:', data);
+      setCategories(data);
       setIsLoading(false)
     })
     .catch((error) => {
@@ -22,9 +23,13 @@ export default function Evaluation() {
     });
   }, [])
 
-
-
-
+  const titlesCompetence = categories.map((category) => category.name);
+  const contents = categories.map((category) => category.skills.map((skill) => skill.name));
+  
+  
+  console.log('titlesCompetence:', titlesCompetence);
+  console.log('contents:', contents);
+  
 
 
   // COMPETENSES TABLE
@@ -77,11 +82,12 @@ const addNewData = () => {
       <div>
         <TableCompetencesAtom
   captionTittles="Evolución de competencias()"
-  tittlesCompetence={categories?.map((category) => category.name)}
-  contents={categories?.map((category) => Object.values(category.skills).map((skill) => skill.name))}
-
+  contents={contents}
   showSelects={showSelects}
+  // Extraer los nombres de competencias de 'categories'
+  tittlesCompetence={titlesCompetence}
 />
+
       </div>
     )}
   </div>
