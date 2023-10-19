@@ -5,17 +5,16 @@ import DefaultLayoutRecruitment from "../layouts/DefaultLayoutRecruitment";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
-import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
-import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
+import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
 import BootcampForm from '../pages/Bootcamp/BootcampForm'
-import CommentsIndexByPerson from "../pages/Comments/CommentsIndexByPerson";
+import Login from "../pages/Login"
+import Signup from '../pages/Signup'
+import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
 import StatusRequirement from "../pages/ConfigurationPages/StatusRequirement";
-import Login from "../pages/Login";
-import Signup from '../pages/Signup';
 import CodersIndex from "../pages/CodersFrontend/CodersIndex";
 import Evaluation from "../pages/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
@@ -25,6 +24,8 @@ import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
 import Statistics from "../pages/Statistics/Statistics";
 import CodersAdd from "../pages/CodersFrontend/CodersAdd";
+import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
+import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 
 
 const Router = createBrowserRouter([
@@ -35,6 +36,11 @@ const Router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Navigate to='/' />
+  },
+
+  {
+    path: '/recruitment/selectiondayshow/:id',
+    element: <SelectionDayShow />
   },
 
   {
@@ -103,6 +109,16 @@ const Router = createBrowserRouter([
   {
     path:'/inscribe',
     element: <PublicAddPerson />
+  },
+
+  {
+    path:'/inscribe_femcoders',
+    element: <AddPersonFemcoders />
+  },
+
+  {
+    path:'/inscribe_digitalacademy',
+    element: <AddPersonDigitalAcademy />
   },
 
   {
