@@ -25,6 +25,10 @@ import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
 import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
+import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
+import Statistics from "../pages/Statistics/Statistics";
+import CodersAdd from "../pages/CodersFrontend/CodersAdd";
+import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
 import PeoplebyBootcamp from "../pages/PersonBootcamp/PeoplebyBootcamp";
 
 
@@ -134,8 +138,8 @@ const Router = createBrowserRouter([
         element: <IndexPersonBootcamp />
       },
       {
-        path:'/recruitment/personbybootcamp/:id',
-        element: <PeoplebyBootcamp/>
+        path:'/recruitment/personbybootcamp',
+        element: <PersonbyBootcampTable />
       },
        //Comments
   

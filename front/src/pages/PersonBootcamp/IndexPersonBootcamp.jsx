@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ButtonAtom from '../../components/atoms/ButtonAtom';
+import TableAtom from '../../components/atoms/TableAtom';
 import BootcampDataService from './../../services/crmService/bootcamp.service';
 import selection from "../../assets/img/selection.jpg";
 import CardAtom from "../../components/atoms/CardAtom";
@@ -8,8 +8,13 @@ import CardAtom from "../../components/atoms/CardAtom";
 export default function IndexPersonBootcamp() {
   const [bootcamp, setBootcamp] = useState([]);
   
+  const BootcampOptions = {
+    1: 'FemCoders Norte',
+    2: 'Digital Academy',
+    3: 'UNIC',
+  };
 
-  
+  const columns = ['Nombre', 'Apellidos', 'email', 'Teléfono', 'Bootcamp'];
 
   useEffect(() => {
     BootcampDataService.getAll()
@@ -50,7 +55,7 @@ export default function IndexPersonBootcamp() {
 
   return (
     <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
-      <div>
+      <div className="flex flex-col items-center">
        
         <div className="max-w-screen-lg flex justify-center gap-4 mt-4">
           {nextBootcamps.map((bootcamp, index) => {
@@ -78,6 +83,14 @@ export default function IndexPersonBootcamp() {
           })}
         </div>
       </div>
+          
+      {/* Tabla con jornadas anteriores */}
+      <TableAtom
+        tableTitle="Bootcamps"
+        data={formattedPreviousBootcamps}
+        columns={columns}
+      />
+
     </div>
   );
 }

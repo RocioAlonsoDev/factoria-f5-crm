@@ -32,9 +32,9 @@ class PersonDataService{
     }
 
     showByBootcamp(id_bootcamp){
-        return http.get(`api/getPeopleInBootcamp/${id_bootcamp}`);
+        return http.get(`api/person?id_bootcamp=${id_bootcamp}`);
     }
-
+    
 }
 
 export default new PersonDataService();
