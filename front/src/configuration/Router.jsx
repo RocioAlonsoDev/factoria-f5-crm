@@ -22,6 +22,7 @@ import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
+import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 
 
 const Router = createBrowserRouter([
@@ -100,6 +101,11 @@ const Router = createBrowserRouter([
   {
     path:'/inscribe_femcoders',
     element: <AddPersonFemcoders />
+  },
+
+  {
+    path:'/inscribe_digitalacademy',
+    element: <AddPersonDigitalAcademy />
   },
 
   {
