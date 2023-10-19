@@ -9,6 +9,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\StatisticsController;
 
 /*
@@ -50,4 +51,8 @@ Route::resource('/genderper', StatisticsController::class);
 
 Route::get('genderpercentage', [StatisticsController::class, 'getGenderPercentages']);
 // Route::get('/person/genderpercentage', [PersonController::class, 'getGenderPercentages']);
+
+// Route::get('/',[MailController::class, 'index']);
+ Route::get('/discarded',[MailController::class, 'discarded']);
+
 

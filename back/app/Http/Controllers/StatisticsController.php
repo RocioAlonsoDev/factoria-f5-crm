@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class StatisticsController extends Controller
 {
-    public function getGenderPercentages($id):JsonResponse
+    public function getGenderPercentages():JsonResponse
     {
            // Consulta para contar personas por género
            $genderCounts = Person::select('gender', DB::raw('count(*) as count'))

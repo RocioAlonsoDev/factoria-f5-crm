@@ -1,11 +1,34 @@
-import CardStatsAtom from "../../components/atoms/Statistics/CardStatsAtom";
+// import CardStatsAtom from "../../components/atoms/Statistics/CardStatsAtom";
 import BarGraphicAtom from "../../components/atoms/Statistics/BarGraphicAtom";
+import { useEffect, useState } from "react";
+import PersonDataService from "../../../services/crmService/person.service";
 
 function Statistics() {
+
+    const [genderData, setGenderData] = useState([]);
+    const colors = ['blue', 'red', 'purple', 'orange', 'emerald', 'indigo', 'yellow'];
+  
+    useEffect(() => {
+      PersonDataService.getGenderPercentages()
+        .then(async (response) => {
+          console.log("Response:", response)
+          if (Array.isArray(response.data.data)) {
+            setGenderData(response.data.data);
+          } else {
+            console.error("Response data is not an array:", response);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching gender data:", error);
+        });
+    }, []);
+  
+      console.log("GenderData:", genderData); 
+
   return (
     <>
     <div className='md:block md:absolute md:top-[117px] md:left-64 md:right-0 w-auto p-2'>
-            <div className="px-4 mt-5 md:px-10 mx-auto w-full">
+            {/* <div className="px-4 mt-5 md:px-10 mx-auto w-full">
                 <div className="flex flex-wrap">
                     <CardStatsAtom
                         statSubtitle={"Total Mujeres 2023"}
@@ -61,11 +84,13 @@ function Statistics() {
                         }
                     ></CardStatsAtom>
                 </div>
-            </div>
+            </div> */}
 
             <div className="px-4 mt-5 md:px-10 mx-auto w-2/4">
                 <div className="flex flex-wrap">
-                    <BarGraphicAtom></BarGraphicAtom>
+                    <BarGraphicAtom
+                    
+                    ></BarGraphicAtom>
                 </div>
             </div>
         </div>

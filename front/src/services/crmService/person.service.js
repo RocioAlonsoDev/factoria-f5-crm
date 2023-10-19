@@ -32,7 +32,7 @@ class PersonDataService{
     }
 
     getGenderPercentages(){
-        return http.get(`api/person/gender-percentages`);
+        return http.get(`api/genderpercentage`);
     }
 
 }
