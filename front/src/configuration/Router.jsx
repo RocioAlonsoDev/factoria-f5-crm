@@ -7,7 +7,7 @@ import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
-import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
+import BootcampForm from '../pages/Bootcamp/BootcampForm'
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
@@ -23,6 +23,8 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
+import Statistics from "../pages/Statistics/Statistics";
+import CodersAdd from "../pages/CodersFrontend/CodersAdd";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 
@@ -50,7 +52,10 @@ const Router = createBrowserRouter([
     path: '/people',
     element: <AllPeople />
   },
-  
+  {
+    path: '/stats',
+    element: <Statistics />
+  },
     
 
   {
@@ -65,7 +70,7 @@ const Router = createBrowserRouter([
   },
   {
     path: '/tracking',
-    element: <DefaultLayout title='Seguimiento'/>,
+    element: <DefaultLayout title='Seguimiento' />,
     children:[
       {
         path: '/tracking/bootcamp',
@@ -73,11 +78,19 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/bootcamp/add',
-        element: <BootcampAdd />
+        element: <BootcampForm />
+      },
+      {
+        path: '/tracking/bootcamp/update/:id',
+        element: <BootcampForm />
       },
       {
         path: '/tracking/coders',
         element: <CodersIndex />
+      },
+      {
+        path: '/tracking/coders/add',
+        element: <CodersAdd />
       },
       {
         path:'/tracking/evaluation/id',
@@ -122,11 +135,9 @@ const Router = createBrowserRouter([
         path:'/recruitment/person/index',
         element: <IndexPerson />
       },
-       //Comments
-  
       {
-        path: '/recruitment/comments',
-        element: <CommentsIndexByPerson />
+      path: '/recruitment/person/:id',
+      element: <ShowPerson />
       },
       //
       {

@@ -84,4 +84,5 @@ class PersonController extends Controller
 
     return response()->json(['data' => $people], 200);
 }
+
 }
