@@ -14,7 +14,6 @@ class BootcampController extends Controller
      */
     public function index():JsonResponse
     {
-        //$bootcamps = Bootcamp::with('personBootcamp.person')->get();
         $bootcamps = Bootcamp::all();
         return response()->json(['data'=>$bootcamps], 200);
     }
