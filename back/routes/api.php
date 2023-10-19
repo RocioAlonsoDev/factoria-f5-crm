@@ -46,3 +46,5 @@ Route::resource('/status', StatusController::class);
 Route::resource('/bootcamp', BootcampController::class);
 Route::resource('/role', RoleController::class);
 
+// Route::get('person/genderpercentages', [PersonController::class, 'getGenderPercentages']);
+

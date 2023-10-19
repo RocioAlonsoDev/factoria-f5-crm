@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Outlet } from 'react-router-dom'
 import UserNavbarMolecule from '../components/molecules/UserNavbarMolecule'
 import Sidebar from "../components/atoms/SideBarAtom"
@@ -14,7 +15,7 @@ export default function DefaultLayoutRecruitment({title}) {
     { label: 'Jornadas de Selección', url: '/recruitment/selectionday' },
     { label: 'Total Aspirantes', url: '/recruitment/person/index' },
     { label: 'Aspirantes por Bootcamp', url: '/aspirantes_bootcamp' },
-    { label: 'Estadísticas', url: '/estadisticas' },
+    { label: 'Estadísticas', url: '/recruitment/estadisticas' },
   ];
   
 
@@ -32,5 +33,9 @@ export default function DefaultLayoutRecruitment({title}) {
     </>
   )
 
+
 }
 
+DefaultLayoutRecruitment.propTypes = {
+  title: PropTypes.any,
+}
