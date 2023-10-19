@@ -13,7 +13,7 @@ export default function DefaultLayoutRecruitment({title}) {
     
     { label: 'Jornadas de Selección', url: '/recruitment/selectionday' },
     { label: 'Total Aspirantes', url: '/recruitment/person/index' },
-    { label: 'Aspirantes por Bootcamp', url: '/aspirantes_bootcamp' },
+    { label: 'Aspirantes por Bootcamp', url: '/recruitment/personbootcamp/index' },
     { label: 'Estadísticas', url: '/estadisticas' },
   ];
   

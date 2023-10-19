@@ -14,7 +14,8 @@ class BootcampController extends Controller
      */
     public function index():JsonResponse
     {
-        $bootcamps = Bootcamp::with('personBootcamp.person')->get();
+        //$bootcamps = Bootcamp::with('personBootcamp.person')->get();
+        $bootcamps = Bootcamp::all();
         return response()->json(['data'=>$bootcamps], 200);
     }
 
@@ -47,10 +48,10 @@ class BootcampController extends Controller
     public function update(BootcampRequest $request, $id):JsonResponse
     {
         $bootcamp = Bootcamp::find($id);
-        $bootcamp->bootcamp=$request->bootcamp;
+        
         $bootcamp->name=$request->name;
         $bootcamp->startDate=$request->startDate;
-        $bootcamp->endDaten=$request->endDate;
+        $bootcamp->endDate=$request->endDate;
         $bootcamp->description=$request->description;
         $bootcamp->school=$request->school;
         $bootcamp->promo=$request->promo;

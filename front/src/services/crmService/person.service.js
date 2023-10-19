@@ -30,6 +30,10 @@ class PersonDataService{
     showByStatus(id_status){
         return http.get(`api/person?id_status=${id_status}`);
     }
+
+    showByBootcamp(id_bootcamp){
+        return http.get(`api/person?id_bootcamp=${id_bootcamp}`);
+    }
     
 }
 
