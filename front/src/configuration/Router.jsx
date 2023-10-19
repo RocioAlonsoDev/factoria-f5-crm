@@ -200,12 +200,7 @@ const Router = createBrowserRouter([
   },
   {
     path: '/tracking',
-    element: <DefaultLayout 
-      title='Seguimiento' 
-      menuItems={[
-        {url: '/tracking/bootcamp', label: 'BOOTCAMPS'},
-        {url: '/tracking/coders', label: 'CODERS'}
-      ]}/>,
+    element: <DefaultLayout title='Seguimiento' />,
     children:[
       {
         path: '/tracking/bootcamp',

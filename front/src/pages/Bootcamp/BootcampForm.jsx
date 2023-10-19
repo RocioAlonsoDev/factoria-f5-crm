@@ -11,8 +11,6 @@ export default function BootcampForm() {
 //   // const navigate = useNavigate()
 //   // const [error, setError] = useState("");
 
-
-
 //   const [bootcamp, setBootcamp] = useState({
 //     name: '',
 //     school: '',
@@ -22,14 +20,7 @@ export default function BootcampForm() {
 //     end_date: '',
 //   })
 
-//   
-
-
 //   const createBootcamp = (values) => {
-
-    
-
-    
 //   }
 
   // useEffect(() => {
