@@ -53,3 +53,5 @@ Route::get('/getPeopleInBootcamp/{bootcamp}', [PersonBootcampController::class, 
 Route::get('genderdata', [GenderController::class, 'getGenderData']);
 
 
+// Route::get('person/genderpercentages', [PersonController::class, 'getGenderPercentages']);
+

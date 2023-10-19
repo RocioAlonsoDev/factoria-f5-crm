@@ -31,6 +31,10 @@ class PersonDataService{
         return http.get(`api/person?id_status=${id_status}`);
     }
 
+    getGenderPercentages(){
+        return http.get(`api/person/gender-percentages`);
+    }
+
 }
 
 export default new PersonDataService();
