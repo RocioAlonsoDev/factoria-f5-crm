@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ButtonAtom from "./ButtonAtom";
 
 export default function TableAtom(props) {
     const { tableTitle, data, columns, addbutton, addlink } = props;
@@ -58,17 +59,7 @@ export default function TableAtom(props) {
                         
                             {addbutton && 
                             <div className="relative flex-none">
-                                <Link to={addlink}>
-                                    <button
-                                        className="bg-transparent mx-2 text-orange-500 outline-orange-500  hover:bg-orange-500 hover:text-white 
-                                        hover:outline-orange-500 my-2 active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none 
-                                        focus:outline-none ease-linear transition-all duration-150" 
-                                        type="button"
-                                    >
-                                        + CREAR NUEVO {addbutton}
-                                    </button>
-                                </Link>
-                                
+                                <ButtonAtom addlink={addlink} addbutton={addbutton}></ButtonAtom>
                             </div>}
                         
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
