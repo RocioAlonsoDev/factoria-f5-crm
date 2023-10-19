@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Outlet } from 'react-router-dom'
 import UserNavbarMolecule from '../components/molecules/UserNavbarMolecule'
 import Sidebar from "../components/atoms/SideBarAtom"
@@ -33,3 +34,6 @@ export default function DefaultLayoutConfiguration({title}) {
 
 }
 
+DefaultLayoutConfiguration.propTypes = {
+  title: PropTypes.any,
+}

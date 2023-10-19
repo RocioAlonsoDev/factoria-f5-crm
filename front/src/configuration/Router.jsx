@@ -179,12 +179,7 @@ const Router = createBrowserRouter([
   {
     path: '/people',
     element: <AllPeople />
-  },
-  {
-    path: '/stats',
-    element: <Statistics />
-  },
-    
+  },    
 
   {
     path: '/',
@@ -265,6 +260,10 @@ const Router = createBrowserRouter([
       {
         path: '/recruitment/selectionday',
         element: <SelectionDayIndex />
+      },
+      {
+        path: '/recruitment/estadisticas',
+        element: <Statistics />
       },
     
     ]
