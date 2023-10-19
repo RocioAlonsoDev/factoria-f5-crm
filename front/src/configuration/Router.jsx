@@ -8,7 +8,7 @@ import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
-import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
+import BootcampForm from '../pages/Bootcamp/BootcampForm'
 import CommentsIndexByPerson from "../pages/Comments/CommentsIndexByPerson";
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
@@ -23,6 +23,8 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
+import Statistics from "../pages/Statistics/Statistics";
+import CodersAdd from "../pages/CodersFrontend/CodersAdd";
 import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
 import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
 
@@ -45,7 +47,10 @@ const Router = createBrowserRouter([
     path: '/people',
     element: <AllPeople />
   },
-  
+  {
+    path: '/stats',
+    element: <Statistics />
+  },
     
 
   {
@@ -60,7 +65,7 @@ const Router = createBrowserRouter([
   },
   {
     path: '/tracking',
-    element: <DefaultLayout title='Seguimiento'/>,
+    element: <DefaultLayout title='Seguimiento' />,
     children:[
       {
         path: '/tracking/bootcamp',
@@ -68,11 +73,19 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/bootcamp/add',
-        element: <BootcampAdd />
+        element: <BootcampForm />
+      },
+      {
+        path: '/tracking/bootcamp/update/:id',
+        element: <BootcampForm />
       },
       {
         path: '/tracking/coders',
         element: <CodersIndex />
+      },
+      {
+        path: '/tracking/coders/add',
+        element: <CodersAdd />
       },
       {
         path:'/tracking/evaluation/id',
@@ -115,11 +128,9 @@ const Router = createBrowserRouter([
         path:'/recruitment/personbybootcamp',
         element: <PersonbyBootcampTable />
       },
-       //Comments
-  
       {
-        path: '/recruitment/comments',
-        element: <CommentsIndexByPerson />
+      path: '/recruitment/person/:id',
+      element: <ShowPerson />
       },
       //
       {

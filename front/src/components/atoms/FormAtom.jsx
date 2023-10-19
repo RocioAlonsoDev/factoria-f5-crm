@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function FormAtom(props) {
   const { formTitle, formData, onSubmit } = props;
