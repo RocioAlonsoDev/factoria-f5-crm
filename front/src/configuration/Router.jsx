@@ -23,7 +23,7 @@ import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
 import Statistics from "../pages/Statistics/Statistics";
-import CodersAdd from "../pages/CodersFrontend/CodersAdd";
+import CodersEdit from "../pages/CodersFrontend/codersEdit";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 
@@ -88,8 +88,8 @@ const Router = createBrowserRouter([
         element: <CodersIndex />
       },
       {
-        path: '/tracking/coders/add',
-        element: <CodersAdd />
+        path: '/tracking/coders/update/:id',
+        element: <CodersEdit />
       },
       {
         path:'/tracking/evaluation/id',
