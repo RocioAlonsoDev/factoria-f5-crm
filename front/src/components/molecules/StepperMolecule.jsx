@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
-import { useNavigate , useParams } from 'react-router-dom';
-import StepAtom from '../../components/atoms/StepAtom'
+import { useParams } from 'react-router-dom';
+import FormAtom from '../../components/atoms/FormAtom'
+import bootcampService from "../../services/crmService/bootcamp.service";
+import stackService from "../../services/trackingService/stack.service";
  
 export default function StepperMolecule (props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isLastStep, setIsLastStep] = React.useState(false);
   const [isFirstStep, setIsFirstStep] = React.useState(false);
+  const [stacks,setStacks] = React.useState([]);
   const { id } = useParams();
  
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
@@ -21,7 +24,8 @@ export default function StepperMolecule (props) {
       {
         id: 'school', 
         label: 'Escuela', 
-        type: 'text', 
+        type: 'select',
+        options: ['Selecciona', 'Cataluña', 'Madrid', 'Asturias'],
       },
       {
         id: 'promo', 
@@ -43,28 +47,72 @@ export default function StepperMolecule (props) {
         label: 'Fecha de finalización', 
         type: 'date', 
         },
+  ];
 
-    ];
+  
+  const storeDataInLocalStorage = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(stacks));
+  };
+  
+  // Function to retrieve data from local storage
+  const retrieveDataFromLocalStorage = (key) => {
+    const storedData = localStorage.getItem(key);
+    return storedData ? JSON.parse(storedData) : null;
+  };
+  
+  // Example: Storing the "stacks" data in local storage
+  const stacksData = [/* Your stack data */];
+  storeDataInLocalStorage('stacksData', stacksData);
+
+  useEffect(() => {
+    stackService.getAll()
+    .then((res)=>{
+      setStacks(res.data)
+    })
+    .catch(err => console.log(err))
+  },[])
+    
+  let step2Data = stacks.map(stack => ({
+    id: stack.id,
+    label: stack.name,
+    type: 'checkbox',
+  }));
 
   const step1 = (values) => {
     let res= null;
-
     if(id){
-      res = APIservice.put(`/bootcamp/${id}`, values)
+      console.log(values)
     }else{
-      res = APIservice.post('/bootcamp', values)
+      res = bootcampService.create(values)
     }
-
     res
     .then(() => {
-      console.log(res.data)
+      handleNext()
     })
     .catch(err=> {
       if (err && err.response) {
         console.log(err.response)
       }
     })
+  }
+
+  const step2 = (values) => {
+    let res= null;
+    if(id){
+      console.log(values)
+    }else{
+      res = bootcampService.create(values)
     }
+    res
+    .then(() => {
+      handleNext()
+    })
+    .catch(err=> {
+      if (err && err.response) {
+        console.log(err.response)
+      }
+    })
+  }
  
   return (
     <div className="flex flex-col relative min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded py-10">
@@ -143,12 +191,18 @@ export default function StepperMolecule (props) {
       </Stepper>
 
       
-      {activeStep === 0 ? <StepAtom
-            formTitle="Crear nuevo Bootcamp"
-            formData={step1Data}
-            onSubmit={step1}
-          /> : ''}
-      {activeStep === 1 ? props.step2 : ''}
+      {activeStep === 0 ? 
+        <FormAtom
+          formTitle="Crear nuevo Bootcamp"
+          formData={step1Data}
+          onSubmit={step1}
+        /> : ''}
+      {activeStep === 1 ? 
+        <FormAtom
+          formTitle="Agregar Stacks"
+          formData={step2Data}
+          onSubmit={step2}
+        /> : ''}
       {activeStep === 2 ? props.step3 : ''}
       <div className="mt-32">
         <Button onClick={handlePrev} disabled={isFirstStep} className="bg-gray-400">
