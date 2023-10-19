@@ -28,7 +28,7 @@ class BootcampDataService{
     }
     
     getPeopleInBootcamp(id_bootcamp){
-        return http.get(`api/getPeopleInBootcamp/${id_bootcamp}/people`)
+        return http.get(`api/getPeopleInBootcamp/${id_bootcamp}`)
     }
    
 }
