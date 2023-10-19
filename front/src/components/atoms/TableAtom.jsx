@@ -65,6 +65,9 @@ export default function TableAtom(props) {
                                 <ButtonAtom addlink={addlink} addbutton={addbutton}></ButtonAtom>
                             </div>}
                         
+                                <ButtonAtom addlink={addlink} addbutton={addbutton}></ButtonAtom>
+                            </div>}
+                        
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                             <input
                                 className="my-5"
