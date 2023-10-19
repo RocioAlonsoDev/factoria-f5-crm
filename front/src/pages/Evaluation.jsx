@@ -45,7 +45,7 @@ const addNewData = () => {
   };
 
   return (
-    <div className='md:block md:fixed md:top-16 md:left-64 md:right-0 w-auto p-2'>
+    <div className='md:block md:absolute md:top-16 md:left-64 md:right-0 w-auto p-2'>
       <div>
         <TableCompetencesAtom
           captionTittles="Evolución de competencias()"
