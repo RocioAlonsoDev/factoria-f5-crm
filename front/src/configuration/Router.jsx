@@ -8,7 +8,8 @@ import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
 import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
-import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
+import BootcampForm from '../pages/Bootcamp/BootcampForm'
+import CommentsIndexByPerson from "../pages/Comments/CommentsIndexByPerson";
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
@@ -62,7 +63,7 @@ const Router = createBrowserRouter([
   },
   {
     path: '/tracking',
-    element: <DefaultLayout title='Seguimiento'/>,
+    element: <DefaultLayout title='Seguimiento' />,
     children:[
       {
         path: '/tracking/bootcamp',
@@ -70,7 +71,11 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/bootcamp/add',
-        element: <BootcampAdd />
+        element: <BootcampForm />
+      },
+      {
+        path: '/tracking/bootcamp/update/:id',
+        element: <BootcampForm />
       },
       {
         path: '/tracking/coders',
