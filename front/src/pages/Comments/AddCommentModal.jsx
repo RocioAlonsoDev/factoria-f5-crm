@@ -48,7 +48,6 @@ export default function AddCommentModal({ setIsModalOpen}) {
       await CommentDataService.createByPerson(id, commentData);
 
       setIsModalOpen(false);
-      console.log('Redirigiend/person/:id');
       window.location.reload();
 
     } catch (error){

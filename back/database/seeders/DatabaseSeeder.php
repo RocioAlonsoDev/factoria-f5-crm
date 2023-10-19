@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'surname' => 'Admin', 
             'email' => 'admin@gmail.com',
+            'image' => 'https://i.pinimg.com/564x/ca/40/cd/ca40cdf8bde9af7fe54d85c0dec73e27.jpg', 
             'password' => bcrypt('123456Aa*'), 
             'id_role' => 1,
      ]);
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ana',
             'surname' => 'Alvarez', 
             'email' => 'ana@gmail.com',
+            'image' => 'https://img.freepik.com/fotos-premium/lindo-gato-camisa-floral-gafas-sol-sentado-aislado-sobre-fondo-blanco_962751-481.jpg',
             'password' => bcrypt('123456Aa*'), 
             'id_role' => 2,
      ]);
@@ -39,6 +41,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Cristina',
             'surname' => 'Fernández', 
             'email' => 'cristina@gmail.com',
+            'image' => 'https://img.freepik.com/fotos-premium/there-is-a-cat-that-is-sitting-on-a-rock-in-a-garden-generative-ai_900396-35758.jpg',
             'password' => bcrypt('123456Aa*'), 
             'id_role' => 2,
      ]);
@@ -46,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Manuela',
             'surname' => 'Grajales', 
             'email' => 'manuela@gmail.com',
+            'image' => 'https://img.freepik.com/fotos-premium/gato-traje-azul-dragon_662214-41149.jpg',
             'password' => bcrypt('123456Aa*'), 
             'id_role' => 3,
      ]);
@@ -53,6 +57,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Maria',
             'surname' => 'Villaverde', 
             'email' => 'maria@gmail.com',
+            'image' => 'https://img.freepik.com/fotos-premium/ilustracion-gata-como-shaman-levantandose-humo_530527-29.jpg',
             'password' => bcrypt('123456Aa*'), 
             'id_role' => 3,
      ]);

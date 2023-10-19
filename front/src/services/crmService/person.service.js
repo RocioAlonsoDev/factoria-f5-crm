@@ -30,7 +30,7 @@ class PersonDataService{
     showByStatus(id_status){
         return http.get(`api/person?id_status=${id_status}`);
     }
-    
+
 }
 
 export default new PersonDataService();
