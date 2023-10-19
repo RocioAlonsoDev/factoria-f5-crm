@@ -253,7 +253,8 @@ export default function PublicAddPerson() {
                         <input
                           id="dataprotection"
                           type="checkbox"
-                          className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                          className="form-checkbox border-0 rounded text-blueGray-700 
+                          ml-1 w-5 h-5 ease-linear transition-all duration-150"
                           checked={formData.dataprotection === "sí"}
                           onChange={handleDataProtectionChange}
                         />
@@ -304,9 +305,7 @@ export default function PublicAddPerson() {
           </div>
        
         </div>
-    //   </div>
-     
-    // </div>
+    
   );
   
   

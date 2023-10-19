@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('startDate');
             $table->date('endDate');
             $table->string('description');
-            $table->enum('school', ['Cataluña', 'Madrid', 'Asturias']);
+            $table->enum('school', ['No definido','Cataluña', 'Madrid', 'Asturias']);
             $table->string('promo');
 
             $table->timestamps();

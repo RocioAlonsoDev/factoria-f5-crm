@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Popup = ({ isOpen, onClose, children }) => {
     return (
       <div
@@ -23,5 +25,11 @@ const Popup = ({ isOpen, onClose, children }) => {
     );
   };
   
+  Popup.propTypes = {
+    isOpen: PropTypes.any,
+    onClose: PropTypes.any,
+    children: PropTypes.any,
+  }
+
   export default Popup;
   

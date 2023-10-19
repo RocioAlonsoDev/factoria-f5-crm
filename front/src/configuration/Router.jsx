@@ -23,6 +23,8 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
+import Statistics from "../pages/Statistics/Statistics";
+import CodersAdd from "../pages/CodersFrontend/CodersAdd";
 
 
 const Router = createBrowserRouter([
@@ -43,7 +45,10 @@ const Router = createBrowserRouter([
     path: '/people',
     element: <AllPeople />
   },
-  
+  {
+    path: '/stats',
+    element: <Statistics />
+  },
     
 
   {
@@ -75,6 +80,10 @@ const Router = createBrowserRouter([
       {
         path: '/tracking/coders',
         element: <CodersIndex />
+      },
+      {
+        path: '/tracking/coders/add',
+        element: <CodersAdd />
       },
       {
         path:'/tracking/evaluation/id',
@@ -109,11 +118,9 @@ const Router = createBrowserRouter([
         path:'/recruitment/person/index',
         element: <IndexPerson />
       },
-       //Comments
-  
       {
-        path: '/recruitment/comments',
-        element: <CommentsIndexByPerson />
+      path: '/recruitment/person/:id',
+      element: <ShowPerson />
       },
       //
       {

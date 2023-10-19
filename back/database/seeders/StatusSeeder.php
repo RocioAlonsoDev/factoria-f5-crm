@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Status;
-use Database\Factories\StatusFactory;
-
 
 class StatusSeeder extends Seeder
 {
@@ -16,8 +14,6 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        Status::factory()->count(10)->create();
-
 
         DB::table('statuses')->insert([
             'name' => 'Aspirante',
@@ -28,11 +24,11 @@ class StatusSeeder extends Seeder
     ]);
 
         DB::table('statuses')->insert([
-        'name' => 'Coder',
+        'name' => 'Descartada/o',
     ]);
 
-        DB::table('statuses')->insert([
-        'name' => 'Descartada/o',
+    DB::table('statuses')->insert([
+        'name' => 'Coder',
     ]);
 
     }
