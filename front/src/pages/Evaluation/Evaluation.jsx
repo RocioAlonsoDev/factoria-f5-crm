@@ -81,12 +81,11 @@ const addNewData = () => {
     ) : (
       <div>
         <TableCompetencesAtom
-  captionTittles="Evolución de competencias()"
-  contents={contents}
-  showSelects={showSelects}
-  // Extraer los nombres de competencias de 'categories'
-  tittlesCompetence={titlesCompetence}
-/>
+        captionTittles="Evolución de competencias()"
+        contents={contents}
+        showSelects={showSelects}
+        tittlesCompetence={titlesCompetence}
+      />
 
       </div>
     )}

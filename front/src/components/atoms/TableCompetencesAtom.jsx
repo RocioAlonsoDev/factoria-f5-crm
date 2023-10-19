@@ -43,54 +43,55 @@ function TableCompetencesAtom(props) {
               </tr>
             </thead>
             <tbody className="border-b font-medium dark:border-neutral-200">
-              {contents.map((content, rowIndex) => {
-                const contentCells = [
-                  <td key="fecha" className="border px-6 py-4 dark:border-neutral-200">
-                    {content.fecha}
-                  </td>,
-                  <td key="tipo" className="border px-6 py-4 dark:border-neutral-200">
-                    {content.tipo}
-                  </td>,
-                  ...allCompetences.flatMap((competence) =>
-                    content.competences[competence].map((value, i) => (
-                      <td
-                        key={`content-${rowIndex}-${i}`}
-                        className="border-r px-6 py-4 dark:border-neutral-200"
-                      >
-                        {value}
-                      </td>
-                    ))
-                  ),
-                ];
+  {/* Aquí debes mapear las categorías (tittlesCompetence) */}
+  {tittlesCompetence.map((competence, rowIndex) => {
+    // Obtén los contenidos asociados a la categoría actual
+    const categoryContents = contents[rowIndex] || [];
 
-                const selectCells = showSelects
-                  ? allCompetences.flatMap((competence) =>
-                      content.competences[competence].map((value, i) => (
-                        <td
-                          key={`select-${rowIndex}-${i}`}
-                          className="border px-6 py-4 dark:border-neutral-200"
-                        >
-                          <select name={`level-${rowIndex}-${i}`} id={`level-${rowIndex}-${i}`}>
-                            <option value="">--Selecciona un nivel--</option>
-                            <option value="1">LEVEL 1</option>
-                            <option value="2">LEVEL 2</option>
-                            <option value="3">LEVEL 3</option>
-                            <option value="4">LEVEL 4</option>
-                            <option value="5">LEVEL 5</option>
-                            <option value="6">LEVEL 6</option>
-                            <option value="7">LEVEL 7</option>
-                          </select>
-                        </td>
-                      ))
-                    )
-                  : null;
+    const contentCells = [
+      <td key="fecha" className="border px-6 py-4 dark:border-neutral-200">
+        {/* Puedes mostrar aquí la fecha relacionada con la categoría si es necesario */}
+      </td>,
+      <td key="tipo" className="border px-6 py-4 dark:border-neutral-200">
+        {/* Puedes mostrar aquí el tipo relacionado con la categoría si es necesario */}
+      </td>,
+       ...categoryContents.map((value, i) => (
+        <td
+          key={`content-${rowIndex}-${i}`}
+          className="border-r px-6 py-4 dark:border-neutral-200"
+        >
+          {value}
+        </td>
+      )),
+    ];
 
-                return [
-                  <tr key={`contentRow-${rowIndex}`}>{contentCells}</tr>,
-                  <tr key={`selectRow-${rowIndex}`}>{selectCells}</tr>,
-                ];
-              })}
-            </tbody>
+    const selectCells = showSelects
+      ? categoryContents.map((value, i) => (
+          <td
+            key={`select-${rowIndex}-${i}`}
+            className="border px-6 py-4 dark:border-neutral-200"
+          >
+            <select name={`level-${rowIndex}-${i}`} id={`level-${rowIndex}-${i}`}>
+              <option value="">--Selecciona un nivel--</option>
+              <option value="1">LEVEL 1</option>
+              <option value="2">LEVEL 2</option>
+              <option value="3">LEVEL 3</option>
+              <option value="4">LEVEL 4</option>
+              <option value="5">LEVEL 5</option>
+              <option value="6">LEVEL 6</option>
+              <option value="7">LEVEL 7</option>
+            </select>
+          </td>
+        ))
+      : null;
+
+    return [
+      <tr key={`contentRow-${rowIndex}`}>{contentCells}</tr>,
+      <tr key={`selectRow-${rowIndex}`}>{selectCells}</tr>,
+    ];
+  })}
+</tbody>
+
           </table>
         </div>
       </div>
