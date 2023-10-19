@@ -26,6 +26,7 @@ import Statistics from "../pages/Statistics/Statistics";
 import CodersAdd from "../pages/CodersFrontend/CodersAdd";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
+import Landing from "../pages/Landing";
 
 
 const Router = createBrowserRouter([
@@ -33,6 +34,12 @@ const Router = createBrowserRouter([
     path: '/home',
     element: <Navigate to='/' />
   },
+
+  {
+    path: '/landing',
+    element: <Landing />
+  },
+
   {
     path: '/dashboard',
     element: <Navigate to='/' />
