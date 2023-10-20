@@ -29,8 +29,8 @@ function TableCompetencesAtom(props) {
               </tr>
               {/* Agrega una fila para los selectores */}
               <tr>
-                <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
-                <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
+                <td className="border-r px-6 py-4 dark:border-neutral-200" key="empty-date"></td>
+                <td className="border-r px-6 py-4 dark:border-neutral-200" key="empty-type"></td>
                 {categories.map((category) =>
                   category.skills.length ? (
                     category.skills.map((skill, skillIndex) => (
@@ -42,24 +42,23 @@ function TableCompetencesAtom(props) {
                       </td>
                     ))
                   ) : (
-                    <td className="border-r px-6 py-4 dark:border-neutral-200">-</td>
+                    <td className="border-r px-6 py-4 dark:border-neutral-200" key={`empty-skill-${category.name}`}>-</td>
                   )
                 )}
               </tr>
             </thead>
             <tbody className="border-b font-medium dark:border-neutral-200">
               <tr>
-                <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
-                <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
+                <td className="border-r px-6 py-4 dark:border-neutral-200" key="empty-date-body"></td>
+                <td className="border-r px-6 py-4 dark:border-neutral-200" key="empty-type-body"></td>
                 {categories.map((category) =>
                   category.skills.length ? (
-                    category.skills.map((skillIndex) => (
+                    category.skills.map((skill, skillIndex) => (
                       <td
-                        key={`${category.name}-${skillIndex}`}
+                        key={`select-${category.name}-${skillIndex}`}
                         className="border-r px-6 py-4 dark:border-neutral-200"
                       >
                         <select
-                          select
                           name={`level-${skillIndex}`}
                           id={`level-${skillIndex}`}
                         >
@@ -75,7 +74,7 @@ function TableCompetencesAtom(props) {
                       </td>
                     ))
                   ) : (
-                    <td className="border-r px-6 py-4 dark:border-neutral-200">-</td>
+                    <td className="border-r px-6 py-4 dark:border-neutral-200" key={`select-empty-${category.name}`}>-</td>
                   )
                 )}
               </tr>
