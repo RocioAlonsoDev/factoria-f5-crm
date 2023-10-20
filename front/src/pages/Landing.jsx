@@ -24,7 +24,7 @@ export default function Landing() {
           </div>
           <div className="container relative mx-auto">
             <div className="items-center flex flex-wrap">
-              <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto md:text-center">
+              <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto md:text-center mt-5">
                 <div className="pr-12">
                   <h1 className="text-white font-semibold text-5xl">
                   Aprende con Factoría F5, <br />
@@ -94,7 +94,7 @@ export default function Landing() {
                     </div>
                     <h6 className="text-2xl font-bold p-2 text-orange-600">Próximos Bootcamps</h6>
                     <p className="mt-2 mb-4 text-blueGray-500 text-center text-xl font-semibold">
-                      Bootcamps inclusivos. <br />Inscríbete y te avisaremos la próxima convocatoria.
+                      Bootcamps inclusivos. <br />Rellena el formulario y te avisaremos la próxima convocatoria.
                     </p>
                     <ul className="text-xl">
                       <li>Metaverso</li>
