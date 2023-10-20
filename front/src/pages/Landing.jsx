@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import Logo from "../../src/assets/img/logo.png";
+import Logo from "../assets/img/logo.png";
 
 // components
 
@@ -36,7 +36,7 @@ export default function Landing() {
                     ¡Haz un cambio en tu vida!
                   </h1>
                   <p className="mt-8 text-2xl text-white">
-                  #RompemosLosCodigos <br /><br />
+                  #RompemosLosCodigos #100%gratuito <br /><br />
 
                    <span className=""> No necesitas titulación o conocimientos previos. <br />
                     Sólo importa tu motivación, tu lógica, tu autonomía y tu capacidad de trabajar en equipo.</span>
@@ -104,7 +104,7 @@ export default function Landing() {
                   <div className="px-4 py-5 flex-auto">
                   <Link to="/inscribe">
                       <button className="bg-orange-500 border border-orange-500 text-white uppercase font-semibold px-4 py-2 rounded mb-4 ">
-                        Inscríbete próximos Bootcamps
+                        Inscríbete a próximos Bootcamps
                       </button>
                     </Link>
                     <img
@@ -166,7 +166,7 @@ export default function Landing() {
                   <i className="fas fa-user-friends text-xl"></i>
                 </div> */}
                 <img src={Logo} alt="" />
-                <h3 className="text-3xl mb-2 font-semibold leading-normal">
+                <h3 className="text-3xl mt-5 mb-2 font-semibold leading-normal">
                   Nuestra Asociación
                 </h3>
                 <p className="text-xl font-regular leading-relaxed mt-4 mb-4 text-blueGray-600">
@@ -180,7 +180,7 @@ export default function Landing() {
                   Apoyada por método de aprendizaje ABP: aprendizaje basado en proyectos llevado a cabo de forma colaborativa
                   con en fin de recrear el ambiente de forma constante.
                 </p>
-                <Link to="https://factoriaf5.org/somos/#equipo" className="font-bold text-orange-600 mt-8">
+                <Link to="https://factoriaf5.org/somos/#equipo" className="font-bold text-xl text-orange-600 mt-8">
                   ¡Conoce al equipo!
                 </Link>
               </div>
@@ -189,7 +189,7 @@ export default function Landing() {
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
                   <img
                     alt="..."
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
+                    src="https://factoriaf5.org/wp-content/uploads/2022/06/IMG_0471-scaled.jpg"
                     className="w-full align-middle rounded-t-lg"
                   />
                   <blockquote className="relative p-8 mb-4">
