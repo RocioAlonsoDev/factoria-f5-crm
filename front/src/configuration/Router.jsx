@@ -5,17 +5,16 @@ import DefaultLayoutRecruitment from "../layouts/DefaultLayoutRecruitment";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
-import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd"
-import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
+import SelectionDayAdd from "../pages/SelectionDay/SelectionDayAdd";
 import BootcampIndex from '../pages/Bootcamp/BootcampIndex'
-import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
-import CommentsIndexByPerson from "../pages/Comments/CommentsIndexByPerson";
+import BootcampForm from '../pages/Bootcamp/BootcampForm'
+import Login from "../pages/Login"
+import Signup from '../pages/Signup'
+import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
 import StatusRequirement from "../pages/ConfigurationPages/StatusRequirement";
-import Login from "../pages/Login";
-import Signup from '../pages/Signup';
 import CodersIndex from "../pages/CodersFrontend/CodersIndex";
 import Evaluation from "../pages/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
@@ -23,6 +22,10 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
+import Statistics from "../pages/Statistics/Statistics";
+import CodersEdit from "../pages/CodersFrontend/codersEdit";
+import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
+import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 
 
 const Router = createBrowserRouter([
@@ -36,6 +39,11 @@ const Router = createBrowserRouter([
   },
 
   {
+    path: '/recruitment/selectiondayshow/:id',
+    element: <SelectionDayShow />
+  },
+
+  {
     path: '/person/:id',
     element: <ShowPerson />
   },
@@ -43,7 +51,10 @@ const Router = createBrowserRouter([
     path: '/people',
     element: <AllPeople />
   },
-  
+  {
+    path: '/stats',
+    element: <Statistics />
+  },
     
 
   {
@@ -58,7 +69,7 @@ const Router = createBrowserRouter([
   },
   {
     path: '/tracking',
-    element: <DefaultLayout title='Seguimiento'/>,
+    element: <DefaultLayout title='Seguimiento' />,
     children:[
       {
         path: '/tracking/bootcamp',
@@ -66,11 +77,19 @@ const Router = createBrowserRouter([
       },
       {
         path: '/tracking/bootcamp/add',
-        element: <BootcampAdd />
+        element: <BootcampForm />
+      },
+      {
+        path: '/tracking/bootcamp/update/:id',
+        element: <BootcampForm />
       },
       {
         path: '/tracking/coders',
         element: <CodersIndex />
+      },
+      {
+        path: '/tracking/coders/update/:id',
+        element: <CodersEdit />
       },
       {
         path:'/tracking/evaluation/id',
@@ -93,6 +112,16 @@ const Router = createBrowserRouter([
   },
 
   {
+    path:'/inscribe_femcoders',
+    element: <AddPersonFemcoders />
+  },
+
+  {
+    path:'/inscribe_digitalacademy',
+    element: <AddPersonDigitalAcademy />
+  },
+
+  {
     path: '/recruitment',
     element: <DefaultLayoutRecruitment title='Captación'/>,
     children:[
@@ -105,11 +134,9 @@ const Router = createBrowserRouter([
         path:'/recruitment/person/index',
         element: <IndexPerson />
       },
-       //Comments
-  
       {
-        path: '/recruitment/comments',
-        element: <CommentsIndexByPerson />
+      path: '/recruitment/person/:id',
+      element: <ShowPerson />
       },
       //
       {
