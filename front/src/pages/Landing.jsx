@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import Logo from "../../src/assets/img/logo.png";
 
 // components
 
@@ -39,13 +40,12 @@ export default function Landing() {
 
                    <span className=""> No necesitas titulación o conocimientos previos. <br />
                     Sólo importa tu motivación, tu lógica, tu autonomía y tu capacidad de trabajar en equipo.</span>
-
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div
+          {/* <div
             className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
             style={{ transform: "translateZ(0)" }}
           >
@@ -63,7 +63,7 @@ export default function Landing() {
                 points="2560 0 2560 100 0 100"
               ></polygon>
             </svg>
-          </div>
+          </div> */}
         </div>
 
         <section className="pb-20 bg-blueGray-200 -mt-20">
@@ -72,32 +72,29 @@ export default function Landing() {
               <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
-                  <Link to="/recruitment/selectionday/add">
-          <button className="bg-orange-500 border border-orange-500 text-white uppercase font-semibold px-4 py-2 rounded mb-4 ">
-            Inscríbete a FemCoders
-          </button>
-        </Link>
-                    {/* <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-orange-500">
-                      <i className="fas fa-award"></i>
-                    </div> */}
+                    <Link to="/inscribe_femcoders">
+                      <button className="bg-orange-500 border border-orange-500 text-white uppercase font-semibold px-4 py-2 rounded mb-4 ">
+                        Inscríbete a FemCoders
+                      </button>
+                    </Link>
                     <img
-                    alt="..."
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
-                    className="w-full align-middle rounded-t-lg"
-                  />
-                    <h6 className="text-xl font-semibold">FemCoders</h6>
-                    <p className="mt-2 mb-4 text-blueGray-500">
-                      Bootcamp intensivo Full Stack.
-                        
-                        Inicio:
-                        Octubre 2023.
-                        Duración:
-                        6 meses, 850 horas.
-                        Modalidad:
-                        Online (en tiempo real).
-                        Financiador:
-                        Google.org 
+                      alt="FemCoders"
+                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
+                      className="w-full align-middle rounded-t-lg"
+                    />
+                     <div className="text-grey-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-3 mt-3 shadow-lg rounded-full bg-teal-500">
+                      <i className="fas fa-fingerprint">Fem</i>
+                    </div>
+                    <h6 className="text-2xl font-bold p-2 text-orange-600">FemCoders - Online - Solo Mujeres</h6>
+                    <p className="mt-2 mb-4 text-blueGray-500 text-center text-xl font-semibold">
+                      Bootcamp intensivo Full Stack
                     </p>
+                    <ul className="text-xl">
+                      <li>Inicio: Octubre 2023</li>
+                      <li>Duración: 6 meses, 850 horas</li>
+                      <li>Modalidad: Online (en tiempo real).</li>
+                      <li>Financiador: Google.org </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -105,14 +102,29 @@ export default function Landing() {
               <div className="w-full md:w-4/12 px-4 text-center">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
-                    <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
-                      <i className="fas fa-retweet"></i>
+                  <Link to="/inscribe">
+                      <button className="bg-orange-500 border border-orange-500 text-white uppercase font-semibold px-4 py-2 rounded mb-4 ">
+                        Inscríbete próximos Bootcamps
+                      </button>
+                    </Link>
+                    <img
+                      alt="Digital Academy"
+                      src="https://factoriaf5.org/wp-content/uploads/2023/07/ciberseguridad_factoria_f5_tech_time_2_skill-600x338.jpg"
+                      className="w-full align-middle rounded-t-lg"
+                    />
+                    <div className="text-grey-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-3 mt-3 shadow-lg rounded-full bg-teal-500">
+                      <i className="fas fa-fingerprint">F5</i>
                     </div>
-                    <h6 className="text-xl font-semibold">Free Revisions</h6>
-                    <p className="mt-2 mb-4 text-blueGray-500">
-                      Keep you user engaged by providing meaningful information.
-                      Remember that by this time, the user is curious.
+                    <h6 className="text-2xl font-bold p-2 text-orange-600">Próximos Bootcamps</h6>
+                    <p className="mt-2 mb-4 text-blueGray-500 text-center text-xl font-semibold">
+                      Bootcamps inclusivos. <br />Inscríbete y te avisaremos la próxima convocatoria.
                     </p>
+                    <ul className="text-xl">
+                      <li>Metaverso</li>
+                      <li>Ciberseguridad</li>
+                      <li>Inteligencia Artificial</li>
+                      <li>Otros</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -120,14 +132,29 @@ export default function Landing() {
               <div className="pt-6 w-full md:w-4/12 px-4 text-center">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
-                    <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
-                      <i className="fas fa-fingerprint"></i>
+                    <Link to="/inscribe_digitalacademy">
+                      <button className="bg-orange-500 border border-orange-500 text-white uppercase font-semibold px-4 py-2 rounded mb-4 ">
+                        Inscríbete a Digital Academy
+                      </button>
+                    </Link>
+                    <img
+                      alt="Digital Academy"
+                      src="https://factoriaf5.org/wp-content/uploads/2023/07/desarrollo_web_full_stack_tecnologias_inmersivas_madrid_factoria_f5-600x400.jpg"
+                      className="w-full align-middle rounded-t-lg"
+                    />
+                    <div className="text-grey-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-3 mt-3 shadow-lg rounded-full bg-teal-500">
+                      <i className="fas fa-fingerprint">Mixto</i>
                     </div>
-                    <h6 className="text-xl font-semibold">Verified Company</h6>
-                    <p className="mt-2 mb-4 text-blueGray-500">
-                      Write a few lines about each one. A paragraph describing a
-                      feature will be enough. Keep you user engaged!
+                    <h6 className="text-2xl font-bold p-2 text-orange-600">Digital Academy - Asturias - Mixto</h6>
+                    <p className="mt-2 mb-4 text-blueGray-500 text-center text-xl font-semibold">
+                      Bootcamp intensivo Full Stack.
                     </p>
+                    <ul className="text-xl">
+                      <li>Inicio: Octubre 2023.</li>
+                      <li>Duración: 6 meses, 850 horas.</li>
+                      <li>Modalidad: Online (jueves presenciales en Langreo).</li>
+                      <li>Financiador: Capgemini </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -135,25 +162,26 @@ export default function Landing() {
 
             <div className="flex flex-wrap items-center mt-32">
               <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
-                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+                {/* <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                   <i className="fas fa-user-friends text-xl"></i>
-                </div>
+                </div> */}
+                <img src={Logo} alt="" />
                 <h3 className="text-3xl mb-2 font-semibold leading-normal">
-                  Working with us is a pleasure
+                  Nuestra Asociación
                 </h3>
-                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                   let your uses guess by attaching tooltips and popoves to
-                  any element. Just make sure you enable them first via
-                  JavaScript.
+                <p className="text-xl font-regular leading-relaxed mt-4 mb-4 text-blueGray-600">
+                Somos <span className="text-orange-600 font-bold text-2xl">Factoría F5</span>, una asociación sin ánimo de lucro que construye la primera red de escuelas digitales solidarias, 
+                <strong> inclusivas y gratuitas</strong> en España dedicadas a ofrecer oportunidades a personas en situación de vulnerabilidad 
+                en el mundo de la programación y del desarrollo web.
                 </p>
-                <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
-                  The kit comes with three pre-built pages to help you get
-                  started faster. You can change the text and images and you're
-                  good to go. Just make sure you enable them first via
-                  JavaScript.
+                <p className="text-xl font-regular leading-relaxed mt-0 mb-4 text-blueGray-600">
+                  Mediante formaciones intensivas y talleres totalmente gratuitos, trabajamos con una metodología innovadora,
+                  100% práctica y orientada a la inserción laboral, basada en el modelo de éxito internacional Simplon.co.
+                  Apoyada por método de aprendizaje ABP: aprendizaje basado en proyectos llevado a cabo de forma colaborativa
+                  con en fin de recrear el ambiente de forma constante.
                 </p>
-                <Link to="/" className="font-bold text-blueGray-700 mt-8">
-                  Check Notus React!
+                <Link to="https://factoriaf5.org/somos/#equipo" className="font-bold text-orange-600 mt-8">
+                  ¡Conoce al equipo!
                 </Link>
               </div>
 
