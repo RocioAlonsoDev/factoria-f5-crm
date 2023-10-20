@@ -4,23 +4,22 @@ import TableCompetencesAtom from '../../components/atoms/TableCompetencesAtom';
 import CategoryDataService from '../../services/trackingService/category.service';
 
 export default function Evaluation() {
-  const [categories, setCategories] = useState([]); // Inicializa categories como una matriz vacía
+  const [categories, setCategories] = useState([])
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCategory = async () => {
       try {
         const response = await CategoryDataService.getAll();
-        // Configura el estado categories con los datos de la API
+      
         setCategories(response.data);
-        setIsLoading(false); // Establece isLoading en false una vez que se han cargado los datos
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
-        setIsLoading(false); // Asegúrate de manejar el error adecuadamente
+        setIsLoading(false); 
       }
     };
 
-    // Llama a la función para cargar los datos de la API
     fetchCategory();
   }, []);
 
@@ -56,8 +55,7 @@ export default function Evaluation() {
           <div>
             <TableCompetencesAtom
               captionTittles="Evolución de competencias()"
-              categories={categories} // Pasa las categorías como prop
-            
+              categories={categories}
             />
           </div>
         )}

@@ -13,13 +13,13 @@ function TableCompetencesAtom(props) {
             </caption>
             <thead className="border-b font-medium dark:border-neutral-200">
               <tr>
-                <th className="border-r px-6 py-4 dark:border-neutral-200">Fecha</th>
-                <th className="border-r px-6 py-4 dark:border-neutral-200">Tipo</th>
+                <th className="text-xl border-r px-6 py-4 dark:border-neutral-200">Fecha</th>
+                <th className="text-xl border-r px-6 py-4 dark:border-neutral-200">Tipo</th>
                 {categories &&
                   categories.map((category) => (
                     <th
                       scope="col"
-                      className="border-r px-6 py-4 dark:border-neutral-200"
+                      className="text-xl border px-6 py-4 dark:border-neutral-200"
                       key={category.name}
                       colSpan={category.skills.length}
                     >
