@@ -15,33 +15,67 @@ function TableCompetencesAtom(props) {
               <tr>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Fecha</th>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Tipo</th>
-                  {categories &&
-                    categories.map((category) => (
-                      <th
-                        scope="col"
+                {categories &&
+                  categories.map((category) => (
+                    <th
+                      scope="col"
+                      className="border-r px-6 py-4 dark:border-neutral-200"
+                      key={category.name}
+                      colSpan={category.skills.length}
+                    >
+                      {category.name}
+                    </th>
+                  ))}
+              </tr>
+              {/* Agrega una fila para los selectores */}
+              <tr>
+                <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
+                <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
+                {categories.map((category) =>
+                  category.skills.length ? (
+                    category.skills.map((skill, skillIndex) => (
+                      <td
+                        key={`${category.name}-${skillIndex}`}
                         className="border-r px-6 py-4 dark:border-neutral-200"
-                        key={category.name}
-                        colSpan={category.skills.length}>
-                        {category.name}
-                      </th>
-                    ))}
+                      >
+                        {skill.name}
+                      </td>
+                    ))
+                  ) : (
+                    <td className="border-r px-6 py-4 dark:border-neutral-200">-</td>
+                  )
+                )}
               </tr>
             </thead>
             <tbody className="border-b font-medium dark:border-neutral-200">
               <tr>
                 <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
                 <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
-                  {categories.map((category) =>
-                    category.skills.length ? (
-                      category.skills.map((skill, skillIndex) => (
-                        <td
-                          key={`${category.name}-${skillIndex}`}
-                          className="border-r px-6 py-4 dark:border-neutral-200">
-                          {skill.name}
-                        </td>
-                      ))
+                {categories.map((category) =>
+                  category.skills.length ? (
+                    category.skills.map((skillIndex) => (
+                      <td
+                        key={`${category.name}-${skillIndex}`}
+                        className="border-r px-6 py-4 dark:border-neutral-200"
+                      >
+                        <select
+                          select
+                          name={`level-${skillIndex}`}
+                          id={`level-${skillIndex}`}
+                        >
+                          <option value="">--Selecciona un nivel--</option>
+                          <option value="1">LEVEL 1</option>
+                          <option value="2">LEVEL 2</option>
+                          <option value="3">LEVEL 3</option>
+                          <option value="4">LEVEL 4</option>
+                          <option value="5">LEVEL 5</option>
+                          <option value="6">LEVEL 6</option>
+                          <option value="7">LEVEL 7</option>
+                        </select>
+                      </td>
+                    ))
                   ) : (
-                <td className="border-r px-6 py-4 dark:border-neutral-200">-</td>
+                    <td className="border-r px-6 py-4 dark:border-neutral-200">-</td>
                   )
                 )}
               </tr>
