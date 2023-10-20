@@ -7,6 +7,27 @@ function TableCompetencesAtom(props) {
     return <div>No se proporcionaron datos de las competencias.</div>;
   }
 
+  // Inicializar combinedData con arrays vacíos para cada competencia
+  const combinedData = {
+    fecha: [],
+    tipo: [],
+    ...tittlesCompetence.reduce((acc, competence) => ({ ...acc, [competence]: [] }), {}),
+  };
+
+  // Combinar todos los datos en combinedData
+  contents.forEach((content) => {
+    {combinedData.fecha.length > 0 ? combinedData.fecha.join(', ') : ''}
+    // {combinedData.tipo.length > 0 ? combinedData.tipo.join(', ') : ''}
+    combinedData.tipo.push(content.tipo ? content.tipo : '');
+
+
+
+
+    tittlesCompetence.forEach((competence) => {
+      combinedData[competence].push(content.competences[competence] ? content.competences[competence].join() : '');
+    });
+  });
+
   return (
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
       <div className="block w-full overflow-x-auto">
@@ -29,27 +50,19 @@ function TableCompetencesAtom(props) {
                 ))}
               </tr>
             </thead>
-            <tbody className="border-b font-medium dark:border-neutral-200">
-              {contents.map((competenceData, rowIndex) => (
-                <tr key={`contentRow-${rowIndex}`}>
-                  <td className="border-r px-6 py-4 dark:border-neutral-200">
-                    {competenceData.fecha}
+            <tbody>
+              <tr>
+                <td className="border px-6 py-4 dark:border-neutral-200">{combinedData.fecha.join('')}</td>
+                <td className="border px-6 py-4 dark:border-neutral-200">{combinedData.tipo.join('')}</td>
+                {tittlesCompetence.map((competence, i) => (
+                  <td
+                    key={`combined-${i}`}
+                    className="border-r px-6 py-4 dark:border-neutral-200"
+                  >
+                    {combinedData[competence].join('')}
                   </td>
-                  <td className="border-r px-6 py-4 dark:border-neutral-200">
-                    {competenceData.tipo}
-                  </td>
-                  {tittlesCompetence.map((competence, i) => (
-                    <td
-                      key={`content-${rowIndex}-${i}`}
-                      className="border-r px-6 py-4 dark:border-neutral-200"
-                    >
-                      {competenceData.competences[competence]
-                        ? competenceData.competences[competence].join(', ')
-                        : '-'}
-                    </td>
-                  ))}
-                </tr>
-              ))}
+                ))}
+              </tr>
             </tbody>
           </table>
         </div>
