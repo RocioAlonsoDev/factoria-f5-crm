@@ -4,35 +4,26 @@ import TableCompetencesAtom from '../../components/atoms/TableCompetencesAtom';
 import CategoryDataService from '../../services/trackingService/category.service';
 
 export default function Evaluation() {
-  const [categories, setCategories] = useState([]);
-  const [tittlesCompetence, setTittlesCompetence] = useState([]); // Define tittlesCompetence antes de usarlo
+  const [categories, setCategories] = useState([]); // Inicializa categories como una matriz vacía
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    CategoryDataService.getAll()
-      .then(({ data }) => {
-        console.log(data)
-        // Reformatea los datos de la API
-        const formattedData = data.map((category) => ({
-          fecha: '', // Establece la fecha según tus necesidades
-          tipo: '',  // Establece el tipo según tus necesidades
-          competences: {
-            [category.name]: category.skills.map((skill) => skill.name),
-          },
-        }));
-  
-        setCategories(formattedData);
-        setTittlesCompetence(data.map((category) => category.name)); // Define tittlesCompetence aquí
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error al cargar los datos de la API:', error);
-        setIsLoading(false);
-      });
+    const fetchCategory = async () => {
+      try {
+        const response = await CategoryDataService.getAll();
+        // Configura el estado categories con los datos de la API
+        setCategories(response.data);
+        setIsLoading(false); // Establece isLoading en false una vez que se han cargado los datos
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false); // Asegúrate de manejar el error adecuadamente
+      }
+    };
+
+    // Llama a la función para cargar los datos de la API
+    fetchCategory();
   }, []);
-  
-  const heads = ["Fecha", "Tipo", ...tittlesCompetence]; // Ahora tittlesCompetence está definido
-  
+
   // Estado para controlar si los selectores deben mostrarse
   const [showSelects, setShowSelects] = useState(false);
 
@@ -43,7 +34,7 @@ export default function Evaluation() {
     const newContentData = {
       fecha: '', // Establece la fecha según tus necesidades
       tipo: '', // Establece el tipo según tus necesidades
-      competences: new Array(tittlesCompetence.length).fill('-'),
+      competences: new Array(categories.length).fill('-'), // Usa categories en lugar de tittlesCompetence
     };
 
     // Agrega la nueva fila al estado
@@ -65,9 +56,7 @@ export default function Evaluation() {
           <div>
             <TableCompetencesAtom
               captionTittles="Evolución de competencias()"
-              contents={categories} // Cambia bodyContent a categories para mostrar los datos de la API
-              showSelects={showSelects}
-              tittlesCompetence={tittlesCompetence}
+              categories={categories} // Pasa las categorías como prop
             />
           </div>
         )}
@@ -77,7 +66,7 @@ export default function Evaluation() {
         <TableContentAtom
           date="FECHA"
           captionTittles="Stacks Femcoders Norte"
-          theadTittles={heads}
+          // theadTittles={heads}
           dateWrite="2023-09-23"
           tableData={bodyContent} // Pasa el estado como prop
           dateEvaluation="2023-03-12"

@@ -1,18 +1,22 @@
 import React from 'react';
 
-function TableCompetencesAtom(props) {
-  const { captionTittles, tittlesCompetence, contents, showSelects } = props;
+function TablecategorysAtom(props) {
+  // const { captionTittles, tittlescategory, contents, showSelects } = props;
+   
+  const {categories, captionTittles} = props;
+  console.log(categories);
 
-  if (!tittlesCompetence || tittlesCompetence.length === 0) {
-    return <div>No se proporcionaron datos de las competencias.</div>;
-  }
 
-  // Extrae todas las competencias únicas de los contenidos
-  const allCompetences = Array.from(
-    new Set(
-      contents.flatMap((content) => Object.keys(content.competences || {}))
-    )
-  );
+  // if (!tittlescategory || tittlescategory.length === 0) {
+  //   return <div>No se proporcionaron datos de las competencias.</div>;
+  // }
+
+  // // Extrae todas las competencias únicas de los contenidos
+  // const allcategorys = Array.from(
+  //   new Set(
+  //     contents.flatMap((skill) => Object.keys(skill.categorys || {}))
+  //   )
+  // );
 
   return (
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -26,34 +30,32 @@ function TableCompetencesAtom(props) {
               <tr>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Fecha</th>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Tipo</th>
-                {allCompetences.map((competence) => (
+                {categories && categories.map((category) => (
                   <th
                     scope="col"
                     className="border-r px-6 py-4 dark:border-neutral-200"
-                    key={competence}
-                    colSpan={contents.flatMap((content) =>
-                      content.competences[competence] ? content.competences[competence].length : 0
-                    )}
+                    key={category.name}
+                    colSpan={category.skills.length}
                   >
-                    {competence}
+                    {category.name}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="border-b font-medium dark:border-neutral-200">
-              {contents.map((content, rowIndex) => {
+            {/* <tbody className="border-b font-medium dark:border-neutral-200">
+              {contents.map((skill, rowIndex) => {
                 const contentCells = [
                   <td key="fecha" className="border px-6 py-4 dark:border-neutral-200">
-                    {content.fecha}
+                    {skill.fecha}
                   </td>,
                   <td key="tipo" className="border px-6 py-4 dark:border-neutral-200">
-                    {content.tipo}
+                    {skill.tipo}
                   </td>,
-                  ...allCompetences.flatMap((competence) => {
-                    const skills = content.competences[competence] || [];
+                  ...allcategorys.flatMap((category) => {
+                    const skills = skill.categorys[category] || [];
                     return skills.map((value, i) => (
                       <td
-                        key={`content-${rowIndex}-${i}`}
+                        key={`skill-${rowIndex}-${i}`}
                         className="border-r px-6 py-4 dark:border-neutral-200"
                       >
                         {value}
@@ -63,8 +65,8 @@ function TableCompetencesAtom(props) {
                 ];
 
                 const selectCells = showSelects
-                  ? allCompetences.flatMap((competence) => {
-                      const skills = content.competences[competence] || [];
+                  ? allcategorys.flatMap((category) => {
+                      const skills = skill.categorys[category] || [];
                       return skills.map((value, i) => (
                         <td
                           key={`select-${rowIndex}-${i}`}
@@ -92,7 +94,7 @@ function TableCompetencesAtom(props) {
                   </React.Fragment>
                 );
               })}
-            </tbody>
+            </tbody> */}
           </table>
         </div>
       </div>
@@ -100,4 +102,4 @@ function TableCompetencesAtom(props) {
   );
 }
 
-export default TableCompetencesAtom;
+export default TablecategorysAtom;
