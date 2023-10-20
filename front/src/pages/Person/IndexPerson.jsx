@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import TableAtom from '../../components/atoms/TableAtom';
 import PersonDataService from './../../services/crmService/person.service';
 import PersonRequirementsDataService from '../../services/recruitmentService/personRequirements.service';
+import ToggleButton from '../../components/atoms/ToggleButton';
+import { Link } from 'react-router-dom';
+
 
 export default function IndexPerson() {
   const [people, setPeople] = useState([]);
@@ -27,7 +30,7 @@ export default function IndexPerson() {
     15: 'No enviar convocatoria',
   };
 
-  const columns = ['Nombre', 'Apellidos', 'email', 'Teléfono', 'Ciudad', 'Comunidad Autónoma',
+  const columns = ['','Nombre', 'Apellidos', 'email', 'Teléfono', 'Ciudad', 'Comunidad Autónoma',
     '¿Acepta la política de protección de datos?', 'Edad', 'Género', 'Fecha de inscripción',
     'RIC', 'Talleres F5', 'Jornada de puertas abiertas', 'Jornada de selección', 'Decisión'];
 
@@ -181,6 +184,16 @@ export default function IndexPerson() {
     const jsValue = selectStatus[`${person.id}_${jsRequirementId}`] || '';
 
     return {
+      '': <Link to={`/person/${person.id}`}>
+      <button
+      className="bg-transparent mx-2 text-orange-500 outline-orange-500  hover:bg-orange-500 hover:text-white 
+      hover:outline-orange-500 my-2 active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none 
+      focus:outline-none ease-linear transition-all duration-150" 
+      type="button"
+  >
+      Ver coder 
+  </button>
+  </Link>,
       Nombre: person.name,
       Apellidos: person.surname,
       email: person.email,
@@ -228,8 +241,14 @@ export default function IndexPerson() {
   });
 
   return (
-    <div  className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
-      <TableAtom tableTitle={'Todas las personas inscritas'} columns={columns} data={data} />
+    
+    <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
+    <div className="w-1/3 mx-auto m-16">
+      <ToggleButton />
     </div>
+    <TableAtom tableTitle={'Todas las personas inscritas'} columns={columns} data={data} />
+  </div>
+
+    
   );
 }
