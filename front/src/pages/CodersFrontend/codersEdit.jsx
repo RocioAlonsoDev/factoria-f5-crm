@@ -3,6 +3,7 @@ import {  useParams } from "react-router-dom";
 import PersonDataService from '../../services/crmService/person.service';
 import { useNavigate } from 'react-router-dom';
 import bootcampService from "../../services/crmService/bootcamp.service";
+import statuService from "../../services/crmService/status.service";
 
 export default function CodersEdit() {
     const { id } = useParams(); 
@@ -68,6 +69,8 @@ export default function CodersEdit() {
     
       }, [id]);
 
+
+
       const [bootcamps, setBootcamps] = useState('');
       useEffect(() => {
         const fetchBootcamps = async () => {
@@ -82,6 +85,24 @@ export default function CodersEdit() {
 
       } 
       fetchBootcamps()
+    },[] )
+        
+
+
+    const [status, setStatus] = useState('');
+      useEffect(() => {
+        const fetchStatus = async () => {
+          try {
+
+            const response = await statuService.getAll()
+            setStatus(response.data.data)
+          
+        } catch (error) {
+          console.error('Error fetching status:', error);
+        }
+
+      } 
+      fetchStatus()
     },[] )
         
     
@@ -233,11 +254,13 @@ export default function CodersEdit() {
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Status:</label>
-            <input
-              value={id_status}
-              onChange={(e) => setId_status(e.target.value)}
-              className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"
-            />
+            <select name="id_status" id="id_status" onChange={(e) => setId_status(e.target.value)}>
+              <option value="">--Please choose an option--</option>
+              {status && status.map((status) => ( 
+                <option value={status.id} key={status.index} selected={id_status === status.id ? "selected" : ""}>{status.name}</option>
+              ))}
+        
+            </select>
           </div>
         </div>
 
