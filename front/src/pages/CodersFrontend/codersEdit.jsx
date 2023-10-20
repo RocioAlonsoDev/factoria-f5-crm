@@ -262,7 +262,7 @@ export default function CodersEdit() {
               onChange={(e) => setDataprotection(e.target.value)}
               className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"              
             >
-              <option value="">--Please choose an option--</option>
+              <option value="">--Por favor, escoge una opción--</option>
               <option value="sí">Sí</option>
               <option value="no">No</option>
             </select>
@@ -291,7 +291,7 @@ export default function CodersEdit() {
                 onChange={(e) => setGender(e.target.value)}    
                 className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"               
                 >
-                <option value="">--Please choose an option--</option>
+                <option value="">--Por favor, escoge una opción--</option>
                 <option value="Mujer">Mujer</option>
                 <option value="Hombre">Hombre</option>
                 <option value="No binario">No binario</option>
@@ -316,7 +316,7 @@ export default function CodersEdit() {
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Status:</label>
             <select name="id_status" id="id_status" value={id_status}  onChange={(e) => setId_status(e.target.value)} className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300">
-              <option value="">--Please choose an option--</option>
+              <option value="">--Por favor, escoge una opción--</option>
               {status && status.map((status) => ( 
               <option value={status.id} key={status.id}>{status.name}</option>
 
@@ -330,7 +330,7 @@ export default function CodersEdit() {
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Bootcamp:</label>
             <select name="id_bootcamp" id="id_bootcamp" value={id_bootcamp}  onChange={(e) => setId_bootcamp(e.target.value)} className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300">
-              <option value="">--Please choose an option--</option>
+              <option value="">--Por favor, escoge una opción--</option>
               {bootcamps && bootcamps.map((bootcamp) => ( 
                 <option value={bootcamp.id} key={bootcamp.id}>{bootcamp.name}</option>
               ))}
