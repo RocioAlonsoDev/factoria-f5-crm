@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Person;
 use App\Models\Person_Bootcamp;
 use Illuminate\Http\Request;
 
@@ -10,14 +10,17 @@ class PersonBootcampController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getPeopleInBootcamp($bootcamp)
+    public function getPeopleInBootcamp($id_bootcamp)
     {
-        $people = Person_Bootcamp::where('id_bootcamp', $bootcamp)->get();
-        if ($people->count() > 0) {
+        $peopleBootcamp = Person_Bootcamp::where('id_bootcamp', $id_bootcamp)->get();
+       /* if ($people->count() > 0) {
             return response()->json(['data' => $people], 200);
         } else {
             return response()->json(['error' => 'No se encontraron personas en el bootcamp'], 404);
-        }
+        }*/
+        $id_person = $peopleBootcamp->pluck('id_person');
+        $peopleInBootcamp = Person::whereIn('id', $id_person)->get();
+        return response()->json(['peopleInBootcamp' => $peopleInBootcamp]);
     }
 
     public function index()
