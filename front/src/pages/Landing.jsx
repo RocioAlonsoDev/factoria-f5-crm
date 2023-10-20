@@ -266,7 +266,7 @@ export default function Landing() {
                     className="shadow-lg rounded-full mx-auto max-w-120-px"
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Amaia Abarroa</h5>
+                    <h5 className="text-xl font-bold">Amaia Abaroa</h5>
                     <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
                       Full Stack Developer
                     </p>
@@ -336,7 +336,7 @@ export default function Landing() {
                     className="shadow-lg rounded-full mx-auto max-w-120-px"
                   />
                   <div className="pt-6 text-center">
-                    <h5 className="text-xl font-bold">Lili Fernandez</h5>
+                    <h5 className="text-xl font-bold">Lili Gutiérrez</h5>
                     <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
                       Full Stack Developer
                     </p>
