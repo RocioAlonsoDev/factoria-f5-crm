@@ -7,7 +7,22 @@ import BarChart from "./BarChart";
 
 function Statistics() {
   const [ageData, setAgeData] = useState([]);
-  const [womenData, setWomenData] = useState([]);
+  const [womenData, setWomenData] = useState({
+    current_year: {
+      year: '',
+      total_women: '',
+      percentage: '',
+    },
+    previous_year: {
+      year: '',
+      total_women: '',
+      percentage: '',
+    },
+    percentage_difference: '',
+  });
+  const [womenDataCurrentYear, setWomenDataCurrentYear] = useState([]);
+  const [womenDataPreviousYear, setWomenDataPreviousYear] = useState([]);
+  const [womenDataYearsDifferencePercentage, setWomenDataYearsDifferencePercentage] = useState([]);
 
   useEffect(() => {
     StatisticsDataService.getTotalAgePercentages()
@@ -22,19 +37,47 @@ function Statistics() {
 
   console.log("AgeData:", ageData.totalPeople);
 
-
+  // useEffect(() => {
+  //   StatisticsDataService.getTotalWomenByYear()
+  //     .then(async (response) => {
+  //       console.log("ResponseWomen:", response.data);
+  //       const totalWomen = response.data.current_year.total_women;
+  
+  //       // Asegúrate de que totalWomen no sea undefined antes de actualizar la tarjeta
+  //       if (totalWomen !== undefined) {
+  //         // Actualiza el estado de la tarjeta con el nuevo valor
+  //         // Puedes hacerlo así:
+  //         const updatedWomenData = { ...womenDataCurrentYear };
+  //         updatedWomenData.totalWomen = totalWomen;
+  //         setWomenDataCurrentYear(updatedWomenData);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching gender data:", error);
+  //     });
+  // }, []);
+  
+  // console.log('WomenData', womenDataCurrentYear);
+  
   useEffect(() => {
     StatisticsDataService.getTotalWomenByYear()
       .then(async (response) => {
         console.log("ResponseWomen:", response.data);
-          setWomenData(response.data)
+        setWomenData(response.data);
+        
+        // Extrae los datos específicos y actuliza los estados
+        const { current_year, previous_year} = response.data;
+        setWomenDataCurrentYear(current_year);
+        setWomenDataPreviousYear(previous_year);
+
       })
       .catch((error) => {
         console.error("Error fetching gender data:", error);
       });
   }, []);
 
-  console.log("WomenData:", womenData.current_year.total_women);
+  console.log("WomenData", womenData.percentage_difference);
+
   return (
     <>
       <div className="md:block md:absolute md:top-[117px] md:left-64 md:right-0 w-auto p-2">
@@ -67,12 +110,12 @@ function Statistics() {
             ></CardStatsAtom>
 
             <CardStatsAtom
-              statSubtitle={"Total Mujeres 2023"}
-              statTitle={"womenData.current_year.total_women"}
-              statArrow={"up"}
-              statPercent={"3.48"}
-              statPercentColor={"text-emerald-500"}
-              statDescripiron={"Since last month"}
+              statSubtitle={`Total Mujeres ${womenDataCurrentYear.year}`}
+              statTitle={womenDataCurrentYear.total_women}
+              // statArrow={"up"}
+              statPercent={womenData.percentage_difference}
+              statPercentColor={"text-black-800 text-lg"}
+              statDescripiron={`Diferencia con respecto al ${womenDataPreviousYear.year}`}
               statIconColor={"bg-orange-500"}
               statIconImage={
                 <svg
