@@ -1,5 +1,3 @@
-
-
 // export default function BarGraphicAtom() {
 //   return (
 //     <>
@@ -149,20 +147,25 @@
 //   );
 // }
 
-
-
 import { useEffect, useState } from "react";
-import PersonDataService from "../../../services/crmService/person.service";
+import StatisticsDataService from "../../services/crmService/statistics.service";
 
-
-export default function BarGraphicAtom() {
+export default function BarGraphicTotalGenderPercentages() {
   const [genderData, setGenderData] = useState([]);
-  const colors = ['blue', 'red', 'purple', 'orange', 'emerald', 'indigo', 'yellow'];
+  const colors = [
+    "blue",
+    "red",
+    "purple",
+    "orange",
+    "emerald",
+    "indigo",
+    "yellow",
+  ];
 
   useEffect(() => {
-    PersonDataService.getGenderPercentages()
+    StatisticsDataService.getTotalGenderPercentages()
       .then(async (response) => {
-        console.log("Response:", response)
+        console.log("Response:", response);
         if (Array.isArray(response.data.data)) {
           setGenderData(response.data.data);
         } else {
@@ -174,7 +177,7 @@ export default function BarGraphicAtom() {
       });
   }, []);
 
-    console.log("GenderData:", genderData); 
+  console.log("GenderData:", genderData);
 
   return (
     <>
@@ -203,29 +206,30 @@ export default function BarGraphicAtom() {
               </tr>
             </thead>
             <tbody>
-  {genderData.map((genderItem, index) => (
-    <tr key={genderItem.gender}>
-      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-        {genderItem.gender}
-      </th>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-        {genderItem.count}
-      </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-        <div className="flex items-center">
-          <span className="mr-2">{genderItem.percentage}%</span>
-          <div className={`relative w-full overflow-hidden h-2 text-xs flex rounded bg-${colors[index]}-200`}>
-            <div
-              style={{ width: `${genderItem.percentage}%` }}
-              className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-${colors[index]}-500`}
-            ></div>
-          </div>
-        </div>
-      </td>
-    </tr>
-  ))}
-</tbody>
-
+              {genderData.map((genderItem, index) => (
+                <tr key={genderItem.gender}>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                    {genderItem.gender}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    {genderItem.count}
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <div className="flex items-center">
+                      <span className="mr-2">{genderItem.percentage}%</span>
+                      <div
+                        className={`relative w-full overflow-hidden h-2 text-xs flex rounded bg-${colors[index]}-200`}
+                      >
+                        <div
+                          style={{ width: `${genderItem.percentage}%` }}
+                          className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-${colors[index]}-500`}
+                        ></div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
