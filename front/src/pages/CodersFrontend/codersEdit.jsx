@@ -208,12 +208,6 @@ export default function CodersEdit() {
             {/*Banner*/}
 
 
-
-
-
-
-
-
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Teléfono:</label>
@@ -261,11 +255,18 @@ export default function CodersEdit() {
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Protección de Datos:</label>
-            <input
+            <select
+              name="dataprotection"
+              id="dataprotection"
               value={dataprotection}
               onChange={(e) => setDataprotection(e.target.value)}
-              className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"
-            />
+              className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"              
+            >
+              <option value="">--Please choose an option--</option>
+              <option value="sí">Sí</option>
+              <option value="no">No</option>
+            </select>
+            
           </div>
         </div>
 
@@ -283,13 +284,22 @@ export default function CodersEdit() {
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Género:</label>
-            <input
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"
-            />
+            <select 
+                name="gender" 
+                id="gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}    
+                className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"               
+                >
+                <option value="">--Please choose an option--</option>
+                <option value="Mujer">Mujer</option>
+                <option value="Hombre">Hombre</option>
+                <option value="No binario">No binario</option>
+                <option value="Fluido">Fluido</option>
+                <option value="Otro">Otro</option>
+              </select>
           </div>
-        </div>
+        </div>     
 
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
@@ -305,22 +315,21 @@ export default function CodersEdit() {
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Status:</label>
-            <select name="id_status" id="id_status" value={id_status}  onChange={(e) => setId_status(e.target.value)}>
+            <select name="id_status" id="id_status" value={id_status}  onChange={(e) => setId_status(e.target.value)} className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300">
               <option value="">--Please choose an option--</option>
               {status && status.map((status) => ( 
               <option value={status.id} key={status.id}>{status.name}</option>
-))}
+
+              ))}             
               
-        
             </select>
           </div>
-        </div>
+        </div>        
 
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Bootcamp:</label>
-
-            <select name="id_bootcamp" id="id_bootcamp" value={id_bootcamp} onChange={(e) => setId_bootcamp(e.target.value)}>
+            <select name="id_bootcamp" id="id_bootcamp" value={id_bootcamp}  onChange={(e) => setId_bootcamp(e.target.value)} className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300">
               <option value="">--Please choose an option--</option>
               {bootcamps && bootcamps.map((bootcamp) => ( 
                 <option value={bootcamp.id} key={bootcamp.id}>{bootcamp.name}</option>
@@ -329,9 +338,7 @@ export default function CodersEdit() {
             </select>
 
           </div>
-        </div>
-
-        
+        </div>     
 
            
         <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
