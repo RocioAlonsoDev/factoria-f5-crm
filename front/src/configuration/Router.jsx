@@ -20,12 +20,13 @@ import Evaluation from "../pages/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
-import AllPeople from "../pages/Person/AllPeople";
+
 import IndexPerson from "../pages/Person/IndexPerson";
 import Statistics from "../pages/Statistics/Statistics";
 import CodersEdit from "../pages/CodersFrontend/codersEdit";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
+import IndexPersonSecondPhase from "../pages/Person/IndexPersonSecondPhase";
 
 
 const Router = createBrowserRouter([
@@ -47,10 +48,7 @@ const Router = createBrowserRouter([
     path: '/person/:id',
     element: <ShowPerson />
   },
-  {
-    path: '/people',
-    element: <AllPeople />
-  },
+  
   {
     path: '/stats',
     element: <Statistics />
@@ -137,6 +135,10 @@ const Router = createBrowserRouter([
       {
       path: '/recruitment/person/:id',
       element: <ShowPerson />
+      },
+      {
+        path: '/recruitment/person/secondphase',
+        element: <IndexPersonSecondPhase />
       },
       //
       {

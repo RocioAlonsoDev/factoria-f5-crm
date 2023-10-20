@@ -12,6 +12,9 @@ export default function IndexPerson() {
   const [requirements, setRequirements] = useState([]);
   const [selectStatus, setSelectStatus] = useState({});
 
+
+  
+
   const statusOptions = {
     1: 'En seguimiento',
     2: 'Segundo formulario completado',
@@ -32,7 +35,7 @@ export default function IndexPerson() {
 
   const columns = ['','Nombre', 'Apellidos', 'email', 'Teléfono', 'Ciudad', 'Comunidad Autónoma',
     '¿Acepta la política de protección de datos?', 'Edad', 'Género', 'Fecha de inscripción',
-    'RIC', 'Talleres F5', 'Jornada de puertas abiertas', 'Jornada de selección', 'Decisión'];
+    'RIC' , 'Talleres F5', 'Jornada de puertas abiertas', 'Jornada de selección', 'Decisión'];
 
   const allowedMeetingOptions = [1, 3, 4, 5, 6, 13, 14, 15];
   const allowedTalleresOptions = [1, 3, 4, 7, 8, 13, 14];
@@ -183,6 +186,8 @@ export default function IndexPerson() {
     const jpaValue = selectStatus[`${person.id}_${jpaRequirementId}`] || '';
     const jsValue = selectStatus[`${person.id}_${jsRequirementId}`] || '';
 
+
+
     return {
       '': <Link to={`/person/${person.id}`}>
       <button
@@ -200,7 +205,7 @@ export default function IndexPerson() {
       Teléfono: person.phone,
       Ciudad: person.city,
       'Comunidad Autónoma': person.region,
-      '¿Acepta la política de protección?': person.dataprotection,
+      '¿Acepta la política de protección de datos?': person.dataprotection,
       Edad: age,
       Género: person.gender,
       'Fecha de inscripción': formattedDate,
@@ -246,7 +251,7 @@ export default function IndexPerson() {
     <div className="w-1/3 mx-auto m-16">
       <ToggleButton />
     </div>
-    <TableAtom tableTitle={'Todas las personas inscritas'} columns={columns} data={data} />
+    <TableAtom tableTitle={'PRIMER FORMULARIO: Todas las personas inscritas'} columns={columns} data={data} />
   </div>
 
     
