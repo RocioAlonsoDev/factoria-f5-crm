@@ -20,8 +20,8 @@ export default function Dashboard() {
 
   return (
     <>
-  <div>
-  <div className='h-1/2 bg-teal-700 md:block md:absolute md:top-[80px] md:left-64 md:right-2 lg:bottom-1000 w-auto p-2 pb-5'>
+  <div className= "flex flex-col">
+  <div className='"h-1/2 bg-teal-700 md:block md:absolute md:top-[80px] md:left-64 md:right-2 lg:bottom-1000 w-auto p-2 pb-5'>
   <div className="px-4 mt-5 md:px-10 mx-auto w-full">
     <h2 className="mb-4 text-xl font-bold leading-none tracking-tight text-white text-center md:text-5xl lg:text-4xl dark:text-white">CAPTACIÓN</h2>
     <div className="flex flex-wrap px-4 py-20">
