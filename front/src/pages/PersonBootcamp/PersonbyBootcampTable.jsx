@@ -1,23 +1,27 @@
-import PersonDataService from '../../services/crmService/person.service';
+//import PersonDataService from '../../services/crmService/person.service';
 import BootcampDataService from '../../services/crmService/bootcamp.service';
+//import PersonBootcampDataService from '../../services/crmService/personBootcamp.service';
 import { useState, useEffect } from 'react';
-import TableAtom from '../../components/atoms/TableAtom';
+//import TableAtom from '../../components/atoms/TableAtom';
 import { useParams } from 'react-router';
 
 
-export default function PersonbyBootcampTable() {
+
+export default function PersonbyBootcampTable(){
  
   const { id } = useParams();
   const [bootcamps, setBootcamps] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(true); 
-  /*const [id_bootcamp, setId_bootcamp] = useState([]);
-  useEffect(() => {
+  //const [isLoading, setIsLoading] = useState(true); 
+  //const [id_bootcamp, setId_bootcamp] = useState([]);
+ /* useEffect(() => {
     const fetchAll= async ()=> {
       try {
-        if (id_bootcamp) {
-        const response = await BootcampDataService.getPeopleInBootcamp(id_bootcamp)
+        console.log(id)
+        if (id) {
+        const response = await BootcampDataService.getPeopleInBootcamp(id)
         setBootcamps(response.data.data)
+        console.log(bootcamps)
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -25,8 +29,25 @@ export default function PersonbyBootcampTable() {
   }
   return fetchAll;
  
-  }, [id_bootcamp]);
-
+  }, [id]);*/
+  useEffect(() => {
+    BootcampDataService.get(id)
+      .then((response) => {
+        setBootcamps(response.data);
+      })
+      .catch((error) => {
+        console.error('Error al cargar la jornada de selección:', error);
+      });
+  
+    BootcampDataService.getPeopleInBootcamp(id)
+      .then(async (response) => {
+        const Data = response.data.data;
+  
+        const dataPromises = Data.map((bootcamp) => {
+          return BootcampDataService.get(id);
+        });
+     
+      });
   return (
     <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
         <div className="rounded-t bg-white mb-0 px-6 py-6">
@@ -111,7 +132,9 @@ export default function PersonbyBootcampTable() {
         
     </div>
 );
-};*/
+}, [id]); 
+
+/*
 useEffect(() => {
   console.log('ID:', id);
   PersonDataService.showByBootcamp(id)
@@ -150,6 +173,7 @@ useEffect(() => {
       setIsLoading(false);
     });
 }, [id]);
+
 console.log('ID:', id);
 console.log('Bootcamps:', bootcamps);
 if (isLoading) {
@@ -185,5 +209,5 @@ return (
       
     </>
       </div>
-);
+);*/
 }

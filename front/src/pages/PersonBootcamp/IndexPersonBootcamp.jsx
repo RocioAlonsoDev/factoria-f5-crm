@@ -27,6 +27,8 @@ export default function IndexPersonBootcamp() {
       });
   }, []);
 
+
+
   const currentDate = new Date();
 
   const nextBootcamps = bootcamp.filter((bootcamp) => {
@@ -58,7 +60,7 @@ export default function IndexPersonBootcamp() {
       <div className="flex flex-col items-center">
        
         <div className="max-w-screen-lg flex justify-center gap-4 mt-4">
-          {nextBootcamps.map((bootcamp, index) => {
+          {nextBootcamps.map((bootcamp, id) => {
             const formattedDate = new Date(bootcamp.startDate).toLocaleDateString("es-ES", {
               day: "numeric",
               month: "numeric",
@@ -68,7 +70,7 @@ export default function IndexPersonBootcamp() {
 
             return (
               <CardAtom
-                key={index}
+                key={id}
                 name={bootcamp.name}
                 imageUrl={selection}
                 stats={[
@@ -76,9 +78,11 @@ export default function IndexPersonBootcamp() {
                   
                 ]}
                 buttonText="Ver Aspirantes"
-                buttonLink={`/recruitment/personbootcamp/${bootcamp.id}`}
+                buttonLink={`/recruitment/personbybootcamp/${bootcamp.id}`}
+                
                 style={{ width: "20%" }}
-              />
+                >
+                </CardAtom>
             );
           })}
         </div>
