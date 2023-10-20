@@ -105,23 +105,20 @@ export default function CodersEdit() {
       fetchStatus()
     },[] )
 
-    const onImageChoose = (ev) => {
-      const file = ev.target.files[0];
-      console.log(file)
-      const reader = new FileReader();
-      reader.onload = () => {
-        console.log(reader.result)
-        setImage(reader.result)
-        console.log(image)
-        ev.target.value = "";
-      }
-      reader.readAsDataURL(file)
-    }
-        
-    useEffect(() => {
-      console.log(image);
-    }, [image]);
+    const onImageChoose = (e) => {
+      const file = e.target.files[0]; // Get the selected file from the input
     
+      if (file) {
+        const reader = new FileReader();
+    
+        reader.onload = (event) => {
+          const imageData = event.target.result;
+          setImage(imageData); // Update the state with the new image data
+        };
+    
+        reader.readAsDataURL(file);
+      }
+    };
 
     return (
     
@@ -165,24 +162,14 @@ export default function CodersEdit() {
               onChange={(e) => setEmail(e.target.value)}
               className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"
             />
-        </div>
-
-        </div>
-        {/* <div className="block w-full px-4 py-3">
-          <div className="mb-4">
-            <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Foto:</label>
-            <input
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"
-            />
           </div>
-        </div> */}
+        </div>
+        
 
-        {/*Banner*/}
-        <div className="col-span-full">
-              <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                Portada
+         {/*Banner*/}
+        <div className="block w-full px-4 py-3">
+              <label htmlFor="image" className="block uppercase text-blueGray-600 text-md font-bold mb-2">
+                Foto
               </label>
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
@@ -190,9 +177,9 @@ export default function CodersEdit() {
                   <div className="mt-4 flex text-sm leading-6 text-gray-600">
                     <label
                       htmlFor="image"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                      className="relative cursor-pointer rounded-md bg-white font-semibold text-blueGray-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
-<div className="mt-1 flex items-center">
+                      <div className="mt-1 flex items-center">
                         {image && (
                           <img
                             src={image}
@@ -201,8 +188,7 @@ export default function CodersEdit() {
                           />
                         )}
 
-
-{!image && (
+                          {!image && (
                           <span className="mx-auto flex justify-center  items-center text-gray-400 h-12 w-12 overflow-hidden rounded-full bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
@@ -211,7 +197,7 @@ export default function CodersEdit() {
                           </span>
                         )}
                         </div>
-<span>Sube una imagen</span>
+                          <span>Sube una imagen</span>
                       <input id="image" onChange={onImageChoose} name="image" type="file" className="sr-only" />
                     </label>
                   </div>
@@ -322,8 +308,9 @@ export default function CodersEdit() {
             <select name="id_status" id="id_status" value={id_status}  onChange={(e) => setId_status(e.target.value)}>
               <option value="">--Please choose an option--</option>
               {status && status.map((status) => ( 
-                <option value={status.id} key={status.index}>{status.name}</option>
-              ))}
+              <option value={status.id} key={status.id}>{status.name}</option>
+))}
+              
         
             </select>
           </div>
@@ -336,7 +323,7 @@ export default function CodersEdit() {
             <select name="id_bootcamp" id="id_bootcamp" value={id_bootcamp} onChange={(e) => setId_bootcamp(e.target.value)}>
               <option value="">--Please choose an option--</option>
               {bootcamps && bootcamps.map((bootcamp) => ( 
-                <option value={bootcamp.id} key={bootcamp.index}>{bootcamp.name}</option>
+                <option value={bootcamp.id} key={bootcamp.id}>{bootcamp.name}</option>
               ))}
         
             </select>
