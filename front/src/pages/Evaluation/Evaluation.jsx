@@ -57,6 +57,7 @@ export default function Evaluation() {
             <TableCompetencesAtom
               captionTittles="Evolución de competencias()"
               categories={categories} // Pasa las categorías como prop
+            
             />
           </div>
         )}
