@@ -7,26 +7,12 @@ function TableCompetencesAtom(props) {
     return <div>No se proporcionaron datos de las competencias.</div>;
   }
 
-  // Inicializar combinedData con arrays vacíos para cada competencia
-  const combinedData = {
-    fecha: [],
-    tipo: [],
-    ...tittlesCompetence.reduce((acc, competence) => ({ ...acc, [competence]: [] }), {}),
-  };
-
-  // Combinar todos los datos en combinedData
-  contents.forEach((content) => {
-    {combinedData.fecha.length > 0 ? combinedData.fecha.join(', ') : ''}
-    // {combinedData.tipo.length > 0 ? combinedData.tipo.join(', ') : ''}
-    combinedData.tipo.push(content.tipo ? content.tipo : '');
-
-
-
-
-    tittlesCompetence.forEach((competence) => {
-      combinedData[competence].push(content.competences[competence] ? content.competences[competence].join() : '');
-    });
-  });
+  // Extrae todas las competencias únicas de los contenidos
+  const allCompetences = Array.from(
+    new Set(
+      contents.flatMap((content) => Object.keys(content.competences || {}))
+    )
+  );
 
   return (
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -40,29 +26,72 @@ function TableCompetencesAtom(props) {
               <tr>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Fecha</th>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Tipo</th>
-                {tittlesCompetence.map((competence, i) => (
+                {allCompetences.map((competence) => (
                   <th
-                    key={`competence-${i}`}
+                    scope="col"
                     className="border-r px-6 py-4 dark:border-neutral-200"
+                    key={competence}
+                    colSpan={contents.flatMap((content) =>
+                      content.competences[competence] ? content.competences[competence].length : 0
+                    )}
                   >
                     {competence}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td className="border px-6 py-4 dark:border-neutral-200">{combinedData.fecha.join('')}</td>
-                <td className="border px-6 py-4 dark:border-neutral-200">{combinedData.tipo.join('')}</td>
-                {tittlesCompetence.map((competence, i) => (
-                  <td
-                    key={`combined-${i}`}
-                    className="border-r px-6 py-4 dark:border-neutral-200"
-                  >
-                    {combinedData[competence].join('')}
-                  </td>
-                ))}
-              </tr>
+            <tbody className="border-b font-medium dark:border-neutral-200">
+              {contents.map((content, rowIndex) => {
+                const contentCells = [
+                  <td key="fecha" className="border px-6 py-4 dark:border-neutral-200">
+                    {content.fecha}
+                  </td>,
+                  <td key="tipo" className="border px-6 py-4 dark:border-neutral-200">
+                    {content.tipo}
+                  </td>,
+                  ...allCompetences.flatMap((competence) => {
+                    const skills = content.competences[competence] || [];
+                    return skills.map((value, i) => (
+                      <td
+                        key={`content-${rowIndex}-${i}`}
+                        className="border-r px-6 py-4 dark:border-neutral-200"
+                      >
+                        {value}
+                      </td>
+                    ));
+                  }),
+                ];
+
+                const selectCells = showSelects
+                  ? allCompetences.flatMap((competence) => {
+                      const skills = content.competences[competence] || [];
+                      return skills.map((value, i) => (
+                        <td
+                          key={`select-${rowIndex}-${i}`}
+                          className="border px-6 py-4 dark:border-neutral-200"
+                        >
+                          <select name={`level-${rowIndex}-${i}`} id={`level-${rowIndex}-${i}`}>
+                            <option value="">--Selecciona un nivel--</option>
+                            <option value="1">LEVEL 1</option>
+                            <option value="2">LEVEL 2</option>
+                            <option value="3">LEVEL 3</option>
+                            <option value="4">LEVEL 4</option>
+                            <option value="5">LEVEL 5</option>
+                            <option value="6">LEVEL 6</option>
+                            <option value="7">LEVEL 7</option>
+                          </select>
+                        </td>
+                      ));
+                    })
+                  : null;
+
+                return (
+                  <React.Fragment key={`contentRow-${rowIndex}`}>
+                    <tr>{contentCells}</tr>
+                    {showSelects && <tr>{selectCells}</tr>}
+                  </React.Fragment>
+                );
+              })}
             </tbody>
           </table>
         </div>
