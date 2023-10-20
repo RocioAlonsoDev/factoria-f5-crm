@@ -63,6 +63,7 @@ class PersonSeeder extends Seeder
         'dni' => '98765432B',
         'id_status' => 2, 
         'id_bootcamp' => 1, 
+        'created_at' => '2023-06-19'
  ]);
 
     DB::table('people')->insert([
@@ -80,6 +81,7 @@ class PersonSeeder extends Seeder
         'dni' => '45678912C',
         'id_status' => 3, 
         'id_bootcamp' => 2, 
+        'created_at' => '2023-06-19'
     ]);
 
     DB::table('people')->insert([
@@ -96,7 +98,8 @@ class PersonSeeder extends Seeder
         'gender' => 'no binario',
         'dni' => '78912345D',
         'id_status' => 4, 
-        'id_bootcamp' => 3, 
+        'id_bootcamp' => 3,
+        'created_at' => '2023-06-19' 
     ]);
 
     DB::table('people')->insert([
@@ -114,6 +117,7 @@ class PersonSeeder extends Seeder
         'dni' => '34912345J',
         'id_status' => 4, 
         'id_bootcamp' => 5, 
+        'created_at' => '2022-06-19'
     ]);
 
     DB::table('people')->insert([
@@ -131,6 +135,7 @@ class PersonSeeder extends Seeder
         'dni' => '98912345L',
         'id_status' => 4, 
         'id_bootcamp' => 4, 
+        'created_at' => '2021-09-09'
     ]);
 
     DB::table('people')->insert([
@@ -143,11 +148,12 @@ class PersonSeeder extends Seeder
         'city' => 'Bilbao', 
         'region' => 'País Vasco', 
         'dataprotection' => 'no',
-        'birthdate' => '1976-11-07', 
+        'birthdate' => '2006-11-07', 
         'gender' => 'mujer',
         'dni' => '76512345P',
         'id_status' => 4, 
         'id_bootcamp' => 3, 
+        'created_at' => '2023-02-10'
     ]);
 
     DB::table('people')->insert([
@@ -165,6 +171,7 @@ class PersonSeeder extends Seeder
         'dni' => '12312345L',
         'id_status' => 4, 
         'id_bootcamp' => 2, 
+        'created_at' => '2023-08-08'
     ]);
 
     DB::table('people')->insert([
@@ -182,6 +189,7 @@ class PersonSeeder extends Seeder
         'dni' => '56412345K',
         'id_status' => 4, 
         'id_bootcamp' => 3, 
+        'created_at' => '2022-01-19'
     ]);
 
     DB::table('people')->insert([
@@ -194,11 +202,12 @@ class PersonSeeder extends Seeder
         'city' => 'Madrid', 
         'region' => 'Comunidad de Madrid', 
         'dataprotection' => 'sí',
-        'birthdate' => '1992-12-07', 
+        'birthdate' => '2010-12-07', 
         'gender' => 'no binario',
         'dni' => '90872345M',
         'id_status' => 4, 
         'id_bootcamp' => 4, 
+        'created_at' => '2023-09-11'
     ]);
 }
 }

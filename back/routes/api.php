@@ -46,6 +46,12 @@ Route::resource('/person', PersonController::class);
 Route::resource('/status', StatusController::class);
 Route::resource('/bootcamp', BootcampController::class);
 Route::resource('/role', RoleController::class);
+Route::resource('/genderper', StatisticsController::class);
+
+Route::get('totalGenderPercentage', [StatisticsController::class, 'getTotalGenderPercentages']);
+Route::get('totalWomenByYear', [StatisticsController::class, 'getTotalWomenByYear']);
+Route::get('totalAgePercentage', [StatisticsController::class, 'getTotalAgePercentages']);
+
 
 // Route::get('/',[MailController::class, 'index']);
  Route::get('/discarded',[MailController::class, 'discarded']);
