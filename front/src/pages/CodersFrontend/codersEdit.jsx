@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import {  useParams } from "react-router-dom";
 import PersonDataService from '../../services/crmService/person.service';
 import { useNavigate } from 'react-router-dom';
+import bootcampService from "../../services/crmService/bootcamp.service";
 
 export default function CodersEdit() {
     const { id } = useParams(); 
@@ -66,6 +67,23 @@ export default function CodersEdit() {
         fetchData(); 
     
       }, [id]);
+
+      const [bootcamps, setBootcamps] = useState('');
+      useEffect(() => {
+        const fetchBootcamps = async () => {
+          try {
+
+            const response = await bootcampService.getAll()
+            setBootcamps(response.data.data)
+          
+        } catch (error) {
+          console.error('Error fetching bootcamps:', error);
+        }
+
+      } 
+      fetchBootcamps()
+    },[] )
+        
     
 
     return (
@@ -226,13 +244,19 @@ export default function CodersEdit() {
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Bootcamp:</label>
-            <input
-              value={id_bootcamp}
-              onChange={(e) => setId_bootcamp(e.target.value)}
-              className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"
-            />
+
+            <select name="id_bootcamp" id="id_bootcamp" onChange={(e) => setId_bootcamp(e.target.value)}>
+              <option value="">--Please choose an option--</option>
+              {bootcamps && bootcamps.map((bootcamp) => ( 
+                <option value={bootcamp.id} key={bootcamp.index} selected={id_bootcamp === bootcamp.id ? "selected" : ""}>{bootcamp.name}</option>
+              ))}
+        
+            </select>
+
           </div>
         </div>
+
+        
 
            
         <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
