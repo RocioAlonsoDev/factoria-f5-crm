@@ -16,36 +16,35 @@ function TableCompetencesAtom(props) {
               <tr>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Fecha</th>
                 <th className="border-r px-6 py-4 dark:border-neutral-200">Tipo</th>
-                {categories && categories.map((category) => (
-                  <th
-                    scope="col"
-                    className="border-r px-6 py-4 dark:border-neutral-200"
-                    key={category.name}
-                    colSpan={category.skills.length}
-                  >
-                    {category.name}
-                  </th>
-                ))}
+                {categories &&
+                  categories.map((category) => (
+                    <th
+                      scope="col"
+                      className="border-r px-6 py-4 dark:border-neutral-200"
+                      key={category.name}
+                      colSpan={category.skills.length}
+                    >
+                      {category.name}
+                    </th>
+                  ))}
               </tr>
             </thead>
-           
+
             <tbody className="border-b font-medium dark:border-neutral-200">
-  {categories[0]?.skills.map((_, index) => (
-    <tr key={index}>
-      <td className="border-r px-6 py-4 dark:border-neutral-200">Fecha</td>
-      <td className="border-r px-6 py-4 dark:border-neutral-200">Tipo</td>
-      {categories.map((category) => (
-        category.skills.map((skill, skillIndex) => (
-          <td
-            key={`${category.name}-${skillIndex}`}
-            className="border-r px-6 py-4 dark:border-neutral-200"
-          >
-            {skill.name}
-          </td>
-        ))
-      ))}
-    </tr>
-  ))}
+  <tr>
+    <td className="border-r px-6 py-4 dark:border-neutral-200">Fecha</td>
+    <td className="border-r px-6 py-4 dark:border-neutral-200">Tipo</td>
+    {categories.map((category) =>
+      category.skills.map((skill, skillIndex) => (
+        <td
+          key={`${category.name}-${skillIndex}`}
+          className="border-r px-6 py-4 dark:border-neutral-200"
+        >
+          {skill.name}
+        </td>
+      ))
+    )}
+  </tr>
 </tbody>
 
           </table>
