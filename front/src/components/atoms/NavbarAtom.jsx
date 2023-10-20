@@ -68,3 +68,4 @@ function NavbarAtom({ menuItems }) {
 }
 
 export default NavbarAtom;
+

@@ -7,6 +7,7 @@ import StatusDataService from "../../services/crmService/status.service";
 import CommentsIndexByPerson from "../Comments/CommentsIndexByPerson";
 import EditShowPersonModal from "./EditShowPersonModal";
 
+
 export default function ShowPerson() {
   const { id } = useParams();
   const [person, setPerson] = useState([]);
@@ -51,6 +52,54 @@ export default function ShowPerson() {
   const handleEditProfileClick = () => {
     setIsEditShowPersonModalOpen(true);
   };
+
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
+
+  // const { id } = useParams();
+  // const [person, setPerson] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [isEditShowPersonModalOpen, setIsEditShowPersonModalOpen] = useState(false);
+
+  // useEffect(() => {
+  //   const fetchPersonData = async () => {
+  //     try {
+  //       const response = await PersonDataService.get(id);
+  //       const personData = response.data;
+  //       const bootcampId = personData.id_bootcamp;
+  //       const statusId = personData.id_status;
+
+  //       const [bootcampResponse, statusResponse] = await Promise.all([
+  //         BootcampDataService.get(bootcampId),
+  //         StatusDataService.get(statusId),
+  //       ]);
+
+  //       const bootcampName = bootcampResponse.data.name;
+  //       const statusName = statusResponse.data.name;
+
+  //       const updatedPerson = {
+  //         ...personData,
+  //         bootcamp: bootcampName,
+  //         status: statusName
+  //       };
+
+  //       setPerson(updatedPerson);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       console.error('Error fetching person data', error);
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchPersonData();
+  // }, [id]);
+
+  // console.log("Person:", person);
+
+  // const handleEditProfileClick = () => {
+  //   setIsEditShowPersonModalOpen(true);
+  // };
 
   if (isLoading) {
     return <div>Cargando...</div>;
@@ -276,7 +325,7 @@ export default function ShowPerson() {
                         id="direccion" 
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         defaultValue={person.address}
-                        
+                        readOnly
                       />
                     </div>
                   </div>

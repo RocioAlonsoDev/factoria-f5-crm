@@ -74,6 +74,7 @@ class PersonSeeder extends Seeder
         'surname' =>'Lopez',
         'email' => 'carloslopez@ejemplo.com',
         'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1svaxqfsdvEjpkg7vZzyrJ5KtGHBamg1h4g&usqp=CAU',
+        'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1svaxqfsdvEjpkg7vZzyrJ5KtGHBamg1h4g&usqp=CAU',
         'phone' => '444 444 444',
         'address' => 'Plaza del Bosque, 234',
         'city' => 'Sevilla', 

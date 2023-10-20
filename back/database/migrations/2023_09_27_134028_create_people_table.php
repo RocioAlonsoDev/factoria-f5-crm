@@ -25,10 +25,8 @@ return new class extends Migration
             $table->date('birthdate');
             $table->enum('gender', ['Mujer', 'Hombre', 'No binario', 'Fluido', 'Otro']);
             $table->string('dni');
-            $table->unsignedBigInteger('id_status');
-            $table->foreign('id_status')->references('id')->on('statuses');
-            $table->unsignedBigInteger('id_bootcamp')->default(1);
-            $table->foreign('id_bootcamp')->references('id')->on('bootcamps');
+            $table->bigInteger('id_status');
+            $table->bigInteger('id_bootcamp')->default(1);
             $table->timestamps();
         });
     }

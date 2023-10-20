@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
 import DefaultLayoutConfiguration from "../layouts/DefaultLayoutConfiguration";
 import DefaultLayoutRecruitment from "../layouts/DefaultLayoutRecruitment";
+import DefaultLayoutDashboard from "../layouts/DefaultLayoutDashboard";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
@@ -11,6 +12,7 @@ import BootcampForm from '../pages/Bootcamp/BootcampForm'
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
+// import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
@@ -56,7 +58,7 @@ const Router = createBrowserRouter([
 
   {
     path: '/',
-    element: <DefaultLayout title='Home'/>,
+    element: <DefaultLayoutDashboard title='Home'/>,
     children:[
       {
         path: '/',
@@ -159,6 +161,10 @@ const Router = createBrowserRouter([
       {
         path: '/recruitment/selectionday',
         element: <SelectionDayIndex />
+      },
+      {
+        path: '/recruitment/estadisticas',
+        element: <Statistics />
       },
       {
         path: '/recruitment/estadisticas',

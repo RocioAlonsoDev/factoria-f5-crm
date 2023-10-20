@@ -3,8 +3,6 @@ import { Outlet } from 'react-router-dom'
 import UserNavbarMolecule from '../components/molecules/UserNavbarMolecule'
 import Sidebar from "../components/atoms/SideBarAtom"
 import NavbarAtom from '../components/atoms/NavbarAtom'
-
-
 import { AuthContext } from '../contexts/AuthContext'
 import { Navigate } from 'react-router-dom';
 

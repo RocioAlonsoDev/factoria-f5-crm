@@ -30,7 +30,11 @@ class SelectionDayDataService{
     getPeopleInSelectionDay(id_selectionDay){
         return http.get(`api/getPeopleInSelectionDay/${id_selectionDay}/people`)
     }
-    
+    getNextSelectionDay() {
+        return http.get("api/nextSelectionDay"); 
+      }
+      
+     
 }
 
 export default new SelectionDayDataService();
