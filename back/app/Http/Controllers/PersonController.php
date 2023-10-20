@@ -38,45 +38,31 @@ class PersonController extends Controller
         
     public function update(PersonRequest $request, $id):JsonResponse
     {
-        // Get the person record from the database.
         $person = Person::find($id);
-    
-        if (!$person) {
-            return response()->json(['message' => 'Person not found'], 404);
-        }
-    
-        // Handle the image upload.
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $person->image = 'images/' . $imageName;
-        }
-    // Update the other request data.
-        $person->name = $request->name;
-        $person->surname = $request->surname;
-        $person->email = $request->email;
-        $person->phone = $request->phone;
-        $person->address = $request->address;
-        $person->city = $request->city;
-        $person->region = $request->region;
-        $person->birthdate = $request->birthdate;
-        $person->dataprotection = $request->dataprotection;
-        $person->gender = $request->gender;
-        $person->dni = $request->dni;
-        $person->id_status = $request->id_status;
-        $person->id_bootcamp = $request->id_bootcamp;
-        
-        $person->save();
-    
-        if ($person->id_status == 3) {
-            event(new StatusDiscardedEvent($person));
-        }
-    
-        return response()->json([
-            'success' => true
-        ], 200);
+        $person->name=$request->name;
+        $person->surname=$request->surname;
+        $person->email=$request->email;
+        $person->image=$request->image;
+        $person->phone=$request->phone;
+        $person->address=$request->address;
+        $person->city=$request->city;
+        $person->region=$request->region;
+        $person->birthdate=$request->birthdate;
+        $person->dataprotection=$request->dataprotection;
+        $person->gender=$request->gender;
+        $person->dni=$request->dni;
+        $person->id_status=$request->id_status;
+        $person->id_bootcamp=$request->id_bootcamp;
+        $person ->save();
 
+        
+        if ($person -> id_status == 3) {
+            event(new StatusDiscardedEvent($person));
+             }
+
+        return response()->json([
+            'success'=>true
+            ], 200);
     }
 
     
