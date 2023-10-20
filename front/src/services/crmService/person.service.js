@@ -31,7 +31,9 @@ class PersonDataService{
         return http.get(`api/person?id_status=${id_status}`);
     }
 
-
+    showByBootcamp(id_bootcamp){
+        return http.get(`api/getPeopleInBootcamp/${id_bootcamp}`);
+    }
 
 }
 

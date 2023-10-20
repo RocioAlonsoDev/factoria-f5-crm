@@ -10,6 +10,16 @@ class PersonBootcampController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function getPeopleInBootcamp($bootcamp)
+    {
+        $people = Person_Bootcamp::where('id_bootcamp', $bootcamp)->get();
+        if ($people->count() > 0) {
+            return response()->json(['data' => $people], 200);
+        } else {
+            return response()->json(['error' => 'No se encontraron personas en el bootcamp'], 404);
+        }
+    }
+
     public function index()
     {
         //
