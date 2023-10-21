@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StatusDiscardedEvent;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use App\Http\Requests\PersonRequest;
@@ -54,6 +55,11 @@ class PersonController extends Controller
         $person->id_bootcamp=$request->id_bootcamp;
         $person ->save();
 
+        
+        if ($person -> id_status == 3) {
+            event(new StatusDiscardedEvent($person));
+             }
+
         return response()->json([
             'success'=>true
             ], 200);
@@ -67,6 +73,7 @@ class PersonController extends Controller
             'success'=>true
         ], 200);
     }
+
 
     // RECRUITMENT METHODS
 
