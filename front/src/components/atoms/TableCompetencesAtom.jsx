@@ -50,7 +50,15 @@ function TableCompetencesAtom(props) {
             <tbody className="border-b font-medium dark:border-neutral-200">
               <tr>
                 <td className="border-r px-6 py-4 dark:border-neutral-200" key="empty-date-body"></td>
-                <td className="border-r px-6 py-4 dark:border-neutral-200" key="empty-type-body"></td>
+                <td className="border-r px-6 py-4 dark:border-neutral-200">
+                  <select name="type" id="type">
+                  <option value="">-Selecciona una evaluación-</option>
+                    <option value="EVALUCAION">Evaluación</option>
+                    <option value="CO-EVALUACION">Co-evaluación</option>
+                    <option value="AUTO-EVALUCAION">Auto-evaluación</option>
+
+                  </select>
+                </td>
                 {categories.map((category) =>
                   category.skills.length ? (
                     category.skills.map((skill, skillIndex) => (

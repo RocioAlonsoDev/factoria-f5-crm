@@ -31,7 +31,15 @@ function TableContentAtom(props) {
             <tbody className="border-b font-medium dark:border-neutral-200">
               <tr>
                 <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
-                <td className="border-r px-6 py-4 dark:border-neutral-200"></td>
+                <td className="border-r px-6 py-4 dark:border-neutral-200">
+                  <select name="type" id="type">
+                  <option value="">-Selecciona una evaluación-</option>
+                    <option value="EVALUCAION">Evaluación</option>
+                    <option value="CO-EVALUACION">Co-evaluación</option>
+                    <option value="AUTO-EVALUCAION">Auto-evaluación</option>
+
+                  </select>
+                </td>
                 {stacks &&
                   stacks.map((stack, stackIndex) => (
                     <td
