@@ -11,10 +11,10 @@ export default function PersonbyBootcampTable(){
  
   const { id } = useParams();
   const [bootcamps, setBootcamps] = useState([]);
-
+/*
   //const [isLoading, setIsLoading] = useState(true); 
   //const [id_bootcamp, setId_bootcamp] = useState([]);
- /* useEffect(() => {
+ useEffect(() => {
     const fetchAll= async ()=> {
       try {
         console.log(id)
@@ -28,8 +28,10 @@ export default function PersonbyBootcampTable(){
       }  
   }
   return fetchAll;
+
  
-  }, [id]);*/
+  }, []);
+  /*
   useEffect(() => {
     BootcampDataService.get(id)
       .then((response) => {
@@ -40,14 +42,12 @@ export default function PersonbyBootcampTable(){
       });
   
     BootcampDataService.getPeopleInBootcamp(id)
-      .then(async (response) => {
-        const Data = response.data.data;
-  
-        const dataPromises = Data.map((bootcamp) => {
-          return BootcampDataService.get(id);
-        });
-     
-      });
+    .then((response) => {
+      setBootcamps(response.data);
+    })
+    .catch((error) => {
+      console.error('Error al cargar la jornada de selección:', error);
+    });
   return (
     <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
         <div className="rounded-t bg-white mb-0 px-6 py-6">
@@ -132,31 +132,20 @@ export default function PersonbyBootcampTable(){
         
     </div>
 );
-}, [id]); 
+}, []); */
 
-/*
+
 useEffect(() => {
-  console.log('ID:', id);
-  PersonDataService.showByBootcamp(id)
+
+  BootcampDataService.getPeopleInBootcamp(id)
     .then(async (response) => {
       if (Array.isArray(response.data.data)) {
-        const peopleData = response.data.data;
-        const bootcampPromises = peopleData.map((people) => {
-          return BootcampDataService.get(people.id_bootcamp);
+        const Data = response.data.data;
+        const bootcampPromises = Data.map((bootcamps) => {
+          return BootcampDataService.getPeopleInBootcamp(id);
         });
 
-        try {
-          const bootcampResponses = await Promise.all(bootcampPromises);
-          console.log('Bootcamp Responses:', bootcampResponses);
-
-          const updatedBootcamps = peopleData.map((people, index) => {
-            const personBootcampInfo = bootcampResponses[index].data.person_bootcamp;
-            console.log('Bootcamp:', people);
-            return {
-              ...people,
-              person: personBootcampInfo.person,
-            };
-          });
+       
 
           setBootcamps(updatedBootcamps);
           setIsLoading(false);
@@ -209,5 +198,5 @@ return (
       
     </>
       </div>
-);*/
+);
 }
