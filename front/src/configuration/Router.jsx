@@ -25,7 +25,7 @@ import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
 import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
-import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
+import PersonsbyBootcamp from "../pages/PersonBootcamp/PersonsbyBootcamp";
 
 
 const Router = createBrowserRouter([
@@ -130,7 +130,7 @@ const Router = createBrowserRouter([
       },
       {
         path:'/recruitment/personbybootcamp/:id',
-        element: <PersonbyBootcampTable />
+        element: <PersonsbyBootcamp/>
       },
        //Comments
   
