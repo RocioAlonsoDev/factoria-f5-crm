@@ -16,7 +16,7 @@ import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
 import StatusRequirement from "../pages/ConfigurationPages/StatusRequirement";
 import CodersIndex from "../pages/CodersFrontend/CodersIndex";
-import Evaluation from "../pages/Evaluation";
+import Evaluation from "../pages/Evaluation/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
