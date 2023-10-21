@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import TableContentAtom from '../../components/atoms/TableContentAtom';
 import TableCompetencesAtom from '../../components/atoms/TableCompetencesAtom';
 import CategoryDataService from '../../services/trackingService/category.service';
+import StackDataService from '../../services/trackingService/stack.service';
 
 export default function Evaluation() {
   const [categories, setCategories] = useState([])
   const [isLoading, setIsLoading] = useState(true);
+  const [stacks, setStacks]= useState([]);
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -22,6 +24,27 @@ export default function Evaluation() {
 
     fetchCategory();
   }, []);
+
+
+
+useEffect(() => {
+  const fetchStack = async () => {
+    try {
+      const response = await StackDataService.getAll();
+
+      setStacks(response.data);
+      setIsLoading(false);
+    } catch (error){
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+  fetchStack();
+}, []);
+
+
+
+
 
   // Estado para controlar si los selectores deben mostrarse
   const [showSelects, setShowSelects] = useState(false);
@@ -65,10 +88,7 @@ export default function Evaluation() {
         <TableContentAtom
           date="FECHA"
           captionTittles="Stacks Femcoders Norte"
-          // theadTittles={heads}
-          dateWrite="2023-09-23"
-          tableData={bodyContent} // Pasa el estado como prop
-          dateEvaluation="2023-03-12"
+          stacks={stacks}
           showSelects={showSelects} // Pasa el estado como prop
         ></TableContentAtom>
       </div>
