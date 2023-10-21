@@ -24,7 +24,7 @@ class Bootcamp extends Model
 
     public function personBootcamp()
     {
-    return $this->hasMany(Person_Bootcamp::class/*, 'person__bootcamp', 'bootcamp_id', 'id'*/);
+    return $this->hasMany(Person_Bootcamp::class, 'id_bootcamp', 'id');
     }
 
     public function person(): BelongsTo
