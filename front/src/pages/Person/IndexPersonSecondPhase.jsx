@@ -343,10 +343,10 @@ export default function IndexPersonSecondPhase() {
   });
 
   return (
-    <div className="md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2">
+    <div className="md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2 relative">
       <div className="w-1/3 mx-auto m-16">
         <ToggleButton />
-
+  
         <div>
           <h2>Información de Estado de Ejercicios</h2>
           <p>Completos: {counts.completos}</p>
@@ -357,56 +357,65 @@ export default function IndexPersonSecondPhase() {
         </div>
       </div>
       <FilterButton openFilterModal={openFilterModal} />
-      {/* Modal para el filtro */}
-      <div className={`modal ${isFilterModalOpen ? "block" : "hidden"}`}>
-        <div className="modal-content bg-white w-1/2 mx-auto my-16 p-6 rounded-lg shadow-lg">
-          <span
-            className="close absolute top-4 right-4 cursor-pointer"
-            onClick={closeFilterModal}
-          >
-            &times;
-          </span>
-          <label className="block mb-4">
-            Filtrar por edad:
-            <select
-              value={ageFilter}
-              onChange={(e) => setAgeFilter(e.target.value)}
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Todas las edades</option>
-              <option value="30">Menos de 30 años</option>
-            </select>
-          </label>
-          <h2 className="text-lg font-semibold mb-4">
-            Filtrar por Estado de Ejercicios
-          </h2>
-          <label className="block mb-4">
-            Filtrar por estado:
-            <select
-              value={selectedFilterStatus}
-              onChange={(e) => setSelectedFilterStatus(e.target.value)}
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Todos</option>
-              <option value="9">Completos</option>
-              <option value="10">No acabados</option>
-              <option value="11">Sin comenzar</option>
-              <option value="12">Faltan enlaces</option>
-            </select>
-          </label>
-          <button
-            onClick={applyFilter}
-            className="bg-orange-500 text-white py-2 px-4 rounded hover-bg-orange-600"
-          >
-            Aplicar filtro
-          </button>
-        </div>
-      </div>
       <TableAtom
         tableTitle={"SEGUNDO FORMULARIO: Todas las personas en el proceso"}
         columns={columns}
         data={data}
       />
+  
+     
+      {isFilterModalOpen && (
+        <div className="modal fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-75">
+          <div className="modal-content bg-white w-1/2 p-6 rounded-lg shadow-lg relative">
+            <span
+              className="close absolute top-4 right-4 cursor-pointer"
+              onClick={closeFilterModal}
+            >
+              &times;
+            </span>
+            <label className="block mb-4">
+              <h2 className="text-lg font-semibold mb-4">
+                Filtrar por edades
+              </h2>
+              <select
+                value={ageFilter}
+                onChange={(e) => setAgeFilter(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todas las edades</option>
+                <option value="30">Menos de 30 años</option>
+              </select>
+            </label>
+            <h2 className="text-lg font-semibold mb-4">
+              Filtrar por Estado de Ejercicios
+            </h2>
+            <label className="block mb-4">
+              Filtrar por estado:
+              <select
+                value={selectedFilterStatus}
+                onChange={(e) => setSelectedFilterStatus(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todos</option>
+                <option value="9">Completos</option>
+                <option value="10">No acabados</option>
+                <option value="11">Sin comenzar</option>
+                <option value="12">Faltan enlaces</option>
+              </select>
+            </label>
+            <button
+              onClick={applyFilter}
+              className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
+            >
+              Aplicar filtro
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
+  
+  
+  
+  
 }

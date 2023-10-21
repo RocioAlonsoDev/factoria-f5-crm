@@ -382,131 +382,123 @@ export default function IndexPerson() {
   });
 
   return (
-    <div className="md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2">
-      <div className="w-1/3 mx-auto m-16">
+    <div className="md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2 relative">
+      <div className="w-1/3 mx-auto m-10">
         <ToggleButton />
       </div>
       <FilterButton openFilterModal={openFilterModal} />
-      {/* Modal para el filtro */}
-      <div className={`modal ${isFilterModalOpen ? "block" : "hidden"}`}>
-        <div className="modal-content bg-white w-1/2 mx-auto my-16 p-6 rounded-lg shadow-lg">
-          <span
-            className="close absolute top-4 right-4 cursor-pointer"
-            onClick={closeFilterModal}
-          >
-            &times;
-          </span>
-          {/* <label className="block mb-4">
-            Filtrar por edad:
-            <select
-              value={ageFilter}
-              onChange={(e) => setAgeFilter(e.target.value)}
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Todas las edades</option>
-              <option value="30">Menos de 30 años</option>
-            </select>
-          </label> */}
-          <h2 className="text-lg font-semibold mb-4">Filtrar por RIC</h2>
-          <label className="block mb-4">
-            <select
-              value={ricFilter}
-              onChange={(e) => setRicFilter(e.target.value)}
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Todos</option>
-              <option value="1">En seguimiento</option>
-              <option value="3">Sin respuesta</option>
-              <option value="4">
-                Fuera (duplicado, baja, prueba, error, etc)
-              </option>
-              <option value="5">Confirma asistencia</option>
-              <option value="6">Asiste</option>
-              <option value="8">No ha participado</option>
-              <option value="13">Convocado/a</option>
-              <option value="14">Enviar convocatoria</option>
-              <option value="15">No enviar convocatoria</option>
-            </select>
-          </label>
-          <h2 className="text-lg font-semibold mb-4">Filtrar por talleres</h2>
-          <label className="block mb-4">
-            <select
-              value={talleresFilter}
-              onChange={(e) => setTalleresFilter(e.target.value)}
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Todos</option>
-              <option value="1">En seguimiento</option>
-              <option value="3">Sin respuesta</option>
-              <option value="4">
-                Fuera (duplicado, baja, prueba, error, etc)
-              </option>
-
-              <option value="7">Ha participado</option>
-              <option value="8">No ha participado</option>
-              <option value="13">Convocado/a</option>
-              <option value="14">Enviar convocatoria</option>
-            </select>
-          </label>
-          <h2 className="text-lg font-semibold mb-4">
-            Filtrar por Jornada de puertas abiertas
-          </h2>
-          <label className="block mb-4">
-            <select
-              value={jpaFilter}
-              onChange={(e) => setJpaFilter(e.target.value)}
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Todos</option>
-              <option value="1">En seguimiento</option>
-              <option value="3">Sin respuesta</option>
-              <option value="4">
-                Fuera (duplicado, baja, prueba, error, etc)
-              </option>
-              <option value="5">Confirma asistencia</option>
-              <option value="6">Asiste</option>
-              <option value="8">No ha participado</option>
-              <option value="13">Convocado/a</option>
-              <option value="14">Enviar convocatoria</option>
-              <option value="15">No enviar convocatoria</option>
-            </select>
-          </label>
-          <h2 className="text-lg font-semibold mb-4">
-            Filtrar por Jornada de Selección
-          </h2>
-          <label className="block mb-4">
-            <select
-              value={jsFilter}
-              onChange={(e) => setJsFilter(e.target.value)}
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Todos</option>
-              <option value="1">En seguimiento</option>
-              <option value="3">Sin respuesta</option>
-              <option value="4">
-                Fuera (duplicado, baja, prueba, error, etc)
-              </option>
-              <option value="5">Confirma asistencia</option>
-              <option value="6">Asiste</option>
-              <option value="8">No ha participado</option>
-              <option value="13">Convocado/a</option>
-              <option value="14">Enviar convocatoria</option>
-              <option value="15">No enviar convocatoria</option>
-            </select>
-          </label>
-          <button
-            onClick={applyFilter}
-            className="bg-orange-500 text-white py-2 px-4 rounded hover-bg-orange-600"
-          >
-            Aplicar filtro
-          </button>
-        </div>
-      </div>
       <TableAtom
         tableTitle={"PRIMER FORMULARIO: Todas las personas inscritas"}
         columns={columns}
         data={data}
       />
+      {/* Modal para el filtro */
+      isFilterModalOpen && (
+        <div className="modal fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-75">
+          <div className="modal-content bg-white w-1/2 p-6 rounded-lg shadow-lg relative">
+            <span
+              className="close absolute top-4 right-4 cursor-pointer"
+              onClick={closeFilterModal}
+            >
+              &times;
+            </span>
+            <h2 className="text-lg font-semibold mb-4">Filtrar por RIC</h2>
+            <label className="block mb-4">
+              <select
+                value={ricFilter}
+                onChange={(e) => setRicFilter(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todos</option>
+                <option value="1">En seguimiento</option>
+                <option value="3">Sin respuesta</option>
+                <option value="4">
+                  Fuera (duplicado, baja, prueba, error, etc)
+                </option>
+                <option value="5">Confirma asistencia</option>
+                <option value="6">Asiste</option>
+                <option value="8">No ha participado</option>
+                <option value="13">Convocado/a</option>
+                <option value="14">Enviar convocatoria</option>
+                <option value="15">No enviar convocatoria</option>
+              </select>
+            </label>
+            <h2 className="text-lg font-semibold mb-4">Filtrar por talleres</h2>
+            <label className="block mb-4">
+              <select
+                value={talleresFilter}
+                onChange={(e) => setTalleresFilter(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todos</option>
+                <option value="1">En seguimiento</option>
+                <option value="3">Sin respuesta</option>
+                <option value="4">
+                  Fuera (duplicado, baja, prueba, error, etc)
+                </option>
+                <option value="7">Ha participado</option>
+                <option value="8">No ha participado</option>
+                <option value="13">Convocado/a</option>
+                <option value="14">Enviar convocatoria</option>
+              </select>
+            </label>
+            <h2 className="text-lg font-semibold mb-4">
+              Filtrar por Jornada de puertas abiertas
+            </h2>
+            <label className="block mb-4">
+              <select
+                value={jpaFilter}
+                onChange={(e) => setJpaFilter(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todos</option>
+                <option value="1">En seguimiento</option>
+                <option value="3">Sin respuesta</option>
+                <option value="4">
+                  Fuera (duplicado, baja, prueba, error, etc)
+                </option>
+                <option value="5">Confirma asistencia</option>
+                <option value="6">Asiste</option>
+                <option value="8">No ha participado</option>
+                <option value="13">Convocado/a</option>
+                <option value="14">Enviar convocatoria</option>
+                <option value="15">No enviar convocatoria</option>
+              </select>
+            </label>
+            <h2 className="text-lg font-semibold mb-4">
+              Filtrar por Jornada de Selección
+            </h2>
+            <label className="block mb-4">
+              <select
+                value={jsFilter}
+                onChange={(e) => setJsFilter(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todos</option>
+                <option value="1">En seguimiento</option>
+                <option value="3">Sin respuesta</option>
+                <option value="4">
+                  Fuera (duplicado, baja, prueba, error, etc)
+                </option>
+                <option value="5">Confirma asistencia</option>
+                <option value="6">Asiste</option>
+                <option value="8">No ha participado</option>
+                <option value="13">Convocado/a</option>
+                <option value="14">Enviar convocatoria</option>
+                <option value="15">No enviar convocatoria</option>
+              </select>
+            </label>
+            <button
+              onClick={applyFilter}
+              className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
+            >
+              Aplicar filtro
+            </button>
+          </div>
+        </div>
+      )}
+      
     </div>
   );
+  
 }
