@@ -31,13 +31,28 @@ export default function IndexPerson() {
     13: 'Convocado/a',
     14: 'Enviar convocatoria',
     15: 'No enviar convocatoria',
+    
   };
+
+  const statusColors = {
+    2: 'green',
+    5: 'green',
+    6: 'green',
+    7: 'green',
+    3: 'red',
+    8: 'red',
+    13: 'orange',
+    14: 'orange',
+    15: 'orange',
+    4: 'gray',
+    1: 'gray'
+  }
 
   const columns = ['','Nombre', 'Apellidos', 'email', 'Teléfono', 'Ciudad', 'Comunidad Autónoma',
     '¿Acepta la política de protección de datos?', 'Edad', 'Género', 'Fecha de inscripción',
     'RIC' , 'Talleres F5', 'Jornada de puertas abiertas', 'Jornada de selección', 'Decisión'];
 
-  const allowedMeetingOptions = [1, 3, 4, 5, 6, 13, 14, 15];
+  const allowedMeetingOptions = [1, 3, 4, 5, 6, 8, 13, 14, 15];
   const allowedTalleresOptions = [1, 3, 4, 7, 8, 13, 14];
   const meetingStatusOptions = Object.keys(statusOptions)
     .filter((key) => allowedMeetingOptions.includes(parseInt(key)))
@@ -210,6 +225,11 @@ export default function IndexPerson() {
       Género: person.gender,
       'Fecha de inscripción': formattedDate,
       RIC: (
+        <div className="flex items-center">
+          <div
+            className={`w-4 h-4 rounded-full mr-2`}
+            style={{ backgroundColor: statusColors[ricValue] }}
+          />
         <select
           value={ricValue}
           onChange={(e) => handleSelectChange(person.id, ricRequirementId, e.target.value)}
@@ -217,30 +237,49 @@ export default function IndexPerson() {
         >
             {meetingStatusOptions}
         </select>
+        </div>
       ),
       'Talleres F5': (
+        <div className="flex items-center">
+          <div
+            className={`w-4 h-4 rounded-full mr-2`}
+            style={{ backgroundColor: statusColors[talleresValue] }}
+          />
         <select
           value={talleresValue}
           onChange={(e) => handleSelectChange(person.id, talleresRequirementId, e.target.value)}
         >
           {talleresStatusOptions}
         </select>
+        </div>
       ),
       'Jornada de puertas abiertas': (
+        <div className="flex items-center">
+          <div
+            className={`w-4 h-4 rounded-full mr-2`}
+            style={{ backgroundColor: statusColors[jpaValue] }}
+          />
         <select
           value={jpaValue}
           onChange={(e) => handleSelectChange(person.id, jpaRequirementId, e.target.value)}
         >
             {meetingStatusOptions}
         </select>
+        </div>
       ),
       'Jornada de selección': (
+        <div className="flex items-center">
+          <div
+            className={`w-4 h-4 rounded-full mr-2`}
+            style={{ backgroundColor: statusColors[jsValue] }}
+          />
         <select
           value={jsValue}
           onChange={(e) => handleSelectChange(person.id, jsRequirementId, e.target.value)}
         >
           {meetingStatusOptions}
         </select>
+        </div>
       ),
     };
   });
