@@ -26,7 +26,8 @@ import Statistics from "../pages/Statistics/Statistics";
 import CodersEdit from "../pages/CodersFrontend/codersEdit";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
-
+import CodersShow from "../pages/CodersFrontend/CodersShow";
+import ProjectsWorkShopsIndexByPerson from "../pages/ProjectsWorkshops/ProjectsWorkshopsIndexByPerson";
 
 const Router = createBrowserRouter([
   {
@@ -90,6 +91,14 @@ const Router = createBrowserRouter([
       {
         path: '/tracking/coders/update/:id',
         element: <CodersEdit />
+      },
+      {
+        path: '/tracking/coders/:id',
+        element: <CodersShow />
+      },
+      {
+        path: '/tracking/coders/:id/projectsWorkshops',
+        element: <ProjectsWorkShopsIndexByPerson />
       },
       {
         path:'/tracking/evaluation/id',
