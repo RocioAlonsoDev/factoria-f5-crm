@@ -5,6 +5,8 @@ import PersonRequirementsDataService from "../../services/recruitmentService/per
 import ToggleButton from "../../components/atoms/ToggleButton";
 import { Link } from "react-router-dom";
 import FilterButton from "../../components/atoms/FilterButton";
+import StatusCard from "../../components/atoms/StatusCards";
+import YearlyStatsCard from "../../components/atoms/Statistics/YearlyStatsCard";
 
 export default function IndexPerson() {
   const [people, setPeople] = useState([]);
@@ -85,6 +87,76 @@ export default function IndexPerson() {
         {statusOptions[key]}
       </option>
     ));
+
+    //CONTADORES
+
+    const countPeopleInStatus = (requirementId) => {
+      const statusCounts = Object.keys(statusOptions).reduce((counts, key) => {
+        const count = people.reduce((acc, person) => {
+          const statusKey = `${person.id}_${requirementId}`;
+          if (selectStatus[statusKey] === parseInt(key)) {
+            return acc + 1;
+          }
+          return acc;
+        }, 0);
+    
+        if (count > 0) {
+          counts[key] = count;
+        }
+    
+        return counts;
+      }, {});
+    
+      return statusCounts;
+    };
+  
+    const ricStatusCounts = countPeopleInStatus(2);
+    const talleresStatusCounts = countPeopleInStatus(3);
+    const jpaStatusCounts = countPeopleInStatus(1);
+    const jsStatusCounts = countPeopleInStatus(4);
+
+    //STATS
+
+const currentYear = new Date().getFullYear();
+const lastYear = currentYear - 1;
+const totalPeople = originalPeople.length;
+
+const peopleInCurrentYear = originalPeople.filter((person) => {
+  const registrationDate = new Date(person.created_at);
+  return registrationDate.getFullYear() === currentYear;
+});
+
+const peopleInLastYear = originalPeople.filter((person) => {
+  const registrationDate = new Date(person.created_at);
+  return registrationDate.getFullYear() === lastYear;
+});
+
+const currentYearTotal = peopleInCurrentYear.length;
+const lastYearTotal = peopleInLastYear.length;
+
+
+const difference = currentYearTotal - lastYearTotal;
+const percentageChange = ((difference / lastYearTotal) * 100).toFixed(2); 
+
+const cardColor = difference > 0 ? "green" : "red";
+const arrowIcon = difference > 0 ? "↑" : "↓";
+
+const calculateFemaleCount = (people) => {
+  return people.filter((person) => person.gender === "mujer").length;
+};
+
+const calculateAgeBelow30Count = (people) => {
+  const currentYear = new Date().getFullYear();
+  return people.filter((person) => {
+      const birthYear = new Date(person.birthdate).getFullYear();
+      return currentYear - birthYear < 30;
+  }).length;
+};
+
+const femaleCount = calculateFemaleCount(people);
+const ageBelow30Count = calculateAgeBelow30Count(people);
+
+
 
   //FILTROS
 
@@ -382,10 +454,63 @@ export default function IndexPerson() {
   });
 
   return (
-    <div className="md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2 relative">
+    <div className="md:bloc md:top-[107px] md:left-64 md:right-0 w-auto p-2 relative">
       <div className="w-1/3 mx-auto m-10">
         <ToggleButton />
       </div>
+      <div className="flex flex-wrap">
+      <YearlyStatsCard
+  currentYearTotal={currentYearTotal}
+  lastYearTotal={lastYearTotal}
+  difference={difference}
+  percentageChange={percentageChange}
+  cardColor={cardColor}
+  arrowIcon={arrowIcon}
+  cardTitle='Personas inscritas'
+  totalPeople={totalPeople}
+/>
+<YearlyStatsCard
+            currentYearTotal={femaleCount}
+            lastYearTotal={0} 
+            cardTitle="Total de mujeres"
+            totalPeople={femaleCount}
+        />
+        <YearlyStatsCard
+            currentYearTotal={ageBelow30Count}
+            lastYearTotal={0} 
+            cardTitle="Personas menores de 30 años"
+            totalPeople={ageBelow30Count}
+        />
+        </div>
+      <div className="flex flex-wrap">
+        <StatusCard
+          title="RIC"
+          statusCounts={ricStatusCounts}
+          statusOptions={statusOptions}
+          statusColors={statusColors}
+        />
+        <StatusCard
+          title="Talleres F5"
+          statusCounts={talleresStatusCounts}
+          statusOptions={statusOptions}
+          statusColors={statusColors}
+        />
+        <StatusCard
+          title="Jornada de puertas abiertas"
+          statusCounts={jpaStatusCounts}
+          statusOptions={statusOptions}
+          statusColors={statusColors}
+        />
+        <StatusCard
+          title="Jornada de Selección"
+          statusCounts={jsStatusCounts}
+          statusOptions={statusOptions}
+          statusColors={statusColors}
+        />
+      </div>
+
+      
+
       <FilterButton openFilterModal={openFilterModal} />
       <TableAtom
         tableTitle={"PRIMER FORMULARIO: Todas las personas inscritas"}
@@ -502,3 +627,4 @@ export default function IndexPerson() {
   );
   
 }
+
