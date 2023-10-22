@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import profileError from "../../assets/img/profileError.jpg";
 import PersonDataService from "../../services/crmService/person.service";
@@ -46,8 +46,6 @@ export default function ShowPerson() {
 
     fetchPersonData();
   }, [id]);
-
-  console.log("Person:", person);
 
   const handleEditProfileClick = () => {
     setIsEditShowPersonModalOpen(true);
@@ -118,7 +116,7 @@ export default function ShowPerson() {
                     src={person.image} 
                     alt="Foto de perfil"
                     onError={(e) => {
-                      e.target.src={profileError};
+                      e.target.src=profileError;
                     }} 
                     className="shadow-xl rounded-full h-40 w-40 object-cover border-4 border-orange-500"
                   />  
@@ -144,99 +142,99 @@ export default function ShowPerson() {
                           readOnly
                         />
                       </div>
-                      <div className="relative w-2/12 ">
-                      <button
-                        className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                        type="button"
-                        onClick={handleEditProfileClick}
-                      >
-                        Modificar perfil
-                      </button>
+                      <div className="relative w-2/12">
+                        <button
+                          className="bg-orange-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                          type="button"
+                          onClick={handleEditProfileClick}
+                        >
+                          Modificar perfil
+                        </button>
                       </div>
                     </div>
                   </div>
 
-                    <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                      Información Coder
-                    </h6>
-                    <div className="flex flex-wrap">
-                      <div className="w-full lg:w-6/12 px-4">
-                        <div className="relative w-full mb-3">
-                          <label
-                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                            htmlFor="nombre" 
-                          >
-                            Nombre
-                          </label>
-                          <input
-                            type="text"
-                            id="nombre" 
-                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            defaultValue={person.name}
-                            readOnly
-                          />
-                        </div>
+                  <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                    Información Coder
+                  </h6>
+                  <div className="flex flex-wrap">
+                    <div className="w-full lg-w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="nombre" 
+                        >
+                          Nombre
+                        </label>
+                        <input
+                          type="text"
+                          id="nombre" 
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          defaultValue={person.name}
+                          readOnly
+                        />
                       </div>
-                      <div className="w-full lg:w-6/12 px-4">
-                        <div className="relative w-full mb-3">
-                          <label
-                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                            htmlFor="apellido" 
-                          >
-                            Apellido
-                          </label>
-                          <input
-                            type="text" 
-                            id="apellido" 
-                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            defaultValue={person.surname}
-                            readOnly
-                          />
-                        </div>
+                    </div>
+                    <div className="w-full lg:w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="apellido" 
+                        >
+                          Apellido
+                        </label>
+                        <input
+                          type="text" 
+                          id="apellido" 
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          defaultValue={person.surname}
+                          readOnly
+                        />
                       </div>
-                      <div className="w-full lg:w-6/12 px-4">
-                        <div className="relative w-full mb-3">
-                          <label
-                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                            htmlFor="genero" 
-                          >
-                            Género
-                          </label>
-                          <input
-                            type="text" 
-                            id="genero" 
-                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            defaultValue={person.gender}
-                            readOnly
-                          />
-                        </div>
+                    </div>
+                    <div className="w-full lg:w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="genero" 
+                        >
+                          Género
+                        </label>
+                        <input
+                          type="text" 
+                          id="genero" 
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          defaultValue={person.gender}
+                          readOnly
+                        />
                       </div>
-                      <div className="w-full lg:w-6/12 px-4">
-                        <div className="relative w-full mb-3">
-                          <label
-                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                            htmlFor="dni" 
-                          >
-                            DNI
-                          </label>
-                          <input
-                            type="text" 
-                            id="dni" 
-                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            defaultValue={person.dni}
-                            readOnly
-                          />
-                        </div>
+                    </div>
+                    <div className="w-full lg:w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="dni" 
+                        >
+                          DNI
+                        </label>
+                        <input
+                          type="text" 
+                          id="dni" 
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          defaultValue={person.dni}
+                          readOnly
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <hr className="mt-6 border-b-1 border-blueGray-300" />
+              <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                  Información de Contacto
-                </h6>
+              <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                Información de Contacto
+              </h6>
 
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-6/12 px-4">
@@ -331,28 +329,26 @@ export default function ShowPerson() {
                   </div>
                 </div>
 
-                <hr className="mt-6 border-b-1 border-blueGray-300" />
+              <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-              </form>
-            </div>
+            </form>
           </div>
+        </div>
 
-          {isEditShowPersonModalOpen && (
-            <EditShowPersonModal
-              setIsEditModalOpen={setIsEditShowPersonModalOpen}
-              personId={id}
-              updatePerson={setPerson}
-            />
-          )}
+        {isEditShowPersonModalOpen && (
+          <EditShowPersonModal
+            setIsEditModalOpen={setIsEditShowPersonModalOpen}
+            personId={id}
+            updatePerson={setPerson}
+          />
+        )}
 
-          <CommentsIndexByPerson />
+        <CommentsIndexByPerson />
       </div>
     </>
 
   );
 }
-
-
 
 
 

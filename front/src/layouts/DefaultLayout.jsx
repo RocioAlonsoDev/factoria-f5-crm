@@ -12,6 +12,8 @@ export default function DefaultLayout({title}) {
     { label: 'Inicio', url: '/' },
     { label: 'Bootcamps', url: '/tracking/bootcamp' },
     { label: 'Coders', url: '/tracking/coders' },
+    { label: 'Bootcamps', url: '/tracking/bootcamp' },
+    { label: 'Coders', url: '/tracking/coders' },
   ];
   
   if(!userToken){

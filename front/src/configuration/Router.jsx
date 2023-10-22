@@ -24,9 +24,10 @@ import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
+import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
+//import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
 import Statistics from "../pages/Statistics/Statistics";
 import CodersAdd from "../pages/CodersFrontend/CodersAdd";
-import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
 import PeoplebyBootcamp from "../pages/PersonBootcamp/PeoplebyBootcamp";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
@@ -40,16 +41,6 @@ const Router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Navigate to='/' />
-  },
-
-  {
-    path: '/recruitment/selectiondayshow/:id',
-    element: <SelectionDayShow />
-  },
-
-  {
-    path: '/person/:id',
-    element: <ShowPerson />
   },
   {
     path: '/people',

@@ -31,6 +31,21 @@ class PersonSeeder extends Seeder
         'dni' => '888888888V',
         'id_status' => 1, 
         'id_bootcamp' => 1, 
+    DB::table('people')->insert([
+        'name' => 'Maria',
+        'surname' =>'García',
+        'email' => 'mariagarcia@ejemplo.com',
+        'image' => 'https://pbs.twimg.com/media/DfKT_QFU8AE4krM.jpg:large',
+        'phone' => '666 666 666',
+        'address' => 'c/ Algun lugar de Asturias',
+        'city' => 'Oviedo', 
+        'region' => 'Asturias', 
+        'dataprotection' => 'sí',
+        'birthdate' => '1980-08-23', 
+        'gender' => 'mujer',
+        'dni' => '888888888V',
+        'id_status' => 1, 
+        'id_bootcamp' => 1, 
      ]);
 
      DB::table('people')->insert([
