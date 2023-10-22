@@ -47,39 +47,45 @@ export default function Evaluation() {
   //   fetchStack();
   // }, [id]);
 
-  useEffect(() => {
-    const fetchPersonDetails = async () => {
-      try {
-        const response = await personService.get(id);
-        const personData = response.data;
-
-        setPerson(personData);
-
-        if (personData.bootcamp) {
-          const id = personData.bootcamp.id;
-          setBootcampName(personData.bootcamp.name);
-
-          // Luego, obtenemos los stacks asociados al mismo bootcamp
-          const stackResponse = await bootcampStackService.get(id);
-          const stackData = stackResponse.data.stacks;
-          console.log(stackData);
-          
-          setStacks(stackData);
-        } else {
-          console.error('Los datos de la persona no contienen información de bootcamp.');
+  
+    useEffect(() => {
+      const fetchPersonDetails = async () => {
+        try {
+          const response = await personService.get(id);
+          const personData = response.data;
+  
+          setPerson(personData);
+  
+          if (personData.bootcamp) {
+            const bootcampId = personData.bootcamp.id;
+            setBootcampName(personData.bootcamp.name);
+  
+            // Obtener los stacks asociados al bootcamp dinámicamente
+            const stackResponse = await bootcampStackService.getAll();
+            const stackData = stackResponse.data;
+            console.log(stackData)
+  
+            if (Array.isArray(stackData)) {
+              // Filtra los stacks que coinciden con el bootcampId
+              const filteredStacks = stackData.filter(stack => stack.bootcamp_id === bootcampId);
+  
+              // Obtiene los nombres de los stacks filtrados
+              const stackNames = filteredStacks.map(stack => stack.stacks[0].name);
+  
+              setStacks(stackNames);
+            } else {
+              console.error('Los datos de la API no contienen información de stacks válida.');
+            }
+          } else {
+            console.error('Los datos de la persona no contienen información de bootcamp.');
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchPersonDetails();
-  }, [id]);
-
-
-
-
-
+      };
+  
+      fetchPersonDetails();
+    }, [id]);
 
   // Estado para controlar si los selectores deben mostrarse
   const [showSelects, setShowSelects] = useState(false);
