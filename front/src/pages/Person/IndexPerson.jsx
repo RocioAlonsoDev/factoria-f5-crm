@@ -454,7 +454,8 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   });
 
   return (
-    <div className="md:bloc md:top-[107px] md:left-64 md:right-0 w-auto p-2 relative">
+    <div className="md:block md:absolute md:top-[107px] md:left-64 md:right-0 w-auto p-2">
+      
       <div className="w-1/3 mx-auto m-10">
         <ToggleButton />
       </div>
@@ -512,11 +513,13 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
       
 
       <FilterButton openFilterModal={openFilterModal} />
+      <div className="overflow-x-auto">
       <TableAtom
         tableTitle={"PRIMER FORMULARIO: Todas las personas inscritas"}
         columns={columns}
         data={data}
       />
+      </div>
       {/* Modal para el filtro */
       isFilterModalOpen && (
         <div className="modal fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-75">
