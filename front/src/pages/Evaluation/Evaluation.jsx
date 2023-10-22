@@ -45,54 +45,37 @@ export default function Evaluation() {
   //     }
   //   };
   //   fetchStack();
-  // }, []);
+  // }, [id]);
 
   useEffect(() => {
     const fetchPersonDetails = async () => {
       try {
-        // Realiza una solicitud a la API para obtener los detalles de la persona
         const response = await personService.get(id);
-        console.log('Respuesta de la API:', response.data);
         const personData = response.data;
 
-        // Establece los detalles de la persona en el estado
         setPerson(personData);
 
-        if (personData && personData.bootcamp) {
-          // Establece los detalles de la persona en el estado
-          setPerson(personData);
+        if (personData.bootcamp) {
+          const id = personData.bootcamp.id;
+          setBootcampName(personData.bootcamp.name);
 
-          // Accede al nombre del bootcamp desde personData.bootcamp.name
-          const bootcampName = personData.bootcamp.name;
-          setBootcampName(bootcampName);
+          // Luego, obtenemos los stacks asociados al mismo bootcamp
+          const stackResponse = await bootcampStackService.get(id);
+          const stackData = stackResponse.data.stacks;
+          console.log(stackData);
+          
+          setStacks(stackData);
         } else {
           console.error('Los datos de la persona no contienen información de bootcamp.');
         }
-        setIsLoading(false);
       } catch (error) {
-        console.error( error);
-        setIsLoading(false);
+        console.error(error);
       }
     };
 
     fetchPersonDetails();
   }, [id]);
 
-
-useEffect(() => {
-  const fetchStack = async () => {
-    try {
-      const response = await BootcampStackDataService.getAll();
-
-      setStacks(response.data);
-      setIsLoading(false);
-    } catch (error){
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
-  fetchStack();
-}, []);
 
 
 
