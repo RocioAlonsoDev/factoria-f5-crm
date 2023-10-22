@@ -22,7 +22,7 @@ function TableContentAtom(props) {
                       className="text-xl border px-6 py-4 dark:border-neutral-200 " 
                       key={stackIndex}
                     >
-                      {stack.name}
+                      {stack}
                     </th>
                   ))}
               </tr>

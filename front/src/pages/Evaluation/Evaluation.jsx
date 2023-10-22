@@ -63,7 +63,6 @@ export default function Evaluation() {
             // Obtener los stacks asociados al bootcamp dinámicamente
             const stackResponse = await bootcampStackService.getAll();
             const stackData = stackResponse.data;
-            console.log(stackData)
   
             if (Array.isArray(stackData)) {
               // Filtra los stacks que coinciden con el bootcampId
@@ -71,7 +70,7 @@ export default function Evaluation() {
   
               // Obtiene los nombres de los stacks filtrados
               const stackNames = filteredStacks.map(stack => stack.stacks[0].name);
-  
+              console.log(stackNames)
               setStacks(stackNames);
             } else {
               console.error('Los datos de la API no contienen información de stacks válida.');
