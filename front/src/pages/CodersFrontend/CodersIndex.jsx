@@ -37,7 +37,6 @@ export default function CodersIndex() {
     '' : (<>
     <ButtonAtom addlink={`/tracking/coders/${coder.id}/evaluation`} addbutton='Ver'></ButtonAtom>
     <ButtonAtom addlink={`/tracking/coders/update/${coder.id}`} addbutton='Editar'></ButtonAtom>
-    <ButtonAtom addlink={`/tracking/coders/${coder.id}`} addbutton='Eliminar'></ButtonAtom>
     </>)
   }));
 
