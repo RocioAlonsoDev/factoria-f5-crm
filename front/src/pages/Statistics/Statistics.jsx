@@ -7,6 +7,7 @@ import BarChartTotalSchoolsPeople from "./BarChartTotalSchoolsPeople";
 
 function Statistics() {
   const [ageData, setAgeData] = useState([]);
+  const [coderData, setCoderData] = useState([]);
   const [womenData, setWomenData] = useState({
     current_year: {
       year: '',
@@ -34,7 +35,7 @@ function Statistics() {
       });
   }, []);
 
-  console.log("AgeData:", ageData.totalPeople);
+  console.log("AgeData:", ageData);
   
   useEffect(() => {
     StatisticsDataService.getTotalWomenByYear()
@@ -54,6 +55,19 @@ function Statistics() {
   }, []);
 
   console.log("WomenData", womenData.percentage_difference);
+  
+  useEffect(() => {
+    StatisticsDataService.getTotalCoderCurrentYear()
+      .then(async (response) => {
+        console.log("ResponseCoder:", response.data);
+        setCoderData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching gender data:", error);
+      });
+  }, []);
+
+  console.log("CodersData", coderData);
 
   return (
     <>
@@ -61,7 +75,7 @@ function Statistics() {
         <div className="px-4 mt-5 md:px-10 mx-auto w-full">
           <div className="flex flex-wrap">
           <CardStatsAtom
-              statSubtitle={"Menores 30 años en 2023"}
+              statSubtitle={`Menores 30 años en ${ageData.currentYear}`}
               statTitle={ageData.totalPeopleUnder30}
               // statArrow={"down"}
               statPercent={ageData.percentageUnder30}
@@ -113,12 +127,12 @@ function Statistics() {
             ></CardStatsAtom>
 
             <CardStatsAtom
-              statSubtitle={"Total Mujeres 2023"}
-              statTitle={"350,897"}
-              statArrow={"up"}
-              statPercent={"3.48"}
-              statPercentColor={"text-emerald-500"}
-              statDescripiron={"Since last month"}
+              statSubtitle={`Total Coders ${coderData.year}`}
+              statTitle={coderData.totalCoderPeople}
+              // statArrow={"up"}
+              statPercent={coderData.percentageCoderPeople}
+              statPercentColor={"text-black-800 text-lg"}
+              statDescripiron={"Sobre el total de inscritos 2023"}
               statIconColor={"bg-green-500"}
               statIconImage={
                 <svg

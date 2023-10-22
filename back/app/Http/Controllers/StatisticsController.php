@@ -111,6 +111,7 @@ public function getTotalWomenByYear(): JsonResponse
            'totalPeopleUnder30' => $totalPeopleUnder30,
            'totalPeople' => $totalPeople,
            'percentageUnder30' => $percentageUnder30,
+           'currentYear' => $currentDate->year,
        ], 200);
    }
    
@@ -173,6 +174,31 @@ public function getTotalPeopleBySchool(): JsonResponse
     });
     
     return response()->json(['data' => $schoolPercentages], 200);
+}
+
+public function getTotalCoderCurrentYear()
+{
+    // Obten el año actual
+    $currentYear = Carbon::now()->year;
+
+    // Realiza la consulta para obtener el total de personas con el estado "Coder" y creadas durante el año actual
+    $totalCoderPeople = Person::where('id_status', 'Coder')
+        ->whereYear('created_at', $currentYear)
+        ->count();
+
+    // Realiza otra consulta para obtener el total de personas creadas durante el año actual con cualquier estado
+    $totalPeopleForCurrentYear = Person::whereYear('created_at', $currentYear)
+        ->count();
+
+    // Calcula el porcentaje
+    $percentageCoderPeople = ($totalCoderPeople / $totalPeopleForCurrentYear) * 100;
+
+    return [
+        'year' => $currentYear,
+        'totalCoderPeople' => $totalCoderPeople,
+        'totalPeopleForCurrentYear' => $totalPeopleForCurrentYear,
+        'percentageCoderPeople' => $percentageCoderPeople,
+    ];
 }
 
 
