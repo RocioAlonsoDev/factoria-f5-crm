@@ -101,7 +101,7 @@ const Router = createBrowserRouter([
         element: <ProjectsWorkShopsIndexByPerson />
       },
       {
-        path:'/tracking/evaluation/id',
+        path:'/tracking/coders/:id/evaluation',
       element:<Evaluation/>
       }
 

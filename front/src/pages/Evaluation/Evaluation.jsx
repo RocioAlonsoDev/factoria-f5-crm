@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import TableContentAtom from '../../components/atoms/TableContentAtom';
 import TableCompetencesAtom from '../../components/atoms/TableCompetencesAtom';
 import CategoryDataService from '../../services/trackingService/category.service';
-import StackDataService from '../../services/trackingService/stack.service';
+import BootcampStackDataService from '../../services/trackingService/bootcampStack.service';
 
 export default function Evaluation() {
   const [categories, setCategories] = useState([])
@@ -30,7 +30,7 @@ export default function Evaluation() {
 useEffect(() => {
   const fetchStack = async () => {
     try {
-      const response = await StackDataService.getAll();
+      const response = await BootcampStackDataService.getAll();
 
       setStacks(response.data);
       setIsLoading(false);
