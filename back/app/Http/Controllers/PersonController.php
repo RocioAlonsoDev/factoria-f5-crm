@@ -29,10 +29,10 @@ class PersonController extends Controller
     }
 
     
-    public function show($id):JsonResponse
+    public function show($id): JsonResponse
     {
-        $person = Person::find($id);
-        return response ()->json($person, 200);
+        $person = Person::with('status', 'bootcamp')->find($id);
+        return response()->json($person, 200);
     }
     
         
