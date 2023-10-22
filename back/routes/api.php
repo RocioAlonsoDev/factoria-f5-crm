@@ -21,6 +21,10 @@ use App\Http\Controllers\MailController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::put('/secondform', [PersonController::class, 'secondPhase']);
+
+
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout',[AuthController::class, 'logout']);
     Route::get('/me',[AuthController::class, 'me']);
@@ -49,4 +53,8 @@ Route::resource('/role', RoleController::class);
 
 // Route::get('/',[MailController::class, 'index']);
  Route::get('/discarded',[MailController::class, 'discarded']);
+
+ //Second form - recruitment
+
+
 

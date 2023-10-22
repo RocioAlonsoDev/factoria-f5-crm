@@ -74,6 +74,29 @@ class PersonController extends Controller
         ], 200);
     }
 
+    public function secondPhase(Request $request): JsonResponse
+{
+    $email = $request->input('email');
+    $person = Person::where('email', $email)->first();
+
+    if (!$person) {
+        return response()->json(['message' => 'El email proporcionado no figura en el registro'], 404);
+    }
+
+    $person->motivation = $request->input('motivation');
+    $person->englishLevel = $request->input('englishLevel');
+    $person->degree = $request->input('degree');
+    $person->anotherCourse = $request->input('anotherCourse');
+    $person->howArrived = $request->input('howArrived');
+    $person->employmentStatus = $request->input('employmentStatus');
+    $person->exerciseUrl = $request->input('exerciseUrl');
+
+    $person->save();
+
+    return response()->json(['message' => 'Información actualizada con éxito'], 200);
+}
+
+
 
     // RECRUITMENT METHODS
 
