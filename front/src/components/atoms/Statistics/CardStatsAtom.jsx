@@ -9,7 +9,6 @@ export default function CardStatsAtom({
   statDescripiron,
   statIconColor,
   statIconImage,
-  statIconImage,
 }) {
   return (
     <>
@@ -94,5 +93,4 @@ CardStatsAtom.propTypes = {
   statIconColor: PropTypes.string,
   statIconImage: PropTypes.any
 }
-  statIconImage: PropTypes.any
-}
+
