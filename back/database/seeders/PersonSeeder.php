@@ -31,6 +31,8 @@ class PersonSeeder extends Seeder
         'dni' => '888888888V',
         'id_status' => 1, 
         'id_bootcamp' => 1, 
+    ]);
+    
     DB::table('people')->insert([
         'name' => 'Maria',
         'surname' =>'García',

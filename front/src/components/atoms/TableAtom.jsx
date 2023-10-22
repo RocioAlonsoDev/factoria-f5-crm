@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+// import { Link } from "react-router-dom";
 import ButtonAtom from "./ButtonAtom";
 
 export default function TableAtom(props) {
@@ -107,4 +108,14 @@ export default function TableAtom(props) {
             </div>
         </>
     );
+
+}
+
+
+TableAtom.propTypes = {
+    tableTitle: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
+    columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+    addbutton: PropTypes.bool.isRequired,
+    addlink: PropTypes.string,
 }

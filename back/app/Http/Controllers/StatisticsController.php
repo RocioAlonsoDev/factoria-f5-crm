@@ -23,7 +23,7 @@ class StatisticsController extends Controller
                return [
                    'gender' => $item->gender,
                    'count' => $item->count,
-                   'percentage' => ($item->count / $totalPeople) * 100,
+                   'percentage' => number_format(($item->count / $totalPeople) * 100, 2)
                ];
            });
    
@@ -55,8 +55,8 @@ public function getTotalWomenByYear(): JsonResponse
         $currentYearPercentage = 0;
         $previousYearPercentage = 0;
     } else {
-        $currentYearPercentage = ($currentYearWomen / $totalCurrentYearWomen) * 100;
-        $previousYearPercentage = ($previousYearWomen / $totalCurrentYearWomen) * 100;
+        $currentYearPercentage = number_format(($currentYearWomen / $totalCurrentYearWomen) * 100, 2);
+        $previousYearPercentage = number_format(($previousYearWomen / $totalCurrentYearWomen) * 100, 2);
     }
 
     // Calculamos la diferencia en porcentaje entre current_year y previous_year
@@ -105,7 +105,7 @@ public function getTotalWomenByYear(): JsonResponse
        }
    
        // Calcula el porcentaje de personas menores de 30 años
-       $percentageUnder30 = ($totalPeopleUnder30 / $totalPeople) * 100;
+       $percentageUnder30 = number_format(($totalPeopleUnder30 / $totalPeople) * 100, 2);
    
        return response()->json([
            'totalPeopleUnder30' => $totalPeopleUnder30,
@@ -167,8 +167,8 @@ public function getTotalPeopleBySchool(): JsonResponse
             'school' => $item->school,
             'currentCount' => $currentYearCount, 
             'previousCount' => $previousYearCount,
-            'currentPercentage' => $currentYearPercentage,
-            'previousPercentage' => $previousYearPercentage,
+            'currentPercentage' => number_format($currentYearPercentage, 2),
+            'previousPercentage' => number_format($previousYearPercentage, 2),
             'difference' => $currentYearCount - $previousYearCount,
         ];
     });
@@ -197,7 +197,7 @@ public function getTotalCoderCurrentYear()
         'year' => $currentYear,
         'totalCoderPeople' => $totalCoderPeople,
         'totalPeopleForCurrentYear' => $totalPeopleForCurrentYear,
-        'percentageCoderPeople' => $percentageCoderPeople,
+        'percentageCoderPeople' => number_format($percentageCoderPeople, 2)
     ];
 }
 
