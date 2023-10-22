@@ -1,7 +1,7 @@
 const YearlyStatsCard = ({ currentYearTotal, lastYearTotal, cardTitle, totalPeople }) => {
     const difference = currentYearTotal - lastYearTotal;
 
-    // Calcular el porcentaje solo si lastYearTotal no es 0
+    
     const percentage =
         lastYearTotal !== 0
             ? ((difference / Math.abs(lastYearTotal)) * 100).toFixed(2)

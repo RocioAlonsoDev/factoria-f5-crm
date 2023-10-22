@@ -1,24 +1,4 @@
 
-// const StatusCard = ({ title, statusCounts, statusOptions }) => {
-//   return (
-//     <div className="w-full md:w-1/2 lg:w-1/4 p-4"> {/* Ajusta las clases aquí */}
-//       <div className="bg-white p-4 rounded shadow">
-//         <h3 className="text-xl font-semibold">{title}</h3>
-//         <ul>
-//           {Object.keys(statusCounts).map((key) => (
-//             <li key={key}>
-//               {statusOptions[key]}: {statusCounts[key]}
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default StatusCard;
-
-
 const StatusCard = ({ title, statusCounts, statusOptions, statusColors }) => {
   return (
     <div className="w-full md:w-1/2 lg:w-1/4 p-4">
