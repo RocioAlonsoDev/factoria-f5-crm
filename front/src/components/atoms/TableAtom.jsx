@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ButtonAtom from "./ButtonAtom";
 
 export default function TableAtom(props) {
-    const { tableTitle, data, columns, addbutton, addlink, addButtonOnClick } = props;
+    const { tableTitle, data, columns, addbutton, addlink, addButtonOnClick, backButtonLink, backButtonLabel, backButtonOnClick } = props;
     const [searchTerm, setSearchTerm] = React.useState("");
     const [showAlert, setShowAlert] = React.useState(false);
     const [filteredData, setFilteredData] = React.useState([]);
@@ -56,8 +56,13 @@ export default function TableAtom(props) {
                         {addbutton && 
                             <div className="relative flex-none">
                                 <ButtonAtom addlink={addlink} addbutton={addbutton} onClick={addButtonOnClick}></ButtonAtom>
-                            </div>}
-    
+                                
+                            </div>}    
+                        {backButtonLabel && 
+                            <div className="relative flex-none">
+                                <ButtonAtom addlink={backButtonLink} addbutton={backButtonLabel} onClick={backButtonOnClick}></ButtonAtom>
+                            </div>
+    }
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                             <input
                                 className="my-5"
