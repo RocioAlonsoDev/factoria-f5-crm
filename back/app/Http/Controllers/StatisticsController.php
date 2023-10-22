@@ -31,53 +31,6 @@ class StatisticsController extends Controller
       
    }
 
-
-// public function getTotalWomenByYear(): JsonResponse
-// {
-//     // Obtenemos el año actual
-//     $currentYear = now()->year;
-
-//     // Consulta para contar mujeres por año actual
-//     $currentYearWomen = Person::where('gender', 'female')
-//         ->whereYear('created_at', $currentYear)
-//         ->count();
-
-//     // Consulta para contar mujeres por año anterior
-//     $previousYear = $currentYear - 1;
-//     $previousYearWomen = Person::where('gender', 'female')
-//         ->whereYear('created_at', $previousYear)
-//         ->count();
-
-//     // Calculamos los porcentajes
-//     $totalCurrentYearWomen = $currentYearWomen + $previousYearWomen;
-    
-//     // Comprobamos si el total es cero antes de la división
-//     if ($totalCurrentYearWomen === 0) {
-//         $currentYearPercentage = 0;
-//         $previousYearPercentage = 0;
-//     } else {
-//         $currentYearPercentage = ($currentYearWomen / $totalCurrentYearWomen) * 100;
-//         $previousYearPercentage = ($previousYearWomen / $totalCurrentYearWomen) * 100;
-//     }
-
-//     // Calculamos la diferencia en porcentaje entre current_year y previous_year
-//     $percentageDifference = $currentYearPercentage - $previousYearPercentage;
-
-//     return response()->json([
-//         'current_year' => [
-//             'year' => $currentYear,
-//             'total_women' => $currentYearWomen,
-//             'percentage' => $currentYearPercentage,
-//         ],
-//         'previous_year' => [
-//             'year' => $previousYear,
-//             'total_women' => $previousYearWomen,
-//             'percentage' => $previousYearPercentage,
-//         ],
-//         'percentage_difference' => $percentageDifference, // Nueva clave con la diferencia en porcentaje
-//     ], 200);
-// }
-
 public function getTotalWomenByYear(): JsonResponse
 {
     // Obtenemos el año actual
@@ -161,6 +114,66 @@ public function getTotalWomenByYear(): JsonResponse
        ], 200);
    }
    
+
+
+public function getTotalPeopleBySchool(): JsonResponse
+{
+    // Obtenemos el año actual y el año previo
+    $currentYear = Carbon::now()->year;
+    $previousYear = $currentYear - 1;
+
+    // Consulta para contar personas por escuela en el año actual
+    $currentYearCounts = DB::table('people')
+        ->join('bootcamps', 'people.id_bootcamp', '=', 'bootcamps.id')
+        ->select('bootcamps.school', DB::raw('count(*) as count'))
+        ->whereRaw('YEAR(people.created_at) = ?', [$currentYear])
+        ->groupBy('bootcamps.school')
+        ->get();
+    
+    // Consulta para contar personas por escuela en el año previo
+    $previousYearCounts = DB::table('people')
+        ->join('bootcamps', 'people.id_bootcamp', '=', 'bootcamps.id')
+        ->select('bootcamps.school', DB::raw('count(*) as count'))
+        ->whereRaw('YEAR(people.created_at) = ?', [$previousYear])
+        ->groupBy('bootcamps.school')
+        ->get();
+
+    // Calcula los porcentajes y las diferencias
+    $currentYearTotalPeople = $currentYearCounts->sum('count');
+    $previousYearTotalPeople = $previousYearCounts->sum('count');
+
+    $schoolPercentages = $currentYearCounts->map(function ($item) use ($currentYearTotalPeople, $previousYearCounts, $previousYearTotalPeople, $currentYear, $previousYear) {
+        $currentYearCount = $item->count;
+
+        // Busca el valor correspondiente en el año previo
+        $previousYearRecord = $previousYearCounts->first(function ($previousItem) use ($item) {
+            return $previousItem->school === $item->school;
+        });
+
+        // Verifica si se encontró un registro para el año previo
+        if ($previousYearRecord !== null) {
+            $previousYearCount = $previousYearRecord->count;
+        } else {
+            $previousYearCount = 0; // Valor predeterminado en caso de que no se encuentre un registro
+        }
+
+        $currentYearPercentage = ($currentYearCount / $currentYearTotalPeople) * 100;
+        $previousYearPercentage = ($previousYearCount / $previousYearTotalPeople) * 100;
+
+        return [
+            'currentYear' => $currentYear,
+            'previousYear' => $previousYear,
+            'school' => $item->school,
+            'currentCount' => $currentYearCount, 
+            'previousCount' => $previousYearCount,
+            'currentPercentage' => $currentYearPercentage,
+            'previousPercentage' => $previousYearPercentage,
+            'difference' => $currentYearCount - $previousYearCount,
+        ];
+    });
+    
+    return response()->json(['data' => $schoolPercentages], 200);
+}
 
 
 }

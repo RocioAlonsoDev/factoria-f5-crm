@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import CardStatsAtom from "../../components/atoms/Statistics/CardStatsAtom";
 import BarGraphicTotalGenderPercentages from "./BarGraphicTotalGenderPercentages";
-import LineChartTotalSchoolPeople from "./LineChartTotalSchoolsPeople";
+// import LineChart from "./LineChart";
 import StatisticsDataService from "../../services/crmService/statistics.service";
-import BarChart from "./BarChart";
+import BarChartTotalSchoolsPeople from "./BarChartTotalSchoolsPeople";
 
 function Statistics() {
   const [ageData, setAgeData] = useState([]);
@@ -22,8 +22,7 @@ function Statistics() {
   });
   const [womenDataCurrentYear, setWomenDataCurrentYear] = useState([]);
   const [womenDataPreviousYear, setWomenDataPreviousYear] = useState([]);
-  const [womenDataYearsDifferencePercentage, setWomenDataYearsDifferencePercentage] = useState([]);
-
+ 
   useEffect(() => {
     StatisticsDataService.getTotalAgePercentages()
       .then(async (response) => {
@@ -36,28 +35,6 @@ function Statistics() {
   }, []);
 
   console.log("AgeData:", ageData.totalPeople);
-
-  // useEffect(() => {
-  //   StatisticsDataService.getTotalWomenByYear()
-  //     .then(async (response) => {
-  //       console.log("ResponseWomen:", response.data);
-  //       const totalWomen = response.data.current_year.total_women;
-  
-  //       // Asegúrate de que totalWomen no sea undefined antes de actualizar la tarjeta
-  //       if (totalWomen !== undefined) {
-  //         // Actualiza el estado de la tarjeta con el nuevo valor
-  //         // Puedes hacerlo así:
-  //         const updatedWomenData = { ...womenDataCurrentYear };
-  //         updatedWomenData.totalWomen = totalWomen;
-  //         setWomenDataCurrentYear(updatedWomenData);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching gender data:", error);
-  //     });
-  // }, []);
-  
-  // console.log('WomenData', womenDataCurrentYear);
   
   useEffect(() => {
     StatisticsDataService.getTotalWomenByYear()
@@ -84,7 +61,7 @@ function Statistics() {
         <div className="px-4 mt-5 md:px-10 mx-auto w-full">
           <div className="flex flex-wrap">
           <CardStatsAtom
-              statSubtitle={"Menores 30 años"}
+              statSubtitle={"Menores 30 años en 2023"}
               statTitle={ageData.totalPeopleUnder30}
               // statArrow={"down"}
               statPercent={ageData.percentageUnder30}
@@ -169,17 +146,17 @@ function Statistics() {
           </div>
         </div>
 
-
+{/* 
         <div className="px-4 mt-5 md:px-10 mx-auto w-2/4">
           <div className="flex flex-wrap">
-            <LineChartTotalSchoolPeople></LineChartTotalSchoolPeople>
+            <LineChart></LineChart>
           </div>
-        </div>
+        </div> */}
 
 
         <div className="px-4 mt-5 md:px-10 mx-auto w-2/4">
           <div className="flex flex-wrap">
-            <BarChart></BarChart>
+            <BarChartTotalSchoolsPeople></BarChartTotalSchoolsPeople>
           </div>
         </div>
 
