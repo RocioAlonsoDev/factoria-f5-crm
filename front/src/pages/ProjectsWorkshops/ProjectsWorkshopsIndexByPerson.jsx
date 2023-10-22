@@ -4,7 +4,7 @@ import UserDataService from '../../services/crmService/user.service';
 import { useState, useEffect } from 'react';
 import TableAtom from '../../components/atoms/TableAtom';
 import AddProjectsCommentsModal from './AddProjectsCommentsModal';
-import EditCommentModal from '../Comments/EditCommentModal';
+import EditProjectsCommentsModal from './EditProjectsCommentsModal';
 import Popup from '../../components/atoms/PopUp';
 import ButtonAtom from "../../components/atoms/ButtonAtom";
 
@@ -110,7 +110,7 @@ export default function ProjectsWorkShopsIndexByPerson() {
         </div>
         {isModalOpen && <AddProjectsCommentsModal setIsModalOpen={setIsModalOpen} />}
         {isEditModalOpen && (
-          <EditCommentModal
+          <EditProjectsCommentsModal
             setIsEditModalOpen={setIsEditModalOpen}
             commentId={editCommentId}
             updateComments={setComments}
