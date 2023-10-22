@@ -14,6 +14,10 @@ class StatisticsDataService{
         return http.get(`api/totalWomenByYear`);
     }
 
+    getTotalPeoplebySchool(){
+        return http.get(`api/totalPeoplebySchool`);
+    }
+
 }
 
 export default new StatisticsDataService();

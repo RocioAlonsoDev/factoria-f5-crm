@@ -53,6 +53,7 @@ Route::resource('/genderper', StatisticsController::class);
 Route::get('totalGenderPercentage', [StatisticsController::class, 'getTotalGenderPercentages']);
 Route::get('totalWomenByYear', [StatisticsController::class, 'getTotalWomenByYear']);
 Route::get('totalAgePercentage', [StatisticsController::class, 'getTotalAgePercentages']);
+Route::get('totalPeoplebySchool', [StatisticsController::class, 'getTotalPeopleBySchool']);
 
 
 // Route::get('/',[MailController::class, 'index']);

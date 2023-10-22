@@ -192,7 +192,7 @@ class PersonSeeder extends Seeder
         'gender' => 'no binario',
         'dni' => '90872345M',
         'id_status' => 4, 
-        'id_bootcamp' => 4, 
+        'id_bootcamp' => 5, 
         'created_at' => '2023-09-11'
     ]);
 }
