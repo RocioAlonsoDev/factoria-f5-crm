@@ -244,13 +244,36 @@ export default function CodersEdit() {
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
             <label className="block uppercase text-blueGray-600 text-md font-bold mb-2">Comunidad Autónoma:</label>
-            <input
-              value={region}
-              onChange={(e) => setRegion(e.target.value)}
-              className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"
-            />
+            <select 
+                name="region" 
+                id="region"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"               
+                >
+                <option value="">--Por favor, escoge una opción--</option>
+                <option value="Andalucía">Andalucía</option>
+                <option value="Aragón">Aragón</option>
+                <option value="Asturias">Asturias</option>
+                <option value="Baleares">Baleares</option>
+                <option value="Canarias">Canarias</option>
+                <option value="Cantabria">Cantabria</option>
+                <option value="Castilla y León">Castilla y León</option>
+                <option value="Castilla-La Mancha">Castilla-La Mancha</option>
+                <option value="Cataluña">Cataluña</option>
+                <option value="Comunidad de Madrid">Comunidad de Madrid</option>
+                <option value="Comunidad Valenciana">Comunidad Valenciana</option>
+                <option value="Ceuta">Ceuta</option>
+                <option value="Extremadura">Extremadura</option>
+                <option value="Galicia">Galicia</option>
+                <option value="La Rioja">La Rioja</option>
+                <option value="Melilla">Melilla</option>      
+                <option value="Murcia">Murcia</option>
+                <option value="Navarra">Navarra</option>
+                <option value="País Vasco">País Vasco</option>             
+            </select>
           </div>
-        </div>
+        </div>     
 
         <div className="block w-full px-4 py-3">
           <div className="mb-4">
