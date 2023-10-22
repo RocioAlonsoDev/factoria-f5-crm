@@ -18,6 +18,10 @@ class StatisticsDataService{
         return http.get(`api/totalPeoplebySchool`);
     }
 
+    getTotalCoderCurrentYear(){
+        return http.get(`api/totalCoderCurrentYear`);
+    }
+
 }
 
 export default new StatisticsDataService();
