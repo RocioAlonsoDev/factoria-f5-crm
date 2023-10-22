@@ -4,10 +4,9 @@ import UserDataService from '../../services/crmService/user.service';
 import { useState, useEffect } from 'react';
 import TableAtom from '../../components/atoms/TableAtom';
 import AddProjectsCommentsModal from './AddProjectsCommentsModal';
-import EditCommentModal from '../Comments/EditCommentModal';
+import EditProjectsCommentsModal from './EditProjectsCommentsModal';
 import Popup from '../../components/atoms/PopUp';
 import ButtonAtom from "../../components/atoms/ButtonAtom";
-
 
 export default function ProjectsWorkShopsIndexByPerson() {
   const { id } = useParams();
@@ -70,11 +69,11 @@ export default function ProjectsWorkShopsIndexByPerson() {
       console.error('Error al eliminar el comentario:', error);
     }
     setSelectedCommentId(null);
-    setIsConfirmDeleteOpen(true);
+    setIsConfirmDeleteOpen(false); // <-- Cambiado de true a false
   };
 
-
-  const handleEditComment = (commentId) => {
+  const handleEditComment = (comment) => {
+    const commentId = comment.id;
     setEditCommentId(commentId);
     setIsEditModalOpen(true);
   };
@@ -91,47 +90,42 @@ export default function ProjectsWorkShopsIndexByPerson() {
     Fecha: formatDate(comment.submission_date),  
     
     '' : (<>
-       
-        <ButtonAtom onClick={handleEditComment}  addbutton='Editar'></ButtonAtom>
-        <ButtonAtom onClick={handleDeleteComment}  addbutton='Eliminar'></ButtonAtom>
-        </>)
+      <ButtonAtom onClick={() => handleEditComment(comment)} addbutton='Editar'></ButtonAtom>
+      <ButtonAtom onClick={() => handleDeleteComment(comment.id)} addbutton='Eliminar'></ButtonAtom>
+    </>)
   }));
-  
 
   const columns = ['Proyecto', 'Fecha', 'Observaciones', 'Autor', ''];
 
   return (
-
-      <>
-        
-        <div className="md:block md:absolute md:top-[107px] md:left-64 md:right-0 w-auto p-2">
-            <TableAtom tableTitle='Proyectos y Talleres' addbutton='Agregar comentario' addButtonOnClick={setIsModalOpen} data={data} columns={columns} />
-            {isLoading && <div className='pl-3'>Cargando...</div>}
-        </div>
-        {isModalOpen && <AddProjectsCommentsModal setIsModalOpen={setIsModalOpen} />}
-        {isEditModalOpen && (
-          <EditCommentModal
-            setIsEditModalOpen={setIsEditModalOpen}
-            commentId={editCommentId}
-            updateComments={setComments}
-          />
-        )}
-        {isConfirmDeleteOpen && (
-          <Popup isOpen={setIsConfirmDeleteOpen} onClose={handleConfirmDelete} >
-            <h6 className="text-blueGray-700 font-bold mb-4">
-              ¡Estás a punto de eliminar este comentario!
-            </h6>
-            <h2 className="text-2xl font-bold mb-4">¿Eliminar?</h2>
-              {/* <button
-                className="text-black-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setIsConfirmDeleteOpen(false)}
-              >
-                Cerrar
-              </button> */}
-          </Popup>
-        )}
-      </>
-
+    <>
+      <div className="md:block md:absolute md:top-[107px] md:left-64 md:right-0 w-auto p-2">
+        <TableAtom tableTitle='Proyectos y Talleres' addbutton='Agregar comentario' addButtonOnClick={() => setIsModalOpen(true)} data={data} columns={columns} />
+        {isLoading && <div className='pl-3'>Cargando...</div>}
+      </div>
+      {isModalOpen && <AddProjectsCommentsModal setIsModalOpen={setIsModalOpen} />}
+      {isEditModalOpen && (
+        <EditProjectsCommentsModal
+          setIsEditModalOpen={setIsEditModalOpen}
+          commentId={editCommentId}
+          updateComments={setComments}
+        />
+      )}
+      {isConfirmDeleteOpen && (
+        <Popup isOpen={isConfirmDeleteOpen} onClose={handleConfirmDelete}>
+          <h6 className="text-blueGray-700 font-bold mb-4">
+            ¡Estás a punto de eliminar este comentario!
+          </h6>
+          <h2 className="text-2xl font-bold mb-4">¿Eliminar?</h2>
+          <button
+            className="text-black-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => setIsConfirmDeleteOpen(false)}
+          >
+            Cerrar
+          </button>
+        </Popup>
+      )}
+    </>
   )
 }
