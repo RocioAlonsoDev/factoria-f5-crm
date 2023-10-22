@@ -25,11 +25,11 @@ import ShowPerson from "../pages/Person/ShowPerson";
 import AllPeople from "../pages/Person/AllPeople";
 import IndexPerson from "../pages/Person/IndexPerson";
 import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
-import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
+//import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
 import Statistics from "../pages/Statistics/Statistics";
 import CodersAdd from "../pages/CodersFrontend/CodersAdd";
-import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
-import PeoplebyBootcamp from "../pages/PersonBootcamp/PeoplebyBootcamp";
+//import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
+//import PeoplebyBootcamp from "../pages/PersonBootcamp/PeoplebyBootcamp";
 
 
 // const Router = createBrowserRouter([
@@ -258,13 +258,11 @@ const Router = createBrowserRouter([
         path:'/recruitment/personbootcamp/index',
         element: <IndexPersonBootcamp />
       },
+      // {
+      //   path:'/recruitment/personbybootcamp/:id',
+      //   element: <PersonbyBootcampTable />
+      // },
       {
-        path:'/recruitment/personbybootcamp/:id',
-        element: <PersonbyBootcampTable />
-      },
-      {
-      path: '/recruitment/person/:id',
-      element: <ShowPerson />
       path: '/recruitment/person/:id',
       element: <ShowPerson />
       },

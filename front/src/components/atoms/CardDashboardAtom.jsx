@@ -41,7 +41,7 @@ export default function CardDashboardAtom({
           <div className="flex-auto p-4">
             <div className="flex flex-wrap">
               <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                <h5 className="text-orange-400 uppercase font-bold text-m pb-4">
+                <h5 className="text-orange-500 uppercase font-bold text-m pb-4">
                   {title}
                 </h5>
                 <span className="font-semibold text-xl text-blueGray-700">
@@ -59,10 +59,10 @@ export default function CardDashboardAtom({
                 </div>
               </div>
             </div>
-            <span className="whitespace-nowrap">Fecha: {date}</span> <br />
-            <span className="whitespace-nowrap text-m text-blueGray-400 mt-4">
-              Personas asistentes: {attendeesCount}
-            </span>
+            <span className="whitespace-nowrap text-xl "><span className="font-semibold">Fecha:</span> {date}</span> <br />
+            <span className="whitespace-nowrap text-xl text-blueGray-400 mt-4">
+  <span className="font-semibold">Personas asistentes:</span> {attendeesCount}
+</span>
           </div>
         </div>
       </div>

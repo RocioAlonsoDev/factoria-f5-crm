@@ -35,6 +35,10 @@ class PersonDataService{
         return http.get(`api/getPeopleInBootcamp/${id_bootcamp}`);
     }
 
+    showByGender(gender) {
+        return http.get(`api/genderdata`);
+      }
+
 }
 
 export default new PersonDataService();
