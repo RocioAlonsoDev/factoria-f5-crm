@@ -69,7 +69,7 @@ export default function ProjectsWorkShopsIndexByPerson() {
       console.error('Error al eliminar el comentario:', error);
     }
     setSelectedCommentId(null);
-    setIsConfirmDeleteOpen(false); // <-- Cambiado de true a false
+    setIsConfirmDeleteOpen(false); 
   };
 
   const handleEditComment = (comment) => {
@@ -91,17 +91,32 @@ export default function ProjectsWorkShopsIndexByPerson() {
     
     '' : (<>
       <ButtonAtom onClick={() => handleEditComment(comment)} addbutton='Editar'></ButtonAtom>
-      <ButtonAtom onClick={() => handleDeleteComment(comment.id)} addbutton='Eliminar'></ButtonAtom>
+      <ButtonAtom onClick={() => handleDeleteComment(comment.id)} addbutton='Eliminar'></ButtonAtom>    
     </>)
   }));
+
+  const handleGoBack = () => {
+    window.history.back();
+  };
+  
 
   const columns = ['Proyecto', 'Fecha', 'Observaciones', 'Autor', ''];
 
   return (
     <>
-      <div className="md:block md:absolute md:top-[107px] md:left-64 md:right-0 w-auto p-2">
-        <TableAtom tableTitle='Proyectos y Talleres' addbutton='Agregar comentario' addButtonOnClick={() => setIsModalOpen(true)} data={data} columns={columns} />
-        {isLoading && <div className='pl-3'>Cargando...</div>}
+      <div className="md:block md:absolute md:top-[107px] md:left-64 md:right-0 w-auto p-2">      
+      <TableAtom
+          tableTitle='Proyectos y Talleres'
+          addbutton='Agregar comentario'
+          addButtonOnClick={() => setIsModalOpen(true)}
+          data={data}
+          columns={columns}
+          backButtonLabel='Volver'
+          backButtonOnClick={() => handleGoBack(true)}
+        />
+
+        {isLoading && <div className=''>Cargando...</div>}
+       
       </div>
       {isModalOpen && <AddProjectsCommentsModal setIsModalOpen={setIsModalOpen} />}
       {isEditModalOpen && (
@@ -126,6 +141,9 @@ export default function ProjectsWorkShopsIndexByPerson() {
           </button>
         </Popup>
       )}
+      
+ {/* Botón de volver */}
+ <ButtonAtom addlink={`/tracking/coders`} addbutton='Volver'></ButtonAtom>
     </>
   )
 }
