@@ -1,9 +1,9 @@
-// import React, { useEffect } from "react";
-// import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
-// import { useParams } from 'react-router-dom';
-// import FormAtom from '../../components/atoms/FormAtom'
-// import bootcampService from "../../services/crmService/bootcamp.service";
-// import stackService from "../../services/trackingService/stack.service";
+import React, { useEffect } from "react";
+//import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
+import { useParams } from 'react-router-dom';
+import FormAtom from '../../components/atoms/FormAtom'
+import bootcampService from "../../services/crmService/bootcamp.service";
+import stackService from "../../services/trackingService/stack.service";
  
 // export default function StepperMolecule (props) {
 //   const [activeStep, setActiveStep] = React.useState(0);

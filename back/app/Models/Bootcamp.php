@@ -22,9 +22,9 @@ class Bootcamp extends Model
         'promo',
     ];
 
-    public function personBootcamp(): BelongsToMany
+    public function personBootcamp()
     {
-        return $this->belongsToMany(Person_Bootcamp::class, 'person__bootcamp', 'bootcamp_id', 'id');
+    return $this->hasMany(Person_Bootcamp::class, 'id_bootcamp', 'id');
     }
 
     public function person(): BelongsTo

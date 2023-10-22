@@ -27,7 +27,7 @@ import IndexPerson from "../pages/Person/IndexPerson";
 import Statistics from "../pages/Statistics/Statistics";
 import CodersAdd from "../pages/CodersFrontend/CodersAdd";
 import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
-import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
+import PeoplebyBootcamp from "../pages/PersonBootcamp/PeoplebyBootcamp";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 
@@ -139,7 +139,7 @@ const Router = createBrowserRouter([
       },
       {
         path:'/recruitment/personbybootcamp/:id',
-        element: <PersonbyBootcampTable />
+        element: <PeoplebyBootcamp/>
       },
       {
       path: '/recruitment/person/:id',
