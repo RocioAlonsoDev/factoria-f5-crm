@@ -3,18 +3,46 @@ import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
 import { useParams } from 'react-router-dom';
 import FormAtom from '../../components/atoms/FormAtom'
 import bootcampService from "../../services/crmService/bootcamp.service";
-import stackService from "../../services/trackingService/stack.service";
+import StackDataService from "../../services/trackingService/stack.service";
+import BootcampStackDataService from '../../services/trackingService/bootcampStack.service'
+import RequirementDataService from '../../services/recruitmentService/requirement.service'
  
 export default function StepperMolecule (props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isLastStep, setIsLastStep] = React.useState(false);
   const [isFirstStep, setIsFirstStep] = React.useState(false);
   const [stacks,setStacks] = React.useState([]);
+  const [requirements,setRequirements] = React.useState([]);
   const [bootcamp,setBootcamp] = React.useState(null);
   const { id } = useParams();
  
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
   const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
+
+  useEffect(() => {
+    const fetchStacks = async () => {
+      try {
+        const response = await StackDataService.getAll();
+        setStacks(response.data)
+      } catch (error) {
+        console.error('Error fetching stacks:', error);
+      }
+    }
+
+    fetchStacks()
+
+    const fetchRequirements = async () => {
+      try {
+        const response = await RequirementDataService.getAll();
+        setRequirements(response.data.data)
+      } catch (error) {
+        console.error('Error fetching stacks:', error);
+      }
+    } 
+
+    fetchRequirements()
+    
+  },[])
 
   const step1Data = [
       {
@@ -50,21 +78,15 @@ export default function StepperMolecule (props) {
         },
   ];
 
-  useEffect(() => {
-    const fetchStacks= async () => {
-      try {
-        const response = await stackService.getAll();
-        setStacks(response.data)
-      } catch (error) {
-        console.error('Error fetching stacks:', error);
-      }
-    };
-    fetchStacks(); 
-  },[])
-    
-  let step2Data = stacks.map(stack => ({
+  const step2Data = stacks.map(stack => ({
     id: stack.id,
     label: stack.name,
+    type: 'checkbox',
+  }));
+
+  const step3Data = requirements.map(requirement => ({
+    id: requirement.id,
+    label: requirement.name,
     type: 'checkbox',
   }));
 
@@ -88,8 +110,39 @@ export default function StepperMolecule (props) {
   }
 
   const onStacksSubmit = (values) => {
-    console.log(values)
+    if (bootcamp) {
+      const bootcampId = bootcamp; 
+  
+      const selectedStacks = Object.keys(values)
+      .filter((stackId) => values[stackId] === 'on')
+      .map(Number);
+
+      const bootcampStackData = selectedStacks.map((stackId) => ({
+        bootcamp_id: bootcampId,
+        stack_id: stackId,
+      }));
+
+      bootcampStackData.forEach(element => {
+
+        BootcampStackDataService.create(JSON.stringify(element))
+        .then((response) => {
+          console.log(response.data.message)})
+        .catch((error) => {
+          console.error('Network error:', error);
+        })
+        
+      })
+
+      handleNext()
+      console.log(requirements)
+    }
   }
+
+  const onRequirementSubmit = (values) =>{
+
+  }
+    
+  
  
   return (
     <div className="flex flex-col relative min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded py-10">
@@ -177,7 +230,12 @@ export default function StepperMolecule (props) {
           formData={step2Data}
           onSubmit={onStacksSubmit}
         /> : ''}
-      {activeStep === 2 ? props.step3 : ''}
+      {activeStep === 2 ?
+      <FormAtom
+          formTitle="Agregar Requisitos de Acceso"
+          formData={step3Data}
+          onSubmit={onRequirementSubmit}
+        /> : ''}
       <div className="mt-32">
         <Button onClick={handlePrev} disabled={isFirstStep} className="bg-gray-400">
           Atrás
