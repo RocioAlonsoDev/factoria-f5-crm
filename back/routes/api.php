@@ -10,6 +10,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PersonBootcampController;
+use App\Http\Controllers\GenderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,5 +49,7 @@ Route::resource('/bootcamp', BootcampController::class);
 Route::resource('/role', RoleController::class);
 Route::get('/getPeopleInBootcamp/{bootcamp}', [PersonBootcampController::class, 'getPeopleInBootcamp']);
 
-// Route::get('person/genderpercentages', [PersonController::class, 'getGenderPercentages']);
+
+Route::get('genderdata', [GenderController::class, 'getGenderData']);
+
 
