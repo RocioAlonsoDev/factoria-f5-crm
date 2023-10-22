@@ -24,6 +24,13 @@ export default function PublicAddPerson() {
     dni: "",
     id_status: 2,
     id_bootcamp: 1,
+    motivation:'No ha rellenado segundo formulario',
+    englishLevel:"Básico",
+    degree:'No ha rellenado segundo formulario',
+    anotherCourse: 'No ha rellenado segundo formulario',
+    howArrived: 'No ha rellenado segundo formulario',
+    employmentStatus: 'Estudiando',
+    exerciseUrl: 'Noharellenadosegundoformulario.com'
   });
 
   const handleNext = () => {
@@ -247,6 +254,41 @@ export default function PublicAddPerson() {
       type="hidden"
       name="id_bootcamp"
       value="1"
+    />
+    <input
+      type="hidden"
+      name="motivation"
+    
+    />
+    <input
+      type="hidden"
+      name="englishLevel"
+      
+    />
+    <input
+      type="hidden"
+      name="degree"
+      
+    />
+    <input
+      type="hidden"
+      name="anotherCourse"
+     
+    />
+    <input
+      type="hidden"
+      name="howArrived"
+      
+    />
+    <input
+      type="hidden"
+      name="employmentStatus"
+      
+    />
+    <input
+      type="hidden"
+      name="exerciseUrl"
+     
     />
     <div>
                       <label className="inline-flex items-center cursor-pointer m-6">

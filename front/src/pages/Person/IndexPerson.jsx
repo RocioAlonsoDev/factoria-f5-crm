@@ -142,7 +142,7 @@ const cardColor = difference > 0 ? "green" : "red";
 const arrowIcon = difference > 0 ? "↑" : "↓";
 
 const calculateFemaleCount = (people) => {
-  return people.filter((person) => person.gender === "mujer").length;
+  return people.filter((person) => person.gender === "Mujer").length;
 };
 
 const calculateAgeBelow30Count = (people) => {

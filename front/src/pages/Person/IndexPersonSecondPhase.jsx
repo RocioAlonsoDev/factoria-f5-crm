@@ -5,6 +5,8 @@ import PersonRequirementsDataService from "../../services/recruitmentService/per
 import FilterButton from "../../components/atoms/FilterButton";
 import { Link } from "react-router-dom";
 import ToggleButton from "../../components/atoms/ToggleButton";
+import YearlyStatsCard from "../../components/atoms/Statistics/YearlyStatsCard";
+import StatusCard from "../../components/atoms/StatusCards";
 
 export default function IndexPersonSecondPhase() {
   const [people, setPeople] = useState([]);
@@ -39,6 +41,7 @@ export default function IndexPersonSecondPhase() {
     "Apellidos",
     "email",
     "Edad",
+    "Motivación",
     "Nivel de inglés",
     "Titulación",
     "¿Está inscrito en otra formación?",
@@ -76,47 +79,29 @@ export default function IndexPersonSecondPhase() {
     }
   };
 
-  const calculateCounts = () => {
-    
-    const counts = {
-      completos: 0,
-      noAcabados: 0,
-      sinComenzar: 0,
-      faltanEnlaces: 0,
-      under30: 0, 
-    };
 
-    originalPeople.forEach((person) => {
-      const exercicesRequirementId = 6;
-      const exercicesValue =
-        selectStatus[`${person.id}_${exercicesRequirementId}`] || 0;
-        const age = person.birthdate ? calculateAge(person.birthdate) : null;
 
-      switch (exercicesValue) {
-        case 9:
-          counts.completos++;
-          break;
-        case 10:
-          counts.noAcabados++;
-          break;
-        case 11:
-          counts.sinComenzar++;
-          break;
-        case 12:
-          counts.faltanEnlaces++;
-          break;
-        default:
-          break;
+  const countPeopleInExercisesStatus = (requirementId) => {
+    const exercisesStatusCounts = Object.keys(statusOptions).reduce((counts, key) => {
+      const count = originalPeople.reduce((acc, person) => {
+        const statusKey = `${person.id}_${requirementId}`;
+        if (selectStatus[statusKey] === parseInt(key)) {
+          return acc + 1;
+        }
+        return acc;
+      }, 0);
+  
+      if (count > 0) {
+        counts[key] = count;
       }
-      if (age !== null && age < 30) {
-        counts.under30++;
-      }
-    });
-
-    return counts;
+  
+      return counts;
+    }, {});
+  
+    return exercisesStatusCounts;
   };
-
-  const counts = calculateCounts();
+  
+  const exercisesStatusCounts = countPeopleInExercisesStatus(6);
 
   const allowedExercicesOptions = [1, 9, 10, 11, 12, 4];
 
@@ -168,32 +153,85 @@ export default function IndexPersonSecondPhase() {
     closeFilterModal();
   };
 
+  //STATS
+
+  const currentYear = new Date().getFullYear();
+const lastYear = currentYear - 1;
+
+const peopleWithMotivation = originalPeople.filter((person) => {
+  const motivation = person.motivation || '';
+  return (
+    motivation !== "No ha rellenado segundo formulario" &&
+    motivation !== "No ha contestado"
+  );
+});
+
+const totalPeople = peopleWithMotivation.length;
+
+const peopleInCurrentYear = peopleWithMotivation.filter((person) => {
+  const registrationDate = new Date(person.updated_at);
+  return registrationDate.getFullYear() === currentYear;
+});
+
+const peopleInLastYear = peopleWithMotivation.filter((person) => {
+  const registrationDate = new Date(person.updated_at);
+  return registrationDate.getFullYear() === lastYear;
+});
+
+const currentYearTotal = peopleInCurrentYear.length;
+const lastYearTotal = peopleInLastYear.length;
+
+const difference = currentYearTotal - lastYearTotal;
+const percentageChange = lastYearTotal > 0 ? ((difference / lastYearTotal) * 100).toFixed(2) : 0;
+
+const cardColor = difference > 0 ? "green" : "red";
+const arrowIcon = difference > 0 ? "↑" : "↓";
+
+const calculateFemaleCount = (people) => {
+  return people.filter((person) => person.gender === "Mujer").length;
+};
+
+const calculateAgeBelow30Count = (people) => {
+  const currentYear = new Date().getFullYear();
+  return people.filter((person) => {
+    const birthYear = new Date(person.birthdate).getFullYear();
+    return currentYear - birthYear < 30;
+  }).length;
+};
+
+const femaleCount = calculateFemaleCount(peopleWithMotivation);
+const ageBelow30Count = calculateAgeBelow30Count(peopleWithMotivation);
+
+//API
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await PersonDataService.getAll();
-        setOriginalPeople(response.data.data); 
-        setPeople(response.data.data);
+  
+        
+        const filteredPeople = response.data.data.filter(person => {
+          const motivation = person.motivation || ''; 
+          return (
+            motivation !== "No ha rellenado segundo formulario" &&
+            motivation !== "No ha contestado"
+          );
+        });
+  
+        setOriginalPeople(filteredPeople);
+        setPeople(filteredPeople);
       } catch (error) {
         console.error("Error al cargar datos de personas", error);
       }
     };
 
+    
+  
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await PersonDataService.getAll();
-        setPeople(response.data.data);
-      } catch (error) {
-        console.error("Error al cargar datos de personas", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  
 
   useEffect(() => {
     const fetchRequirements = async () => {
@@ -312,13 +350,15 @@ export default function IndexPersonSecondPhase() {
       Nombre: person.name,
       Apellidos: person.surname,
       email: person.email,
-      Teléfono: person.phone,
-      Ciudad: person.city,
-      "Comunidad Autónoma": person.region,
-      "¿Acepta la política de protección de datos?": person.dataprotection,
       Edad: age,
       Género: person.gender,
-      "Fecha de inscripción": formattedDate,
+      Motivación: person.motivation,
+      "Nivel de inglés": person.englishLevel,
+      Titulación: person.degree,
+      "¿Está inscrito en otra formación?": person.anotherCourse,
+      "¿Cómo nos ha conocido?": person.howArrived,
+      "Situación laboral": person.employmentStatus,
+      "Link a ejercicios": person.exerciseUrl,
       "Estado de ejercicios": (
         <div className="flex items-center">
           <div
@@ -343,19 +383,46 @@ export default function IndexPersonSecondPhase() {
   });
 
   return (
-    <div className="md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2 relative">
-      <div className="w-1/3 mx-auto m-16">
+    <div className="md:bloc md:top-[107px] md:left-64 md:right-0 w-auto p-2 relative">
+      <div className="w-1/3 mx-auto m-10">
         <ToggleButton />
-  
-        <div>
-          <h2>Información de Estado de Ejercicios</h2>
-          <p>Completos: {counts.completos}</p>
-          <p>No Acabados: {counts.noAcabados}</p>
-          <p>Sin Comenzar: {counts.sinComenzar}</p>
-          <p>Faltan Enlaces: {counts.faltanEnlaces}</p>
-          <p>Personas menores de 30 años: {counts.under30}</p>
         </div>
-      </div>
+        <div className="flex flex-wrap">
+      <YearlyStatsCard
+  currentYearTotal={currentYearTotal}
+  lastYearTotal={lastYearTotal}
+  difference={difference}
+  percentageChange={percentageChange}
+  cardColor={cardColor}
+  arrowIcon={arrowIcon}
+  cardTitle='Personas que siguen en el proceso'
+  totalPeople={totalPeople}
+/>
+<YearlyStatsCard
+            currentYearTotal={femaleCount}
+            lastYearTotal={0} 
+            cardTitle="Total de mujeres"
+            totalPeople={femaleCount}
+        />
+        <YearlyStatsCard
+            currentYearTotal={ageBelow30Count}
+            lastYearTotal={0} 
+            cardTitle="Personas menores de 30 años"
+            totalPeople={ageBelow30Count}
+        />
+        </div>
+
+        <div className="flex flex-wrap">
+        <StatusCard
+  title="Estado de ejercicios"
+  statusCounts={exercisesStatusCounts}
+  statusOptions={statusOptions}
+  statusColors={statusColors}
+/>
+        </div>
+  
+       
+      
       <FilterButton openFilterModal={openFilterModal} />
       <TableAtom
         tableTitle={"SEGUNDO FORMULARIO: Todas las personas en el proceso"}

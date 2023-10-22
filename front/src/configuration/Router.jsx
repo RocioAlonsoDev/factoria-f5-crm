@@ -27,6 +27,7 @@ import CodersEdit from "../pages/CodersFrontend/codersEdit";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 import IndexPersonSecondPhase from "../pages/Person/IndexPersonSecondPhase";
+import SecondForm from "../pages/Person/SecondForm";
 
 
 const Router = createBrowserRouter([
@@ -110,6 +111,11 @@ const Router = createBrowserRouter([
   },
 
   {
+    path: '/secondform',
+    element: <SecondForm />
+  },
+
+  {
     path:'/inscribe_femcoders',
     element: <AddPersonFemcoders />
   },
@@ -157,6 +163,7 @@ const Router = createBrowserRouter([
         path: '/recruitment/selectionday',
         element: <SelectionDayIndex />
       },
+      
     
     ]
   },

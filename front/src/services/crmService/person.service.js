@@ -31,6 +31,10 @@ class PersonDataService{
         return http.get(`api/person?id_status=${id_status}`);
     }
 
+    secondForm(data){
+        return http.put("api/secondform", data);
+    }
+
 }
 
 export default new PersonDataService();
