@@ -7,6 +7,9 @@ use App\Models\Person;
 use Illuminate\Http\Request;
 use App\Http\Requests\PersonRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+
+
 
 class PersonController extends Controller
 {
@@ -39,6 +42,7 @@ class PersonController extends Controller
     public function update(PersonRequest $request, $id):JsonResponse
     {
         $person = Person::find($id);
+       
         $person->name=$request->name;
         $person->surname=$request->surname;
         $person->email=$request->email;
@@ -107,5 +111,4 @@ class PersonController extends Controller
 
     return response()->json(['data' => $people], 200);
 }
-
 }

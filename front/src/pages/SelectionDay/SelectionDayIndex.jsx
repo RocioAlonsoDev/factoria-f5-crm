@@ -54,7 +54,7 @@ export default function CardAtomSocialTraffic() {
   });
 
   return (
-    <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
+    <div className='md:block md:absolute md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
       <div className="flex flex-col items-center">
         <Link to="/recruitment/selectionday/add">
           <button className="bg-white border border-orange-500 text-orange-500 px-4 py-2 rounded mt-4 ">
