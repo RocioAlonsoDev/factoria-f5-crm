@@ -18,6 +18,8 @@ export default function IndexPerson() {
   const [jsFilter, setJsFilter] = useState("");
   const [talleresFilter, setTalleresFilter] = useState("");
   const [originalPeople, setOriginalPeople] = useState([]);
+const [decisionFilter, setDecisionFilter] = useState([]);
+
 
   const statusOptions = {
     1: "En seguimiento",
@@ -35,6 +37,17 @@ export default function IndexPerson() {
     13: "Convocado/a",
     14: "Enviar convocatoria",
     15: "No enviar convocatoria",
+  };
+
+  const statusOptionsDecision = {
+    1: "Aspirante",
+    2: "Convocada/o",
+    3: "Descartada/o",
+    4: "Coder",
+  };
+
+  const getStatusTitle = (statusId) => {
+    return statusOptionsDecision[statusId] || "Desconocido";
   };
 
   const statusColors = {
@@ -171,6 +184,18 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   const applyFilter = () => {
     let filteredData = originalPeople;
 
+    //Aplicar filtro estado
+
+    if (decisionFilter !== "") {
+      const filterValue = parseInt(decisionFilter);
+      filteredData = filteredData.filter((person) => {
+        const decisionStatusId = person.id_status;
+        return filterValue === 0 || decisionStatusId === filterValue;
+      });
+    }
+
+
+
     // Aplicar filtro RIC
     if (ricFilter !== "") {
       const filterValue = parseInt(ricFilter);
@@ -225,8 +250,12 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     const fetchData = async () => {
       try {
         const response = await PersonDataService.getAll();
-        setPeople(response.data.data);
-        setOriginalPeople(response.data.data);
+       
+        const filteredPeople = response.data.data.filter(
+          (person) => person.id_status !== 4
+        );
+        setPeople(filteredPeople);
+        setOriginalPeople(filteredPeople);
       } catch (error) {
         console.error("Error al cargar datos de personas", error);
       }
@@ -316,6 +345,38 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     }
   };
 
+  const handleDecisionChange = (personId, newDecision) => {
+    
+    const updatedPeople = people.map((person) => {
+      if (person.id === personId) {
+        return { ...person, id_status: newDecision };
+      }
+      return person;
+    });
+    setPeople(updatedPeople);
+
+   
+    updateDecisionInDatabase(personId, newDecision);
+  };
+
+  const updateDecisionInDatabase = async (personId, newDecision) => {
+    try {
+    
+      const response = await PersonDataService.get(personId);
+      const existingData = response.data; 
+  
+      
+      existingData.id_status = newDecision;
+  
+     
+      const updateResponse = await PersonDataService.update(personId, existingData);
+  
+      console.log("Decisión actualizada con éxito en la base de datos", updateResponse.data);
+    } catch (error) {
+      console.error("Error al actualizar la decisión en la base de datos", error);
+    }
+  };
+
   const calculateAge = (birthdate) => {
     if (birthdate) {
       const birthDate = new Date(birthdate);
@@ -358,10 +419,13 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     const talleresValue = selectStatus[`${person.id}_${talleresRequirementId}`] || "";
     const jpaValue = selectStatus[`${person.id}_${jpaRequirementId}`] || "";
     const jsValue = selectStatus[`${person.id}_${jsRequirementId}`] || "";
+    const decisionStatusId = person.id_status;
+    const decisionTitle = getStatusTitle(decisionStatusId);
+
 
     return {
       "": (
-        <Link to={`/person/${person.id}`}>
+        <Link to={`/recruitment/person/${person.id}`}>
           <button
             className="bg-transparent mx-2 text-orange-500 outline-orange-500  hover:bg-orange-500 hover:text-white 
       hover:outline-orange-500 my-2 active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none 
@@ -450,6 +514,24 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
           </select>
         </div>
       ),
+      Decisión: (
+        <div className="flex items-center">
+          <select
+            value={decisionStatusId}
+            onChange={(e) => {
+              const newDecision = e.target.value;
+              handleDecisionChange(person.id, newDecision);
+            }}
+            className="border p-2 rounded"
+          >
+            {Object.keys(statusOptionsDecision).map((key) => (
+              <option key={key} value={key}>
+                {statusOptionsDecision[key]}
+              </option>
+            ))}
+          </select>
+        </div>
+      ),
     };
   });
 
@@ -530,6 +612,23 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
             >
               &times;
             </span>
+            <h2 className="text-lg font-semibold mb-4">Filtrar por estado</h2>
+            <label className="block mb-4">
+              <select
+                value={decisionFilter}
+                onChange={(e) => setDecisionFilter(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todos</option>
+                <option value="1">Aspirante</option>
+                <option value="2">Convocado/a</option>
+                <option value="3">
+                  Descartado/a
+                </option>
+                
+              </select>
+            </label>
+
             <h2 className="text-lg font-semibold mb-4">Filtrar por RIC</h2>
             <label className="block mb-4">
               <select

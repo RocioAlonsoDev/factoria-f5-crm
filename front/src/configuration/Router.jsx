@@ -33,6 +33,7 @@ import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 import IndexPersonSecondPhase from "../pages/Person/IndexPersonSecondPhase";
 import SecondForm from "../pages/Person/SecondForm";
+import Landing from "../pages/Landing";
 
 
 const Router = createBrowserRouter([
@@ -40,6 +41,12 @@ const Router = createBrowserRouter([
     path: '/home',
     element: <Navigate to='/' />
   },
+
+  {
+    path: '/landing',
+    element: <Landing />
+  },
+
   {
     path: '/dashboard',
     element: <Navigate to='/' />
