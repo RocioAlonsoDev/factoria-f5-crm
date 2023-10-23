@@ -336,7 +336,7 @@ const ageBelow30Count = calculateAgeBelow30Count(peopleWithMotivation);
 
     return {
       "": (
-        <Link to={`/person/${person.id}`}>
+        <Link to={`/recruitment/person/${person.id}`}>
           <button
             className="bg-transparent mx-2 text-orange-500 outline-orange-500  hover:bg-orange-500 hover:text-white 
       hover:outline-orange-500 my-2 active-bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none 
