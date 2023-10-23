@@ -18,7 +18,7 @@ export default function IndexPerson() {
   const [jsFilter, setJsFilter] = useState("");
   const [talleresFilter, setTalleresFilter] = useState("");
   const [originalPeople, setOriginalPeople] = useState([]);
-  const [selectedDecision, setSelectedDecision] = useState("");
+const [decisionFilter, setDecisionFilter] = useState([]);
 
 
   const statusOptions = {
@@ -184,6 +184,18 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   const applyFilter = () => {
     let filteredData = originalPeople;
 
+    //Aplicar filtro estado
+
+    if (decisionFilter !== "") {
+      const filterValue = parseInt(decisionFilter);
+      filteredData = filteredData.filter((person) => {
+        const decisionStatusId = person.id_status;
+        return filterValue === 0 || decisionStatusId === filterValue;
+      });
+    }
+
+
+
     // Aplicar filtro RIC
     if (ricFilter !== "") {
       const filterValue = parseInt(ricFilter);
@@ -238,8 +250,12 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     const fetchData = async () => {
       try {
         const response = await PersonDataService.getAll();
-        setPeople(response.data.data);
-        setOriginalPeople(response.data.data);
+       
+        const filteredPeople = response.data.data.filter(
+          (person) => person.id_status !== 4
+        );
+        setPeople(filteredPeople);
+        setOriginalPeople(filteredPeople);
       } catch (error) {
         console.error("Error al cargar datos de personas", error);
       }
@@ -330,7 +346,7 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   };
 
   const handleDecisionChange = (personId, newDecision) => {
-    // Actualiza el estado local con la nueva decisión
+    
     const updatedPeople = people.map((person) => {
       if (person.id === personId) {
         return { ...person, id_status: newDecision };
@@ -339,20 +355,20 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     });
     setPeople(updatedPeople);
 
-    // Llama a la función para actualizar la base de datos
+   
     updateDecisionInDatabase(personId, newDecision);
   };
 
   const updateDecisionInDatabase = async (personId, newDecision) => {
     try {
-      // Obtiene los datos existentes del usuario
+    
       const response = await PersonDataService.get(personId);
-      const existingData = response.data; // Asumiendo que los datos del usuario se obtienen correctamente.
+      const existingData = response.data; 
   
-      // Actualiza solo el campo "id_status" con la nueva decisión
+      
       existingData.id_status = newDecision;
   
-      // Realiza una llamada a la API para actualizar la decisión en la base de datos
+     
       const updateResponse = await PersonDataService.update(personId, existingData);
   
       console.log("Decisión actualizada con éxito en la base de datos", updateResponse.data);
@@ -596,6 +612,23 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
             >
               &times;
             </span>
+            <h2 className="text-lg font-semibold mb-4">Filtrar por estado</h2>
+            <label className="block mb-4">
+              <select
+                value={decisionFilter}
+                onChange={(e) => setDecisionFilter(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todos</option>
+                <option value="1">Aspirante</option>
+                <option value="2">Convocado/a</option>
+                <option value="3">
+                  Descartado/a
+                </option>
+                
+              </select>
+            </label>
+
             <h2 className="text-lg font-semibold mb-4">Filtrar por RIC</h2>
             <label className="block mb-4">
               <select
