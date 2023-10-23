@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
 import DefaultLayoutConfiguration from "../layouts/DefaultLayoutConfiguration";
 import DefaultLayoutRecruitment from "../layouts/DefaultLayoutRecruitment";
+import DefaultLayoutDashboard from "../layouts/DefaultLayoutDashboard";
 import Dashboard from "../pages/Dashboard";
 import SelectionDayShow from "../pages/SelectionDay/SelectionDayShow";
 import SelectionDayIndex from "./../pages/SelectionDay/SelectionDayIndex";
@@ -11,6 +12,7 @@ import BootcampForm from '../pages/Bootcamp/BootcampForm'
 import Login from "../pages/Login"
 import Signup from '../pages/Signup'
 import SelectionDayUpdate from "../pages/SelectionDay/SelectionDayUpdate"
+// import BootcampAdd from '../pages/Bootcamp/BootcampAdd'
 import Requirements from "../pages/ConfigurationPages/Requirements";
 import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
@@ -20,12 +22,18 @@ import Evaluation from "../pages/Evaluation/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
-import AllPeople from "../pages/Person/AllPeople";
+
 import IndexPerson from "../pages/Person/IndexPerson";
+import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
+//import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
 import Statistics from "../pages/Statistics/Statistics";
 import CodersEdit from "../pages/CodersFrontend/codersEdit";
+import PeoplebyBootcamp from "../pages/PersonBootcamp/PeoplebyBootcamp";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
+import IndexPersonSecondPhase from "../pages/Person/IndexPersonSecondPhase";
+import SecondForm from "../pages/Person/SecondForm";
+import Landing from "../pages/Landing";
 import CodersShow from "../pages/CodersFrontend/CodersShow";
 import ProjectsWorkShopsIndexByPerson from "../pages/ProjectsWorkshops/ProjectsWorkshopsIndexByPerson";
 
@@ -34,33 +42,21 @@ const Router = createBrowserRouter([
     path: '/home',
     element: <Navigate to='/' />
   },
+
+  {
+    path: '/landing',
+    element: <Landing />
+  },
+
   {
     path: '/dashboard',
     element: <Navigate to='/' />
   },
-
-  {
-    path: '/recruitment/selectiondayshow/:id',
-    element: <SelectionDayShow />
-  },
-
-  {
-    path: '/person/:id',
-    element: <ShowPerson />
-  },
-  {
-    path: '/people',
-    element: <AllPeople />
-  },
-  {
-    path: '/stats',
-    element: <Statistics />
-  },
-    
+      
 
   {
     path: '/',
-    element: <DefaultLayout title='Home'/>,
+    element: <DefaultLayoutDashboard title='Home'/>,
     children:[
       {
         path: '/',
@@ -121,6 +117,11 @@ const Router = createBrowserRouter([
   },
 
   {
+    path: '/secondform',
+    element: <SecondForm />
+  },
+
+  {
     path:'/inscribe_femcoders',
     element: <AddPersonFemcoders />
   },
@@ -144,8 +145,20 @@ const Router = createBrowserRouter([
         element: <IndexPerson />
       },
       {
+        path:'/recruitment/personbootcamp/index',
+        element: <IndexPersonBootcamp />
+      },
+      {
+        path:'/recruitment/personbybootcamp/:id',
+        element: <PeoplebyBootcamp/>
+      },
+      {
       path: '/recruitment/person/:id',
       element: <ShowPerson />
+      },
+      {
+        path: '/recruitment/person/secondphase',
+        element: <IndexPersonSecondPhase />
       },
       //
       {
@@ -163,6 +176,14 @@ const Router = createBrowserRouter([
       {
         path: '/recruitment/selectionday',
         element: <SelectionDayIndex />
+      },
+      {
+        path: '/recruitment/estadisticas',
+        element: <Statistics />
+      },
+      {
+        path: '/recruitment/estadisticas',
+        element: <Statistics />
       },
     
     ]

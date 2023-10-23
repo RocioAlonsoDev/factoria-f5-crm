@@ -1,19 +1,51 @@
 import React, { useEffect } from "react";
-//import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
+import { Stepper, Step, Typography } from "@material-tailwind/react";
 import { useParams } from 'react-router-dom';
 import FormAtom from '../../components/atoms/FormAtom'
 import bootcampService from "../../services/crmService/bootcamp.service";
-import stackService from "../../services/trackingService/stack.service";
+import StackDataService from "../../services/trackingService/stack.service";
+import BootcampStackDataService from '../../services/trackingService/bootcampStack.service'
+import RequirementDataService from '../../services/recruitmentService/requirement.service'
+import BootcampRequirementDataService from '../../services/crmService/bootcampRequirement.service'
+import { useNavigate } from 'react-router-dom';
  
 export default function StepperMolecule (props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isLastStep, setIsLastStep] = React.useState(false);
   const [isFirstStep, setIsFirstStep] = React.useState(false);
   const [stacks,setStacks] = React.useState([]);
+  const [requirements,setRequirements] = React.useState([]);
+  const [bootcamp,setBootcamp] = React.useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
  
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
-  const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
+  // const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
+
+  useEffect(() => {
+    const fetchStacks = async () => {
+      try {
+        const response = await StackDataService.getAll();
+        setStacks(response.data)
+      } catch (error) {
+        console.error('Error fetching stacks:', error);
+      }
+    }
+
+    fetchStacks()
+
+    const fetchRequirements = async () => {
+      try {
+        const response = await RequirementDataService.getAll();
+        setRequirements(response.data.data)
+      } catch (error) {
+        console.error('Error fetching stacks:', error);
+      }
+    } 
+
+    fetchRequirements()
+    
+  },[])
 
   const step1Data = [
       {
@@ -49,36 +81,19 @@ export default function StepperMolecule (props) {
         },
   ];
 
-  
-  const storeDataInLocalStorage = (key, data) => {
-    localStorage.setItem(key, JSON.stringify(stacks));
-  };
-  
-  // Function to retrieve data from local storage
-  const retrieveDataFromLocalStorage = (key) => {
-    const storedData = localStorage.getItem(key);
-    return storedData ? JSON.parse(storedData) : null;
-  };
-  
-  // Example: Storing the "stacks" data in local storage
-  const stacksData = [/* Your stack data */];
-  storeDataInLocalStorage('stacksData', stacksData);
-
-  useEffect(() => {
-    stackService.getAll()
-    .then((res)=>{
-      setStacks(res.data)
-    })
-    .catch(err => console.log(err))
-  },[])
-    
-  let step2Data = stacks.map(stack => ({
+  const step2Data = stacks.map(stack => ({
     id: stack.id,
     label: stack.name,
     type: 'checkbox',
   }));
 
-  const step1 = (values) => {
+  const step3Data = requirements.map(requirement => ({
+    id: requirement.id,
+    label: requirement.name,
+    type: 'checkbox',
+  }));
+
+  const onBootcampSubmit = (values) => {
     let res= null;
     if(id){
       console.log(values)
@@ -86,7 +101,8 @@ export default function StepperMolecule (props) {
       res = bootcampService.create(values)
     }
     res
-    .then(() => {
+    .then((response) => {
+      setBootcamp(response.data.data.id)
       handleNext()
     })
     .catch(err=> {
@@ -96,24 +112,70 @@ export default function StepperMolecule (props) {
     })
   }
 
-  const step2 = (values) => {
-    let res= null;
-    if(id){
-      console.log(values)
-    }else{
-      res = bootcampService.create(values)
-    }
-    res
-    .then(() => {
+  const onStacksSubmit = (values) => {
+    if (bootcamp) {
+      const bootcampId = bootcamp; 
+  
+      const selectedStacks = Object.keys(values)
+      .filter((stackId) => values[stackId] === 'on')
+      .map(Number);
+
+      const bootcampStackData = selectedStacks.map((stackId) => ({
+        bootcamp_id: bootcampId,
+        stack_id: stackId,
+      }));
+
+      bootcampStackData.forEach(element => {
+
+        BootcampStackDataService.create(JSON.stringify(element))
+        .then((response) => {
+          console.log(response.data.message)})
+        .catch((error) => {
+          console.error('Network error:', error);
+        })
+        
+      })
+
       handleNext()
-    })
-    .catch(err=> {
-      if (err && err.response) {
-        console.log(err.response)
-      }
-    })
+    }
   }
- 
+
+  const onRequirementSubmit = async (values) =>{
+    
+    if (bootcamp) {
+      const bootcampId = bootcamp; 
+  
+      const selectedRequirements = Object.keys(values)
+      .filter((requirementId) => values[requirementId] === 'on')
+      .map(Number);
+
+      const bootcampRequirementData = selectedRequirements.map((requirementId) => ({
+        id_bootcamp: bootcampId,
+        id_requirement: requirementId,
+      }));
+
+      const promises = [];
+      
+      for (const element of bootcampRequirementData) {
+        try {
+          const response = await BootcampRequirementDataService.create(JSON.stringify(element));
+          console.log(response.data.message);
+          promises.push(Promise.resolve(response));
+        } catch (error) {
+          console.error('Network error:', error);
+          promises.push(Promise.reject(error));
+        }
+      }
+
+      Promise.all(promises)
+      .then(() => {
+        navigate('/tracking/bootcamp');
+      });
+
+      
+    }
+  }
+    
   return (
     <div className="flex flex-col relative min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded py-10">
       <Stepper
@@ -130,7 +192,6 @@ export default function StepperMolecule (props) {
                 <path d="M4.462 19.462c.42-.419.753-.89 1-1.394.453.213.902.434 1.347.661a6.743 6.743 0 01-1.286 1.794.75.75 0 11-1.06-1.06z" />
               </svg>
           </div>
-          
           <div className="  w-max text-center ">
             <Typography
               variant="h5"
@@ -151,8 +212,6 @@ export default function StepperMolecule (props) {
               <path fillRule="evenodd" d="M14.447 3.027a.75.75 0 01.527.92l-4.5 16.5a.75.75 0 01-1.448-.394l4.5-16.5a.75.75 0 01.921-.526zM16.72 6.22a.75.75 0 011.06 0l5.25 5.25a.75.75 0 010 1.06l-5.25 5.25a.75.75 0 11-1.06-1.06L21.44 12l-4.72-4.72a.75.75 0 010-1.06zm-9.44 0a.75.75 0 010 1.06L2.56 12l4.72 4.72a.75.75 0 11-1.06 1.06L.97 12.53a.75.75 0 010-1.06l5.25-5.25a.75.75 0 011.06 0z" clipRule="evenodd" />
             </svg>
           </div>
-          
-
           <div className="w-max text-center">
             <Typography
               variant="h5"
@@ -195,23 +254,20 @@ export default function StepperMolecule (props) {
         <FormAtom
           formTitle="Crear nuevo Bootcamp"
           formData={step1Data}
-          onSubmit={step1}
+          onSubmit={onBootcampSubmit}
         /> : ''}
       {activeStep === 1 ? 
         <FormAtom
           formTitle="Agregar Stacks"
           formData={step2Data}
-          onSubmit={step2}
+          onSubmit={onStacksSubmit}
         /> : ''}
-      {activeStep === 2 ? props.step3 : ''}
-      <div className="mt-32">
-        <Button onClick={handlePrev} disabled={isFirstStep} className="bg-gray-400">
-          Atrás
-        </Button>
-        <Button onClick={handleNext} disabled={isLastStep} className="bg-gray-400">
-          Siguiente
-        </Button>
-      </div>
+      {activeStep === 2 ?
+      <FormAtom
+          formTitle="Agregar Requisitos de Acceso"
+          formData={step3Data}
+          onSubmit={onRequirementSubmit}
+        /> : ''}
     </div>
   );
 }

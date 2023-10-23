@@ -46,6 +46,15 @@ export default function FormAtom(props) {
                     </option>
                   ))}
                 </select>
+              ) : field.type === 'checkbox' ? (
+                <input
+                  type="checkbox"
+                  id={field.id}
+                  name={field.id}
+                  checked={values[field.id] || false}
+                  onChange={handleChange}
+                  className="border rounded-md py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-300"
+                />
               ) : (
                 <input
                   type={field.type}

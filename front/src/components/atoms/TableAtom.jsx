@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+// import { Link } from "react-router-dom";
 import ButtonAtom from "./ButtonAtom";
 
 export default function TableAtom(props) {
@@ -52,9 +53,9 @@ export default function TableAtom(props) {
                                 {tableTitle}
                             </h3>
                         </div>
-
                         {addbutton && 
                             <div className="relative flex-none">
+
                                 <ButtonAtom addlink={addlink} addbutton={addbutton} onClick={addButtonOnClick}></ButtonAtom>
                                 
                             </div>}    
@@ -63,6 +64,7 @@ export default function TableAtom(props) {
                                 <ButtonAtom addlink={backButtonLink} addbutton={backButtonLabel} onClick={backButtonOnClick}></ButtonAtom>
                             </div>
     }
+
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                             <input
                                 className="my-5"
@@ -114,4 +116,14 @@ export default function TableAtom(props) {
             </div>
         </>
     );
+
+}
+
+
+TableAtom.propTypes = {
+    tableTitle: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
+    columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+    addbutton: PropTypes.bool.isRequired,
+    addlink: PropTypes.string,
 }
