@@ -18,7 +18,7 @@ export default function IndexPerson() {
   const [jsFilter, setJsFilter] = useState("");
   const [talleresFilter, setTalleresFilter] = useState("");
   const [originalPeople, setOriginalPeople] = useState([]);
-  const [selectedDecision, setSelectedDecision] = useState("");
+const [decisionFilter, setDecisionFilter] = useState([]);
 
 
   const statusOptions = {
@@ -184,6 +184,18 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   const applyFilter = () => {
     let filteredData = originalPeople;
 
+    //Aplicar filtro estado
+
+    if (decisionFilter !== "") {
+      const filterValue = parseInt(decisionFilter);
+      filteredData = filteredData.filter((person) => {
+        const decisionStatusId = person.id_status;
+        return filterValue === 0 || decisionStatusId === filterValue;
+      });
+    }
+
+
+
     // Aplicar filtro RIC
     if (ricFilter !== "") {
       const filterValue = parseInt(ricFilter);
@@ -238,8 +250,12 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     const fetchData = async () => {
       try {
         const response = await PersonDataService.getAll();
-        setPeople(response.data.data);
-        setOriginalPeople(response.data.data);
+       
+        const filteredPeople = response.data.data.filter(
+          (person) => person.id_status !== 4
+        );
+        setPeople(filteredPeople);
+        setOriginalPeople(filteredPeople);
       } catch (error) {
         console.error("Error al cargar datos de personas", error);
       }
@@ -596,6 +612,23 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
             >
               &times;
             </span>
+            <h2 className="text-lg font-semibold mb-4">Filtrar por estado</h2>
+            <label className="block mb-4">
+              <select
+                value={decisionFilter}
+                onChange={(e) => setDecisionFilter(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
+                <option value="">Todos</option>
+                <option value="1">Aspirante</option>
+                <option value="2">Convocado/a</option>
+                <option value="3">
+                  Descartado/a
+                </option>
+                
+              </select>
+            </label>
+
             <h2 className="text-lg font-semibold mb-4">Filtrar por RIC</h2>
             <label className="block mb-4">
               <select
