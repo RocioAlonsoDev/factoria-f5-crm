@@ -30,6 +30,10 @@ class SelectionDayDataService{
     getPeopleInSelectionDay(id_selectionDay){
         return http.get(`api/getPeopleInSelectionDay/${id_selectionDay}/people`)
     }
+    addPersonToSelectionDay(id_selectionDay, id_person){
+        return http.post(`api/addPersonToSelectionDay/${id_selectionDay}/${id_person}`)
+    }
+
     getNextSelectionDay() {
         return http.get("api/nextSelectionDay"); 
       }
