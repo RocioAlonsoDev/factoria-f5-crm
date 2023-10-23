@@ -27,9 +27,15 @@ class StatusSeeder extends Seeder
         'name' => 'Descartada/o',
     ]);
 
-    DB::table('statuses')->insert([
+        DB::table('statuses')->insert([
         'name' => 'Coder',
     ]);
+
+        DB::table('statuses')->insert([
+        'name' => 'ExCoder',
+    ]);
+
+
 
     }
 }

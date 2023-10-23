@@ -18,7 +18,7 @@ import RequirementEdit from "../pages/ConfigurationPages/RequirementEdit";
 import PersonStatus from "../pages/ConfigurationPages/PersonStatus";
 import StatusRequirement from "../pages/ConfigurationPages/StatusRequirement";
 import CodersIndex from "../pages/CodersFrontend/CodersIndex";
-import Evaluation from "../pages/Evaluation";
+import Evaluation from "../pages/Evaluation/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
@@ -34,7 +34,8 @@ import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
 import IndexPersonSecondPhase from "../pages/Person/IndexPersonSecondPhase";
 import SecondForm from "../pages/Person/SecondForm";
 import Landing from "../pages/Landing";
-
+import CodersShow from "../pages/CodersFrontend/CodersShow";
+import ProjectsWorkShopsIndexByPerson from "../pages/ProjectsWorkshops/ProjectsWorkshopsIndexByPerson";
 
 const Router = createBrowserRouter([
   {
@@ -88,7 +89,15 @@ const Router = createBrowserRouter([
         element: <CodersEdit />
       },
       {
-        path:'/tracking/evaluation/id',
+        path: '/tracking/coders/:id',
+        element: <CodersShow />
+      },
+      {
+        path: '/tracking/coders/:id/projectsWorkshops',
+        element: <ProjectsWorkShopsIndexByPerson />
+      },
+      {
+        path:'/tracking/coders/:id/evaluation',
       element:<Evaluation/>
       }
 
