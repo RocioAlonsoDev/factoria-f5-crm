@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
+import { Stepper, Step, Typography } from "@material-tailwind/react";
 import { useParams } from 'react-router-dom';
 import FormAtom from '../../components/atoms/FormAtom'
 import bootcampService from "../../services/crmService/bootcamp.service";
 import StackDataService from "../../services/trackingService/stack.service";
 import BootcampStackDataService from '../../services/trackingService/bootcampStack.service'
 import RequirementDataService from '../../services/recruitmentService/requirement.service'
+import BootcampRequirementDataService from '../../services/crmService/bootcampRequirement.service'
+import { useNavigate } from 'react-router-dom';
  
 export default function StepperMolecule (props) {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -15,9 +17,10 @@ export default function StepperMolecule (props) {
   const [requirements,setRequirements] = React.useState([]);
   const [bootcamp,setBootcamp] = React.useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
  
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
-  const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
+  // const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
 
   useEffect(() => {
     const fetchStacks = async () => {
@@ -134,16 +137,45 @@ export default function StepperMolecule (props) {
       })
 
       handleNext()
-      console.log(requirements)
     }
   }
 
-  const onRequirementSubmit = (values) =>{
+  const onRequirementSubmit = async (values) =>{
+    
+    if (bootcamp) {
+      const bootcampId = bootcamp; 
+  
+      const selectedRequirements = Object.keys(values)
+      .filter((requirementId) => values[requirementId] === 'on')
+      .map(Number);
 
+      const bootcampRequirementData = selectedRequirements.map((requirementId) => ({
+        id_bootcamp: bootcampId,
+        id_requirement: requirementId,
+      }));
+
+      const promises = [];
+      
+      for (const element of bootcampRequirementData) {
+        try {
+          const response = await BootcampRequirementDataService.create(JSON.stringify(element));
+          console.log(response.data.message);
+          promises.push(Promise.resolve(response));
+        } catch (error) {
+          console.error('Network error:', error);
+          promises.push(Promise.reject(error));
+        }
+      }
+
+      Promise.all(promises)
+      .then(() => {
+        navigate('/tracking/bootcamp');
+      });
+
+      
+    }
   }
     
-  
- 
   return (
     <div className="flex flex-col relative min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded py-10">
       <Stepper
@@ -236,14 +268,6 @@ export default function StepperMolecule (props) {
           formData={step3Data}
           onSubmit={onRequirementSubmit}
         /> : ''}
-      <div className="mt-32">
-        <Button onClick={handlePrev} disabled={isFirstStep} className="bg-gray-400">
-          Atrás
-        </Button>
-        <Button onClick={handleNext} disabled={isLastStep} className="bg-gray-400">
-          Siguiente
-        </Button>
-      </div>
     </div>
   );
 }
