@@ -34,7 +34,15 @@ class PersonRequest extends FormRequest
             'dni'=>'required|string',
             'id_status'=>'required|numeric',
             'id_bootcamp'=>'required|numeric',
+            'motivation' => 'required|string',
+            'englishLevel' => 'required|string',
+            'degree' => 'required|string',
+            'anotherCourse' => 'string|nullable',
+            'howArrived' => 'string|nullable',
+            'employmentStatus' => 'required|string',
             
         ];
+            
+        
     }
 }

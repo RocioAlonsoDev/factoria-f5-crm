@@ -23,6 +23,10 @@ use App\Http\Controllers\StatisticsController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::put('/secondform', [PersonController::class, 'secondPhase']);
+
+
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout',[AuthController::class, 'logout']);
     Route::get('/me',[AuthController::class, 'me']);
@@ -59,5 +63,9 @@ Route::get('totalCoderCurrentYear', [StatisticsController::class, 'getTotalCoder
 
 // Route::get('/',[MailController::class, 'index']);
  Route::get('/discarded',[MailController::class, 'discarded']);
+
+ //Second form - recruitment
+
+
 
 Route::get('/getPeopleInBootcamp/{bootcamp}', [PersonBootcampController::class, 'getPeopleInBootcamp']);

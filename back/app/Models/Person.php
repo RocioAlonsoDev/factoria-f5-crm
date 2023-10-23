@@ -27,6 +27,13 @@ class Person extends Model
             'dni',
             'id_status',
             'id_bootcamp',
+            'motivation',
+            'englishLevel',
+            'degree',
+            'anotherCourse',
+            'howArrived',
+            'employmentStatus',
+            'exerciseUrl',
             
     ];
 

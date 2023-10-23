@@ -22,15 +22,17 @@ import Evaluation from "../pages/Evaluation";
 import PublicAddPerson from "../pages/Person/PublicAddPerson";
 import AdminAddPerson from "../pages/Person/AdminAddPerson";
 import ShowPerson from "../pages/Person/ShowPerson";
-import AllPeople from "../pages/Person/AllPeople";
+
 import IndexPerson from "../pages/Person/IndexPerson";
 import IndexPersonBootcamp from "../pages/PersonBootcamp/IndexPersonBootcamp";
 //import PersonbyBootcampTable from "../pages/PersonBootcamp/PersonbyBootcampTable";
 import Statistics from "../pages/Statistics/Statistics";
-import CodersAdd from "../pages/CodersFrontend/CodersAdd";
+import CodersEdit from "../pages/CodersFrontend/codersEdit";
 import PeoplebyBootcamp from "../pages/PersonBootcamp/PeoplebyBootcamp";
 import AddPersonFemcoders from "../pages/Person/AddPersonFemcoders";
 import AddPersonDigitalAcademy from "../pages/Person/AddPersonDigitalAcademy";
+import IndexPersonSecondPhase from "../pages/Person/IndexPersonSecondPhase";
+import SecondForm from "../pages/Person/SecondForm";
 
 
 const Router = createBrowserRouter([
@@ -42,10 +44,7 @@ const Router = createBrowserRouter([
     path: '/dashboard',
     element: <Navigate to='/' />
   },
-  {
-    path: '/people',
-    element: <AllPeople />
-  },    
+      
 
   {
     path: '/',
@@ -78,8 +77,8 @@ const Router = createBrowserRouter([
         element: <CodersIndex />
       },
       {
-        path: '/tracking/coders/add',
-        element: <CodersAdd />
+        path: '/tracking/coders/update/:id',
+        element: <CodersEdit />
       },
       {
         path:'/tracking/evaluation/id',
@@ -99,6 +98,11 @@ const Router = createBrowserRouter([
   {
     path:'/inscribe',
     element: <PublicAddPerson />
+  },
+
+  {
+    path: '/secondform',
+    element: <SecondForm />
   },
 
   {
@@ -135,6 +139,10 @@ const Router = createBrowserRouter([
       {
       path: '/recruitment/person/:id',
       element: <ShowPerson />
+      },
+      {
+        path: '/recruitment/person/secondphase',
+        element: <IndexPersonSecondPhase />
       },
       //
       {

@@ -31,6 +31,10 @@ class PersonDataService{
         return http.get(`api/person?id_status=${id_status}`);
     }
 
+    secondForm(data){
+        return http.put("api/secondform", data);
+    }
+
     showByBootcamp(id_bootcamp){
         return http.get(`api/getPeopleInBootcamp/${id_bootcamp}`);
     }

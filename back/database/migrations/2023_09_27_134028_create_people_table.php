@@ -25,8 +25,20 @@ return new class extends Migration
             $table->date('birthdate');
             $table->enum('gender', ['Mujer', 'Hombre', 'No binario', 'Fluido', 'Otro']);
             $table->string('dni');
-            $table->bigInteger('id_status');
-            $table->bigInteger('id_bootcamp')->default(1);
+            $table->unsignedBigInteger('id_status');
+            $table->foreign('id_status')->references('id')->on('statuses');
+            $table->unsignedBigInteger('id_bootcamp')->default(1);
+            $table->foreign('id_bootcamp')->references('id')->on('bootcamps');
+
+            //Second Form
+
+            $table->string('motivation')->default('No ha contestado');
+            $table->enum('englishLevel',["No hablo inglés", "Básico", "Medio", "Alto", "Bilingüe", "Nativo"])->default('No hablo inglés');
+            $table->string('degree')->default ('No ha contestado');
+            $table->string('anotherCourse')->default('No ha contestado');
+            $table->string('howArrived')->default('No ha contestado');
+            $table->enum('employmentStatus',["Desempleado/a", "Trabajando por cuenta propia", "Trabajando por cuenta ajena", "En un descanso laboral", "Estudiando"])->default('Estudiando');
+            $table->string('exerciseUrl')->default('No ha contestado');
             $table->timestamps();
         });
     }
