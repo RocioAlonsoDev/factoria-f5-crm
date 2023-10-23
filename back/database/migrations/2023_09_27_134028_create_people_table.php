@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('gender', ['Mujer', 'Hombre', 'No binario', 'Fluido', 'Otro']);
             $table->string('dni');
             $table->unsignedBigInteger('id_status');
-            $table->foreign('id_status')->references('id')->on('statuses');
+            $table->foreign('id_status')->references('id')->on('statuses')->default(1);
             $table->unsignedBigInteger('id_bootcamp')->default(1);
             $table->foreign('id_bootcamp')->references('id')->on('bootcamps');
 

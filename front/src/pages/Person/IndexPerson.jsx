@@ -18,6 +18,8 @@ export default function IndexPerson() {
   const [jsFilter, setJsFilter] = useState("");
   const [talleresFilter, setTalleresFilter] = useState("");
   const [originalPeople, setOriginalPeople] = useState([]);
+  const [selectedDecision, setSelectedDecision] = useState("");
+
 
   const statusOptions = {
     1: "En seguimiento",
@@ -35,6 +37,17 @@ export default function IndexPerson() {
     13: "Convocado/a",
     14: "Enviar convocatoria",
     15: "No enviar convocatoria",
+  };
+
+  const statusOptionsDecision = {
+    1: "Aspirante",
+    2: "Convocada/o",
+    3: "Descartada/o",
+    4: "Coder",
+  };
+
+  const getStatusTitle = (statusId) => {
+    return statusOptionsDecision[statusId] || "Desconocido";
   };
 
   const statusColors = {
@@ -316,6 +329,38 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     }
   };
 
+  const handleDecisionChange = (personId, newDecision) => {
+    // Actualiza el estado local con la nueva decisión
+    const updatedPeople = people.map((person) => {
+      if (person.id === personId) {
+        return { ...person, id_status: newDecision };
+      }
+      return person;
+    });
+    setPeople(updatedPeople);
+
+    // Llama a la función para actualizar la base de datos
+    updateDecisionInDatabase(personId, newDecision);
+  };
+
+  const updateDecisionInDatabase = async (personId, newDecision) => {
+    try {
+      // Obtiene los datos existentes del usuario
+      const response = await PersonDataService.get(personId);
+      const existingData = response.data; // Asumiendo que los datos del usuario se obtienen correctamente.
+  
+      // Actualiza solo el campo "id_status" con la nueva decisión
+      existingData.id_status = newDecision;
+  
+      // Realiza una llamada a la API para actualizar la decisión en la base de datos
+      const updateResponse = await PersonDataService.update(personId, existingData);
+  
+      console.log("Decisión actualizada con éxito en la base de datos", updateResponse.data);
+    } catch (error) {
+      console.error("Error al actualizar la decisión en la base de datos", error);
+    }
+  };
+
   const calculateAge = (birthdate) => {
     if (birthdate) {
       const birthDate = new Date(birthdate);
@@ -358,6 +403,9 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     const talleresValue = selectStatus[`${person.id}_${talleresRequirementId}`] || "";
     const jpaValue = selectStatus[`${person.id}_${jpaRequirementId}`] || "";
     const jsValue = selectStatus[`${person.id}_${jsRequirementId}`] || "";
+    const decisionStatusId = person.id_status;
+    const decisionTitle = getStatusTitle(decisionStatusId);
+
 
     return {
       "": (
@@ -447,6 +495,24 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
             }
           >
             {meetingStatusOptions}
+          </select>
+        </div>
+      ),
+      Decisión: (
+        <div className="flex items-center">
+          <select
+            value={decisionStatusId}
+            onChange={(e) => {
+              const newDecision = e.target.value;
+              handleDecisionChange(person.id, newDecision);
+            }}
+            className="border p-2 rounded"
+          >
+            {Object.keys(statusOptionsDecision).map((key) => (
+              <option key={key} value={key}>
+                {statusOptionsDecision[key]}
+              </option>
+            ))}
           </select>
         </div>
       ),
