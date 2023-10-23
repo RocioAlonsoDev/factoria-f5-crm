@@ -13,7 +13,7 @@ export default function ModalAtom({ setIsModalOpen, handleCreate}) {
   };
 
   const handleModalClick = (e) => {
-    // Evita que el evento se propague y cierre el modal
+ 
     e.stopPropagation();
   };
 

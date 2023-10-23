@@ -1,16 +1,14 @@
 import RequirementDataService from "../../services/recruitmentService/requirement.service.js"
 import { useState, useEffect } from "react";
 import RequirementModalAtom from "./RequirementModalAtom.jsx";
-//import RequirementEditModalAtom from "./RequirementEditModalAtom.jsx";
+
 import {Link} from 'react-router-dom';
 
 
 const Requirements= () => {
   const [requirements, setRequirements] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  //const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  //const [selectedRequirement/*, setSelectedRequirement*/] = useState(null);
-  
+ 
   useEffect(() => {
 
     const fetchAll= async ()=> {
@@ -42,16 +40,6 @@ const Requirements= () => {
     }
   };
 
-  /* const handleUpdate = async (id, data) => {
-    try {
-      await RequirementDataService.update(id, data);
-      const response = await RequirementDataService.update(id, data);
-    setRequirements(response.data.data);
-    setIsModalOpen(false); 
-    } catch (error) {
-      console.error('Error updating requirement:', error);
-    }
-  };*/
 
     return (
         <div className='md:block md:fixed md:top-[107px] md:left-64 md:right-0 w-auto p-2'>
@@ -139,7 +127,7 @@ const Requirements= () => {
                 </table>
             </div>
             {isModalOpen && <RequirementModalAtom setIsModalOpen={setIsModalOpen} handleCreate={handleCreate} />}
-            {/*isEditModalOpen && <RequirementEditModalAtom setIsEditModalOpen={setIsEditModalOpen} handleUpdate={handleUpdate} selectedRequirement={selectedRequirement*/}
+            
         </div>
     );
   };
