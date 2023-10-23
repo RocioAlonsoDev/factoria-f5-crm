@@ -8,12 +8,12 @@ export default function RequirementModalAtom({ setIsModalOpen, handleCreate}) {
   });
 
   const handleInputChange = (e) => {
-    const { name, value, description } = e.target;
-    setFormData({ ...formData, [name]: value, [description]: value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value});
   };
 
   function handleModalClick(e) {
-    // Evita que el evento se propague y cierre el modal
+  
     e.stopPropagation();
   }
 
@@ -47,7 +47,7 @@ export default function RequirementModalAtom({ setIsModalOpen, handleCreate}) {
                 <label className="block text-blueGray-700 text-sm font-bold mb-2">Nombre:</label>
                 <textarea
                   name="name"
-                  rows={10}
+                  rows={3}
                   cols={100}
                   wrap="wrap"
                   maxLength={200}
