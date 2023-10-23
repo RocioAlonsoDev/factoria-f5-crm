@@ -24,6 +24,13 @@ export default function PublicAddPerson() {
     dni: "",
     id_status: 2,
     id_bootcamp: 1,
+    motivation:'No ha rellenado segundo formulario',
+    englishLevel:"Básico",
+    degree:'No ha rellenado segundo formulario',
+    anotherCourse: 'No ha rellenado segundo formulario',
+    howArrived: 'No ha rellenado segundo formulario',
+    employmentStatus: 'Estudiando',
+    exerciseUrl: 'Noharellenadosegundoformulario.com'
   });
 
   const handleNext = () => {
@@ -248,12 +255,48 @@ export default function PublicAddPerson() {
       name="id_bootcamp"
       value="1"
     />
+    <input
+      type="hidden"
+      name="motivation"
+    
+    />
+    <input
+      type="hidden"
+      name="englishLevel"
+      
+    />
+    <input
+      type="hidden"
+      name="degree"
+      
+    />
+    <input
+      type="hidden"
+      name="anotherCourse"
+     
+    />
+    <input
+      type="hidden"
+      name="howArrived"
+      
+    />
+    <input
+      type="hidden"
+      name="employmentStatus"
+      
+    />
+    <input
+      type="hidden"
+      name="exerciseUrl"
+     
+    />
     <div>
                       <label className="inline-flex items-center cursor-pointer m-6">
                         <input
                           id="dataprotection"
                           type="checkbox"
-                          className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                          className="form-checkbox border-0 rounded text-blueGray-700 
+                          ml-1 w-5 h-5 ease-linear transition-all duration-150"
                           checked={formData.dataprotection === "sí"}
                           onChange={handleDataProtectionChange}
                         />
@@ -304,9 +347,7 @@ export default function PublicAddPerson() {
           </div>
        
         </div>
-    //   </div>
-     
-    // </div>
+    
   );
   
   

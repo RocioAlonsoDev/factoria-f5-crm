@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import PropTypes from "prop-types";
+// import { Link } from "react-router-dom";
 import ButtonAtom from "./ButtonAtom";
 
 export default function TableAtom(props) {
     const { tableTitle, data, columns, addbutton, addlink } = props;
-    const [searchTerm, setSearchTerm] = useState("");
-    const [showAlert, setShowAlert] = useState(false);
-    const [filteredData, setFilteredData] = useState([]);
+    const [searchTerm, setSearchTerm] = React.useState("");
+    const [showAlert, setShowAlert] = React.useState(false);
+    const [filteredData, setFilteredData] = React.useState([]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const newFilteredData = data.filter((row) =>
             columns.some((column) => {
                 const cellValue = row[column];
@@ -16,14 +17,11 @@ export default function TableAtom(props) {
                     cellValue &&
                     cellValue.toString().toLowerCase().includes(searchTerm.toLowerCase())
                 );
-            }),
-            console.log("Data:", data),
-            // console.log("Columns:", columns)
+            })
         );
 
         setFilteredData(newFilteredData);
 
-        // Mostrar el mensaje de alerta si no hay resultados
         if (searchTerm && newFilteredData.length === 0) {
             setShowAlert(true);
         } else {
@@ -31,10 +29,9 @@ export default function TableAtom(props) {
         }
     }, [data, columns, searchTerm]);
 
-    const [sortColumn, setSortColumn] = useState(null);
-    const [sortDirection, setSortDirection] = useState('asc');
+    const [sortColumn, setSortColumn] = React.useState(null);
+    const [sortDirection, setSortDirection] = React.useState('asc');
 
-    //Ordenar por orden alfabético las columnas
     const sortedData = [...filteredData].sort((a, b) => {
         if (sortColumn === null) return 0;
 
@@ -52,16 +49,14 @@ export default function TableAtom(props) {
                 <div className="rounded-t mb-0 px-4 py-3 border-0">
                     <div className="flex flex-wrap items-center">
                         <div className="relative px-2 flex-none">
-                            <h3 className="font-semibold text-blueGray-700 text-2xl ">
+                            <h3 className="font-semibold text-blueGray-700 text-2xl">
                                 {tableTitle}
                             </h3>
                         </div>
-                        
-                            {addbutton && 
+                        {addbutton && 
                             <div className="relative flex-none">
                                 <ButtonAtom addlink={addlink} addbutton={addbutton}></ButtonAtom>
-                            </div>}
-                        
+                            </div>}                        
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                             <input
                                 className="my-5"
@@ -76,12 +71,6 @@ export default function TableAtom(props) {
                             >
                                 Limpiar
                             </button>
-                            {/* <button
-                                className="bg-orange-500 text-white active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button"
-                            >
-                                ver todas
-                            </button> */}
                         </div>
                     </div>
                 </div>
@@ -106,7 +95,7 @@ export default function TableAtom(props) {
                             </thead>
                             <tbody>
                                 {sortedData.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
+                                    <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-orange-100'}>
                                         {columns.map((column, columnIndex) => (
                                             <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" key={columnIndex}>{row[column]}</td>
                                         ))}
@@ -119,6 +108,14 @@ export default function TableAtom(props) {
             </div>
         </>
     );
+
 }
 
 
+TableAtom.propTypes = {
+    tableTitle: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
+    columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+    addbutton: PropTypes.bool.isRequired,
+    addlink: PropTypes.string,
+}

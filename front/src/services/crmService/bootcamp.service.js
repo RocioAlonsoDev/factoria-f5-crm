@@ -18,9 +18,19 @@ class BootcampDataService{
     delete(id){
         return http.delete(`api/bootcamp/${id}`);
     }
+
     deleteAll(){
         return http.delete(`api/bootcamp`);
-    } 
+    }
+
+    findByPerson(id_person){
+        return http.get(`api/bootcamp?id_person=${id_person}`);
+    }
+    
+    getPeopleInBootcamp(id_bootcamp){
+        return http.get(`api/getPeopleInBootcamp/${id_bootcamp}`)
+    }
+   
 }
 
 export default new BootcampDataService();

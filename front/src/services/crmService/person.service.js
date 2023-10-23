@@ -30,7 +30,19 @@ class PersonDataService{
     showByStatus(id_status){
         return http.get(`api/person?id_status=${id_status}`);
     }
-    
+
+    secondForm(data){
+        return http.put("api/secondform", data);
+    }
+
+    showByBootcamp(id_bootcamp){
+        return http.get(`api/getPeopleInBootcamp/${id_bootcamp}`);
+    }
+
+    showByGender(gender) {
+        return http.get(`api/genderdata`);
+      }
+
 }
 
 export default new PersonDataService();
