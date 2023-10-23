@@ -330,7 +330,7 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   };
 
   const handleDecisionChange = (personId, newDecision) => {
-    // Actualiza el estado local con la nueva decisión
+    
     const updatedPeople = people.map((person) => {
       if (person.id === personId) {
         return { ...person, id_status: newDecision };
@@ -339,20 +339,20 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
     });
     setPeople(updatedPeople);
 
-    // Llama a la función para actualizar la base de datos
+   
     updateDecisionInDatabase(personId, newDecision);
   };
 
   const updateDecisionInDatabase = async (personId, newDecision) => {
     try {
-      // Obtiene los datos existentes del usuario
+    
       const response = await PersonDataService.get(personId);
-      const existingData = response.data; // Asumiendo que los datos del usuario se obtienen correctamente.
+      const existingData = response.data; 
   
-      // Actualiza solo el campo "id_status" con la nueva decisión
+      
       existingData.id_status = newDecision;
   
-      // Realiza una llamada a la API para actualizar la decisión en la base de datos
+     
       const updateResponse = await PersonDataService.update(personId, existingData);
   
       console.log("Decisión actualizada con éxito en la base de datos", updateResponse.data);
