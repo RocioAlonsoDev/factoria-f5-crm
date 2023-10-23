@@ -8,9 +8,7 @@ class BootcampStackDataService{
         return http.get(`api/bootcampStacks/${id}`);
     }
     create(data){
-        
-        return http.post("api/bootcampStacks", data);
-        
+        return http.post("api/bootcampStacks", data);  
     }
     update(id, data){
         return http.put(`api/bootcampStacks/${id}`, data);

@@ -40,11 +40,11 @@ export default function BootcampIndex() {
     'Fecha de Inicio': formatDate(bootcamp.startDate),
     'Fecha de Fin': formatDate(bootcamp.endDate),
     'Status' : checkStatus(new Date(bootcamp.startDate),new Date(bootcamp.endDate)),
-    '' : (<>
-    <ButtonAtom addlink={`/tracking/bootcamp/${bootcamp.id}`} addbutton='Ver'></ButtonAtom>
-    <ButtonAtom addlink={`/tracking/bootcamp/update/${bootcamp.id}`} addbutton='Editar'></ButtonAtom>
-    <ButtonAtom addlink={`/tracking/bootcamp/${bootcamp.id}`} addbutton='Eliminar'></ButtonAtom>
-    </>)
+    // '' : (<>
+    // <ButtonAtom addlink={`/tracking/bootcamp/${bootcamp.id}`} addbutton='Ver'></ButtonAtom>
+    // <ButtonAtom addlink={`/tracking/bootcamp/update/${bootcamp.id}`} addbutton='Editar'></ButtonAtom>
+    // <ButtonAtom addlink={`/tracking/bootcamp/${bootcamp.id}`} addbutton='Eliminar'></ButtonAtom>
+    // </>)
   }));
 
   const columns = ['Bootcamp', 'Escuela', 'Promoción', 'Fecha de Inicio', 'Fecha de Fin', 'Status', ''];
