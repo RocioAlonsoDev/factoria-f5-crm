@@ -7,6 +7,9 @@ use App\Models\Person;
 use Illuminate\Http\Request;
 use App\Http\Requests\PersonRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+
+
 
 class PersonController extends Controller
 {
@@ -39,6 +42,7 @@ class PersonController extends Controller
     public function update(PersonRequest $request, $id):JsonResponse
     {
         $person = Person::find($id);
+       
         $person->name=$request->name;
         $person->surname=$request->surname;
         $person->email=$request->email;
@@ -74,6 +78,29 @@ class PersonController extends Controller
         ], 200);
     }
 
+    public function secondPhase(Request $request): JsonResponse
+{
+    $email = $request->input('email');
+    $person = Person::where('email', $email)->first();
+
+    if (!$person) {
+        return response()->json(['message' => 'El email proporcionado no figura en el registro'], 404);
+    }
+
+    $person->motivation = $request->input('motivation');
+    $person->englishLevel = $request->input('englishLevel');
+    $person->degree = $request->input('degree');
+    $person->anotherCourse = $request->input('anotherCourse');
+    $person->howArrived = $request->input('howArrived');
+    $person->employmentStatus = $request->input('employmentStatus');
+    $person->exerciseUrl = $request->input('exerciseUrl');
+
+    $person->save();
+
+    return response()->json(['message' => 'Información actualizada con éxito'], 200);
+}
+
+
 
     // RECRUITMENT METHODS
 
@@ -84,5 +111,4 @@ class PersonController extends Controller
 
     return response()->json(['data' => $people], 200);
 }
-
 }
