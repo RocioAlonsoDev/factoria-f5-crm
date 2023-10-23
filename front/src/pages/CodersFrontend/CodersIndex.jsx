@@ -35,9 +35,9 @@ export default function CodersIndex() {
     'Bootcamp': coder.bootcamp.name,
     
     '' : (<>
-    <ButtonAtom addlink={`/tracking/coders/${coder.id}`} addbutton='Ver'></ButtonAtom>
+    <ButtonAtom addlink={`/tracking/coders/${coder.id}/evaluation`} addbutton='Evaluación'></ButtonAtom>
+    <ButtonAtom addlink={`/tracking/coders/${coder.id}/projectsWorkshops`} addbutton='Proyectos'></ButtonAtom>
     <ButtonAtom addlink={`/tracking/coders/update/${coder.id}`} addbutton='Editar'></ButtonAtom>
-    <ButtonAtom addlink={`/tracking/coders/${coder.id}`} addbutton='Eliminar'></ButtonAtom>
     </>)
   }));
 
