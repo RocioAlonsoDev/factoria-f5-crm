@@ -18,7 +18,7 @@ export default function IndexPerson() {
   const [jsFilter, setJsFilter] = useState("");
   const [talleresFilter, setTalleresFilter] = useState("");
   const [originalPeople, setOriginalPeople] = useState([]);
-const [decisionFilter, setDecisionFilter] = useState([]);
+  const [decisionFilter, setDecisionFilter] = useState("");
 
 
   const statusOptions = {
@@ -38,14 +38,12 @@ const [decisionFilter, setDecisionFilter] = useState([]);
     14: "Enviar convocatoria",
     15: "No enviar convocatoria",
   };
-
   const statusOptionsDecision = {
     1: "Aspirante",
     2: "Convocada/o",
     3: "Descartada/o",
     4: "Coder",
   };
-
   const getStatusTitle = (statusId) => {
     return statusOptionsDecision[statusId] || "Desconocido";
   };
@@ -184,7 +182,7 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   const applyFilter = () => {
     let filteredData = originalPeople;
 
-    //Aplicar filtro estado
+    //Filtro estado
 
     if (decisionFilter !== "") {
       const filterValue = parseInt(decisionFilter);
@@ -193,8 +191,6 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
         return filterValue === 0 || decisionStatusId === filterValue;
       });
     }
-
-
 
     // Aplicar filtro RIC
     if (ricFilter !== "") {
@@ -251,16 +247,14 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
       try {
         const response = await PersonDataService.getAll();
        
-        const filteredPeople = response.data.data.filter(
-          (person) => person.id_status !== 4
-        );
+        const filteredPeople = response.data.data.filter(person => person.id_status !== 4);
         setPeople(filteredPeople);
         setOriginalPeople(filteredPeople);
       } catch (error) {
         console.error("Error al cargar datos de personas", error);
       }
     };
-
+  
     fetchData();
   }, []);
 
@@ -612,6 +606,7 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
             >
               &times;
             </span>
+
             <h2 className="text-lg font-semibold mb-4">Filtrar por estado</h2>
             <label className="block mb-4">
               <select
@@ -628,7 +623,6 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
                 
               </select>
             </label>
-
             <h2 className="text-lg font-semibold mb-4">Filtrar por RIC</h2>
             <label className="block mb-4">
               <select
@@ -729,4 +723,3 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   );
   
 }
-
