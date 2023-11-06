@@ -340,17 +340,22 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
   };
 
   const handleDecisionChange = (personId, newDecision) => {
-    
-    const updatedPeople = people.map((person) => {
-      if (person.id === personId) {
-        return { ...person, id_status: newDecision };
-      }
-      return person;
-    });
-    setPeople(updatedPeople);
+    const currentDecision = people.find(person => person.id === personId)?.id_status;
+    if (currentDecision === newDecision) {
+      return; 
+    }
 
-   
-    updateDecisionInDatabase(personId, newDecision);
+    const confirmed = window.confirm(`¿Estás seguro de cambiar el estado de "${statusOptionsDecision[currentDecision]}" a "${statusOptionsDecision[newDecision]}"?`);
+    if (confirmed) {
+      const updatedPeople = people.map(person => {
+        if (person.id === personId) {
+          return { ...person, id_status: newDecision };
+        }
+        return person;
+      });
+      setPeople(updatedPeople);
+      updateDecisionInDatabase(personId, newDecision);
+    }
   };
 
   const updateDecisionInDatabase = async (personId, newDecision) => {
@@ -366,9 +371,12 @@ const ageBelow30Count = calculateAgeBelow30Count(people);
       const updateResponse = await PersonDataService.update(personId, existingData);
   
       console.log("Decisión actualizada con éxito en la base de datos", updateResponse.data);
+
+      window.alert(`El estado se ha actualizado a "${statusOptionsDecision[newDecision]}"`);
     } catch (error) {
       console.error("Error al actualizar la decisión en la base de datos", error);
     }
+    
   };
 
   const calculateAge = (birthdate) => {
