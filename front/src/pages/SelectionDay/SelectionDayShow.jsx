@@ -74,9 +74,21 @@ export default function SelectionDayShow() {
     return <div>Cargando...</div>;
   }
 
-  const columns = ["nombre", "apellidos", "ciudad", "genero"];
+  const columns = ["", "nombre", "apellidos", "ciudad", "genero"];
   const data = people
     ? people.map((person) => ({
+      "": (
+        <Link to={`/recruitment/person/${person.id}`}>
+          <button
+            className="bg-transparent mx-2 text-orange-500 outline-orange-500  hover:bg-orange-500 hover:text-white 
+      hover:outline-orange-500 my-2 active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none 
+      focus:outline-none ease-linear transition-all duration-150"
+            type="button"
+          >
+            Ver coder
+          </button>
+        </Link>
+      ),
         nombre: person.nombre,
         apellidos: person.apellidos,
         ciudad: person.ciudad,
